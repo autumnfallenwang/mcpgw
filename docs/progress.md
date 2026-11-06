@@ -7,15 +7,15 @@ A dated log of what was done and decided, newest first. The plan and milestone s
 ## 2026-11-05
 
 - **Harnesses disconnected, the user's decision** ([ADR 0010](adr/0010-home-apps-only-for-now.md)). Only home apps call mcpgw
-  for now. mcpgw is out of Claude Code's and Codex's configs. Removing its `/etc/hosts` line is the user's step, and until then
-  its name still resolves on arch. A program on arch that deliberately targets the Service IP can still reach it; this is a
-  choice about configuration, not a lock.
+  for now. mcpgw is out of Claude Code's and Codex's configs. Its `/etc/hosts` line and pinned IP stay, so it can be reached
+  from arch when wanted. Any program on arch or pod that calls it still gets an answer; this is a choice about configuration,
+  not a lock.
 - **M7: mcpgw and llmgw reachable only from arch and the cluster,** the user's decision
   ([ADR 0008](adr/0008-only-arch-and-the-cluster-no-auth.md)), replacing LAN access.
   - **Why:** neither has a login, nothing outside arch needs them, any device on the network could use them, and llmgw's open
     CORS let web pages call it.
   - **Done:** every app uses the full Service name, llmgw 0.7.0 refuses other Host names and other sites' pages, and both
-    Ingresses are gone. On arch, `/etc/hosts` points llmgw's full name at its Service IP, which is pinned in its chart.
+    Ingresses are gone. On arch, `/etc/hosts` points both full names at their Service IPs, which are pinned in the charts.
   - **In a real browser on arch:** `http://llmgw.llmgw.svc.cluster.local/docs` renders, and its own requests work. A page from
     `homestorm.arch.internal` is refused by both gateways.
   - **Firewall rule written and tested in a throwaway network namespace:** a simulated LAN device reaches the Service and pod

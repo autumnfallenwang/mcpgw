@@ -47,8 +47,7 @@ GHCR image, the Helm chart in `deploy/chart`, and an Argo CD Application in `arc
   tag is bumped by hand.
 - **Logs:** `{namespace="mcpgw"} | json | event="tool.call"`. One request: `| json | req_id="<id>"`.
 - **Check it's healthy, from arch:** 
-  `curl http://$(kubectl -n mcpgw get svc mcpgw -o jsonpath='{.spec.clusterIP}')/health` shows the service and its search
-  backend.
+  `curl http://mcpgw.mcpgw.svc.cluster.local/health` shows the service and its search backend.
 
 ## Who can use it
 

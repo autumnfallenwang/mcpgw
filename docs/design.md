@@ -147,6 +147,9 @@ Only the home apps, for now ([ADR 0010](adr/0010-home-apps-only-for-now.md)). Th
 ([deploy/host/](../deploy/host/)) drops traffic from other devices addressed to the cluster's ranges
 ([ADR 0008](adr/0008-only-arch-and-the-cluster-no-auth.md)).
 
+On arch, `/etc/hosts` points the name at the pinned Service IP. That only resolves the name, for checks by hand: no harness or
+other tool is set up to use it.
+
 | Client | Works? | How |
 |---|---|---|
 | Home apps | **Yes** | In-cluster, at `http://mcpgw.mcpgw.svc.cluster.local/mcp` |
@@ -337,7 +340,7 @@ can't tell where a URL came from, so the rule has to live with whoever holds the
   - Deployment `searxng` and Service `searxng:8080`, cluster-internal only;
   - ConfigMap `searxng-settings`, from `deploy/chart/files/settings.yml`;
   - the §6.2 NetworkPolicies;
-  - no Ingress, for either Deployment ([ADR 0008](adr/0008-only-arch-and-the-cluster-no-auth.md)).
+  - no Ingress, for either Deployment ([ADR 0008](adr/0008-only-arch-and-the-cluster-no-auth.md)), and Service `mcpgw`'s IP is pinned.
 - **Argo CD:** `apps/mcpgw.yaml` in arch-infra (the root app-of-apps), review copy in `deploy/arch-infra/`, tags
   pinned to the image SHA.
 - **Resources:** mcpgw uses about 75 MB and SearXNG about 100 MB. Both request 128 MB. mcpgw's limit is 512 MB, enough for

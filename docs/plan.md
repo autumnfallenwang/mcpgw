@@ -139,13 +139,12 @@ Decided by the user in [ADR 0008](adr/0008-only-arch-and-the-cluster-no-auth.md)
 
 - [x] homecal, homenews and homestorm use `llmgw.llmgw.svc.cluster.local`
 - [x] llmgw 0.7.0: refuses other Host names and other sites' web pages, and open CORS is gone
-- [x] **By the user:** `/etc/hosts` on arch points llmgw's full name at its Service IP
+- [x] **By the user:** `/etc/hosts` on arch points both full names at their Service IPs
 - [x] Local `.env` files use the full names
-- [x] Both Ingresses removed, llmgw's Service IP pinned, and the old names refused
+- [x] Both Ingresses removed, both Service IPs pinned, and the old names refused
 - [x] **Finish line:** `http://llmgw.llmgw.svc.cluster.local/docs` works in a real browser on arch, a page from another site is
   refused, and Traefik answers 404 for the old names. Tested from arch, sending the Host header a device on the network
   would send
-- [ ] **By the user:** remove mcpgw's line from `/etc/hosts` on arch ([ADR 0010](adr/0010-home-apps-only-for-now.md))
 - [ ] **By the user:** remove `llmgw.arch.internal` and `mcpgw.arch.internal` from the router's DNS
 - [ ] **By the user:** install the firewall rule ([deploy/host/](../deploy/host/)), and decide whether it also blocks Ollama
 
