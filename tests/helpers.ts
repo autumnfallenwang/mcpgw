@@ -17,7 +17,7 @@ export interface RunningServer {
 /** The real app on a real port, since the Host checks need real HTTP requests. */
 export async function startApp(overrides: Partial<AppDeps> = {}): Promise<RunningServer> {
   const app = createApp({
-    allowedHosts: ["127.0.0.1", "mcpgw.arch.internal", "mcpgw.mcpgw.svc.cluster.local"],
+    allowedHosts: ["127.0.0.1", "mcpgw.mcpgw.svc.cluster.local"],
     search: new SearchService(cannedProvider, { cacheTtlMs: 60_000, concurrency: 4 }),
     fetch: new FetchService(
       new Fetcher({ policy: DEFAULT_POLICY(250), timeoutMs: 2_000, maxBytes: 1024 * 1024 }),

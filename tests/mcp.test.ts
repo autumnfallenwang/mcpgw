@@ -50,19 +50,17 @@ const INITIALIZE = rpc("initialize", {
 
 describe("guards", () => {
   it("accepts the names callers use", async () => {
-    for (const host of [
-      "mcpgw.arch.internal",
-      "mcpgw.mcpgw.svc.cluster.local",
-      "mcpgw.mcpgw.svc.cluster.local:3002",
-    ]) {
+    for (const host of ["mcpgw.mcpgw.svc.cluster.local", "mcpgw.mcpgw.svc.cluster.local:3002"]) {
       const res = await send("POST", "/mcp", { ...JSON_HEADERS, host }, INITIALIZE);
       expect(res.status, host).toBe(200);
     }
   });
 
-  it("refuses a Host it doesn't serve (DNS rebinding)", async () => {
-    const res = await send("POST", "/mcp", { ...JSON_HEADERS, host: "evil.example" }, INITIALIZE);
-    expect(res.status).toBe(403);
+  it("refuses a Host it doesn't serve (DNS rebinding), and the name it used to have", async () => {
+    for (const host of ["evil.example", "mcpgw.arch.internal", "mcpgw.mcpgw"]) {
+      const res = await send("POST", "/mcp", { ...JSON_HEADERS, host }, INITIALIZE);
+      expect(res.status, host).toBe(403);
+    }
   });
 
   it("refuses any browser Origin, even one of ours", async () => {

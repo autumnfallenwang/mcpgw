@@ -1,0 +1,13 @@
+[Unit]
+Description=Keep other devices out of the k3s networks (mcpgw ADR 0008)
+Before=network-pre.target
+Wants=network-pre.target
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=/usr/bin/nft -f /etc/nftables.d/arch-only.nft
+ExecStop=/usr/bin/nft delete table inet arch_only
+
+[Install]
+WantedBy=multi-user.target

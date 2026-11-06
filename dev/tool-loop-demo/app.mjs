@@ -3,7 +3,7 @@ import { Client } from "@modelcontextprotocol/sdk/client/index.js";
 import { StreamableHTTPClientTransport } from "@modelcontextprotocol/sdk/client/streamableHttp.js";
 import OpenAI from "openai";
 
-const llm = new OpenAI({ baseURL: "http://llmgw.arch.internal/v1", apiKey: "unused", maxRetries: 0 });
+const llm = new OpenAI({ baseURL: "http://llmgw.llmgw.svc.cluster.local/v1", apiKey: "unused", maxRetries: 0 });
 const mcp = new Client({ name: "homestorm-demo", version: "0.0.1" });
 await mcp.connect(new StreamableHTTPClientTransport(new URL("http://127.0.0.1:3399/mcp")));
 

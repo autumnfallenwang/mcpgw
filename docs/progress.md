@@ -6,6 +6,16 @@ A dated log of what was done and decided, newest first. The plan and milestone s
 
 ## 2026-11-05
 
+- **M7: mcpgw and llmgw reachable only from arch and the cluster,** the user's decision
+  ([ADR 0008](adr/0008-only-arch-and-the-cluster-no-auth.md)), replacing LAN access.
+  - **Why:** neither has a login, nothing outside arch needs them, any device on the network could use them, and llmgw's open
+    CORS let web pages call it.
+  - **Done:** every app uses the full Service name, llmgw 0.7.0 refuses other Host names and other sites' pages, and both
+    Ingresses are gone with their Service IPs pinned. On arch, `/etc/hosts` points the full names at those IPs.
+  - **Firewall rule written and tested in a throwaway network namespace:** a simulated LAN device reaches the Service and pod
+    ranges without it and is blocked with it, while Traefik and arch itself keep working. Installing it is the user's step.
+  - **Not tested from a real second device,** though Traefik's 404 was checked with the Host header such a device would send.
+  - **Out of scope, the user's call:** the homenews iOS app, whose code isn't in its repo.
 - **M6: mcpgw added to Claude Code and Codex.** Both connect at user level.
   - **Which search do they pick?** The built-in one, 4 of 4, on Claude Code and on Codex. The original finish line isn't met
     by default.
@@ -80,7 +90,7 @@ A dated log of what was done and decided, newest first. The plan and milestone s
   - no REST mirror in v1 ([ADR 0005](adr/0005-mcp-only-no-rest-mirror.md));
   - `web_fetch` asks each time in harnesses
     ([ADR 0007](adr/0007-keeping-data-from-leaking-through-web-fetch.md));
-  - no auth on the home network ([ADR 0008](adr/0008-home-network-only-no-auth.md)). This one assumes only trusted
+  - no auth on the home network ([ADR 0008](adr/0008-only-arch-and-the-cluster-no-auth.md)). This one assumes only trusted
     devices share the network, which the user still needs to confirm.
 - **Design corrected** after checking it against MCP `2026-07-28`, SDK v2, OWASP and vendor docs. The architecture
   held; the protocol details were a generation behind.

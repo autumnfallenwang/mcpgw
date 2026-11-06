@@ -7,8 +7,8 @@ Models only know what was in their training data. mcpgw gives home apps such as
 [homestorm](https://github.com/autumnfallenwang/homestorm), and MCP harnesses such as Claude Code and Codex, one place
 to reach tools: `web_search` and `web_fetch` first, more later.
 
-**Status:** live at http://mcpgw.arch.internal, with `web_search` and `web_fetch` on the home k3s cluster. See
-[the plan](docs/plan.md).
+**Status:** live on the home k3s cluster at http://mcpgw.mcpgw.svc.cluster.local, with `web_search` and `web_fetch`. Only arch
+and the cluster can reach it. See [the plan](docs/plan.md).
 
 ## How it works, in short
 
@@ -21,7 +21,7 @@ to reach tools: `web_search` and `web_fetch` first, more later.
   NetworkPolicy blocks private addresses as a second layer.
 - **Leaks:** a page can tell a model to send private data to an address it controls, and mcpgw can't tell where a URL
   came from. So apps limit which URLs may be fetched, and harnesses ask before each fetch.
-- **Home network only:** no public exposure and no auth in v1.
+- **Only arch and the cluster:** there's no Ingress, so other devices can't reach it, and there's no auth to manage.
 
 ## Develop locally
 
@@ -46,22 +46,31 @@ GHCR image, the Helm chart in `deploy/chart`, and an Argo CD Application in `arc
   bumped in arch-infra. The bump needs an `ARCH_INFRA_TOKEN` repo secret; without it the job skips with a warning and the
   tag is bumped by hand.
 - **Logs:** `{namespace="mcpgw"} | json | event="tool.call"`. One request: `| json | req_id="<id>"`.
-- **Check it's healthy:** `curl http://mcpgw.arch.internal/health` shows the service and its search backend.
+- **Check it's healthy, from arch:** `curl http://mcpgw.mcpgw.svc.cluster.local/health` shows the service and its search
+  backend.
 
 ## Who can use it
 
 | Client | Works? | Why |
 |---|---|---|
-| Claude Code and Codex CLIs on the home network | **Yes** | They run on your machine and connect directly |
 | homestorm and other home apps | **Yes** | They call it from inside the cluster |
-| Claude Desktop, claude.ai and mobile custom connectors | **No** | Anthropic says they connect from its cloud, so the server would have to be public |
-| Cloud sessions (Claude Code on the web, Codex cloud) | Assume no | They run in the cloud and can't reach a home address |
+| Claude Code and Codex CLIs on arch | **Yes** | `/etc/hosts` on arch points the name at the Service IP |
+| Anything on another device | **No** | There's no Ingress, and a firewall rule on arch drops anything routed in ([ADR 0008](docs/adr/0008-only-arch-and-the-cluster-no-auth.md)) |
+| Claude Desktop, claude.ai and mobile custom connectors | **No** | Anthropic says they connect from its cloud |
+| Cloud sessions (Claude Code on the web, Codex cloud) | **No** | They run in the cloud and can't reach it |
 
-## Connect (once deployed)
+## Connect, on arch
+
+`/etc/hosts` needs these lines. The IPs are pinned in each chart.
+
+```
+10.43.151.52   llmgw.llmgw.svc.cluster.local
+10.43.164.222  mcpgw.mcpgw.svc.cluster.local
+```
 
 ```sh
-claude mcp add --scope user --transport http mcpgw http://mcpgw.arch.internal/mcp
-codex mcp add mcpgw --url http://mcpgw.arch.internal/mcp
+claude mcp add --scope user --transport http mcpgw http://mcpgw.mcpgw.svc.cluster.local/mcp
+codex mcp add mcpgw --url http://mcpgw.mcpgw.svc.cluster.local/mcp
 ```
 
 Then let `web_search` run freely and keep `web_fetch` asking
@@ -107,5 +116,5 @@ Account-specific details stay in a local, gitignored `private/` folder.
 | [0005](docs/adr/0005-mcp-only-no-rest-mirror.md) | MCP is the only tool interface in v1: no REST mirror |
 | [0006](docs/adr/0006-web-fetch-cannot-reach-home-network.md) | `web_fetch` can't reach the home network: connect-time checks plus a NetworkPolicy |
 | [0007](docs/adr/0007-keeping-data-from-leaking-through-web-fetch.md) | Apps limit which URLs may be fetched; harnesses ask before each fetch |
-| [0008](docs/adr/0008-home-network-only-no-auth.md) | Home network only, no auth in v1 |
+| [0008](docs/adr/0008-only-arch-and-the-cluster-no-auth.md) | Only arch and the cluster can reach mcpgw and llmgw; no auth |
 | [0009](docs/adr/0009-search-behind-a-replaceable-provider.md) | Search sits behind a replaceable provider; SearXNG first |

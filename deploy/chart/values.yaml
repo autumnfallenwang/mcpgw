@@ -12,9 +12,12 @@ replicaCount: 1
 service:
   port: 80
   targetPort: 3002
+  # Pinned, because /etc/hosts on arch points mcpgw.mcpgw.svc.cluster.local here (ADR 0008).
+  clusterIP: 10.43.164.222
 
+# Off: mcpgw is reachable only from inside the cluster and from arch (ADR 0008).
 ingress:
-  enabled: true
+  enabled: false
   className: traefik
   host: mcpgw.arch.internal
 
@@ -22,7 +25,7 @@ ingress:
 env:
   PORT: "3002"
   # Every name a caller uses must be here, or it gets a 403 (ADR 0003).
-  ALLOWED_HOSTS: mcpgw.arch.internal,mcpgw.mcpgw.svc.cluster.local
+  ALLOWED_HOSTS: mcpgw.mcpgw.svc.cluster.local
   SEARCH_PROVIDER: searxng
   SEARXNG_URL: http://searxng.mcpgw.svc.cluster.local:8080
   LOG_LEVEL: info

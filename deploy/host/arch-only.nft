@@ -1,0 +1,27 @@
+#!/usr/bin/nft -f
+# Keeps other devices out of the cluster's network, so llmgw and mcpgw are reachable only from arch (ADR 0008).
+# With no Ingress they have no public door, but kube-proxy would still answer a device that deliberately routes the
+# Service range through this machine. This drops that traffic before kube-proxy sees it.
+#
+# Only traffic arriving on Wi-Fi or Ethernet is touched. Pods and arch itself arrive on other interfaces, and replies to
+# pods' outbound traffic are addressed to arch's own IP at this point, so neither is affected.
+#
+# This file only ever touches its own table, so it can't disturb k3s's rules.
+
+table inet arch_only
+flush table inet arch_only
+
+table inet arch_only {
+  chain prerouting {
+    # Before conntrack (-200) and kube-proxy's DNAT (-100).
+    type filter hook prerouting priority raw; policy accept;
+
+    iifname "wl*" ip daddr { 10.42.0.0/16, 10.43.0.0/16 } drop
+    iifname "en*" ip daddr { 10.42.0.0/16, 10.43.0.0/16 } drop
+
+    # Ollama: open to the network with no login. Uncomment to block it from other devices.
+    # llmgw is unaffected: pods don't arrive on these interfaces.
+    # iifname "wl*" tcp dport 11434 drop
+    # iifname "en*" tcp dport 11434 drop
+  }
+}

@@ -2,11 +2,11 @@
 
 The home cluster's **tool gateway**. llmgw gives apps one place to reach LLMs; mcpgw gives them, and the models
 behind llmgw, one place to reach **tools**: web search first, then web fetch, later more. It speaks **MCP** (Model
-Context Protocol), so MCP harnesses on the home network can use it as well as the home apps.
+Context Protocol), so MCP harnesses on arch can use it as well as the home apps.
 
-- **Status:** live at `http://mcpgw.arch.internal` since 2026-11-05. Progress is in [progress.md](progress.md).
+- **Status:** live at `http://mcpgw.mcpgw.svc.cluster.local` since 2026-11-05, reachable only from the cluster and arch. Progress is in [progress.md](progress.md).
 - **First consumer:** homestorm (`~/agentic/homestorm`), the chair-run multi-model meeting app.
-- **Sibling:** llmgw (`~/agentic/llm-gateway`, `http://llmgw.arch.internal`).
+- **Sibling:** llmgw (`~/agentic/llm-gateway`, `http://llmgw.llmgw.svc.cluster.local`).
 - **See also:** decisions in [adr/](adr/), milestones in [plan.md](plan.md), the log in [progress.md](progress.md).
 
 ---
@@ -54,7 +54,7 @@ mcpgw never calls an LLM itself, and it never runs an agent loop.
 | `code_run` | Sandboxed Python for maths and small data checks. Needs real isolation (a k8s Job with no network, gVisor or similar). The riskiest tool; never in the mcpgw process |
 | `docs_search` | Retrieval over the user's own notes and meeting minutes, using llmgw's `/v1/embeddings` |
 | Home data, read-only | homecal events, homenews articles, cluster status from Loki |
-| Per-client bearer tokens | Before any untrusted device or wider exposure ([ADR 0008](adr/0008-home-network-only-no-auth.md)) |
+| Per-client bearer tokens | Before any untrusted device or wider exposure ([ADR 0008](adr/0008-only-arch-and-the-cluster-no-auth.md)) |
 | A REST mirror | Only if a caller turns up that can't use an MCP client |
 
 **Non-goals:** calling LLMs, agent loops, public internet exposure, user accounts, image generation, rendering
@@ -69,7 +69,7 @@ JavaScript pages.
             ├─► mcpgw ──► SearXNG ──► Google · Bing · DDG · Brave · …    │
             │     │                                                      │
             │     └────► the public web (web_fetch, with the §6 guards)  │
- Claude Code┼─► mcpgw   (MCP harnesses on the home network, over /mcp)   │
+ Claude Code┼─► mcpgw   (MCP harnesses on arch, over /mcp)               │
  Codex     ─┤                                                            │
             └────────────────────────────────────────────────────────────┘
 ```
@@ -99,7 +99,7 @@ official v2 packages `@modelcontextprotocol/server` and `@modelcontextprotocol/h
   ```ts
   const mcp = createMcpHonoApp({
     host: "0.0.0.0",
-    allowedHosts: ["mcpgw.arch.internal", "mcpgw.mcpgw.svc.cluster.local"],
+    allowedHosts: ["mcpgw.mcpgw.svc.cluster.local"],
     allowedOrigins: [],
   });
   ```
@@ -147,16 +147,18 @@ These sit on an outer Hono app, with the MCP app mounted inside it. On the MCP a
 
 ### 4.4 Who can connect
 
+Only the cluster and arch ([ADR 0008](adr/0008-only-arch-and-the-cluster-no-auth.md)). There's no Ingress. On arch, `/etc/hosts`
+points the name at the Service IP, which is pinned in the chart. A firewall rule on arch ([deploy/host/](../deploy/host/))
+drops traffic from other devices addressed to the cluster's ranges.
+
 | Client | Works? | How |
 |---|---|---|
-| Claude Code CLI on the home network | **Yes (tested)** | `claude mcp add --scope user --transport http mcpgw http://mcpgw.arch.internal/mcp`. Without `--scope user` it's added for one project only |
-| Codex CLI on the home network | **Yes (tested)** | `codex mcp add mcpgw --url http://mcpgw.arch.internal/mcp` |
 | Home apps | **Yes** | In-cluster, at `http://mcpgw.mcpgw.svc.cluster.local/mcp` |
-| Claude Desktop, local config file | Untested | Anthropic's docs say this route uses the local network; it would need a local stdio bridge |
-| Claude custom connectors (claude.ai, Desktop, mobile) | **No** | Anthropic: they connect "from Anthropic's cloud infrastructure", so the server "must be reachable over the public internet" |
-| Claude Code on the web, Codex cloud | Assume no | They run in the cloud; the docs don't say outright |
-
-Away from home nothing can reach mcpgw, unless a VPN is added.
+| Claude Code CLI on arch | **Yes (tested)** | `claude mcp add --scope user --transport http mcpgw http://mcpgw.mcpgw.svc.cluster.local/mcp`. Without `--scope user` it's added for one project only |
+| Codex CLI on arch | **Yes (tested)** | `codex mcp add mcpgw --url http://mcpgw.mcpgw.svc.cluster.local/mcp` |
+| Another device | **No** | Use SSH or a tunnel to arch |
+| Claude custom connectors (claude.ai, Desktop, mobile) | **No** | Anthropic: they connect "from Anthropic's cloud infrastructure" |
+| Claude Code on the web, Codex cloud | **No** | They run in the cloud |
 
 Both CLIs prefer their own built-in search unless told otherwise, so mcpgw is there when named (D12 in the plan).
 
@@ -309,7 +311,7 @@ can't tell where a URL came from, so the rule has to live with whoever holds the
 | Env var | Default | Purpose |
 |---|---|---|
 | `PORT` | `3002` | HTTP port |
-| `ALLOWED_HOSTS` | `mcpgw.arch.internal,mcpgw.mcpgw.svc.cluster.local` | Accepted `Host` names (dev: `127.0.0.1`) |
+| `ALLOWED_HOSTS` | `mcpgw.mcpgw.svc.cluster.local` | Accepted `Host` names (dev: `127.0.0.1`) |
 | `SEARXNG_URL` | `http://searxng.mcpgw.svc.cluster.local:8080` | SearXNG base URL (dev: `http://127.0.0.1:8180`) |
 | `SEARCH_CACHE_TTL_S` | `600` | |
 | `SEARCH_CONCURRENCY` | `4` | |
@@ -343,8 +345,7 @@ can't tell where a URL came from, so the rule has to live with whoever holds the
   - Deployment `searxng` and Service `searxng:8080`, cluster-internal only;
   - ConfigMap `searxng-settings`, from `deploy/chart/files/settings.yml`;
   - the §6.2 NetworkPolicies;
-  - Ingress through Traefik: `mcpgw.arch.internal` to Service `mcpgw`. **SearXNG gets no ingress.** The user adds the
-    DNS name on the router, as for homestorm (it has no wildcard, and the name doesn't resolve yet).
+  - no Ingress, for either Deployment ([ADR 0008](adr/0008-only-arch-and-the-cluster-no-auth.md)), and Service `mcpgw`'s IP is pinned.
 - **Argo CD:** `apps/mcpgw.yaml` in arch-infra (the root app-of-apps), review copy in `deploy/arch-infra/`, tags
   pinned to the image SHA.
 - **Resources:** mcpgw uses about 75 MB and SearXNG about 100 MB. Both request 128 MB. mcpgw's limit is 512 MB, enough for
@@ -395,7 +396,7 @@ Built in homestorm at M5. Testing with thinking on added three rules: "must sear
 a tool call isn't the answer; and when the calls are used up, the final answer gets the research as plain text with no
 tools at all, since `tool_choice: "none"` made DeepSeek write raw tool markup into the answer and Claude Opus return nothing.
 
-**c) Any MCP harness on the home network** connects to `/mcp` and gets the same tools with no app code (§4.4).
+**c) Any MCP harness on arch** connects to `/mcp` and gets the same tools with no app code (§4.4).
 
 ## 11. Testing
 
@@ -425,13 +426,11 @@ path is the one thing the tests so far couldn't cover.
 
 ## 14. Open questions
 
-1. **Does anything untrusted share the home network?** [ADR 0008](adr/0008-home-network-only-no-auth.md) assumes not,
-   and the user hasn't confirmed it. If guests or IoT devices share it, add a bearer token before deploying.
-2. **SearXNG engine mix.** Tune it after a week of real use and the engine-error log. Bing carries most of it today.
-3. **Sites that refuse mcpgw.** Stack Overflow and Medium answer 403 to its plain `User-Agent`. It's reported, not worked
+1. **SearXNG engine mix.** Tune it after a week of real use and the engine-error log. Bing carries most of it today.
+2. **Sites that refuse mcpgw.** Stack Overflow and Medium answer 403 to its plain `User-Agent`. It's reported, not worked
    around.
-4. **Hosted fallback.** Not for now; worth another look after real use ([ADR 0009](adr/0009-search-behind-a-replaceable-provider.md)).
-5. **Should harnesses use mcpgw for search by default?** Left to themselves they pick their built-in search, 4 of 4. D12 in
+3. **Hosted fallback.** Not for now; worth another look after real use ([ADR 0009](adr/0009-search-behind-a-replaceable-provider.md)).
+4. **Should harnesses use mcpgw for search by default?** Left to themselves they pick their built-in search, 4 of 4. D12 in
    the plan has the evidence. The recommendation is to keep the built-ins and name mcpgw when wanted.
 
 ## 15. Standards and sources
@@ -444,7 +443,7 @@ path is the one thing the tests so far couldn't cover.
 
 **What the MCP spec requires of a server like this:** implement `server/discover` (the SDK does); validate `Origin`
 and answer 403 when it's invalid; validate tool inputs; apply access controls; rate-limit tool calls; clean tool
-outputs. It also says servers *should* authenticate, which v1 doesn't ([ADR 0008](adr/0008-home-network-only-no-auth.md)).
+outputs. It also says servers *should* authenticate. mcpgw doesn't, and is unreachable from other devices instead ([ADR 0008](adr/0008-only-arch-and-the-cluster-no-auth.md)).
 
 **Sources:**
 
