@@ -26,30 +26,32 @@ const ANNOTATIONS = {
   openWorldHint: true,
 };
 
+/** What each tool tells callers. The MCP server registers these, and the /docs page shows them. */
+export const TOOLS = {
+  web_search: {
+    title: "Web search",
+    description: WEB_SEARCH_DESCRIPTION,
+    inputSchema: webSearchInput,
+    annotations: ANNOTATIONS,
+  },
+  web_fetch: {
+    title: "Web fetch",
+    description: WEB_FETCH_DESCRIPTION,
+    inputSchema: webFetchInput,
+    annotations: ANNOTATIONS,
+  },
+};
+
 export function createMcpApp(deps: McpDeps) {
   // One fresh McpServer per request: this is what makes the endpoint stateless, and the default
   // `legacy: "stateless"` also serves the 2025 protocol Codex still speaks (ADR 0003).
   const handler = createMcpHandler(() => {
     const server = new McpServer({ name: APP_NAME, version: APP_VERSION });
-    server.registerTool(
-      "web_search",
-      {
-        title: "Web search",
-        description: WEB_SEARCH_DESCRIPTION,
-        inputSchema: webSearchInput,
-        annotations: ANNOTATIONS,
-      },
-      (args) => runTool("web_search", () => webSearch(args, deps.search)),
+    server.registerTool("web_search", TOOLS.web_search, (args) =>
+      runTool("web_search", () => webSearch(args, deps.search)),
     );
-    server.registerTool(
-      "web_fetch",
-      {
-        title: "Web fetch",
-        description: WEB_FETCH_DESCRIPTION,
-        inputSchema: webFetchInput,
-        annotations: ANNOTATIONS,
-      },
-      (args) => runTool("web_fetch", () => webFetch(args, deps.fetch)),
+    server.registerTool("web_fetch", TOOLS.web_fetch, (args) =>
+      runTool("web_fetch", () => webFetch(args, deps.fetch)),
     );
     return server;
   });

@@ -1,7 +1,13 @@
 import { z } from "zod";
 import { log } from "../lib/logger.js";
 import { ToolFailure } from "../tools/result.js";
-import type { SearchHit, SearchOutcome, SearchProvider, SearchQuery } from "./types.js";
+import type {
+  EngineIssue,
+  SearchHit,
+  SearchOutcome,
+  SearchProvider,
+  SearchQuery,
+} from "./types.js";
 
 const responseSchema = z.object({
   results: z
@@ -22,14 +28,29 @@ const responseSchema = z.object({
 const DOWN_MESSAGE =
   "The search backend isn't answering right now. Try again shortly, or answer without searching and say so.";
 
+const ISSUE_WINDOW_MS = 60 * 60 * 1000;
+
 function publishedDay(value: string | null | undefined): string | undefined {
   const day = value?.slice(0, 10);
   return day && /^\d{4}-\d{2}-\d{2}$/.test(day) ? day : undefined;
 }
 
 export function createSearxngProvider(baseUrl: string): SearchProvider {
+  // Only for the status page, so memory is enough: Loki has the history as searxng.error.
+  const issues = new Map<string, { reason: string; lastAt: number; count: number }>();
+
   return {
     name: "searxng",
+
+    engineIssues(): EngineIssue[] {
+      const cutoff = Date.now() - ISSUE_WINDOW_MS;
+      const recent: EngineIssue[] = [];
+      for (const [engine, issue] of issues) {
+        if (issue.lastAt < cutoff) issues.delete(engine);
+        else recent.push({ engine, ...issue, lastAt: new Date(issue.lastAt).toISOString() });
+      }
+      return recent.sort((a, b) => b.lastAt.localeCompare(a.lastAt));
+    },
 
     async search(query: SearchQuery, signal: AbortSignal): Promise<SearchOutcome> {
       const url = new URL("/search", baseUrl);
@@ -60,6 +81,12 @@ export function createSearxngProvider(baseUrl: string): SearchProvider {
       }
 
       const engineErrors = Object.fromEntries(body.unresponsive_engines);
+      const now = Date.now();
+      for (const [engine, reason] of body.unresponsive_engines) {
+        const seen = issues.get(engine);
+        const count = seen && now - seen.lastAt < ISSUE_WINDOW_MS ? seen.count + 1 : 1;
+        issues.set(engine, { reason, lastAt: now, count });
+      }
       if (body.unresponsive_engines.length > 0) {
         log.warn(
           { event: "searxng.error", status: 200, engine_errors: engineErrors },

@@ -1,6 +1,6 @@
 import { createServer, type Server } from "node:http";
 import type { AddressInfo } from "node:net";
-import { afterAll, beforeAll, describe, expect, it } from "vitest";
+import { afterAll, beforeAll, describe, expect, it, vi } from "vitest";
 import { TtlCache } from "../src/lib/cache.js";
 import { Limiter, QueueTimeout } from "../src/lib/limiter.js";
 import { createSearxngProvider } from "../src/search/searxng.js";
@@ -172,6 +172,33 @@ describe("SearXNG provider, against a fake SearXNG", () => {
     };
     const out = await createSearxngProvider(base).search(QUERY, signal());
     expect(out.results).toHaveLength(1);
+  });
+
+  it("remembers failing engines for the status page, and forgets them after an hour", async () => {
+    const provider = createSearxngProvider(base);
+    expect(provider.engineIssues?.()).toEqual([]);
+    reply = {
+      status: 200,
+      body: {
+        results: [{ title: "A", url: "https://a.example/" }],
+        unresponsive_engines: [["brave", "too many requests"]],
+      },
+    };
+    await provider.search(QUERY, signal());
+    await provider.search(QUERY, signal());
+    expect(provider.engineIssues?.()).toMatchObject([
+      { engine: "brave", reason: "too many requests", count: 2 },
+    ]);
+
+    const later = Date.now() + 61 * 60 * 1000;
+    const clock = vi.spyOn(Date, "now").mockReturnValue(later);
+    try {
+      expect(provider.engineIssues?.()).toEqual([]);
+      await provider.search(QUERY, signal());
+      expect(provider.engineIssues?.()).toMatchObject([{ engine: "brave", count: 1 }]);
+    } finally {
+      clock.mockRestore();
+    }
   });
 
   it("treats nothing found as a normal empty result", async () => {

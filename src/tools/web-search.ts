@@ -27,7 +27,7 @@ function cut(text: string, chars: number): string {
   return flat.length <= chars ? flat : `${flat.slice(0, chars - 1).trimEnd()}…`;
 }
 
-function humanTime(iso: string): string {
+export function humanTime(iso: string): string {
   return `${iso.slice(0, 16).replace("T", " ")} UTC`;
 }
 

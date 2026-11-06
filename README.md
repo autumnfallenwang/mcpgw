@@ -46,8 +46,8 @@ GHCR image, the Helm chart in `deploy/chart`, and an Argo CD Application in `arc
   bumped in arch-infra. The bump needs an `ARCH_INFRA_TOKEN` repo secret; without it the job skips with a warning and the
   tag is bumped by hand.
 - **Logs:** `{namespace="mcpgw"} | json | event="tool.call"`. One request: `| json | req_id="<id>"`.
-- **Check it's healthy, from arch:** 
-  `curl http://mcpgw.mcpgw.svc.cluster.local/health` shows the service and its search backend.
+- **Status page, in a browser on arch:** http://mcpgw.mcpgw.svc.cluster.local/docs shows the version, search health, failing
+  engines, the tools and how to connect. `/health` and `/` return the basics as JSON.
 
 ## Who can use it
 

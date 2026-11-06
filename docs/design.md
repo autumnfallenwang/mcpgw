@@ -130,9 +130,14 @@ official v2 packages `@modelcontextprotocol/server` and `@modelcontextprotocol/h
 |---|---|
 | `GET /health` | `{ "status": "ok" }` once the service is up. Also reports `searxng: ok/down` without failing |
 | `GET /` | Version and commit, like llmgw |
+| `GET /docs` | A read-only status page for people: version, search health, engines that failed in the last hour, the tools and their inputs, how to connect, log queries |
 
 These sit on an outer Hono app, with the MCP app mounted inside it. On the MCP app, a request with a pod-IP `Host`
 (what a Kubernetes probe sends) got a 403 in testing, which would fail the probes.
+
+`/docs` isn't Swagger, because Swagger documents REST routes and all of mcpgw's tools sit behind one `POST /mcp`. It's plain
+server-rendered HTML with no scripts, built from the same definitions the MCP server registers, so it can't drift. It has the same
+Host check as `/mcp`. It has no "try it" box, because `/mcp` refuses every browser `Origin`, including its own.
 
 ### 4.3 Request headers
 
