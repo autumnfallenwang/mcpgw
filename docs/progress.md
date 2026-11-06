@@ -6,12 +6,18 @@ A dated log of what was done and decided, newest first. The plan and milestone s
 
 ## 2026-11-05
 
+- **Harnesses disconnected, the user's decision** ([ADR 0010](adr/0010-home-apps-only-for-now.md)). Only home apps call mcpgw
+  for now. mcpgw is out of Claude Code's and Codex's configs. Removing its `/etc/hosts` line is the user's step, and until then
+  its name still resolves on arch. A program on arch that deliberately targets the Service IP can still reach it; this is a
+  choice about configuration, not a lock.
 - **M7: mcpgw and llmgw reachable only from arch and the cluster,** the user's decision
   ([ADR 0008](adr/0008-only-arch-and-the-cluster-no-auth.md)), replacing LAN access.
   - **Why:** neither has a login, nothing outside arch needs them, any device on the network could use them, and llmgw's open
     CORS let web pages call it.
   - **Done:** every app uses the full Service name, llmgw 0.7.0 refuses other Host names and other sites' pages, and both
-    Ingresses are gone with their Service IPs pinned. On arch, `/etc/hosts` points the full names at those IPs.
+    Ingresses are gone. On arch, `/etc/hosts` points llmgw's full name at its Service IP, which is pinned in its chart.
+  - **In a real browser on arch:** `http://llmgw.llmgw.svc.cluster.local/docs` renders, and its own requests work. A page from
+    `homestorm.arch.internal` is refused by both gateways.
   - **Firewall rule written and tested in a throwaway network namespace:** a simulated LAN device reaches the Service and pod
     ranges without it and is blocked with it, while Traefik and arch itself keep working. Installing it is the user's step.
   - **Not tested from a real second device,** though Traefik's 404 was checked with the Host header such a device would send.

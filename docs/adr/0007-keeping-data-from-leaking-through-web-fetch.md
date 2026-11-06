@@ -1,7 +1,8 @@
 # 0007: Apps limit which URLs may be fetched; harnesses ask before each fetch
 
 - **Status:** accepted. The recommended option, taken when the user said to go ahead on 2026-11-05; not picked
-  explicitly, and easy to change before M5.
+  explicitly, and easy to change before M5. The rule for harnesses isn't in use, since none are connected
+  ([ADR 0010](0010-home-apps-only-for-now.md)). It applies if one is reconnected.
 - **Date:** 2026-11-05
 
 ## Context

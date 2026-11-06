@@ -12,10 +12,8 @@ replicaCount: 1
 service:
   port: 80
   targetPort: 3002
-  # Pinned, because /etc/hosts on arch points mcpgw.mcpgw.svc.cluster.local here (ADR 0008).
-  clusterIP: 10.43.164.222
 
-# Off: mcpgw is reachable only from inside the cluster and from arch (ADR 0008).
+# Off: only home apps call mcpgw, from inside the cluster (ADR 0008, ADR 0010).
 ingress:
   enabled: false
   className: traefik

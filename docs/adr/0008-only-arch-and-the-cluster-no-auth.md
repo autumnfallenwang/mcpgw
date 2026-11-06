@@ -1,6 +1,8 @@
 # 0008: Only arch and the cluster can reach mcpgw and llmgw; no auth
 
 - **Status:** accepted, the user's decision. It replaces the first version, which served mcpgw to the whole home network.
+  [ADR 0010](0010-home-apps-only-for-now.md) narrows it for mcpgw: only home apps call it, so arch has no `/etc/hosts` line
+  for it.
 - **Date:** 2026-11-05
 
 ## Context
@@ -17,8 +19,7 @@ so a web page could too.
 - **No Ingress.** Traefik doesn't serve either gateway, and the router has no DNS name for them.
 - **One name everywhere:** `http://llmgw.llmgw.svc.cluster.local` and `http://mcpgw.mcpgw.svc.cluster.local`. Each gateway
   refuses any other Host, which also stops DNS rebinding.
-- **On arch,** `/etc/hosts` points those names at their Service IPs, so a browser and the CLIs use the same URLs as the
-  apps. The IPs are pinned in the charts, so a recreated Service keeps its address.
+- **On arch,** `/etc/hosts` points llmgw's name at its Service IP, so a browser uses the same URL as the apps. That IP is pinned in llmgw's chart, so a recreated Service keeps its address.
 - **No web pages:** a request with another site's `Origin` gets a 403.
 - **A firewall rule on arch** ([deploy/host/](../../deploy/host/)) drops traffic from Wi-Fi or Ethernet addressed to the
   Service and pod ranges. Without it, a device that deliberately routes those ranges through arch could reach them.
@@ -41,5 +42,5 @@ so a web page could too.
 - **Clients that connect from a vendor's cloud can't either,** as before: Claude custom connectors and cloud sessions.
 - **"Only arch" means arch and the cluster.** Any program on arch, and any pod, can reach them. A NetworkPolicy naming the
   allowed apps could narrow the pods, and hasn't been added.
-- **A rebuilt cluster needs a check:** the pinned IPs must fit its service range, and `/etc/hosts` must match.
+- **A rebuilt cluster needs a check:** llmgw's pinned IP must fit its service range, and `/etc/hosts` must match.
 - **Undoing it for one gateway** takes `ingress.enabled` in its chart, plus adding the name back to its allowed hosts.

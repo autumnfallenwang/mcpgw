@@ -1,5 +1,8 @@
 # Harness check (2026-11-05)
 
+Harnesses aren't connected to mcpgw now ([ADR 0010](../../docs/adr/0010-home-apps-only-for-now.md)). This stays as the record,
+for if one is reconnected.
+
 Throwaway scripts that tried real Claude Code and Codex against MCP SDK v2 before any of mcpgw was built. Several ADRs
 cite these results. The canned prices are made up, so a model quoting one can only have got it from the tool.
 

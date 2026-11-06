@@ -4,11 +4,10 @@ The home cluster's tool gateway. **Models live in [llmgw](https://github.com/aut
 here, loops live in apps.**
 
 Models only know what was in their training data. mcpgw gives home apps such as
-[homestorm](https://github.com/autumnfallenwang/homestorm), and MCP harnesses such as Claude Code and Codex, one place
-to reach tools: `web_search` and `web_fetch` first, more later.
+[homestorm](https://github.com/autumnfallenwang/homestorm) one place to reach tools: `web_search` and `web_fetch` first, more later.
 
-**Status:** live on the home k3s cluster at http://mcpgw.mcpgw.svc.cluster.local, with `web_search` and `web_fetch`. Only arch
-and the cluster can reach it. See [the plan](docs/plan.md).
+**Status:** live on the home k3s cluster at http://mcpgw.mcpgw.svc.cluster.local, with `web_search` and `web_fetch`. Only
+home apps call it. See [the plan](docs/plan.md).
 
 ## How it works, in short
 
@@ -20,8 +19,9 @@ and the cluster can reach it. See [the plan](docs/plan.md).
 - **Fetch:** `web_fetch` can't reach the home network. The app checks every address at connect time, and a
   NetworkPolicy blocks private addresses as a second layer.
 - **Leaks:** a page can tell a model to send private data to an address it controls, and mcpgw can't tell where a URL
-  came from. So apps limit which URLs may be fetched, and harnesses ask before each fetch.
-- **Only arch and the cluster:** there's no Ingress, so other devices can't reach it, and there's no auth to manage.
+  came from. So apps limit which URLs may be fetched.
+- **Only home apps call it, for now:** there's no Ingress, so other devices can't reach it, and harnesses aren't connected
+  ([ADR 0010](docs/adr/0010-home-apps-only-for-now.md)).
 
 ## Develop locally
 
@@ -46,52 +46,18 @@ GHCR image, the Helm chart in `deploy/chart`, and an Argo CD Application in `arc
   bumped in arch-infra. The bump needs an `ARCH_INFRA_TOKEN` repo secret; without it the job skips with a warning and the
   tag is bumped by hand.
 - **Logs:** `{namespace="mcpgw"} | json | event="tool.call"`. One request: `| json | req_id="<id>"`.
-- **Check it's healthy, from arch:** `curl http://mcpgw.mcpgw.svc.cluster.local/health` shows the service and its search
+- **Check it's healthy, from arch:** 
+  `curl http://$(kubectl -n mcpgw get svc mcpgw -o jsonpath='{.spec.clusterIP}')/health` shows the service and its search
   backend.
 
 ## Who can use it
 
 | Client | Works? | Why |
 |---|---|---|
-| homestorm and other home apps | **Yes** | They call it from inside the cluster |
-| Claude Code and Codex CLIs on arch | **Yes** | `/etc/hosts` on arch points the name at the Service IP |
+| Home apps (homestorm today) | **Yes** | They call `http://mcpgw.mcpgw.svc.cluster.local` from inside the cluster |
+| Claude Code, Codex and other harnesses | **Not connected** | The user's decision for now ([ADR 0010](docs/adr/0010-home-apps-only-for-now.md), which also says how to reconnect one) |
 | Anything on another device | **No** | There's no Ingress, and a firewall rule on arch drops anything routed in ([ADR 0008](docs/adr/0008-only-arch-and-the-cluster-no-auth.md)) |
-| Claude Desktop, claude.ai and mobile custom connectors | **No** | Anthropic says they connect from its cloud |
-| Cloud sessions (Claude Code on the web, Codex cloud) | **No** | They run in the cloud and can't reach it |
-
-## Connect, on arch
-
-`/etc/hosts` needs these lines. The IPs are pinned in each chart.
-
-```
-10.43.151.52   llmgw.llmgw.svc.cluster.local
-10.43.164.222  mcpgw.mcpgw.svc.cluster.local
-```
-
-```sh
-claude mcp add --scope user --transport http mcpgw http://mcpgw.mcpgw.svc.cluster.local/mcp
-codex mcp add mcpgw --url http://mcpgw.mcpgw.svc.cluster.local/mcp
-```
-
-Then let `web_search` run freely and keep `web_fetch` asking
-([ADR 0007](docs/adr/0007-keeping-data-from-leaking-through-web-fetch.md)). For Claude Code, an `ask` rule is needed, because
-its `auto` mode otherwise approves `web_fetch` by itself:
-
-```sh
-jq '.permissions.allow += ["mcp__mcpgw__web_search"] | .permissions.ask += ["mcp__mcpgw__web_fetch"]' \
-  ~/.claude/settings.json > /tmp/claude-settings.json && mv /tmp/claude-settings.json ~/.claude/settings.json
-```
-
-For Codex, in `~/.codex/config.toml`:
-
-```toml
-[mcp_servers.mcpgw.tools.web_fetch]
-approval_mode = "prompt"
-```
-
-Both CLIs prefer their own built-in search unless told otherwise, so name mcpgw when you want it. To make it the default, add
-this to `CLAUDE.md` or `AGENTS.md`, though see D12 in [the plan](docs/plan.md) first: "For web search, use the web_search tool
-from the mcpgw MCP server rather than any built-in search."
+| Cloud clients | **No** | They connect from the cloud |
 
 ## Docs
 
@@ -115,6 +81,7 @@ Account-specific details stay in a local, gitignored `private/` folder.
 | [0004](docs/adr/0004-text-results-app-data-in-meta.md) | Tool results are text for the model, with app data in `_meta` |
 | [0005](docs/adr/0005-mcp-only-no-rest-mirror.md) | MCP is the only tool interface in v1: no REST mirror |
 | [0006](docs/adr/0006-web-fetch-cannot-reach-home-network.md) | `web_fetch` can't reach the home network: connect-time checks plus a NetworkPolicy |
-| [0007](docs/adr/0007-keeping-data-from-leaking-through-web-fetch.md) | Apps limit which URLs may be fetched; harnesses ask before each fetch |
+| [0007](docs/adr/0007-keeping-data-from-leaking-through-web-fetch.md) | Apps limit which URLs may be fetched; a harness would have to ask before each fetch |
 | [0008](docs/adr/0008-only-arch-and-the-cluster-no-auth.md) | Only arch and the cluster can reach mcpgw and llmgw; no auth |
 | [0009](docs/adr/0009-search-behind-a-replaceable-provider.md) | Search sits behind a replaceable provider; SearXNG first |
+| [0010](docs/adr/0010-home-apps-only-for-now.md) | Only home apps call mcpgw, for now; harnesses aren't connected |

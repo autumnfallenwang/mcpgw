@@ -14,7 +14,7 @@ Progress against this plan is logged in [progress.md](progress.md). The design i
 - **Tools:** `web_search` through SearXNG behind a replaceable provider, and `web_fetch` with the safety rules in
   [design §6](design.md).
 - **Interface:** MCP at `POST /mcp`, serving the `2026-07-28` protocol and the 2025 one Codex uses.
-- **Callers:** homestorm from inside the cluster; Claude Code and Codex on arch. Nothing else can reach it.
+- **Callers:** home apps, from inside the cluster. Today that's homestorm ([ADR 0010](adr/0010-home-apps-only-for-now.md)).
 - **Tracing:** JSON logs in Loki for every request and tool call, with the caller's name and request ID.
 - **Deploy:** k3s through Argo CD and arch-infra, at `http://mcpgw.mcpgw.svc.cluster.local`.
 
@@ -35,11 +35,11 @@ it isn't trivial, rendering JavaScript pages, public exposure.
 | D4 | Tool results are text for the model, with app data in `_meta` | decided: [ADR 0004](adr/0004-text-results-app-data-in-meta.md) |
 | D5 | MCP only: no REST mirror in v1 | **recommended option taken; the user hasn't picked it explicitly:** [ADR 0005](adr/0005-mcp-only-no-rest-mirror.md) |
 | D6 | `web_fetch` can't reach the home network: connect-time checks plus a NetworkPolicy | decided: [ADR 0006](adr/0006-web-fetch-cannot-reach-home-network.md) |
-| D7 | Apps limit which URLs may be fetched; harnesses ask before each fetch | **recommended option taken; the user hasn't picked it explicitly:** [ADR 0007](adr/0007-keeping-data-from-leaking-through-web-fetch.md) |
+| D7 | Apps limit which URLs may be fetched | decided: [ADR 0007](adr/0007-keeping-data-from-leaking-through-web-fetch.md). Its harness rule isn't in use (D12) |
 | D8 | Only arch and the cluster can reach mcpgw and llmgw; no auth | decided by the user: [ADR 0008](adr/0008-only-arch-and-the-cluster-no-auth.md) |
 | D9 | Search behind a replaceable provider; SearXNG first | decided: [ADR 0009](adr/0009-search-behind-a-replaceable-provider.md) |
 | D10 | Hosted search fallback? | **not now:** the M3 trial found results for all 21 queries, so nothing justifies paying yet. Bing carries most of it, and weak spots are on the record ([progress.md](progress.md)). The provider layer makes it a small change later ([ADR 0009](adr/0009-search-behind-a-replaceable-provider.md)) |
-| D12 | Should harnesses use mcpgw for search by default? | **the user's call. Recommended: no.** Keep the built-ins as the default, and name mcpgw when wanted. With `web_fetch` not approved, mcpgw's answers were weaker: Codex ran 16 searches and said 18.4 where its built-in said 18.6, and Claude Code couldn't confirm a version |
+| D12 | Should harnesses use mcpgw? | **no, for now: the user's decision.** Only home apps call it: [ADR 0010](adr/0010-home-apps-only-for-now.md) |
 | D11 | PDF in v1 or later? | **later:** v1 refuses PDFs with a clear message. Parsing them needs a heavy library and adds attack surface, and no finish line depends on it |
 
 When a decision is made, record it as an ADR in [adr/](adr/), update this table, and log it in
@@ -49,7 +49,7 @@ When a decision is made, record it as an ADR in [adr/](adr/), update this table,
 
 ## Milestones
 
-Status: ✅ done · 🔄 in progress · ⬜ not started
+Status: ✅ done · 🔄 in progress · ⬜ not started · ↩️ reverted
 
 The skeleton deploys at M2 rather than at the end, because the real network path is the one thing the tests so far
 couldn't cover: Traefik, the real hostname, and a second device.
@@ -122,19 +122,16 @@ couldn't cover: Traefik, the real hostname, and a second device.
 - [x] On the cluster: deployed, migrated with the data intact, and homestorm's real client reaches mcpgw from its pod
 - [ ] **By the user:** a real meeting on the cluster, which needs the admin login
 
-### M6: Harnesses use it 🔄
+### M6: Harnesses use it ↩️
 
-- [x] mcpgw added to Claude Code and Codex at user level, and both connect
-- [x] Codex: `approval_mode = "prompt"` on `web_fetch`. It asks in an interactive session, and refuses unattended
-- [ ] **By the user:** the same rule for Claude Code. Auto mode won't let me change Claude Code's permission rules, and in
-  `auto` mode the classifier otherwise approves `web_fetch` by itself. The command is in the README. Tested per-run: with
-  the rule, `web_fetch` is denied unattended
-- [x] Which search each model picks without being told: the built-in one, every time (4 of 4)
-- [x] What it takes to change that: one instruction works on both. Turning the built-in off works on Claude Code, while
-  Codex falls back to another hosted search
+Built and tested, then removed by the user's decision: only home apps call mcpgw for now
+([ADR 0010](adr/0010-home-apps-only-for-now.md)). What it found is in the progress log, for if it's ever wanted again.
+
+- [x] Connected Claude Code and Codex, and tested them through Traefik and at the full name
+- [x] Tested `web_fetch` approval: Codex's `approval_mode = "prompt"` asks, and Claude Code needs an `ask` rule in `auto` mode
+- [x] Tested which search they pick: their built-in one, 4 of 4
+- [x] Removed mcpgw from both
 - [x] Services table in arch-infra's README
-- [ ] **By the user:** D12. The original finish line, "a normal coding session uses mcpgw for search", isn't met by default,
-  and the evidence argues against forcing it
 
 ### M7: Only arch and the cluster 🔄
 
@@ -142,11 +139,13 @@ Decided by the user in [ADR 0008](adr/0008-only-arch-and-the-cluster-no-auth.md)
 
 - [x] homecal, homenews and homestorm use `llmgw.llmgw.svc.cluster.local`
 - [x] llmgw 0.7.0: refuses other Host names and other sites' web pages, and open CORS is gone
-- [x] **By the user:** `/etc/hosts` on arch points both full names at their Service IPs
-- [x] Claude Code, Codex and local `.env` files use the full names
-- [x] Both Ingresses removed, both Service IPs pinned, and the old names refused
-- [x] **Finish line:** `http://llmgw.llmgw.svc.cluster.local/docs` works in a real browser on arch, and Traefik answers 404 for
-  the old names. Tested from arch, sending the Host header a device on the network would send
+- [x] **By the user:** `/etc/hosts` on arch points llmgw's full name at its Service IP
+- [x] Local `.env` files use the full names
+- [x] Both Ingresses removed, llmgw's Service IP pinned, and the old names refused
+- [x] **Finish line:** `http://llmgw.llmgw.svc.cluster.local/docs` works in a real browser on arch, a page from another site is
+  refused, and Traefik answers 404 for the old names. Tested from arch, sending the Host header a device on the network
+  would send
+- [ ] **By the user:** remove mcpgw's line from `/etc/hosts` on arch ([ADR 0010](adr/0010-home-apps-only-for-now.md))
 - [ ] **By the user:** remove `llmgw.arch.internal` and `mcpgw.arch.internal` from the router's DNS
 - [ ] **By the user:** install the firewall rule ([deploy/host/](../deploy/host/)), and decide whether it also blocks Ollama
 

@@ -2,9 +2,9 @@
 
 The home cluster's **tool gateway**. llmgw gives apps one place to reach LLMs; mcpgw gives them, and the models
 behind llmgw, one place to reach **tools**: web search first, then web fetch, later more. It speaks **MCP** (Model
-Context Protocol), so MCP harnesses on arch can use it as well as the home apps.
+Context Protocol). For now, only the home apps use it ([ADR 0010](adr/0010-home-apps-only-for-now.md)).
 
-- **Status:** live at `http://mcpgw.mcpgw.svc.cluster.local` since 2026-11-05, reachable only from the cluster and arch. Progress is in [progress.md](progress.md).
+- **Status:** live at `http://mcpgw.mcpgw.svc.cluster.local` since 2026-11-05, called only by the home apps. Progress is in [progress.md](progress.md).
 - **First consumer:** homestorm (`~/agentic/homestorm`), the chair-run multi-model meeting app.
 - **Sibling:** llmgw (`~/agentic/llm-gateway`, `http://llmgw.llmgw.svc.cluster.local`).
 - **See also:** decisions in [adr/](adr/), milestones in [plan.md](plan.md), the log in [progress.md](progress.md).
@@ -69,16 +69,12 @@ JavaScript pages.
             ├─► mcpgw ──► SearXNG ──► Google · Bing · DDG · Brave · …    │
             │     │                                                      │
             │     └────► the public web (web_fetch, with the §6 guards)  │
- Claude Code┼─► mcpgw   (MCP harnesses on arch, over /mcp)               │
- Codex     ─┤                                                            │
             └────────────────────────────────────────────────────────────┘
 ```
 
 - **mcpgw:** one stateless Node service (no database in v1).
 - **SearXNG:** a second Deployment in the same Argo CD app and namespace. It's an implementation detail: only
   mcpgw talks to it, and apps never see its URL.
-- **Harnesses skip llmgw.** Claude Code and Codex talk to their own models and call mcpgw directly, so llmgw isn't on
-  that path.
 
 **Stack** ([ADR 0001](adr/0001-house-stack.md)): the same as llmgw and homestorm, so one person can keep both in
 their head: TypeScript on Node, Hono, zod 4, pino (the house JSON log shape), Vitest, Biome, pnpm. MCP through the
@@ -143,24 +139,20 @@ These sit on an outer Hono app, with the MCP app mounted inside it. On the MCP a
 - `X-Request-Id`: if the caller sends one, mcpgw logs it as `request_id` (homestorm sends one per seat turn).
   mcpgw's own `req_id` is returned in `X-Request-Id` on the response.
 - `X-Client`: a short caller name such as `homestorm`, logged as `client`. Optional. When it's absent, `client` is the
-  first word of `User-Agent`, which harnesses already send (`claude-code/2.1.318`, `codex-mcp-client/0.166.0`).
+  first word of `User-Agent`, so MCP clients are named even when they send nothing extra (`claude-code/2.1.318`).
 
 ### 4.4 Who can connect
 
-Only the cluster and arch ([ADR 0008](adr/0008-only-arch-and-the-cluster-no-auth.md)). There's no Ingress. On arch, `/etc/hosts`
-points the name at the Service IP, which is pinned in the chart. A firewall rule on arch ([deploy/host/](../deploy/host/))
-drops traffic from other devices addressed to the cluster's ranges.
+Only the home apps, for now ([ADR 0010](adr/0010-home-apps-only-for-now.md)). There's no Ingress, and a firewall rule on arch
+([deploy/host/](../deploy/host/)) drops traffic from other devices addressed to the cluster's ranges
+([ADR 0008](adr/0008-only-arch-and-the-cluster-no-auth.md)).
 
 | Client | Works? | How |
 |---|---|---|
 | Home apps | **Yes** | In-cluster, at `http://mcpgw.mcpgw.svc.cluster.local/mcp` |
-| Claude Code CLI on arch | **Yes (tested)** | `claude mcp add --scope user --transport http mcpgw http://mcpgw.mcpgw.svc.cluster.local/mcp`. Without `--scope user` it's added for one project only |
-| Codex CLI on arch | **Yes (tested)** | `codex mcp add mcpgw --url http://mcpgw.mcpgw.svc.cluster.local/mcp` |
-| Another device | **No** | Use SSH or a tunnel to arch |
-| Claude custom connectors (claude.ai, Desktop, mobile) | **No** | Anthropic: they connect "from Anthropic's cloud infrastructure" |
-| Claude Code on the web, Codex cloud | **No** | They run in the cloud |
-
-Both CLIs prefer their own built-in search unless told otherwise, so mcpgw is there when named (D12 in the plan).
+| Claude Code, Codex and other harnesses | **Not connected** | Tested at M6, then removed by decision. ADR 0010 says how to reconnect one |
+| Another device | **No** | No route to it |
+| Claude custom connectors, Claude Code on the web, Codex cloud | **No** | They connect from the cloud |
 
 ## 5. Tools in v1
 
@@ -302,7 +294,7 @@ can't tell where a URL came from, so the rule has to live with whoever holds the
 | Layer | What it does |
 |---|---|
 | **Apps** | Allow `web_fetch` only on URLs from the user or from `web_search` results. Not links inside fetched pages, and not URLs the model made up |
-| **Harnesses** | `web_search` runs freely and `web_fetch` asks each time, because those sessions can see code and secrets. Claude Code needs an explicit `ask` rule, since its `auto` mode otherwise approves it |
+| **Harnesses** | Not connected for now ([ADR 0010](adr/0010-home-apps-only-for-now.md)). If that changes, `web_fetch` must ask each time, because those sessions can see code and secrets |
 | **App UIs** | Never load images from a model's Markdown: the browser would send the URL with no click |
 | **mcpgw** | The URL length limit, cleaned output, and a line marking fetched text as data rather than instructions. These reduce the risk and don't remove it |
 
@@ -345,7 +337,7 @@ can't tell where a URL came from, so the rule has to live with whoever holds the
   - Deployment `searxng` and Service `searxng:8080`, cluster-internal only;
   - ConfigMap `searxng-settings`, from `deploy/chart/files/settings.yml`;
   - the §6.2 NetworkPolicies;
-  - no Ingress, for either Deployment ([ADR 0008](adr/0008-only-arch-and-the-cluster-no-auth.md)), and Service `mcpgw`'s IP is pinned.
+  - no Ingress, for either Deployment ([ADR 0008](adr/0008-only-arch-and-the-cluster-no-auth.md)).
 - **Argo CD:** `apps/mcpgw.yaml` in arch-infra (the root app-of-apps), review copy in `deploy/arch-infra/`, tags
   pinned to the image SHA.
 - **Resources:** mcpgw uses about 75 MB and SearXNG about 100 MB. Both request 128 MB. mcpgw's limit is 512 MB, enough for
@@ -396,7 +388,7 @@ Built in homestorm at M5. Testing with thinking on added three rules: "must sear
 a tool call isn't the answer; and when the calls are used up, the final answer gets the research as plain text with no
 tools at all, since `tool_choice: "none"` made DeepSeek write raw tool markup into the answer and Claude Opus return nothing.
 
-**c) Any MCP harness on arch** connects to `/mcp` and gets the same tools with no app code (§4.4).
+**c) MCP harnesses** aren't connected for now (§4.4).
 
 ## 11. Testing
 
@@ -410,8 +402,8 @@ tools at all, since `tool_choice: "none"` made DeepSeek write raw tool markup in
   - the guards: wrong `Host` 403, any `Origin` 403, `GET` and `DELETE` 405, and `/health` 200 with a pod-IP `Host`.
 - **Live, opt-in** (`pnpm test:live`): real SearXNG and one real page fetch, plus one llmgw round trip per family
   (Claude, GPT, DeepSeek) where the model calls `web_search` and answers from its result.
-- **Harness check:** real Claude Code and Codex, seeded from [dev/harness-check/](../dev/harness-check/). Re-run it
-  when either harness or the SDK changes, because which block a harness shows its model isn't set by the spec.
+- **Harness check:** the record of testing real Claude Code and Codex is in [dev/harness-check/](../dev/harness-check/). Re-run it
+  if a harness is ever reconnected, because which block a harness shows its model isn't set by the spec.
 
 ## 12. Build order
 
@@ -430,8 +422,6 @@ path is the one thing the tests so far couldn't cover.
 2. **Sites that refuse mcpgw.** Stack Overflow and Medium answer 403 to its plain `User-Agent`. It's reported, not worked
    around.
 3. **Hosted fallback.** Not for now; worth another look after real use ([ADR 0009](adr/0009-search-behind-a-replaceable-provider.md)).
-4. **Should harnesses use mcpgw for search by default?** Left to themselves they pick their built-in search, 4 of 4. D12 in
-   the plan has the evidence. The recommendation is to keep the built-ins and name mcpgw when wanted.
 
 ## 15. Standards and sources
 
