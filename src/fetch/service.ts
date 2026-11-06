@@ -2,7 +2,7 @@ import { TtlCache } from "../lib/cache.js";
 import { Limiter, QueueTimeout } from "../lib/limiter.js";
 import { log } from "../lib/logger.js";
 import { ToolFailure } from "../tools/result.js";
-import { HTML_TYPES } from "./extract.js";
+import { HTML_TYPES, isPdf } from "./extract.js";
 import { ExtractFailure, type ExtractorPool } from "./extractor-pool.js";
 import { type Fetcher, FetchFailure, HttpFailure } from "./fetcher.js";
 import { BlockedUrl } from "./guard.js";
@@ -80,44 +80,68 @@ export class FetchService {
     this.limiter = new Limiter(options.concurrency, options.queueWaitMs ?? 10_000);
   }
 
-  async read(url: string): Promise<ReadablePage & { cached: boolean }> {
-    const hit = this.cache.get(url);
+  async read(url: string, includeLinks = false): Promise<ReadablePage & { cached: boolean }> {
+    const key = (u: string) => (includeLinks ? `links:${u}` : u);
+    const hit = this.cache.get(key(url));
     if (hit) return { ...hit, cached: true };
 
     let page: ReadablePage;
     try {
-      page = await this.limiter.run(() => this.fetchAndExtract(url));
+      page = await this.limiter.run(() => this.fetchAndExtract(url, includeLinks));
     } catch (err) {
       throw this.toToolFailure(err);
     }
-    this.cache.set(url, page);
-    if (page.finalUrl !== url) this.cache.set(page.finalUrl, page);
+    this.cache.set(key(url), page);
+    if (page.finalUrl !== url) this.cache.set(key(page.finalUrl), page);
     return { ...page, cached: false };
   }
 
-  private async fetchAndExtract(url: string): Promise<ReadablePage> {
+  private async fetchAndExtract(url: string, includeLinks: boolean): Promise<ReadablePage> {
     const fetched = await this.fetcher.fetch(url);
+    const bytes = new Uint8Array(fetched.body);
+    const pdf = isPdf({ bytes, contentType: fetched.contentType });
     const base = {
       url,
       finalUrl: fetched.finalUrl.href,
-      contentType: fetched.contentType,
+      contentType: pdf ? "application/pdf" : fetched.contentType,
       bytes: fetched.bytes,
       partial: fetched.partial,
       fetchedAt: new Date().toISOString(),
     };
+    // A PDF's index is at its end, so one cut off at the size limit can't be parsed at all.
+    if (pdf && fetched.partial) {
+      throw new ToolFailure(
+        `This PDF is larger than mcpgw reads (${Math.round(fetched.bytes / 1_048_576)} MB). Try another source.`,
+        "error",
+        { reason: "pdf_too_large", final_host: fetched.finalUrl.hostname },
+      );
+    }
     if (
+      pdf ||
       HTML_TYPES.has(fetched.contentType) ||
       TEXT_TYPES.has(fetched.contentType) ||
       fetched.contentType.endsWith("+json")
     ) {
       // Page content is only ever handled in a worker, never on the thread serving other callers.
-      const { title, text } = await this.extractors.run({
-        bytes: new Uint8Array(fetched.body),
-        contentType: fetched.contentType,
-        ...(fetched.charset ? { charset: fetched.charset } : {}),
-        finalUrl: fetched.finalUrl.href,
-      });
-      return { ...base, title, text };
+      try {
+        const { title, text } = await this.extractors.run({
+          bytes,
+          contentType: fetched.contentType,
+          ...(fetched.charset ? { charset: fetched.charset } : {}),
+          finalUrl: fetched.finalUrl.href,
+          includeLinks,
+        });
+        return { ...base, title, text };
+      } catch (err) {
+        if (pdf && err instanceof ExtractFailure && err.kind === "crash") {
+          throw new ToolFailure(
+            "mcpgw couldn't read this PDF: it may be damaged or password-protected. Try another source.",
+            "error",
+            { reason: "pdf_unreadable", final_host: fetched.finalUrl.hostname },
+          );
+        }
+        throw err;
+      }
     }
 
     const kind = fetched.contentType || "an unknown type";

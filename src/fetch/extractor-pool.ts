@@ -13,6 +13,8 @@ export interface ExtractorPoolOptions {
   size?: number;
   timeoutMs?: number;
   maxOldMb?: number;
+  /** The whole process's memory, which is what the pod's limit counts. */
+  maxRssMb?: number;
 }
 
 interface Waiting {
@@ -22,17 +24,23 @@ interface Waiting {
 }
 
 const WORKER_URL = new URL("./extract-worker.ts", import.meta.url);
+const RSS_CHECK_MS = 10;
+const RSS_GROWTH_BYTES = 64 * 1024 * 1024;
 
 /**
  * Parsing a hostile page is the one thing here that a model can make expensive: 5 MB of tags took
  * 9.5 s and 1.3 GB on the main thread, which froze every caller and would get the pod killed. So
  * pages are parsed in workers with a memory cap and a time limit, and a page over either costs only
  * its own request. A worker that went over is thrown away, since it can't be trusted to recover.
+ *
+ * The worker's heap cap doesn't see buffers: a 0.2 MB PDF whose stream inflates to 256 MB peaked at
+ * 626 MB without touching it, past the pod's 512 MB limit. So the process's own memory is watched too.
  */
 export class ExtractorPool {
   private readonly size: number;
   private readonly timeoutMs: number;
   private readonly maxOldMb: number;
+  private readonly maxRssBytes: number;
   private readonly idle: Worker[] = [];
   private readonly queue: Waiting[] = [];
   private busy = 0;
@@ -43,6 +51,7 @@ export class ExtractorPool {
     this.size = options.size ?? 2;
     this.timeoutMs = options.timeoutMs ?? 5_000;
     this.maxOldMb = options.maxOldMb ?? 192;
+    this.maxRssBytes = (options.maxRssMb ?? 350) * 1024 * 1024;
   }
 
   run(job: ExtractJob): Promise<ExtractedPage> {
@@ -77,6 +86,7 @@ export class ExtractorPool {
     const finish = (keep: boolean) => {
       settled = true;
       clearTimeout(timer);
+      clearInterval(memoryWatch);
       worker.off("message", onMessage);
       worker.off("error", onError);
       worker.off("exit", onExit);
@@ -107,6 +117,17 @@ export class ExtractorPool {
       finish(false);
       reject(new ExtractFailure("timeout"));
     }, this.timeoutMs);
+    // Only a job that's growing can trip this. Memory is slow to come back after a bad page, and the
+    // next page shouldn't pay for that.
+    const rssAtStart = process.memoryUsage.rss();
+    const memoryWatch = setInterval(() => {
+      if (settled) return;
+      const rss = process.memoryUsage.rss();
+      if (rss <= this.maxRssBytes || rss - rssAtStart <= RSS_GROWTH_BYTES) return;
+      finish(false);
+      reject(new ExtractFailure("memory"));
+    }, RSS_CHECK_MS);
+    memoryWatch.unref();
 
     worker.on("message", onMessage);
     worker.on("error", onError);

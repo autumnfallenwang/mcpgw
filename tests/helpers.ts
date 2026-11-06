@@ -21,7 +21,7 @@ export async function startApp(overrides: Partial<AppDeps> = {}): Promise<Runnin
     search: new SearchService(cannedProvider, { cacheTtlMs: 60_000, concurrency: 4 }),
     fetch: new FetchService(
       new Fetcher({ policy: DEFAULT_POLICY(250), timeoutMs: 2_000, maxBytes: 1024 * 1024 }),
-      new ExtractorPool(),
+      new ExtractorPool({ maxRssMb: 16_384 }),
       { cacheTtlMs: 60_000, concurrency: 4 },
     ),
     ...overrides,

@@ -9,6 +9,7 @@ import { FetchService } from "../src/fetch/service.js";
 import { META_KEY } from "../src/tools/result.js";
 import { webFetch } from "../src/tools/web-fetch.js";
 import { type RunningServer, startApp } from "./helpers.js";
+import { buildPdf, pdfWithText } from "./pdf-fixture.js";
 
 let site: Server;
 let base: string;
@@ -49,7 +50,31 @@ beforeAll(async () => {
     }
     if (path === "/report.pdf") {
       res.writeHead(200, { "content-type": "application/pdf" });
-      return void res.end("%PDF-1.7");
+      return void res.end(pdfWithText("Cat. No. 10231X", "Form W-9"));
+    }
+    if (path === "/unlabelled") {
+      res.writeHead(200, { "content-type": "application/octet-stream" });
+      return void res.end(pdfWithText("No label on this one"));
+    }
+    if (path === "/broken.pdf") {
+      res.writeHead(200, { "content-type": "application/pdf" });
+      return void res.end("%PDF-1.7 not really a PDF");
+    }
+    if (path === "/scan.pdf") {
+      res.writeHead(200, { "content-type": "application/pdf" });
+      return void res.end(buildPdf(""));
+    }
+    if (path === "/huge.pdf") {
+      res.writeHead(200, { "content-type": "application/pdf" });
+      return void res.end(
+        Buffer.concat([Buffer.from("%PDF-1.7\n"), Buffer.alloc(2 * 1024 * 1024, 0x20)]),
+      );
+    }
+    if (path === "/links") {
+      res.writeHead(200, { "content-type": "text/html" });
+      return void res.end(
+        '<html><body><article><h1>Linked</h1><p>A paragraph long enough to count as an article, and it has <a href="/next">a link in it</a> that a reader may or may not want to follow later on.</p></article></body></html>',
+      );
     }
     if (path === "/js-only") {
       res.writeHead(200, html);
@@ -81,7 +106,7 @@ const OPEN_POLICY: FetchPolicy = {
 function service(overrides: { cacheTtlMs?: number } = {}) {
   return new FetchService(
     new Fetcher({ policy: OPEN_POLICY, timeoutMs: 1000, maxBytes: 1024 * 1024 }),
-    new ExtractorPool(),
+    new ExtractorPool({ maxRssMb: 16_384 }),
     { cacheTtlMs: overrides.cacheTtlMs ?? 60_000, concurrency: 2 },
   );
 }
@@ -159,6 +184,54 @@ describe("paging through a long page", () => {
   });
 });
 
+describe("PDFs", () => {
+  it("reads one", async () => {
+    const { text, meta } = await webFetch({ url: `${base}/report.pdf` }, service());
+    expect(text).toContain("Cat. No. 10231X");
+    expect(meta.title).toBe("Form W-9");
+    expect(meta.content_type).toBe("application/pdf");
+  });
+
+  it("recognises one that a server didn't label", async () => {
+    const { text, meta } = await webFetch({ url: `${base}/unlabelled` }, service());
+    expect(text).toContain("No label on this one");
+    expect(meta.content_type).toBe("application/pdf");
+  });
+
+  it("says a PDF with no text may be a scan, not that it needs JavaScript", async () => {
+    const { text } = await webFetch({ url: `${base}/scan.pdf` }, service());
+    expect(text).toContain("scanned images");
+    expect(text).not.toContain("JavaScript");
+  });
+
+  it("says when one is too large to read, rather than failing on the cut-off file", async () => {
+    const small = new FetchService(
+      new Fetcher({
+        policy: OPEN_POLICY,
+        timeoutMs: 2_000,
+        maxBytes: 1024 * 1024,
+      }),
+      new ExtractorPool({ maxRssMb: 16_384 }),
+      { cacheTtlMs: 60_000, concurrency: 4 },
+    );
+    const err = await webFetch({ url: `${base}/huge.pdf` }, small).catch((e) => e);
+    expect(err.message).toMatch(/larger than mcpgw reads/);
+  });
+});
+
+describe("links", () => {
+  it("leaves addresses out by default, and keeps them on request, cached apart", async () => {
+    const s = service();
+    const plain = await webFetch({ url: `${base}/links` }, s);
+    expect(plain.text).toContain("a link in it");
+    expect(plain.text).not.toContain("](");
+    const linked = await webFetch({ url: `${base}/links`, include_links: true }, s);
+    expect(linked.text).toContain(`[a link in it](${base}/next)`);
+    expect(linked.meta.cached).toBe(false);
+    expect((await webFetch({ url: `${base}/links` }, s)).meta.cached).toBe(true);
+  });
+});
+
 describe("what fails, and what the model is told", () => {
   const fails = async (path: string) => {
     return webFetch({ url: `${base}${path}` }, service()).catch((e) => e);
@@ -169,7 +242,7 @@ describe("what fails, and what the model is told", () => {
     ["/403", /refused.*Don't retry/, "error"],
     ["/429", /rate-limiting/, "error"],
     ["/image.png", /can't read this type of file: image\/png/, "error"],
-    ["/report.pdf", /can't read this type of file: application\/pdf/, "error"],
+    ["/broken.pdf", /couldn't read this PDF/, "error"],
   ])("%s", async (path, message, status) => {
     const err = await fails(path);
     expect(err.message).toMatch(message);

@@ -14,6 +14,8 @@ export interface ExtractJob {
   /** The label from the Content-Type header, if it had one. */
   charset?: string;
   finalUrl: string;
+  /** Keep link addresses in the text. Off by default: they're a median 23% of a page's text. */
+  includeLinks?: boolean;
 }
 
 /**
@@ -49,7 +51,7 @@ export function cleanText(text: string): string {
   );
 }
 
-function createTurndown(baseUrl: string): TurndownService {
+function createTurndown(baseUrl: string, includeLinks: boolean): TurndownService {
   const turndown = new TurndownService({
     headingStyle: "atx",
     codeBlockStyle: "fenced",
@@ -68,7 +70,7 @@ function createTurndown(baseUrl: string): TurndownService {
       const label = content.trim();
       const href = (node as HTMLElement).getAttribute("href");
       if (!label) return "";
-      if (!href) return label;
+      if (!href || !includeLinks) return label;
       try {
         const url = new URL(href, baseUrl);
         if (url.protocol !== "http:" && url.protocol !== "https:") return label;
@@ -86,7 +88,7 @@ const MAX_ELEMENTS = 100_000;
 /** Markup left after removing scripts and styles. Real pages stay well under this. */
 const MAX_MARKUP_CHARS = 2_000_000;
 /** Far more than a model reads in a call. It keeps a cached page's memory bounded. */
-const MAX_TEXT_CHARS = 500_000;
+export const MAX_TEXT_CHARS = 500_000;
 
 const PAGE_FURNITURE =
   "nav,footer,aside,[role='navigation'],[role='banner'],[role='contentinfo'],[role='complementary']";
@@ -103,8 +105,8 @@ export function markdownTitle(text: string): string | undefined {
   return /^#\s+(.+)$/m.exec(top)?.[1]?.trim();
 }
 
-/** Main-content extraction, then Markdown-ish text: headings, lists and links stay. */
-export function extractHtml(html: string, baseUrl: string): ExtractedPage {
+/** Main-content extraction, then Markdown-ish text: headings and lists stay, and links on request. */
+export function extractHtml(html: string, baseUrl: string, includeLinks = false): ExtractedPage {
   // Most of a modern page's bytes are scripts and styles, so they go before anything is parsed.
   const markup = html
     .replace(/<!--[\s\S]*?-->/g, "")
@@ -141,7 +143,7 @@ export function extractHtml(html: string, baseUrl: string): ExtractedPage {
     // Too many elements, or markup it can't handle: the whole page below still reads.
   }
 
-  const turndown = createTurndown(baseUrl);
+  const turndown = createTurndown(baseUrl, includeLinks);
   let text = contentHtml ? cleanText(turndown.turndown(contentHtml)) : "";
   if (text.length < SHORT_ARTICLE_CHARS && wholePageHtml) {
     const whole = cleanText(turndown.turndown(wholePageHtml));
@@ -167,6 +169,23 @@ function decode(job: ExtractJob, isHtml: boolean): string {
 }
 
 export const HTML_TYPES = new Set(["text/html", "application/xhtml+xml"]);
+const PDF_TYPES = new Set(["application/pdf", "application/x-pdf"]);
+/** What servers that don't know a file's type send, PDFs included. */
+const UNKNOWN_TYPES = new Set(["application/octet-stream", "binary/octet-stream", ""]);
+
+/** By its declared type, or by its first bytes when the server doesn't say. */
+export function isPdf(job: Pick<ExtractJob, "bytes" | "contentType">): boolean {
+  if (PDF_TYPES.has(job.contentType)) return true;
+  if (!UNKNOWN_TYPES.has(job.contentType)) return false;
+  return new TextDecoder("latin1").decode(job.bytes.subarray(0, 5)) === "%PDF-";
+}
+
+/** Links and images in a document that was already Markdown, keeping each link's text. */
+export function stripMarkdownLinks(text: string): string {
+  return text
+    .replace(/!\[[^\]]*\]\((?:[^()\s]|\([^()\s]*\))*(?:\s+"[^"]*")?\)/g, "")
+    .replace(/\[([^\]]*)\]\((?:[^()\s]|\([^()\s]*\))*(?:\s+"[^"]*")?\)/g, "$1");
+}
 
 /** Bytes in, text out: everything that handles a page's content, in one place the worker runs. */
 export function extractDocument(job: ExtractJob): ExtractedPage {
@@ -174,13 +193,14 @@ export function extractDocument(job: ExtractJob): ExtractedPage {
   const decoded = decode(job, isHtml);
 
   if (isHtml) {
-    const { title, text } = extractHtml(decoded, job.finalUrl);
+    const { title, text } = extractHtml(decoded, job.finalUrl, job.includeLinks ?? false);
     return { title, text: text.slice(0, MAX_TEXT_CHARS) };
   }
 
-  const text = cleanText(decoded);
+  const isMarkdown = job.contentType === "text/markdown";
+  const text = cleanText(isMarkdown && !job.includeLinks ? stripMarkdownLinks(decoded) : decoded);
   const url = new URL(job.finalUrl);
-  const fromText = job.contentType === "text/markdown" ? markdownTitle(text) : undefined;
+  const fromText = isMarkdown ? markdownTitle(text) : undefined;
   const fromName = url.pathname.split("/").filter(Boolean).at(-1);
   return { title: fromText ?? fromName ?? url.host, text: text.slice(0, MAX_TEXT_CHARS) };
 }

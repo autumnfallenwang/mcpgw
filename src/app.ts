@@ -99,7 +99,7 @@ export function createApp(deps: AppDeps) {
             name: "web_fetch",
             ...TOOLS.web_fetch,
             readOnly: TOOLS.web_fetch.annotations.readOnlyHint,
-            note: `Only reads public addresses: home network and cluster addresses are refused. Results are cached for ${minutes(FETCH_CACHE_TTL_S)}.`,
+            note: `Reads web pages, text and PDFs. Only reads public addresses: home network and cluster addresses are refused. Results are cached for ${minutes(FETCH_CACHE_TTL_S)}.`,
             inputTypes: { url: `string, up to ${FETCH_MAX_URL_CHARS} characters` },
           },
         ],

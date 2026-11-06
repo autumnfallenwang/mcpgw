@@ -40,7 +40,7 @@ it isn't trivial, rendering JavaScript pages, public exposure.
 | D9 | Search behind a replaceable provider; SearXNG first | decided: [ADR 0009](adr/0009-search-behind-a-replaceable-provider.md) |
 | D10 | Hosted search fallback? | **not now:** the M3 trial found results for all 21 queries, so nothing justifies paying yet. Bing carries most of it, and weak spots are on the record ([progress.md](progress.md)). The provider layer makes it a small change later ([ADR 0009](adr/0009-search-behind-a-replaceable-provider.md)) **Up for review in M9:** that trial counted whether results came back, not whether they were any good. |
 | D12 | Should harnesses use mcpgw? | **no, for now: the user's decision.** Only home apps call it: [ADR 0010](adr/0010-home-apps-only-for-now.md) |
-| D11 | PDF in v1 or later? | **later:** v1 refuses PDFs with a clear message. Parsing them needs a heavy library and adds attack surface, and no finish line depends on it **Up for review in M9, step 4.** |
+| D11 | PDF in v1 or later? | **now:** a measured gap, read in capped workers: [ADR 0011](adr/0011-read-pdfs-in-capped-workers.md) |
 | D13 | Keep SearXNG as the search backend? | **yes for now, until the benchmark says otherwise:** nothing open source and self-hosted beat it in the 2026-11-06 research. It has no index of its own, so its quality depends on which engines tolerate it |
 | D14 | Can the M9 benchmark run Claude against mcpgw? | **open, the user's call.** An exception to [ADR 0010](adr/0010-home-apps-only-for-now.md): one question at a time, with no change to Claude's config |
 

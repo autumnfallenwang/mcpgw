@@ -23,6 +23,7 @@ describe("extractHtml", () => {
         '<h2>Details</h2><ul><li>One</li><li>Two</li></ul><p>See <a href="/docs">the docs</a>.</p>',
       ),
       BASE,
+      true,
     );
     expect(title).toBeTruthy();
     expect(text).toContain("## Details");
@@ -62,12 +63,23 @@ describe("extractHtml", () => {
     expect(text).toContain("Small print");
   });
 
+  it("leaves out link addresses by default, keeping the words", () => {
+    const { text } = extractHtml(
+      page('<p>See <a href="/docs">the docs</a> for more on this subject.</p>'),
+      BASE,
+    );
+    expect(text).toContain("See the docs for more");
+    expect(text).not.toContain("example.com/docs");
+    expect(text).not.toContain("](");
+  });
+
   it("keeps only web links", () => {
     const { text } = extractHtml(
       page(
         '<p><a href="javascript:alert(1)">bad link</a> <a href="mailto:a@b.c">mail link</a> <a href="https://x.example/y">good link</a></p>',
       ),
       BASE,
+      true,
     );
     expect(text).toContain("bad link");
     expect(text).not.toContain("javascript:");

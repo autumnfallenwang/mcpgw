@@ -84,3 +84,4 @@ Account-specific details stay in a local, gitignored `private/` folder.
 | [0008](docs/adr/0008-only-arch-and-the-cluster-no-auth.md) | Only arch and the cluster can reach mcpgw and llmgw; no auth |
 | [0009](docs/adr/0009-search-behind-a-replaceable-provider.md) | Search sits behind a replaceable provider; SearXNG first |
 | [0010](docs/adr/0010-home-apps-only-for-now.md) | Only home apps call mcpgw, for now; harnesses aren't connected |
+| [0011](docs/adr/0011-read-pdfs-in-capped-workers.md) | Read PDFs in capped workers, with a limit on the whole process |

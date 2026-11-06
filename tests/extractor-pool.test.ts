@@ -14,7 +14,7 @@ const plain = (text: string) => ({
   finalUrl: "https://example.com/notes.txt",
 });
 
-const pool = new ExtractorPool({ timeoutMs: 5_000 });
+const pool = new ExtractorPool({ timeoutMs: 5_000, maxRssMb: 16_384 });
 afterAll(() => pool.close());
 
 /** How long the main thread stayed stuck while `fn` ran. */
@@ -106,7 +106,7 @@ describe("ExtractorPool", () => {
   it.each(HOSTILE)(
     "%s: fails or finishes within the limit, and never stalls other callers",
     async (_name, make) => {
-      const hostile = new ExtractorPool({ size: 1, timeoutMs: 2_000 });
+      const hostile = new ExtractorPool({ maxRssMb: 16_384, size: 1, timeoutMs: 2_000 });
       const started = performance.now();
       let outcome: unknown;
       const stall = await worstStall(async () => {
@@ -123,7 +123,7 @@ describe("ExtractorPool", () => {
   );
 
   it("fails a page over the time limit", async () => {
-    const tight = new ExtractorPool({ size: 1, timeoutMs: 5 });
+    const tight = new ExtractorPool({ size: 1, timeoutMs: 5, maxRssMb: 16_384 });
     const err = await tight
       .run(html(`<html><body>${row.repeat(60_000)}</body></html>`))
       .catch((e) => e);
@@ -133,7 +133,7 @@ describe("ExtractorPool", () => {
   });
 
   it("fails a page over the memory limit, and only that page", async () => {
-    const small = new ExtractorPool({ size: 1, timeoutMs: 15_000, maxOldMb: 16 });
+    const small = new ExtractorPool({ maxRssMb: 16_384, size: 1, timeoutMs: 15_000, maxOldMb: 16 });
     const err = await small
       .run(html(`<html><body>${row.repeat(60_000)}</body></html>`))
       .catch((e) => e);

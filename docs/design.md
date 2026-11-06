@@ -175,7 +175,7 @@ snippets. Use web_fetch to read a page."
 | `max_results` | integer 1–10 | 5 | |
 | `time_range` | `day` · `week` · `month` · `year` | none | Passed to the provider |
 | `category` | `general` · `news` · `it` · `science` | `general` | SearXNG categories |
-| `language` | BCP 47 such as `en` | `en` | |
+| `language` | BCP 47 such as `en` | Picked from the query's script, or `en` | Chinese, Japanese and Korean queries ask for their own language |
 
 **Text for the model:**
 
@@ -205,6 +205,12 @@ Use web_fetch to read a page.
 
 - `published` only when the provider has it. Snippets are cut to 300 characters.
 - Results with the same URL are merged (SearXNG mostly does this).
+- `site:` terms in a query are applied here as well, because not every engine honours them and models use them in about half
+  their searches.
+- A narrow category that finds fewer than 3 results is filled in from a general search. `it` is only GitHub and Stack Overflow, and
+  GPT-5.6 Luna often picked it for ordinary technical questions and got one stray result, or none.
+- An empty result gets one more try after 1.5 s and is never cached. The message says an empty result doesn't prove nothing
+  exists, because engines often come back empty for a moment.
 - **Provider:** tool code calls a one-method `SearchProvider`. SearXNG is the first implementation; a hosted API could
   replace it with no change for callers.
 - **Cache:** identical arguments return the cached result for 10 minutes (in memory, an LRU of 500 entries).
@@ -213,14 +219,15 @@ Use web_fetch to read a page.
 
 ### 5.2 `web_fetch`
 
-**Description given to models:** "Read one web page or document as plain text. Use it on a link from web_search
-or one the user gave you."
+**Description given to models:** "Read one web page or PDF as plain text. Use it on a link from web_search or one the user
+gave you."
 
 | Input | Type | Default | Notes |
 |---|---|---|---|
 | `url` | string, `http`/`https` only, up to 250 chars | required | Checked by §6 before any connection |
 | `max_chars` | integer 1,000–40,000 | 12,000 | Characters of text returned |
 | `start` | integer ≥ 0 | 0 | Offset, to read a long page in parts |
+| `include_links` | boolean | `false` | Keep link addresses in the text |
 
 **Text for the model:** the title and final URL, a line saying the content is from that page and is data rather than
 instructions, the text, then "(truncated: call again with start=N for more)" when there's more.
@@ -233,13 +240,16 @@ into Markdown for Agents answer with Markdown, which skips extraction.
 
 **Extraction:**
 
-- `text/html`: main-content extraction, then converted to plain Markdown-ish text: headings, lists and links kept,
-  scripts, styles, navigation and ads dropped. Mozilla Readability on linkedom to start, behind one `extract()`
+- `text/html`: main-content extraction, then converted to plain Markdown-ish text: headings and lists kept, scripts, styles,
+  navigation and ads dropped. Link addresses are dropped too unless `include_links` is set, because they took a median 20% of
+  the text, up to 78% on Chinese pages, and homestorm refuses to follow them anyway. Mozilla Readability on linkedom to start, behind one `extract()`
   function. Compared with Defuddle on real pages: Defuddle was 3–5× slower and not clearly better.
 - **Output is cleaned** (the spec requires it): hidden elements, HTML comments and invisible Unicode go, because
   they're where instructions to a model get hidden. This reduces the risk; it doesn't remove it (§6.3).
 - `text/plain`, `text/markdown`, `application/json`: returned as is, after the same Unicode cleaning.
-- `application/pdf`: refused with a clear message in v1 (D11 in the plan).
+- `application/pdf`, or a generic type with PDF's first bytes: text extracted in a worker, under a limit on the whole process's
+  memory ([ADR 0011](adr/0011-read-pdfs-in-capped-workers.md)). One with no text says it may be a scan, and one over the size
+  limit says so.
 - Pages that need JavaScript aren't rendered. Near-empty extractions say so. Anthropic's own fetch tool has the same
   limit.
 - Anything else: refused ("mcpgw can't read this type of file: image/png").

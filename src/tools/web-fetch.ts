@@ -3,7 +3,7 @@ import type { FetchService } from "../fetch/service.js";
 import type { ToolOutput } from "./result.js";
 
 export const WEB_FETCH_DESCRIPTION =
-  "Read one web page or document as plain text. Use it on a link from web_search or one the user gave you.";
+  "Read one web page or PDF as plain text. Use it on a link from web_search or one the user gave you.";
 
 export const webFetchInput = z.object({
   url: z.string().min(1).max(8000).describe("The http or https address to read."),
@@ -20,6 +20,12 @@ export const webFetchInput = z.object({
     .min(0)
     .optional()
     .describe("Offset to start from, to read a long page in parts. Default 0."),
+  include_links: z
+    .boolean()
+    .optional()
+    .describe(
+      "Keep link addresses in the text, to find pages linked from this one. Default false.",
+    ),
 });
 
 export type WebFetchArgs = z.infer<typeof webFetchInput>;
@@ -37,7 +43,7 @@ function slicePage(text: string, start: number, maxChars: number): string {
 }
 
 export async function webFetch(args: WebFetchArgs, service: FetchService): Promise<ToolOutput> {
-  const page = await service.read(args.url);
+  const page = await service.read(args.url, args.include_links ?? false);
   const start = args.start ?? 0;
   const maxChars = args.max_chars ?? DEFAULT_MAX_CHARS;
   const part = slicePage(page.text, start, maxChars);
@@ -55,7 +61,11 @@ export async function webFetch(args: WebFetchArgs, service: FetchService): Promi
   let body: string;
   if (page.text.length < NEARLY_EMPTY_CHARS && start === 0) {
     const found = page.text ? `It had only this:\n\n${page.text}` : "It had no readable text.";
-    body = `${found}\n\nThe page may need JavaScript, which mcpgw doesn't run. Try another source.`;
+    const why =
+      page.contentType === "application/pdf"
+        ? "It may be scanned images, which mcpgw doesn't read."
+        : "The page may need JavaScript, which mcpgw doesn't run.";
+    body = `${found}\n\n${why} Try another source.`;
   } else if (start >= page.text.length) {
     body = `(start is past the end: this page has ${page.text.length} characters.)`;
   } else {
