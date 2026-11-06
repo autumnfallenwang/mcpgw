@@ -27,6 +27,6 @@ format themselves. `/health` and `/` stay as plain HTTP.
 ## Consequences
 
 - Fewer routes to guard, one set of errors, and no format conversion inside mcpgw.
-- homestorm's ADR 0014 and plan still describe the REST mirror. They need updating in its repo (M5).
+- homestorm's ADR 0014 and plan were updated at M5, and its client took about 100 lines.
 - Checking by hand needs an MCP client: the script in `dev/harness-check/` or the MCP Inspector, not plain `curl`.
 - If a caller turns up that can't use an MCP client, add the mirror then.

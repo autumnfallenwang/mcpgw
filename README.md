@@ -64,13 +64,25 @@ claude mcp add --scope user --transport http mcpgw http://mcpgw.arch.internal/mc
 codex mcp add mcpgw --url http://mcpgw.arch.internal/mcp
 ```
 
-Then let `web_search` run freely and keep `web_fetch` asking ([ADR 0007](docs/adr/0007-keeping-data-from-leaking-through-web-fetch.md)):
-allow only `mcp__mcpgw__web_search` in Claude Code, and in `~/.codex/config.toml` set:
+Then let `web_search` run freely and keep `web_fetch` asking
+([ADR 0007](docs/adr/0007-keeping-data-from-leaking-through-web-fetch.md)). For Claude Code, an `ask` rule is needed, because
+its `auto` mode otherwise approves `web_fetch` by itself:
+
+```sh
+jq '.permissions.allow += ["mcp__mcpgw__web_search"] | .permissions.ask += ["mcp__mcpgw__web_fetch"]' \
+  ~/.claude/settings.json > /tmp/claude-settings.json && mv /tmp/claude-settings.json ~/.claude/settings.json
+```
+
+For Codex, in `~/.codex/config.toml`:
 
 ```toml
 [mcp_servers.mcpgw.tools.web_fetch]
 approval_mode = "prompt"
 ```
+
+Both CLIs prefer their own built-in search unless told otherwise, so name mcpgw when you want it. To make it the default, add
+this to `CLAUDE.md` or `AGENTS.md`, though see D12 in [the plan](docs/plan.md) first: "For web search, use the web_search tool
+from the mcpgw MCP server rather than any built-in search."
 
 ## Docs
 

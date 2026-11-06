@@ -158,6 +158,8 @@ These sit on an outer Hono app, with the MCP app mounted inside it. On the MCP a
 
 Away from home nothing can reach mcpgw, unless a VPN is added.
 
+Both CLIs prefer their own built-in search unless told otherwise, so mcpgw is there when named (D12 in the plan).
+
 ## 5. Tools in v1
 
 ### 5.1 `web_search`
@@ -298,7 +300,8 @@ can't tell where a URL came from, so the rule has to live with whoever holds the
 | Layer | What it does |
 |---|---|
 | **Apps** | Allow `web_fetch` only on URLs from the user or from `web_search` results. Not links inside fetched pages, and not URLs the model made up |
-| **Harnesses** | `web_search` runs freely and `web_fetch` asks each time, because those sessions can see code and secrets |
+| **Harnesses** | `web_search` runs freely and `web_fetch` asks each time, because those sessions can see code and secrets. Claude Code needs an explicit `ask` rule, since its `auto` mode otherwise approves it |
+| **App UIs** | Never load images from a model's Markdown: the browser would send the URL with no click |
 | **mcpgw** | The URL length limit, cleaned output, and a line marking fetched text as data rather than instructions. These reduce the risk and don't remove it |
 
 ## 7. Configuration
@@ -388,6 +391,10 @@ sees the same sources, which keeps blind rounds fair.
 4. The searches and fetched links show under the seat's answer, and enter the record, so the other seats can see
    which sources it used.
 
+Built in homestorm at M5. Testing with thinking on added three rules: "must search" forces `web_search` by name; text before
+a tool call isn't the answer; and when the calls are used up, the final answer gets the research as plain text with no
+tools at all, since `tool_choice: "none"` made DeepSeek write raw tool markup into the answer and Claude Opus return nothing.
+
 **c) Any MCP harness on the home network** connects to `/mcp` and gets the same tools with no app code (§4.4).
 
 ## 11. Testing
@@ -424,8 +431,8 @@ path is the one thing the tests so far couldn't cover.
 3. **Sites that refuse mcpgw.** Stack Overflow and Medium answer 403 to its plain `User-Agent`. It's reported, not worked
    around.
 4. **Hosted fallback.** Not for now; worth another look after real use ([ADR 0009](adr/0009-search-behind-a-replaceable-provider.md)).
-5. **Which search will harness models pick?** Both harnesses have their own web search, and the tests named the
-   mcpgw tool in the prompt (Claude Code's built-ins were also turned off). Checked at M6.
+5. **Should harnesses use mcpgw for search by default?** Left to themselves they pick their built-in search, 4 of 4. D12 in
+   the plan has the evidence. The recommendation is to keep the built-ins and name mcpgw when wanted.
 
 ## 15. Standards and sources
 

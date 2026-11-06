@@ -39,6 +39,7 @@ it isn't trivial, rendering JavaScript pages, public exposure.
 | D8 | Home network only, no auth in v1 | **recommended option taken; the user needs to confirm the network is trusted:** [ADR 0008](adr/0008-home-network-only-no-auth.md) |
 | D9 | Search behind a replaceable provider; SearXNG first | decided: [ADR 0009](adr/0009-search-behind-a-replaceable-provider.md) |
 | D10 | Hosted search fallback? | **not now:** the M3 trial found results for all 21 queries, so nothing justifies paying yet. Bing carries most of it, and weak spots are on the record ([progress.md](progress.md)). The provider layer makes it a small change later ([ADR 0009](adr/0009-search-behind-a-replaceable-provider.md)) |
+| D12 | Should harnesses use mcpgw for search by default? | **the user's call. Recommended: no.** Keep the built-ins as the default, and name mcpgw when wanted. With `web_fetch` not approved, mcpgw's answers were weaker: Codex ran 16 searches and said 18.4 where its built-in said 18.6, and Claude Code couldn't confirm a version |
 | D11 | PDF in v1 or later? | **later:** v1 refuses PDFs with a clear message. Parsing them needs a heavy library and adds attack surface, and no finish line depends on it |
 
 When a decision is made, record it as an ADR in [adr/](adr/), update this table, and log it in
@@ -106,29 +107,37 @@ couldn't cover: Traefik, the real hostname, and a second device.
   inside the pod, with the app's checks out of the way, the LAN, llmgw and the service network are refused, while a pod
   with no policy reaches them
 
-### M5: homestorm uses it 🔄 (M9 in homestorm's plan, in its own repo)
+### M5: homestorm uses it ✅ (M9 in homestorm's plan, in its own repo)
 
-- [x] Streaming `tool_calls` through llmgw checked on all three families, including SDK v2's schemas with `$schema`,
-  `tool_choice: "required"`, and `tool_choice: "none"` with tool history (needed for Claude's forced final answer)
-- [ ] Today's date in the intro
-- [ ] Update homestorm's ADR 0014 and plan, which still describe the REST mirror
-- [ ] `@modelcontextprotocol/client` in homestorm's API
-- [ ] Chair search, posted as one "Sources" message
-- [ ] Seat tools: the tool loop with a per-turn limit, and the URL rule from
+- [x] Streaming `tool_calls` through llmgw checked on all three families with thinking on, including SDK v2's schemas
+  with `$schema`. This changed the design: see the progress log
+- [x] Today's date in the intro
+- [x] homestorm's ADR 0014 and plan updated
+- [x] `@modelcontextprotocol/client` in homestorm's API
+- [x] Chair search, posted as one message every seat reads
+- [x] Seat tools: the tool loop with a limit of 4 calls per turn, and the URL rule from
   [ADR 0007](adr/0007-keeping-data-from-leaking-through-web-fetch.md)
-- [ ] **Finish line:** a real meeting where a seat searches, reads a page and cites it; a `web_fetch` of a URL from
-  no allowed source is refused
+- [x] **Finish line:** a real meeting in a real browser on localhost, against the real llmgw and mcpgw: seats on all three
+  families searched, read pages and cited them; a `web_fetch` of a URL from no allowed source was refused before reaching
+  mcpgw
+- [x] On the cluster: deployed, migrated with the data intact, and homestorm's real client reaches mcpgw from its pod
+- [ ] **By the user:** a real meeting on the cluster, which needs the admin login
 
-### M6: Harnesses use it ⬜
+### M6: Harnesses use it 🔄
 
-- [ ] Add mcpgw to Claude Code and Codex for real; `web_search` allowed, `web_fetch` asks each time
-- [ ] Check that Codex's `approval_mode = "prompt"` asks in interactive sessions (only `approve` has been tested)
-- [ ] See which search each model picks without being told; if it's always the built-in one, decide whether to turn
-  the built-in off or add an instruction to `CLAUDE.md`
-- [ ] Services table in arch-infra's README
-- [ ] **Finish line:** a normal coding session on each harness uses mcpgw for search
+- [x] mcpgw added to Claude Code and Codex at user level, and both connect
+- [x] Codex: `approval_mode = "prompt"` on `web_fetch`. It asks in an interactive session, and refuses unattended
+- [ ] **By the user:** the same rule for Claude Code. Auto mode won't let me change Claude Code's permission rules, and in
+  `auto` mode the classifier otherwise approves `web_fetch` by itself. The command is in the README. Tested per-run: with
+  the rule, `web_fetch` is denied unattended
+- [x] Which search each model picks without being told: the built-in one, every time (4 of 4)
+- [x] What it takes to change that: one instruction works on both. Turning the built-in off works on Claude Code, while
+  Codex falls back to another hosted search
+- [x] Services table in arch-infra's README
+- [ ] **By the user:** D12. The original finish line, "a normal coding session uses mcpgw for search", isn't met by default,
+  and the evidence argues against forcing it
 
-v1 is done after M6.
+v1 is done after those three "by the user" items and the second-device check in M2.
 
 ## Future work
 

