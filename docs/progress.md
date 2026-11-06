@@ -6,6 +6,10 @@ A dated log of what was done and decided, newest first. The plan and milestone s
 
 ## 2026-11-06
 
+- **M9 deployed on the user's OK,** as image `f6e747a`. From homestorm's pod, a search, a PDF and a normal page worked, and a private
+  address was refused. The tools-alone test on production scored 98% on the topic, 31 of 31 first results, 15 of 15 `site:`, 3 of 3 PDFs
+  and 26 of 36 pages, level with the local run. DuckDuckGo drew 3 CAPTCHAs during it, and the score held. The answer scores weren't
+  re-run on production.
 - **M9 built, with steps 2 to 4 waiting on a deploy.** Measured against Claude Code's own search, on the same model and questions,
   graded blind: 99.2 with mcpgw, 93 with its own search, and 29.7 with no tools. GPT-5.6 Luna went from 78.1 to 90.6. Search results on
   the topic went from 83% to 96%, `site:` from 0 to 15 of 15, and PDFs from 0 to 3 of 3. The numbers are in [the plan](plan.md).

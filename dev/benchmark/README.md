@@ -56,7 +56,8 @@ unpaced test on 2026-11-05 scored 61% on the topic where a paced one the next da
 Everything with tools scored 100 on the 8 hard questions, and no tools scored 25. Labels in `results/`: `baseline` and `baseline-hard`
 for before, `after` and `after-hard` for after, `step1` for the engine mix on the cluster, and `engines` for each mix tried. `after`
 ran the new image in local containers. `retrieval.json` under `after` says 25 of 36 pages, but the Transformer PDF was readable and only
-its check was too narrow, so it's 26. That check is corrected now.
+its check was too narrow, so it's 26. That check is corrected now. `deployed` is `retrieval.mjs` alone against production, after the
+deploy: 98% on the topic and 26 of 36 pages.
 
 ## Limits
 

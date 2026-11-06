@@ -3,7 +3,7 @@
 What the first workable version of mcpgw includes, the milestones to get there, and the decisions still open.
 Progress against this plan is logged in [progress.md](progress.md). The design is in [design.md](design.md).
 
-**Updated:** 2026-11-05
+**Updated:** 2026-11-06
 
 ---
 
@@ -159,7 +159,7 @@ Decided by the user in [ADR 0008](adr/0008-only-arch-and-the-cluster-no-auth.md)
 
 v1 is done after the remaining "by the user" items.
 
-### M9: Tool quality 🔄
+### M9: Tool quality ✅
 
 Started with the user's "go M9 e2e" on 2026-11-06. How it's measured, and its limits, is in [dev/benchmark/](../dev/benchmark/).
 
@@ -192,20 +192,24 @@ own search is a few questions, so read it as "at least level with it", not as pr
 
 The 10 pages still unusable refuse mcpgw (6) or need JavaScript (4), and neither is planned to change.
 
-"After" ran the new image and engine mix in local containers, because auto mode blocked the deploy. The engine mix alone was also
-measured on the cluster: 83% to 94% on the topic. The first test, on 2026-11-05, scored 61% because it was unpaced and drew CAPTCHAs,
+"After" ran the new image and engine mix in local containers, because auto mode blocked the deploy at the time. The engine mix alone was
+also measured on the cluster: 83% to 94% on the topic. The first test, on 2026-11-05, scored 61% because it was unpaced and drew CAPTCHAs,
 so its numbers were replaced by these.
+
+**On production,** after the deploy, the tools-alone test scored 98% on the topic (152 of 155), 31 of 31 first results, 15 of 15 `site:`,
+3 of 3 PDFs and 26 of 36 pages, with 0% link addresses. That's level with the local run, since 96% to 98% is within one run's noise.
+DuckDuckGo drew 3 CAPTCHAs during it, and the score held. The answer scores above weren't re-run on production.
 
 - [x] **Step 0, benchmark:** [dev/benchmark/](../dev/benchmark/), with the baseline recorded
 - [x] **Step 1, engines:** Yahoo and DuckDuckGo lead, Bing is a backup and Brave goes ([ADR 0012](adr/0012-search-engine-mix.md)). **Live**
 - [x] **Step 2, honest search:** one more try for an empty result, which is never cached; narrow categories widen when they find too
-  little; `site:` is applied by mcpgw too; Chinese, Japanese and Korean queries ask for their own language. **Built, not deployed**
-- [x] **Step 3, cleaner fetch:** link addresses are left out unless `include_links` asks for them. **Built, not deployed**
+  little; `site:` is applied by mcpgw too; Chinese, Japanese and Korean queries ask for their own language. **Live**
+- [x] **Step 3, cleaner fetch:** link addresses are left out unless `include_links` asks for them. **Live**
 - [x] **Step 4, PDFs:** read in capped workers, with a limit on the whole process's memory after a small PDF proved it could take the
-  pod down ([ADR 0011](adr/0011-read-pdfs-in-capped-workers.md)). **Built, not deployed**
+  pod down ([ADR 0011](adr/0011-read-pdfs-in-capped-workers.md)). **Live**
 - [x] **Step 5, decide:** no re-ranking and no hosted fallback, since the targets that matter are met without them
-- [ ] **Waiting for the user's OK:** deploy steps 2 to 4 by bumping the image tag in arch-infra to `f6e747a`, then confirm it on the
-  cluster with the benchmark and from homestorm's pod
+- [x] **Deployed on the user's OK** as image `f6e747a`. Confirmed with the tools-alone test on the cluster and from homestorm's pod: a
+  search, a PDF and a normal page worked, and a private address was refused
 
 **Not planned:**
 - **JavaScript rendering:** it means running a heavy browser for a few pages, and Anthropic's own fetch tool doesn't do it.
