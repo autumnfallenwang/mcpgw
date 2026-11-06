@@ -76,11 +76,69 @@ describe("SearchService", () => {
   const same = <T>(x: T) => x;
 
   it("serves identical arguments from the cache, and different ones fresh", async () => {
-    const provider = counting({ results: [], suggestions: [] });
+    const provider = counting({
+      results: [{ title: "A", url: "https://a.example/", snippet: "", engines: [] }],
+      suggestions: [],
+    });
     const service = new SearchService(provider, { cacheTtlMs: 60_000, concurrency: 1 });
     expect((await service.search(QUERY, same)).cached).toBe(false);
     expect((await service.search(QUERY, same)).cached).toBe(true);
     expect((await service.search({ ...QUERY, language: "de" }, same)).cached).toBe(false);
+    expect(provider.calls).toBe(2);
+  });
+
+  it("tries an empty result once more, and never caches it", async () => {
+    const provider = counting({ results: [], suggestions: [] });
+    const service = new SearchService(provider, {
+      cacheTtlMs: 60_000,
+      concurrency: 1,
+      retryDelayMs: 0,
+    });
+    const first = await service.search(QUERY, same);
+    expect(first.retried).toBe(true);
+    expect(first.cached).toBe(false);
+    expect(provider.calls).toBe(2);
+    expect((await service.search(QUERY, same)).cached).toBe(false);
+    expect(provider.calls).toBe(4);
+  });
+
+  it("keeps what the second try finds", async () => {
+    let calls = 0;
+    const provider: SearchProvider = {
+      name: "flaky",
+      health: () => Promise.resolve("ok"),
+      search: () => {
+        calls++;
+        return Promise.resolve({
+          results:
+            calls === 1
+              ? []
+              : [{ title: "A", url: "https://a.example/", snippet: "", engines: [] }],
+          suggestions: [],
+        });
+      },
+    };
+    const service = new SearchService(provider, {
+      cacheTtlMs: 60_000,
+      concurrency: 1,
+      retryDelayMs: 0,
+    });
+    const found = await service.search(QUERY, same);
+    expect(found.results).toHaveLength(1);
+    expect(found.retried).toBe(true);
+    expect((await service.search(QUERY, same)).cached).toBe(true);
+  });
+
+  it("tries again when no engine answered, then says so", async () => {
+    const provider = counting(
+      new ToolFailure("no engines", "error", { engine_errors: { a: "b" } }),
+    );
+    const service = new SearchService(provider, {
+      cacheTtlMs: 60_000,
+      concurrency: 1,
+      retryDelayMs: 0,
+    });
+    await expect(service.search(QUERY, same)).rejects.toThrow("no engines");
     expect(provider.calls).toBe(2);
   });
 
