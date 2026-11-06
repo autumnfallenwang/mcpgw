@@ -1,7 +1,12 @@
 import type { AddressInfo } from "node:net";
 import { type ServerType, serve } from "@hono/node-server";
 import { type AppDeps, createApp } from "../src/app.js";
+import { ExtractorPool } from "../src/fetch/extractor-pool.js";
+import { Fetcher } from "../src/fetch/fetcher.js";
+import { DEFAULT_POLICY } from "../src/fetch/guard.js";
+import { FetchService } from "../src/fetch/service.js";
 import { cannedProvider } from "../src/search/canned.js";
+import { SearchService } from "../src/search/service.js";
 
 export interface RunningServer {
   url: string;
@@ -13,7 +18,12 @@ export interface RunningServer {
 export async function startApp(overrides: Partial<AppDeps> = {}): Promise<RunningServer> {
   const app = createApp({
     allowedHosts: ["127.0.0.1", "mcpgw.arch.internal", "mcpgw.mcpgw.svc.cluster.local"],
-    searchProvider: cannedProvider,
+    search: new SearchService(cannedProvider, { cacheTtlMs: 60_000, concurrency: 4 }),
+    fetch: new FetchService(
+      new Fetcher({ policy: DEFAULT_POLICY(250), timeoutMs: 2_000, maxBytes: 1024 * 1024 }),
+      new ExtractorPool(),
+      { cacheTtlMs: 60_000, concurrency: 4 },
+    ),
     ...overrides,
   });
   const server: ServerType = await new Promise((resolve) => {

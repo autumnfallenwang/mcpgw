@@ -1,11 +1,6 @@
 import { z } from "zod";
-import {
-  CATEGORIES,
-  type SearchHit,
-  type SearchOutcome,
-  type SearchProvider,
-  TIME_RANGES,
-} from "../search/types.js";
+import type { SearchService } from "../search/service.js";
+import { CATEGORIES, type SearchHit, TIME_RANGES } from "../search/types.js";
 import type { ToolOutput } from "./result.js";
 
 export const WEB_SEARCH_DESCRIPTION =
@@ -58,19 +53,15 @@ function mergeByUrl(hits: SearchHit[]): SearchHit[] {
   return [...byUrl.values()];
 }
 
-export function shapeResults(outcome: SearchOutcome, maxResults: number): SearchHit[] {
-  return mergeByUrl(outcome.results)
+export function shapeResults(hits: SearchHit[], maxResults: number): SearchHit[] {
+  return mergeByUrl(hits)
     .slice(0, maxResults)
     .map((r) => ({ ...r, title: cut(r.title, 200), snippet: cut(r.snippet, SNIPPET_CHARS) }));
 }
 
-export async function webSearch(
-  args: WebSearchArgs,
-  provider: SearchProvider,
-  signal: AbortSignal,
-): Promise<ToolOutput> {
+export async function webSearch(args: WebSearchArgs, service: SearchService): Promise<ToolOutput> {
   const maxResults = args.max_results ?? 5;
-  const outcome = await provider.search(
+  const found = await service.search(
     {
       query: args.query,
       maxResults,
@@ -78,19 +69,17 @@ export async function webSearch(
       language: args.language ?? "en",
       ...(args.time_range ? { timeRange: args.time_range } : {}),
     },
-    signal,
+    (hits) => shapeResults(hits, maxResults),
   );
-  const results = shapeResults(outcome, maxResults);
-  const searchedAt = new Date().toISOString();
   return {
-    text: formatSearchText(args.query, results, searchedAt),
+    text: formatSearchText(args.query, found.results, found.searchedAt),
     meta: {
       query: args.query,
-      results,
-      suggestions: outcome.suggestions,
-      searched_at: searchedAt,
-      cached: false,
+      results: found.results,
+      suggestions: found.suggestions,
+      searched_at: found.searchedAt,
+      cached: found.cached,
     },
-    logFields: { query: args.query, results: results.length, cached: false },
+    logFields: { query: args.query, results: found.results.length, cached: found.cached },
   };
 }

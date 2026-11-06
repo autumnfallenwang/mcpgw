@@ -1,6 +1,6 @@
 apiVersion: v2
 name: mcpgw
-description: Home cluster tool gateway. Web search and fetch over MCP.
+description: Home cluster tool gateway. Web search through SearXNG and web fetch, over MCP.
 type: application
 version: 0.1.0
 appVersion: "0.1.0"

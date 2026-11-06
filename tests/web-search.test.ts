@@ -1,4 +1,5 @@
 import { describe, expect, it } from "vitest";
+import { SearchService } from "../src/search/service.js";
 import type { SearchProvider, SearchQuery } from "../src/search/types.js";
 import { formatSearchText, shapeResults, webSearch } from "../src/tools/web-search.js";
 
@@ -33,10 +34,7 @@ describe("formatSearchText", () => {
 describe("shapeResults", () => {
   it("merges the same URL from several engines", () => {
     const shaped = shapeResults(
-      {
-        results: [hit("https://a.example/", ["bing"]), hit("https://a.example/", ["google"])],
-        suggestions: [],
-      },
+      [hit("https://a.example/", ["bing"]), hit("https://a.example/", ["google"])],
       5,
     );
     expect(shaped).toHaveLength(1);
@@ -45,10 +43,7 @@ describe("shapeResults", () => {
 
   it("cuts snippets to 300 characters and collapses whitespace", () => {
     const [shaped] = shapeResults(
-      {
-        results: [{ ...hit("https://a.example/"), snippet: `a  \n b ${"x".repeat(400)}` }],
-        suggestions: [],
-      },
+      [{ ...hit("https://a.example/"), snippet: `a  \n b ${"x".repeat(400)}` }],
       5,
     );
     expect(shaped?.snippet.length).toBeLessThanOrEqual(300);
@@ -58,7 +53,7 @@ describe("shapeResults", () => {
 
   it("keeps to max_results", () => {
     const results = [1, 2, 3].map((n) => hit(`https://a.example/${n}`));
-    expect(shapeResults({ results, suggestions: [] }, 2)).toHaveLength(2);
+    expect(shapeResults(results, 2)).toHaveLength(2);
   });
 });
 
@@ -73,7 +68,8 @@ describe("webSearch", () => {
       },
       health: () => Promise.resolve("ok"),
     };
-    const output = await webSearch({ query: "x" }, provider, AbortSignal.timeout(1000));
+    const service = new SearchService(provider, { cacheTtlMs: 1000, concurrency: 1 });
+    const output = await webSearch({ query: "x" }, service);
     expect(seen).toEqual({ query: "x", maxResults: 5, category: "general", language: "en" });
     expect(output.logFields).toMatchObject({ query: "x", results: 0, cached: false });
   });

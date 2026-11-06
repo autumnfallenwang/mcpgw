@@ -23,15 +23,18 @@ env:
   PORT: "3002"
   # Every name a caller uses must be here, or it gets a 403 (ADR 0003).
   ALLOWED_HOSTS: mcpgw.arch.internal,mcpgw.mcpgw.svc.cluster.local
-  SEARCH_PROVIDER: canned
+  SEARCH_PROVIDER: searxng
+  SEARXNG_URL: http://searxng.mcpgw.svc.cluster.local:8080
   LOG_LEVEL: info
 
+# The limit covers the main thread plus two page-parsing workers at their own caps. Normal use is far
+# below it; the workers only grow on a hostile page, and fail on their own before this limit.
 resources:
   requests:
     cpu: 50m
     memory: 128Mi
   limits:
-    memory: 256Mi
+    memory: 512Mi
 
 podSecurityContext:
   runAsNonRoot: true
@@ -60,3 +63,32 @@ probes:
       port: http
     initialDelaySeconds: 3
     periodSeconds: 10
+
+# SearXNG: only mcpgw talks to it, and it has no ingress.
+searxng:
+  image:
+    repository: searxng/searxng
+    # A dated tag, never latest.
+    tag: 2026.11.5-3e95f6cd2
+    pullPolicy: IfNotPresent
+  port: 8080
+  resources:
+    requests:
+      cpu: 50m
+      memory: 128Mi
+    limits:
+      memory: 512Mi
+
+# Second layer behind the checks in src/fetch/guard.ts, in case a bug gets past them (ADR 0006). These
+# ranges stay unreachable from both Deployments. Anything else they may reach is on public web ports.
+networkPolicy:
+  enabled: true
+  blockedRanges:
+    - 10.0.0.0/8
+    - 100.64.0.0/10
+    - 127.0.0.0/8
+    - 169.254.0.0/16
+    - 172.16.0.0/12
+    - 192.168.0.0/16
+  fetchPorts: [80, 443, 8080, 8443]
+  searchPorts: [80, 443]

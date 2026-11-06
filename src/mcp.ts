@@ -2,13 +2,16 @@ import { createMcpHonoApp } from "@modelcontextprotocol/hono";
 import { createMcpHandler, McpServer } from "@modelcontextprotocol/server";
 import type { Context } from "hono";
 import { APP_NAME, APP_VERSION } from "./config.js";
-import type { SearchProvider } from "./search/types.js";
+import type { FetchService } from "./fetch/service.js";
+import type { SearchService } from "./search/service.js";
 import { runTool } from "./tools/result.js";
+import { WEB_FETCH_DESCRIPTION, webFetch, webFetchInput } from "./tools/web-fetch.js";
 import { WEB_SEARCH_DESCRIPTION, webSearch, webSearchInput } from "./tools/web-search.js";
 
 export interface McpDeps {
   allowedHosts: string[];
-  searchProvider: SearchProvider;
+  search: SearchService;
+  fetch: FetchService;
 }
 
 /**
@@ -23,8 +26,6 @@ const ANNOTATIONS = {
   openWorldHint: true,
 };
 
-const SEARCH_TIMEOUT_MS = 20_000;
-
 export function createMcpApp(deps: McpDeps) {
   // One fresh McpServer per request: this is what makes the endpoint stateless, and the default
   // `legacy: "stateless"` also serves the 2025 protocol Codex still speaks (ADR 0003).
@@ -38,10 +39,17 @@ export function createMcpApp(deps: McpDeps) {
         inputSchema: webSearchInput,
         annotations: ANNOTATIONS,
       },
-      (args) =>
-        runTool("web_search", () =>
-          webSearch(args, deps.searchProvider, AbortSignal.timeout(SEARCH_TIMEOUT_MS)),
-        ),
+      (args) => runTool("web_search", () => webSearch(args, deps.search)),
+    );
+    server.registerTool(
+      "web_fetch",
+      {
+        title: "Web fetch",
+        description: WEB_FETCH_DESCRIPTION,
+        inputSchema: webFetchInput,
+        annotations: ANNOTATIONS,
+      },
+      (args) => runTool("web_fetch", () => webFetch(args, deps.fetch)),
     );
     return server;
   });

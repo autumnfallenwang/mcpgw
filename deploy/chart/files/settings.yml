@@ -1,0 +1,46 @@
+# SearXNG settings, used by the cluster's ConfigMap and by local dev. Only mcpgw calls this instance.
+use_default_settings:
+  engines:
+    # Few engines, to keep upstream traffic low and the home IP from being refused. Google isn't
+    # here: it refused every query from this IP in the M3 trial, and only added errors to the logs.
+    keep_only:
+      - bing
+      - duckduckgo
+      - brave
+      - wikipedia
+      - github
+      - stackoverflow
+      - arxiv
+      - bing news
+      - duckduckgo news
+
+general:
+  instance_name: mcpgw
+  debug: false
+
+search:
+  safe_search: 0
+  # JSON must be turned on explicitly; it's the only format mcpgw reads.
+  formats:
+    - json
+
+server:
+  # Replaced at boot by SEARXNG_SECRET, a random value the pod generates: nothing signed with it
+  # outlives the pod, since the limiter and the image proxy are both off.
+  secret_key: "set-by-SEARXNG_SECRET-at-boot"
+  limiter: false
+  public_instance: false
+  image_proxy: false
+
+# keep_only leaves each engine's default on/off state, and Bing is off by default.
+engines:
+  - name: bing
+    disabled: false
+  - name: bing news
+    disabled: false
+  - name: duckduckgo news
+    disabled: false
+
+outgoing:
+  request_timeout: 5.0
+  max_request_timeout: 10.0

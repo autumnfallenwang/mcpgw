@@ -1,0 +1,231 @@
+import { createServer, type Server } from "node:http";
+import type { AddressInfo } from "node:net";
+import { afterAll, beforeAll, describe, expect, it } from "vitest";
+import { TtlCache } from "../src/lib/cache.js";
+import { Limiter, QueueTimeout } from "../src/lib/limiter.js";
+import { createSearxngProvider } from "../src/search/searxng.js";
+import { SearchService } from "../src/search/service.js";
+import type { SearchOutcome, SearchProvider, SearchQuery } from "../src/search/types.js";
+import { ToolFailure } from "../src/tools/result.js";
+
+const QUERY: SearchQuery = { query: "gold", maxResults: 5, category: "general", language: "en" };
+
+describe("TtlCache", () => {
+  it("expires entries and drops the least recently used", () => {
+    let now = 0;
+    const cache = new TtlCache<number>(100, 2, () => now);
+    cache.set("a", 1);
+    cache.set("b", 2);
+    expect(cache.get("a")).toBe(1); // "b" is now the oldest
+    cache.set("c", 3);
+    expect(cache.get("b")).toBeUndefined();
+    expect(cache.get("a")).toBe(1);
+    now = 200;
+    expect(cache.get("a")).toBeUndefined();
+  });
+});
+
+describe("Limiter", () => {
+  it("never runs more than the cap at once", async () => {
+    const limiter = new Limiter(2, 1000);
+    let running = 0;
+    let peak = 0;
+    await Promise.all(
+      [1, 2, 3, 4, 5].map(() =>
+        limiter.run(async () => {
+          running++;
+          peak = Math.max(peak, running);
+          await new Promise((r) => setTimeout(r, 5));
+          running--;
+        }),
+      ),
+    );
+    expect(peak).toBe(2);
+  });
+
+  it("fails a call that waits too long, then keeps working", async () => {
+    const limiter = new Limiter(1, 10);
+    let finish = () => {};
+    const slow = limiter.run(() => new Promise<void>((r) => (finish = r)));
+    await expect(limiter.run(() => Promise.resolve())).rejects.toBeInstanceOf(QueueTimeout);
+    finish();
+    await slow;
+    await expect(limiter.run(() => Promise.resolve("ok"))).resolves.toBe("ok");
+  });
+
+  it("releases the slot when a call throws", async () => {
+    const limiter = new Limiter(1, 10);
+    await expect(limiter.run(() => Promise.reject(new Error("boom")))).rejects.toThrow("boom");
+    await expect(limiter.run(() => Promise.resolve("ok"))).resolves.toBe("ok");
+  });
+});
+
+describe("SearchService", () => {
+  function counting(outcome: SearchOutcome | Error) {
+    const provider: SearchProvider & { calls: number } = {
+      name: "test",
+      calls: 0,
+      search() {
+        provider.calls++;
+        return outcome instanceof Error ? Promise.reject(outcome) : Promise.resolve(outcome);
+      },
+      health: () => Promise.resolve("ok"),
+    };
+    return provider;
+  }
+  const same = <T>(x: T) => x;
+
+  it("serves identical arguments from the cache, and different ones fresh", async () => {
+    const provider = counting({ results: [], suggestions: [] });
+    const service = new SearchService(provider, { cacheTtlMs: 60_000, concurrency: 1 });
+    expect((await service.search(QUERY, same)).cached).toBe(false);
+    expect((await service.search(QUERY, same)).cached).toBe(true);
+    expect((await service.search({ ...QUERY, language: "de" }, same)).cached).toBe(false);
+    expect(provider.calls).toBe(2);
+  });
+
+  it("doesn't cache a failure", async () => {
+    const provider = counting(new ToolFailure("down", "error"));
+    const service = new SearchService(provider, { cacheTtlMs: 60_000, concurrency: 1 });
+    await expect(service.search(QUERY, same)).rejects.toBeInstanceOf(ToolFailure);
+    await expect(service.search(QUERY, same)).rejects.toBeInstanceOf(ToolFailure);
+    expect(provider.calls).toBe(2);
+  });
+});
+
+describe("SearXNG provider, against a fake SearXNG", () => {
+  let server: Server;
+  let base: string;
+  let reply: { status: number; body: unknown; delayMs?: number };
+  let lastUrl: URL;
+
+  beforeAll(async () => {
+    server = createServer((req, res) => {
+      lastUrl = new URL(req.url ?? "/", "http://x");
+      if (lastUrl.pathname === "/healthz") {
+        res.writeHead(reply.status).end("OK");
+        return;
+      }
+      setTimeout(() => {
+        res.writeHead(reply.status, { "content-type": "application/json" });
+        res.end(typeof reply.body === "string" ? reply.body : JSON.stringify(reply.body));
+      }, reply.delayMs ?? 0);
+    });
+    await new Promise<void>((r) => server.listen(0, "127.0.0.1", r));
+    base = `http://127.0.0.1:${(server.address() as AddressInfo).port}`;
+  });
+  afterAll(() => {
+    server.closeAllConnections();
+    server.close();
+  });
+
+  const signal = () => AbortSignal.timeout(1000);
+
+  it("sends the arguments and maps the results", async () => {
+    reply = {
+      status: 200,
+      body: {
+        results: [
+          {
+            title: " A ",
+            url: "https://a.example/",
+            content: "text",
+            engines: ["bing"],
+            publishedDate: "2026-09-25T10:00:00",
+          },
+          { title: "No date", url: "https://b.example/", content: null, publishedDate: null },
+          { title: "Not a web link", url: "magnet:?xt=abc" },
+        ],
+        suggestions: ["more gold"],
+        unresponsive_engines: [],
+      },
+    };
+    const provider = createSearxngProvider(base);
+    const out = await provider.search({ ...QUERY, timeRange: "week", category: "news" }, signal());
+    expect(Object.fromEntries(lastUrl.searchParams)).toEqual({
+      q: "gold",
+      format: "json",
+      language: "en",
+      categories: "news",
+      time_range: "week",
+    });
+    expect(out.results).toEqual([
+      {
+        title: "A",
+        url: "https://a.example/",
+        snippet: "text",
+        engines: ["bing"],
+        published: "2026-09-25",
+      },
+      { title: "No date", url: "https://b.example/", snippet: "", engines: [] },
+    ]);
+    expect(out.suggestions).toEqual(["more gold"]);
+  });
+
+  it("keeps results when only some engines failed", async () => {
+    reply = {
+      status: 200,
+      body: {
+        results: [{ title: "A", url: "https://a.example/" }],
+        unresponsive_engines: [["google", "access denied"]],
+      },
+    };
+    const out = await createSearxngProvider(base).search(QUERY, signal());
+    expect(out.results).toHaveLength(1);
+  });
+
+  it("treats nothing found as a normal empty result", async () => {
+    reply = { status: 200, body: { results: [], unresponsive_engines: [] } };
+    await expect(createSearxngProvider(base).search(QUERY, signal())).resolves.toEqual({
+      results: [],
+      suggestions: [],
+    });
+  });
+
+  it("says so when no results is because every engine failed", async () => {
+    reply = {
+      status: 200,
+      body: { results: [], unresponsive_engines: [["google", "access denied"]] },
+    };
+    await expect(createSearxngProvider(base).search(QUERY, signal())).rejects.toMatchObject({
+      status: "error",
+      message: expect.stringContaining("didn't answer"),
+    });
+  });
+
+  it("turns a backend error into a tool failure", async () => {
+    reply = { status: 500, body: "oops" };
+    await expect(createSearxngProvider(base).search(QUERY, signal())).rejects.toMatchObject({
+      status: "error",
+      message: expect.stringContaining("isn't answering"),
+    });
+  });
+
+  it("turns a garbled response into a tool failure", async () => {
+    reply = { status: 200, body: "<html>not json</html>" };
+    await expect(createSearxngProvider(base).search(QUERY, signal())).rejects.toBeInstanceOf(
+      ToolFailure,
+    );
+  });
+
+  it("reports a timeout as a timeout", async () => {
+    reply = { status: 200, body: { results: [] }, delayMs: 200 };
+    await expect(
+      createSearxngProvider(base).search(QUERY, AbortSignal.timeout(20)),
+    ).rejects.toMatchObject({ status: "timeout" });
+  });
+
+  it("reports an unreachable backend as a tool failure", async () => {
+    await expect(
+      createSearxngProvider("http://127.0.0.1:1").search(QUERY, signal()),
+    ).rejects.toMatchObject({ status: "error" });
+  });
+
+  it("checks health", async () => {
+    reply = { status: 200, body: "" };
+    await expect(createSearxngProvider(base).health()).resolves.toBe("ok");
+    reply = { status: 503, body: "" };
+    await expect(createSearxngProvider(base).health()).resolves.toBe("down");
+    await expect(createSearxngProvider("http://127.0.0.1:1").health()).resolves.toBe("down");
+  });
+});

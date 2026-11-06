@@ -21,3 +21,8 @@ Selector labels. They must stay stable across chart versions.
 app.kubernetes.io/name: mcpgw
 app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end -}}
+
+{{- define "mcpgw.searxngSelectorLabels" -}}
+app.kubernetes.io/name: searxng
+app.kubernetes.io/instance: {{ .Release.Name }}
+{{- end -}}
