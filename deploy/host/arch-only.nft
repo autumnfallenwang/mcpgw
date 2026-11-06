@@ -1,5 +1,5 @@
 #!/usr/bin/nft -f
-# Keeps other devices out of the cluster's network, so llmgw and mcpgw are reachable only from arch (ADR 0008).
+# Keeps other devices off the cluster's network and Ollama, so llmgw and mcpgw are reachable only from arch (ADR 0008).
 # With no Ingress they have no public door, but kube-proxy would still answer a device that deliberately routes the
 # Service range through this machine. This drops that traffic before kube-proxy sees it.
 #
@@ -19,9 +19,9 @@ table inet arch_only {
     iifname "wl*" ip daddr { 10.42.0.0/16, 10.43.0.0/16 } drop
     iifname "en*" ip daddr { 10.42.0.0/16, 10.43.0.0/16 } drop
 
-    # Ollama: open to the network with no login. Uncomment to block it from other devices.
-    # llmgw is unaffected: pods don't arrive on these interfaces.
-    # iifname "wl*" tcp dport 11434 drop
-    # iifname "en*" tcp dport 11434 drop
+    # Ollama listens on every address with no login, because llmgw's pods call it at arch's IP. Those pods arrive on
+    # cni0, so they aren't affected.
+    iifname "wl*" tcp dport 11434 drop
+    iifname "en*" tcp dport 11434 drop
   }
 }

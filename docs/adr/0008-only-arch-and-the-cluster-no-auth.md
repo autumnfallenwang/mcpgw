@@ -22,7 +22,8 @@ so a web page could too.
   The IPs are pinned in the charts, so a recreated Service keeps its address.
 - **No web pages:** a request with another site's `Origin` gets a 403.
 - **A firewall rule on arch** ([deploy/host/](../../deploy/host/)) drops traffic from Wi-Fi or Ethernet addressed to the
-  Service and pod ranges. Without it, a device that deliberately routes those ranges through arch could reach them.
+  Service and pod ranges. Without it, a device that deliberately routes those ranges through arch could reach them. It also
+  keeps other devices off Ollama, which has no login and listens on every address so llmgw's pods can call it.
 - **No auth.** There's nobody to authenticate, so it would only add moving parts.
 
 ## Alternatives considered
