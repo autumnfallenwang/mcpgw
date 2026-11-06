@@ -19,7 +19,7 @@ A dated log of what was done and decided, newest first. The plan and milestone s
   - **In a real browser on arch:** `http://llmgw.llmgw.svc.cluster.local/docs` renders, and its own requests work. A page from
     `homestorm.arch.internal` is refused by both gateways.
   - **Firewall rule written and tested in a throwaway network namespace:** a simulated LAN device reaches the Service and pod
-    ranges without it and is blocked with it, while Traefik and arch itself keep working. It blocks Ollama from other devices too. Installing it is the user's step.
+    ranges without it and is blocked with it, while Traefik and arch itself keep working. It blocks Ollama from other devices too. The user installed it, and llmgw's Ollama calls still work.
   - **Not tested from a real second device,** though Traefik's 404 was checked with the Host header such a device would send.
   - **Out of scope, the user's call:** the homenews iOS app, whose code isn't in its repo.
 - **M6: mcpgw added to Claude Code and Codex.** Both connect at user level.

@@ -146,7 +146,8 @@ Decided by the user in [ADR 0008](adr/0008-only-arch-and-the-cluster-no-auth.md)
   refused, and Traefik answers 404 for the old names. Tested from arch, sending the Host header a device on the network
   would send
 - [x] **By the user:** removed `llmgw.arch.internal` and `mcpgw.arch.internal` from the router's DNS. The router now answers that they don't exist
-- [ ] **By the user:** install the firewall rule ([deploy/host/](../deploy/host/)), which also blocks Ollama from other devices
+- [x] **By the user:** installed the firewall rule ([deploy/host/](../deploy/host/)), which also blocks Ollama from other devices.
+  llmgw's Ollama calls still work
 
 v1 is done after the remaining "by the user" items.
 
