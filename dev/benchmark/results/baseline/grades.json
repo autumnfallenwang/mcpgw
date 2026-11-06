@@ -1,0 +1,1154 @@
+{
+ "claude-mcpgw-run2.json|hono-bearer": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "The import path is `hono/bearer-auth`:\n\n```ts\nimport { bearerAuth } from 'hono/bearer-auth'\n```\n\nSource: https://hono.dev/docs/middleware/builtin/bearer-auth"
+ },
+ "claude-builtin-run2.json|stack-overflow": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "I couldn't confirm who wrote the top answer. Stack Overflow blocked my fetch, and the search results only had mirrors that didn't name the author. From memory, I believe the top answer is by Mysticial, but I haven't verified that.\n\nThe main explanation is **branch prediction**. In the loop, the `if (data[c] >= 128)` check is false for a long run of values and then true for a long run in sorted data, so the CPU predicts it well. In unsorted data the predictions often fail, which causes pipeline stalls. Some answers also note that the compiler can sometimes use a conditional move instead of a branch, which removes the penalty.\n\nSources:\n- [Mirror of the question (backiee.wasmer.app)](https://backiee.wasmer.app/https_stackoverflow_com/questions/11227809/why-is-processing-a-sorted-array-faster)\n- [Stack Abuse summary](https://stackabuse.com/bytes/why-is-processing-a-sorted-array-faster-than-processing-an-unsorted-array/)"
+ },
+ "claude-mcpgw-run2.json|weather": {
+  "grade": "right",
+  "why": "It gives 61°F, which is within 5°F of the NWS forecast high of 62°F.",
+  "by": "judge",
+  "answer": "Boston's forecast high for Saturday, November 7, 2026 is about **61°F**, with a low around 51°F and rain likely (83% chance, mostly overnight into early Saturday).\n\nSource: [weathertommorow.com, Boston Saturday forecast](https://www.weathertommorow.com/tomorrow/massachusetts/boston). It cites NOAA/NWS data but was issued Nov 6 at 2:49 AM EST, so it may have changed. I couldn't get a second source to confirm the number; the other result I opened, [uscityweather.com](https://uscityweather.com/weather/Boston/2026-11-07), needs JavaScript and showed no data."
+ },
+ "claude-builtin-run2.json|world-cup": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "Spain won the 2026 FIFA World Cup, beating Argentina 1-0 after extra time in the final on July 19, 2026, at MetLife Stadium. Ferran Torres scored in the 106th minute. It was Spain's second World Cup title, after 2010.\n\nI based this on search result summaries without opening the pages, but several sources agree.\n\nSources:\n- [Spain vs Argentina Result: Spain 1–0 Argentina — Final — World Cup 2026](https://worldcupranking.com/blog/world-cup-2026-match-104-spain-vs-argentina/)\n- [Spain defeat Argentina 1-0 to win 2026 FIFA World Cup](https://www.virginislandsnewsonline.com/en/news/spain-defeat-argentina-1-0-to-win-2026-fifa-world-cup)\n- [FIFA World Cup 2026: all the results and the final score](https://www.sortiraparis.com/en/what-to-do-in-paris/sport-wellness/articles/349129-world-cup-2026-all-results-and-the-final-score)"
+ },
+ "claude-mcpgw-run1.json|pdf-i140": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "I couldn't read the PDF itself. The fetch tool rejects PDFs (`application/pdf`), so I can't see its page footer.\n\nThe USCIS I-140 form page (https://www.uscis.gov/i-140) lists the form's edition date as **06/07/24** (mm/dd/yy). That page covers the form, not necessarily the instructions PDF, so the instructions' footer date could differ. I didn't confirm it."
+ },
+ "claude-builtin-run2.json|oscars": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "The Best Picture winner at the 98th Academy Awards was **One Battle After Another**, Paul Thomas Anderson's Warner Bros. film. Coverage from [ABC13](https://abc13.com/post/oscars-2026-battle-another-wins-best-picture-98th-academy-awards/18719481/), [Manila Bulletin](https://mb.com.ph/2026/03/16/one-battle-after-another-wins-best-picture-at-98th-academy-awards), and [Screen Daily](https://www.screendaily.com/news/one-battle-after-another-sinners-and-warner-bros-the-big-winners-at-2026-oscars/5214819.article) agrees on this.\n\nSources:\n- [ABC13](https://abc13.com/post/oscars-2026-battle-another-wins-best-picture-98th-academy-awards/18719481/)\n- [Manila Bulletin](https://mb.com.ph/2026/03/16/one-battle-after-another-wins-best-picture-at-98th-academy-awards)\n- [Screen Daily](https://www.screendaily.com/news/one-battle-after-another-sinners-and-warner-bros-the-big-winners-at-2026-oscars/5214819.article)"
+ },
+ "claude-builtin-run1.json|typescript": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "The latest stable TypeScript release is **7.0.2**.\n\nTwo sources agree. The npm registry's `latest` dist-tag points to 7.0.2, and the GitHub releases page marks 7.0.2 as \"Latest\" (released 20 Aug, per the page). The npm `beta` tag is 7.1.0-beta, so it isn't stable.\n\nSources:\n- [npm registry dist-tags for typescript](https://registry.npmjs.org/-/package/typescript/dist-tags)\n- [microsoft/TypeScript releases](https://github.com/microsoft/TypeScript/releases)"
+ },
+ "gpt-mcpgw-run1.json|rfc9110": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "RFC 9110 defines idempotent methods in **Section 9.2.2, “Idempotent Methods.”**  \nhttps://www.rfc-editor.org/rfc/rfc9110.html#section-9.2.2"
+ },
+ "claude-mcpgw-run1.json|zh-niw": {
+  "grade": "right",
+  "why": "完整列出三项标准并提供了来源链接。",
+  "by": "judge",
+  "answer": "根据 Matter of Dhanasar, 26 I&N Dec. 884 (AAO 2016) 的判例，NIW 需要申请人证明以下三项（需同时满足）：\n\n1. **实质价值与国家重要性**：申请人拟从事的工作（endeavor）具有实质性价值（substantial merit）和国家层面的重要性（national importance）。\n2. **有能力推进该工作**：申请人适合且有能力（well positioned）推进这项工作。\n3. **整体利益平衡**：综合考虑后，豁免劳动力市场测试（labor certification）对美国有利（on balance, beneficial to the U.S. to waive the job offer and labor certification requirements）。\n\n来源：\n- https://www.justice.gov/eoir/page/file/920996/dl （判例全文 PDF，搜索摘要中可见上述三项表述）\n- https://www.uscis.gov/sites/default/files/document/foia/National_Interest_Waiver_Adjudication_Guidance.pdf （USCIS 文件，摘要中有同样的三项表述）\n\n说明：两个 PDF 我都无法打开阅读，以上内容基于搜索结果摘要。USCIS 在 2025 年 1 月 15 日更新过政策手册中关于 NIW 的规定（https://www.uscis.gov/sites/default/files/document/policy-manual-updates/20250115-Employment-BasedNationalInterestWaivers.pdf），但我未能核实其具体内容，如涉及具体申请，请以该最新政策手册及律师意见为准。"
+ },
+ "gpt-mcpgw-run1.json|nobel": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "The **2026 Nobel Prize in Physics** was awarded to **Francis Halzen** of the University of Wisconsin–Madison:\n\n> “For decisive contributions to the IceCube Neutrino Observatory and the discovery of high-energy neutrinos of astrophysical origin.”\n\n[ Nobel Prize announcement ](https://www.nobelprize.org/prizes/physics/2026/press-release/)"
+ },
+ "gpt-mcpgw-run1.json|pdf-w9": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "The catalog number is **Cat. No. 10231X**."
+ },
+ "claude-mcpgw-run1.json|pdf-paper": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "The paper used **warmup_steps = 4000**.\n\nSection 5.3 (\"Optimizer\") of the paper says: \"We used warmup_steps = 4000,\" in the learning-rate schedule lrate = d_model^(-0.5) · min(step_num^(-0.5), step_num · warmup_steps^(-1.5)).\n\nI couldn't read the PDF directly (the fetch tool rejects `application/pdf`), so I used the arXiv HTML version of the same paper: https://arxiv.org/html/1706.03762 (Section 5.3, page offset ~24000)."
+ },
+ "gpt-mcpgw-run1.json|postgres": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "The latest stable PostgreSQL release is **18.6**. [PostgreSQL](https://www.postgresql.org/)"
+ },
+ "claude-mcpgw-run1.json|react": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "The latest stable React release is **19.3.1**, released October 14, 2026.\n\nSource: the React releases page on GitHub (https://github.com/react/react/releases) lists 19.3.1 at the top. I didn't check the npm registry, so this is based on the GitHub page alone."
+ },
+ "claude-builtin-run2.json|nftables": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "In the `ip` family, the `raw` priority keyword is **-300** (`NF_IP_PRI_RAW`). It's the traditional raw-table priority, and it runs before connection tracking.\n\nSources:\n- [Netfilter hooks (nftables wiki)](https://wiki.nftables.org/wiki-nftables/index.php?oldid=794&title=Netfilter_hooks)\n- [Configuring chains (nftables wiki)](https://wiki.nftables.org/wiki-nftables/index.php?oldid=683&title=Configuring_chains)\n- [Red Hat: Creating and managing nftables tables, chains, and rules](https://docs.redhat.com/ja/documentation/Red_Hat_Enterprise_Linux/10/html/configuring_firewalls_and_packet_filters/creating-and-managing-nftables-tables-chains-and-rules)"
+ },
+ "gpt-mcpgw-run1.json|zh-news": {
+  "grade": "right",
+  "why": "回答用中文列出三条近期科技新闻，并均提供了具体来源链接。",
+  "by": "judge",
+  "answer": "截至 **2026年11月6日**，值得关注的三条科技新闻：\n\n1. **OpenAI 发布 GPT‑6 Cyber**：面向网络安全，重点提升漏洞发现与安全防护能力，目前仅向经过审核的客户开放。  \n   来源：[路透社](https://www.reuters.com/technology/openai-launches-gpt-6-cyber-with-critical-cybersecurity-rating-2026-11-05/)\n\n2. **AI 芯片封装成为新竞争焦点**：随着 AI 基础设施需求激增，各方正投入巨资发展先进封装技术，以提升芯片性能和产能。  \n   来源：[路透社](https://www.reuters.com/world/asia-pacific/ai-boom-turns-chip-packaging-into-next-battleground-semiconductors-2026-11-06/)\n\n3. **Airbnb 计划推出 AI 旅行代理**：预计 2027 年上半年上线，可协助用户规划行程、比较选项并管理预订。  \n   来源：[The Verge](https://www.theverge.com/tech/1028412/airbnb-ai-travel-agent-q3-2026-earnings)"
+ },
+ "claude-builtin-run1.json|react": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "The latest stable React release appears to be **19.3.1**, released October 14, 2026, according to the [React GitHub releases page](https://github.com/facebook/react/releases), which marks it as \"Latest.\"\n\nI couldn't confirm this against the npm registry because npmjs.com returned a 403 error. The search results were mostly old cached pages, so this rests on a single source. To verify, run `npm view react version`."
+ },
+ "claude-builtin-run1.json|better-auth": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "The option is `cookiePrefix`, set inside the `advanced` object of your auth config. By default, cookies are named `${prefix}.${cookie_name}` with the prefix `\"better-auth\"`. Setting `cookiePrefix` changes that prefix.\n\nI confirmed this from search-result summaries of the docs, not by opening the page itself.\n\nSources:\n- https://better-auth.com/docs/concepts/cookies.md\n- https://better-auth.com/docs/1.6/concepts/cookies"
+ },
+ "claude-builtin-run2.json|kubernetes": {
+  "grade": "wrong",
+  "why": "It gives v1.37.1, but the correct latest stable version is 1.37.2.",
+  "by": "judge",
+  "answer": "The latest stable Kubernetes release is **v1.37.1**, released 2026-09-15, according to the official [Kubernetes releases page](https://kubernetes.io/releases/).\n\nThe search result I found earlier listed v1.36.2 from versionlog.com, but it is older and I'd rely on the official page. I read the page through a summarizing tool, so I haven't checked the exact version string against the raw page.\n\nSources:\n- https://kubernetes.io/releases/\n- https://versionlog.com/kubernetes/ (older, superseded)"
+ },
+ "claude-mcpgw-run2.json|zh-niw": {
+  "grade": "right",
+  "why": "用中文完整列出三项标准并提供了来源链接。",
+  "by": "judge",
+  "answer": "**Dhanasar 三项标准**（*Matter of Dhanasar*, 26 I&N Dec. 884 (AAO 2016)）：申请人需证明：\n\n1. **实质价值与国家重要性（Substantial merit and national importance）**：拟从事的事业具有实质价值，并且对美国具有国家层面的重要性。\n2. **有能力推进该事业（Well positioned）**：申请人有能力推进该拟议事业。\n3. **综合权衡（Balance test）**：综合考虑，免除工作邀约和劳工证（PERM）对美国是有利的。\n\n**来源：**\n- 决定原文（DOJ 托管）：https://www.justice.gov/eoir/page/file/920996/dl\n- 通俗解读：https://immigrationreadiness.com/guides/eb-2-niw-dhanasar/\n\n注：我没有能在 USCIS 政策手册中找到并核对 NIW 章节的当前原文（我查看的页面只涵盖 EB-2 学位和特殊能力部分），因此以上内容基于上述两个来源。具体的证据要求和近期审查趋势建议以 USCIS 政策手册的最新版本为准，并咨询移民律师。"
+ },
+ "claude-builtin-run1.json|sourdough": {
+  "grade": "right",
+  "why": "It gives sound causes and fixes for dense sourdough and includes a source link.",
+  "by": "judge",
+  "answer": "Sourdough usually comes out dense for one of a few reasons, and the most common is underproofing (too little fermentation).\n\n**Main causes**\n- **Underproofing:** The dough is tight, stiff, and tears easily. Lengthen bulk fermentation or keep the dough warmer, but not above about 26°C/79°F.\n- **Overproofing:** The gluten weakens and gas escapes. Shorten bulk time, lower the dough temperature, or use less starter.\n- **Weak or acidic starter:** Refresh it at a higher ratio (such as 1:3:3), and use filtered or boiled-and-cooled water if your tap water has chlorine.\n- **Poor gluten development:** Do stretch-and-folds or coil folds before proofing.\n- **Shaping:** Weak surface tension lets the loaf spread instead of rising. Shape so the surface tightens.\n- **Hydration:** About 68–72% gives a tighter crumb. Higher hydration gives a more open crumb but needs more gluten development.\n- **Baking:** Without steam, the crust sets too early. Preheat a covered cast iron pot for at least 30 minutes and keep the lid on for the first part of the bake.\n\n**Source:** [Homegrown Happiness, \"Sourdough Bread Trouble Shooting Guide\"](https://homegrownhappiness.com/sourdough-bread-trouble-shooting-guide/). I read this page directly. The search also surfaced [Homemade Food Junkie](https://www.homemadefoodjunkie.com/?p=92373), which I did not open, and many generic Alibaba pages that I did not rely on."
+ },
+ "claude-mcpgw-run2.json|super-bowl": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "The Seattle Seahawks won Super Bowl LX, beating the New England Patriots **29-13**.\n\nSources:\n- https://en.wikipedia.org/wiki/Super_Bowl_LX\n- https://profootballmania.com/super-bowl-scores/"
+ },
+ "claude-mcpgw-run1.json|oscars": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "The Best Picture winner at the 98th Academy Awards was **\"One Battle After Another\"**, directed by Paul Thomas Anderson, who also won Best Director.\n\nSource: ABC News, \"Oscars 2026: Full winners list from the 98th Academy Awards,\" https://abcnews.com/GMA/Culture/oscars-2026-full-winners-list/story?id=130769299"
+ },
+ "claude-mcpgw-run2.json|pdf-w9": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "I couldn't read the IRS PDF directly. The fetch tool doesn't support PDF files.\n\nBased on search results, the Cat. No. is **10231X**. Several copies of Form W-9 (Rev. 3-2024) show it, including https://www.iacis.com/wp-content/uploads/2025/02/2025-Signed-W-9-dlp.pdf and https://www.napletonfleet.com/Documents/2025/DealerDocs/ddoc_CA081_W-9.pdf.\n\nI didn't verify it against the IRS file itself. If the IRS has published a newer revision, its number could differ, so check the footer of the current form at https://www.irs.gov/pub/irs-pdf/fw9.pdf."
+ },
+ "claude-builtin-run1.json|world-cup": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "**Spain** won the 2026 FIFA World Cup, beating **Argentina 1–0** in the final on July 19, 2026, at MetLife Stadium in East Rutherford, New Jersey. Per the search results, the match was 0–0 after 90 minutes, and Ferran Torres scored in extra time (106'). Spain's title is their second men's World Cup, after 2010.\n\nSeveral sources agree on the 1–0 score. I didn't check the extra-time details against an official match report.\n\nSources:\n- [Spain vs Argentina Result: Spain 1–0 Argentina — Final — World Cup 2026](https://worldcupranking.com/blog/world-cup-2026-match-104-spain-vs-argentina/)\n- [Spain defeats Argentina 1-0 to win 2026 World Cup](https://ruralradio.com/kneb-fm/abc-category/sports/page/5/)\n- [World Cup 2026 Winner: Spain, Full Bracket, Group Standings & Results](https://www.icoachfootball.net/?p=64796)\n- [Who Won the FIFA World Cup 2026? Final Result and Tournament Awards](https://blog.wego.com/who-won-the-fifa-world-cup/)"
+ },
+ "gpt-mcpgw-run1.json|nftables": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "In the `ip` family, the `raw` priority keyword means **-300**. [nftables wiki](https://wiki.nftables.org/wiki-nftables/index.php/Netfilter_hooks)"
+ },
+ "claude-builtin-run1.json|nobel": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "The 2026 Nobel Prize in Physics went to **Francis Halzen**, a Belgian-American particle physicist, for his decisive contributions to the IceCube Neutrino Observatory and the detection of high-energy astrophysical neutrinos. The announcement was on October 6, 2026. I'm working from search snippets and didn't open the pages, but several sources agree, including the official Nobel listing.\n\nSources:\n- [Nobel Prize in Physics 2026](https://nobelprize.org/prizes/physics/2026/summary)\n- [Daily Maverick: Francis Halzen wins 2026 Nobel Prize in Physics](https://www.dailymaverick.co.za/article/2026-10-06-francis-halzen-wins-2026-nobel-prize-in-physics.md)\n- [ThePrint: Francis Halzen wins 2026 Nobel Prize in Physics](https://theprint.in/world/francis-halzen-wins-2026-nobel-prize-in-physics/3063266/)"
+ },
+ "claude-builtin-run2.json|better-auth": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "The option is `advanced.cookiePrefix`. Its default is `\"better-auth\"`, and cookie names follow the pattern `${prefix}.${cookie_name}`. For example, `advanced: { cookiePrefix: \"my-app\" }` in `betterAuth({...})`.\n\nSources:\n- [Better Auth docs: Cookies](https://better-auth.com/docs/concepts/cookies)"
+ },
+ "claude-mcpgw-run2.json|grafana": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "The latest stable Grafana release is **13.3.0**.\n\nSources:\n- GitHub's \"latest\" release redirect resolves to the v13.3.0 tag page: https://github.com/grafana/grafana/releases/tag/v13.3.0\n- Grafana's download page (https://grafana.com/grafana/download) didn't show a version number when I fetched it, so I couldn't cross-check against it."
+ },
+ "gpt-mcpgw-run1.json|hono-bearer": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "The import path is:\n\n```ts\nimport { bearerAuth } from 'hono/bearer-auth'\n```\n\n[Hono Bearer Auth documentation](https://hono.dev/docs/middleware/builtin/bearer-auth)"
+ },
+ "claude-mcpgw-run1.json|hono-bearer": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "The import path is `hono/bearer-auth`, used as `import { bearerAuth } from 'hono/bearer-auth'`.\n\nSource: https://hono.dev/docs/middleware/builtin/bearer-auth"
+ },
+ "claude-builtin-run2.json|react": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "The latest stable React release is **19.3.1**, released October 14, 2026, according to the GitHub releases page, where it carries the \"Latest\" badge: https://github.com/facebook/react/releases\n\nI couldn't confirm this against npm, since the npm page returned a 403. Running `npm view react version` will show the current `latest` dist-tag."
+ },
+ "gpt-mcpgw-run1.json|kubernetes": {
+  "grade": "wrong",
+  "why": "It gives v1.37.0 instead of the correct version 1.37.2.",
+  "by": "judge",
+  "answer": "The latest stable Kubernetes release is **v1.37.0**.  \nSource: [Kubernetes Releases](https://kubernetes.io/releases/)"
+ },
+ "claude-builtin-run2.json|python": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "The latest stable Python release is **3.15.2**, released October 25, 2026, according to python.org.\n\nI got this from a summary of the python.org downloads page, so I haven't independently checked the exact version string. The web search results were older and pointed to 3.14.3 (February 2026), so they're out of date.\n\nSources:\n- [python.org/downloads](https://www.python.org/downloads/)\n- [Python 3.14.3 Released (Feb 2026)](https://techblogky.blogspot.com/2026/02/python-3143-released-whats-new-in.html), outdated"
+ },
+ "claude-mcpgw-run2.json|fed": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "The Fed held rates steady at its October 27–28, 2026 meeting. The federal funds target range stayed at **3.75% to 4.00%** (3-3/4 to 4 percent), in a 10–2 vote.\n\nSources:\n- Fed statement: https://www.federalreserve.gov/newsevents/pressreleases/monetary20261028a.htm\n- Fed implementation note (effective Oct. 29): https://www.federalreserve.gov/newsevents/pressreleases/monetary20261028a1.htm\n- Advisor Perspectives: https://www.advisorperspectives.com/dshort/updates/2026/10/28/feds-interest-rate-decision-october-28-2026\n\nI based this on search result snippets and did not open the full pages. One secondary source (StockAnalysis) says the September meeting had a quarter-point increase, which I did not verify: https://stockanalysis.com/news/fed-holds-rates-steady-oct-2026/"
+ },
+ "gpt-mcpgw-run1.json|weather": {
+  "grade": "right",
+  "why": "61°F is within 5°F of the guided forecast high of 62°F.",
+  "by": "judge",
+  "answer": "Boston’s forecast high for Saturday is **61°F**. [Source](https://weathershogun.com/weather/usa/ma/boston/2111/november/2026-11-07)"
+ },
+ "claude-mcpgw-run1.json|stack-overflow": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "I couldn't confirm the top answer's author. Stack Overflow returned HTTP 403 for the question page, so I worked from search snippets only.\n\n**Main explanation (from the question's search snippet):** Branch prediction. The CPU's branch predictor guesses which way a branch will go so the instruction pipeline keeps flowing. On sorted data the condition (e.g., `if (data[i] >= 128)`) changes direction in long runs, so the predictor is almost always right. On random data it is wrong about half the time, and each miss flushes the pipeline.\n\n**Author:** Not verified. A caspimind.com summary of the thread credits answers by Mysticial, WiSaGaN, caf, steveha, and others, but doesn't say which is top-voted. From memory, Mysticial wrote the highly voted answer, but I couldn't check that here, so treat it as unconfirmed.\n\nSources:\n- https://stackoverflow.com/questions/11227809/why-is-conditional-processing-of-a-sorted-array-faster-than-of-an-unsorted-array (403, snippet only)\n- https://caspimind.com/videos/why-sorted-arrays-are-faster/"
+ },
+ "claude-builtin-run1.json|linux": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "The latest stable Linux kernel is **7.3.1**, released 2026-10-30.\n\nMainline is currently 7.4-rc1 (2026-11-01), which is not stable.\n\nSource: [kernel.org](https://www.kernel.org/)"
+ },
+ "claude-builtin-run2.json|weather": {
+  "grade": "right",
+  "why": "It gives a forecast high near 62°F, matching the guidance.",
+  "by": "judge",
+  "answer": "Saturday, November 7, in Boston is forecast to reach a high near **62°F**, with rain likely before 1 p.m. and a 60% chance of precipitation. Partly sunny conditions are expected later in the day.\n\nThis comes from the National Weather Service Boston forecast page, last updated 5:19 a.m. EST on November 6, 2026: [forecast.weather.gov](https://forecast.weather.gov/MapClick.php?lat=42.3601&lon=-71.0589)\n\nSources:\n- [NWS Boston forecast](https://forecast.weather.gov/MapClick.php?lat=42.3601&lon=-71.0589)"
+ },
+ "gpt-mcpgw-run1.json|react": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "The latest stable React release is **19.3.1**.  \nSource: [npm registry](https://registry.npmjs.org/react/latest)"
+ },
+ "claude-builtin-run1.json|zh-postgres": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "PostgreSQL 的最新稳定版本是 **18.6**（major 18 的最新小版本）。\n\n- 官方版本页列出的各分支最新小版本：18.6、17.11、16.15、15.19、14.24。该页没有给出 18.6 的发布日期。\n- 搜索结果称 18.6 发布于 2026-08-13。这一日期我没能在官方页面上直接核实。按照 PostgreSQL 每年 2 月、5 月、8 月、11 月的小版本发布节奏，下一个小版本（18.7）应在 11 月中旬发布，因此截至今天（2026-11-06）18.6 仍是最新的。\n- 大版本 19 目前只有 RC 1（官方页面横幅称发布于 2026-10-15），尚未正式发布，不应视为稳定版。\n- 14.x 将于 2026-11-12 停止支持。\n\n来源：\n- [PostgreSQL 版本页](https://www.postgresql.org/versions.html)（该页 WebFetch 返回 404，所以我实际抓取的是下面的版本策略页）\n- [PostgreSQL 版本策略](https://www.postgresql.org/support/versioning/)\n- [PostgreSQL 首页](https://www.postgresql.org/?lang=es-ES)（搜索结果中的链接，仅用于 18.6 与 19 RC 1 的日期信息）"
+ },
+ "claude-builtin-run1.json|weather": {
+  "grade": "right",
+  "why": "It gives the NWS forecast high of about 62°F for Saturday.",
+  "by": "judge",
+  "answer": "The National Weather Service forecast for Boston calls for a high of about **62°F on Saturday, November 7**, with rain likely before 1 p.m., a slight chance of rain after 5 p.m., and patchy fog.\n\nThe NWS page doesn't print a calendar date beside Saturday, but its forecast range (8 a.m. EST Nov 6 to 6 p.m. EST Nov 12, 2026) covers that day. Forecasts can change, so check the NWS page for updates before you plan around it.\n\nSource: [NWS Boston forecast (Boston, MA point forecast)](https://forecast.weather.gov/MapClick.php?lat=42.3601&lon=-71.0589)"
+ },
+ "claude-mcpgw-run1.json|nftables": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "The `raw` priority keyword is **-300** in the ip family (it's the value for the `raw` table's prerouting/output hooks, which run before conntrack).\n\nSources: [nftables wiki, \"Configuring chains\"](https://wiki.nftables.org/wiki-nftables/index.php/Configuring_chains) confirms that a prerouting chain at priority -300 runs before connection tracking. I didn't find the keyword-to-value table in what I read, so the exact mapping (`raw` = -300) comes from my existing knowledge of the nft priority names rather than a page I confirmed. The nft(8) man page's \"Base chain priority\" section should confirm it."
+ },
+ "claude-mcpgw-run2.json|zh-postgres": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "PostgreSQL 的最新稳定版本是 **18.6**（发布于 2026-08-13）。\n\n- 来源：https://www.postgresql.org/ （首页列出 18.6、17.11、16.15、15.19、14.24，均为 2026-08-13 发布）\n\n注意两点：\n- 首页同时显示 **PostgreSQL 19 RC 1** 已于 2026-10-15 发布（https://www.postgresql.org/about/news/postgresql-19-rc-1-released-3409/），但我没有找到 19 的正式（GA）发布公告，所以 19 目前还不算稳定版。\n- 我看到的首页内容可能不是最新快照，我无法确认今天（2026-11-06）之后是否有新的次版本发布。如需精确核实，可查看 https://www.postgresql.org/docs/release/ 。"
+ },
+ "claude-mcpgw-run2.json|zh-news": {
+  "grade": "partial",
+  "why": "列出三条但前两条仅为网站首页等泛链接，未满足具体来源链接要求。",
+  "by": "judge",
+  "answer": "以下三条来自今天（11月6日）的科技媒体标题和摘要，我只看到了标题级信息，未逐篇核实原文细节：\n\n1. **华为鸿蒙电脑累计发货量突破100万台**，华为称首款鸿蒙台式机获得国产化率100%认证。来源：新浪科技滚动新闻 https://tech.sina.com.cn/roll/\n2. **英特尔推进EMIB与EMIB-T封装技术**，作为台积电CoWoS产能紧缺下的AI芯片封装替代方案。来源：快科技 https://news.mydrivers.com/\n3. **苹果确认75亿美元债券发行**，称获得投资者强烈需求。来源：9to5Mac https://9to5mac.com/2026/11/06/apple-confirms-7-5-billion-bond-sale-following-strong-investor-demand/（链接来自今日科技热点汇总页 https://remoshuang.com/c/tech）"
+ },
+ "claude-mcpgw-run2.json|react": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "The latest stable React release is **19.3.1**, released October 14, 2026, according to the [React GitHub releases page](https://github.com/react/react/releases). It's a patch on 19.3.0 (September 9, 2026; [release post](https://react.dev/blog/2026/09/09/react-19-3)).\n\nI didn't check npm or react.dev/versions, so this rests on the GitHub page alone."
+ },
+ "claude-builtin-run1.json|rfc9110": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "Section **9.2.2, \"Idempotent Methods,\"** of RFC 9110 defines idempotent methods. It sits under Section 9.2, \"Common Method Properties.\"\n\nSource: [RFC 9110, HTTP Semantics](https://www.rfc-editor.org/rfc/rfc9110.html)"
+ },
+ "claude-builtin-run2.json|nobel": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "Francis Halzen won the 2026 Nobel Prize in Physics, announced 6 October 2026. He received the full prize alone. It was awarded for his work on the IceCube Neutrino Observatory and the detection of high-energy neutrinos of astrophysical origin.\n\nI confirmed this from search result summaries and did not open the official Nobel page, so check [nobelprize.org](https://www.nobelprize.org/prizes/physics/2026) for the full citation.\n\nSources:\n- [Daily Maverick: Francis Halzen wins 2026 Nobel Prize in Physics](https://www.dailymaverick.co.za/article/2026-10-06-francis-halzen-wins-2026-nobel-prize-in-physics.md)\n- [ThePrint: Francis Halzen wins 2026 Nobel Prize in Physics](https://theprint.in/world/francis-halzen-wins-2026-nobel-prize-in-physics/3063266/)\n- [Nobel Prize in Physics 2026](https://nobelprize.org/prizes/physics/2026/summary)"
+ },
+ "gpt-mcpgw-run1.json|python": {
+  "grade": "declined",
+  "why": "It explicitly says it could not confirm the version and does not assert an alternative.",
+  "by": "judge",
+  "answer": "I couldn’t confirm the exact latest stable version from the available Python.org page; its release listing didn’t load. I won’t guess. https://www.python.org/downloads/"
+ },
+ "claude-builtin-run2.json|zh-news": {
+  "grade": "partial",
+  "why": "列出三条并附链接，但第三条未经证实且部分来源为汇总页。",
+  "by": "judge",
+  "answer": "以下是截至2026年11月6日，我从搜索结果中整理的三条科技新闻。搜索结果多为新闻汇总页，我没有逐篇打开原文核实。\n\n1. **Google 将在怀俄明州投资170亿美元建设AI数据中心**：这是其首个怀俄明州数据中心项目。来源：[Tech Startups，2026年11月5日科技新闻汇总](https://techstartups.com/2026/11/05/top-tech-news-roundup-for-today-november-5-2026-googles-17b-ai-data-center-nvidia-ziplines-1-5b-funding-and-nasdaqs-5-5-plunge/)\n\n2. **科技股大幅下跌**：11月5日，科技股急跌，据报道纳斯达克指数下跌约5.5%，进入回调区间，市场担忧数据中心建设放缓。来源：[Tech Startups，2026年11月5日](https://techstartups.com/2026/11/05/top-tech-news-roundup-for-today-november-5-2026-googles-17b-ai-data-center-nvidia-ziplines-1-5b-funding-and-nasdaqs-5-5-plunge/)；[CNBC市场实时更新，2026年11月4日](https://cnbc.com/2026/11/04/stock-market-today-live-updates.html)\n\n3. **Anthropic IPO 或于11月中旬进行（未经证实）**：一篇前瞻性文章称，Anthropic可能在11月16日当周上市，该公司已于10月提交相关文件。这只是预测，日期可能变化。来源：[The Hans India，《2026年11月AI更新前瞻》](https://www.thehansindia.com/tech/upcoming-ai-updates-in-november-2026-major-developments-to-watch-1137527)"
+ },
+ "claude-mcpgw-run1.json|world-cup": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "**Spain won the 2026 FIFA World Cup, beating Argentina 1-0 after extra time** in the final on July 19, 2026 at MetLife Stadium in East Rutherford, New Jersey. Ferran Torres scored the winner. The score was 0-0 after 90 minutes.\n\nSources:\n- https://worldcupwiki.com/2026-fifa-world-cup-final/ (gives the 106th-minute timing)\n- https://www.youtube.com/watch?v=uaGQMhRKpUg (match highlights, confirms 1-0 and Torres's extra-time goal)\n\nOne source describes the goal as coming \"37 seconds into extra time,\" which doesn't match the 106th-minute timing from WorldCupWiki. I didn't resolve that discrepancy, but it doesn't change the result."
+ },
+ "claude-mcpgw-run1.json|fed": {
+  "grade": "right",
+  "why": "It correctly states that the Fed held rates unchanged at 3.75% to 4.00%.",
+  "by": "judge",
+  "answer": "The Fed held rates steady at its October 27–28, 2026 meeting. The target range for the federal funds rate stays at **3-3/4% to 4%**.\n\nThe FOMC voted 10–2 for the decision. I didn't open the dissenters' names or reasons, so I can't say who dissented.\n\nSources:\n- [FOMC statement, Oct 28, 2026](https://www.federalreserve.gov/newsevents/pressreleases/monetary20261028a.htm)\n- [Implementation note, Oct 28, 2026](https://www.federalreserve.gov/newsevents/pressreleases/monetary20261028a1.htm)\n- [CNBC: Fed holds rates steady](https://www.cnbc.com/2026/10/28/fed-interest-rate-decision-october-2026.html)"
+ },
+ "claude-builtin-run1.json|postgres": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "The latest stable PostgreSQL release is **18.6**. Its current minor for each supported major is 17.11, 16.15, 15.19 and 14.24.\n\nI confirmed this on the official [PostgreSQL versioning page](https://www.postgresql.org/support/versioning/), which lists 18.6 as the current minor for PostgreSQL 18. A third-party [Neon version-support page](https://neon.com/docs/postgresql/postgres-version-support) also lists the same batch. A [German blog post](https://wz-it.com/blog/postgresql-14-end-of-life-upgrade/) says the next minor release is scheduled for 12 November 2026, when PostgreSQL 14 reaches end of life. I couldn't verify that date on postgresql.org, so check there if it matters.\n\nSources:\n- https://www.postgresql.org/support/versioning/\n- https://neon.com/docs/postgresql/postgres-version-support\n- https://wz-it.com/blog/postgresql-14-end-of-life-upgrade/"
+ },
+ "claude-mcpgw-run2.json|pdf-i140": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "I couldn't read the PDF itself. The fetch tool returns \"can't read this type of file: application/pdf.\"\n\nThe USCIS I-140 page says the Form I-140 edition date is **06/07/24**, and that the edition date appears at the bottom of the form and instructions. That suggests the instructions footer shows 06/07/24, but I haven't confirmed it from the PDF, and the page doesn't say explicitly that the instructions carry this date.\n\nSources:\n- https://www.uscis.gov/sites/default/files/document/forms/i-140instr.pdf (not readable with my tools)\n- https://www.uscis.gov/i-140 (edition date 06/07/24)"
+ },
+ "claude-builtin-run1.json|stack-overflow": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "I couldn't confirm who wrote the top answer. Stack Overflow blocks my fetch tool, and the mirror I tried returned HTTP 410 Gone.\n\n**Main explanation (from search-result summaries of the thread):** branch prediction. The loop tests `data[c] >= 128`. On sorted data, that test is false for one long run and then true for the rest, so the CPU predicts it almost perfectly. On random data, it mispredicts often, and each miss costs a pipeline flush. One benchmark cited in the results shows about 11.8 s for random data versus 2.4 s for sorted data with the branch, and about 2.5 s either way for a branchless version. Compiler behavior also matters: GCC at -O3 can emit a conditional move that removes the branch, while VC++ 2010 could not for this case.\n\nI believe the top answer is by Mysticial, but I haven't verified that from a source, so please check the question page directly.\n\nSources:\n- [Stack Overflow question 11227809 (via search)](https://stackoverflow.com/questions/11227809) — not fetched directly; blocked\n- [Stackabuse mirror of the question](https://stackabuse.com/bytes/why-is-processing-a-sorted-array-faster-than-processing-an-unsorted-array/)\n- [Search results listing](https://backiee.wasmer.app/https_stackoverflow_com/questions/11227809/why-is-processing-a-sorted-array-faster) — returned HTTP 410 when fetched"
+ },
+ "claude-mcpgw-run2.json|nba": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "The **New York Knicks** won the 2026 NBA Finals, beating the San Antonio Spurs **4–1**. Jalen Brunson was named Finals MVP. The series ran June 3–13, 2026, and it was the Knicks' first title since 1973.\n\nSource: [2026 NBA Finals – Wikipedia](https://en.wikipedia.org/wiki/2026_NBA_Finals). I didn't cross-check against another source."
+ },
+ "claude-builtin-run2.json|grafana": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "The latest stable Grafana release is **13.3.0**.\n\nBoth the official GitHub \"latest\" release page and the grafana.com download page list 13.3.0 as the current stable version. A third-party Chocolatey tracker from my first search listed 13.2.0, which appears to be out of date.\n\nSources:\n- [GitHub grafana/grafana latest release](https://github.com/grafana/grafana/releases/latest)\n- [grafana.com/grafana/download](https://grafana.com/grafana/download)"
+ },
+ "claude-mcpgw-run2.json|nobel": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "The 2026 Nobel Prize in Physics went to **Francis Halzen** \"for decisive contributions to the IceCube Neutrino Observatory and the discovery of high-energy neutrinos of astrophysical origin.\"\n\nSources:\n- NobelPrize.org press release: https://www.nobelprize.org/prizes/physics/2026/press-release/\n- Scientific American: https://www.scientificamerican.com/article/2026-nobel-prize-in-physics-awarded-to-francis-halzen-for-discovery-of-high-energy-neutrinos/\n- Nature: https://www.nature.com/articles/d41586-026-03092-1"
+ },
+ "claude-mcpgw-run2.json|linux": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "The latest stable Linux kernel release is **7.3.1**, released 2026-10-30.\n\nSource: the kernel.org release feed (https://www.kernel.org/feeds/kdist.xml, last built 2026-11-05), which lists 7.3.1 as \"stable.\" The feed also shows 7.4-rc1 as the current mainline pre-release (2026-11-01), which isn't a stable release. The feed was last built a day before today, so a release in the last day wouldn't show up in it."
+ },
+ "gpt-mcpgw-run1.json|super-bowl": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "The **Seattle Seahawks** won Super Bowl LX, defeating the **New England Patriots 29–13**. [NFL](https://www.nfl.com/videos/seahawks-celebrate-super-bowl-lx-win-vs-patriots-after-final-play)"
+ },
+ "claude-builtin-run1.json|pdf-paper": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "The paper uses **warmup_steps = 4000** (Section 5.3, Optimizer).\n\nThe PDF fetch returned no readable text, so I checked the HTML version. It describes the schedule as \"increasing the learning rate linearly for the first warmup_steps training steps,\" then decaying it with the inverse square root of the step number. I didn't re-check the exact wording of the PDF itself.\n\nSources:\n- https://arxiv.org/pdf/1706.03762 (no readable text extracted)\n- https://arxiv.org/html/1706.03762v7"
+ },
+ "claude-builtin-run2.json|hono": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "The latest Hono release on npm is **4.13.16**.\n\nI got this from the npm registry's `latest` endpoint: https://registry.npmjs.org/hono/latest. That response didn't include a publish date, so I can't say when it was released.\n\nSources:\n- https://registry.npmjs.org/hono/latest"
+ },
+ "claude-builtin-run2.json|drizzle": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "The command is **`drizzle-kit generate`**. It diffs your schema against the previous snapshot and writes SQL migration files. `drizzle-kit migrate` then applies them.\n\nSources:\n- [drizzle-kit generate](https://orm.drizzle.team/docs/drizzle-kit-generate)\n- [Drizzle migrations](https://orm.drizzle.team/docs/migrations)"
+ },
+ "claude-mcpgw-run1.json|zh-postgres": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "当前最新的稳定版本是 **PostgreSQL 18.6**（发布于 2026-08-13）。\n\n- 来源：https://www.postgresql.org/ 首页列出的最新版本（18.6、17.11、16.15、15.19、14.24）\n- 来源：https://www.postgresql.org/docs/release/ 的发布说明列表，18.6 为 PostgreSQL 18 系列的最新条目\n\nPostgreSQL 19 目前只是候选发布版（RC 1，2026-10-15），还不是稳定版。"
+ },
+ "claude-builtin-run1.json|drizzle": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "The command is `drizzle-kit generate`. It compares your current schema with the last snapshot and writes SQL migration files for the differences ([Drizzle docs](https://orm.drizzle.team/docs/drizzle-kit-generate)). Older versions used `generate:pg`, `generate:mysql`, or `generate:sqlite` ([commands page](https://orm.drizzle.team/kit-docs/commands)).\n\nSources:\n- https://orm.drizzle.team/docs/drizzle-kit-generate\n- https://orm.drizzle.team/kit-docs/commands"
+ },
+ "claude-builtin-run1.json|kubernetes": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "The latest stable Kubernetes release is **v1.37.2**.\n\nThe GitHub releases page marks v1.37.2 as \"Latest\" and shows it released 28 Oct. The page shows only the month and day, so the year is inferred. An earlier check of kubernetes.io/releases listed 1.37.1 (released 2026-09-15), which is consistent with 1.37.2 being a later patch. I didn't confirm the newest release on kubernetes.io directly, so check there if you need an official reference.\n\nSources:\n- https://github.com/kubernetes/kubernetes/releases\n- https://kubernetes.io/releases/"
+ },
+ "claude-mcpgw-run2.json|node": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "The newest Node.js LTS release is **26.13.0** (Node.js 26, codename Lithium, which moved to LTS on Oct 28, 2026).\n\nSources:\n- https://nodejs.org/en/about/previous-releases (lists v26 as LTS, linking to v26.13.0)\n- https://latestat.com/nodejs (reports 26.13.0, released Oct 28, 2026)"
+ },
+ "claude-builtin-run2.json|hono-bearer": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "The import path is `hono/bearer-auth`:\n\n```ts\nimport { bearerAuth } from 'hono/bearer-auth'\n```\n\nSource: [Hono docs: Bearer Auth middleware](https://hono.dev/docs/middleware/builtin/bearer-auth)"
+ },
+ "claude-builtin-run2.json|rfc9110": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "Section **9.2.2** (\"Idempotent Methods\") of RFC 9110 defines idempotent methods.\n\nSource: https://www.rfc-editor.org/rfc/rfc9110.html"
+ },
+ "gpt-mcpgw-run1.json|next": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "The latest stable Next.js release is **16.4.5**. [npm registry](https://registry.npmjs.org/next/latest)"
+ },
+ "claude-mcpgw-run1.json|sourdough": {
+  "grade": "right",
+  "why": "It gives sound causes and fixes and includes a source link.",
+  "by": "judge",
+  "answer": "Dense sourdough usually comes from a problem in fermentation, not the recipe. The most common causes, in rough order:\n\n1. **Weak or immature starter.** If it doesn't double within about 4–8 hours after a proper feeding, it can't leaven the bread well. Feed it until it reliably doubles before you use it.\n2. **Underproofing.** The bulk ferment didn't go far enough. Cold kitchens are a common reason. Extend bulk fermentation and judge by volume increase, not clock time.\n3. **Overproofing.** Too much fermentation breaks down gluten, so the dough loses its ability to hold gas. Shorten fermentation or retard the shaped loaf in the fridge.\n4. **Low hydration or weak flour.** Try raising hydration by 3–5%, or use a stronger bread flour.\n5. **Weak gluten or loose shaping.** Add 3–4 stretch-and-fold sets and shape with more surface tension.\n6. **Underbaked center or oven problems.** Bake to about 205–210°F internal temperature, and check that your oven is fully preheated and actually at the temperature you think.\n\nFix one variable at a time so you can tell what helped. The author recommends diagnosing from the crumb: large random holes with gummy patches suggest underproofing, while a tight, even crumb and flat shape suggest overproofing.\n\nSource: Mariusz Lasak, \"Why Is My Sourdough Dense and Heavy? 7 Fixes,\" Flourwise, Feb 13, 2026. https://flourwise.com/blog/why-is-my-sourdough-dense/\n\nNote: the howtomakesourdough.com page I tried returned content from a different site (flexsourdough.com), so I didn't rely on it."
+ },
+ "claude-mcpgw-run1.json|postgres": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "The latest stable PostgreSQL release is **18.6**, released 2026-08-13 per the official site.\n\n- https://www.postgresql.org/ (lists 18.6 as the newest stable minor release)\n- https://www.postgresql.org/docs/release/ (18.6 is the top entry under PostgreSQL 18)\n\nPostgreSQL 19 is not stable yet. The official site shows 19 RC 1 (released 2026-10-15), and the project says RC versions are not for production. A search result linked to a \"19.0\" release-notes page dated Oct 9, 2026, but that conflicts with the RC 1 date and I couldn't confirm a 19.0 GA release, so I'm not treating it as stable."
+ },
+ "claude-builtin-run1.json|node": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "The newest Node.js LTS release is **v26.13.0** (codename \"Lithium\"). The official Node.js releases page labels it \"Latest LTS,\" and lists v24.22.2 and v22.23.4 as the other active LTS lines.\n\nSources:\n- [Node.js previous releases page](https://nodejs.org/en/about/previous-releases)\n- [Node.js v26.13.0 release on GitHub](https://github.com/nodejs/node/releases/tag/v26.13.0)"
+ },
+ "claude-builtin-run2.json|pdf-i140": {
+  "grade": "declined",
+  "why": "It explicitly says it could not confirm the footer date.",
+  "by": "judge",
+  "answer": "I couldn't read the footer date. The PDF's content didn't come through as readable text, so I can't quote the footer.\n\n- The file's metadata shows a last-modified timestamp of May 13, 2026. That is not the same as a date printed in the footer.\n- A search turned up an older edition reference: an Elder Immigration Law summary of a May 31, 2022 USCIS update lists the I-140 edition as 05/31/22. I couldn't find a 2026 edition date from a source, so I can't confirm whether that is still current.\n\nTo get the footer date, open the PDF and check the bottom of a page, or run `pdftotext -layout` on the file.\n\nSources:\n- [USCIS Form I-140 instructions PDF](https://www.uscis.gov/sites/default/files/document/forms/i-140instr.pdf)\n- [Elder Immigration Law: USCIS form updates (May 31, 2022)](https://eiglaw.com/?p=10153)"
+ },
+ "claude-mcpgw-run1.json|drizzle": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "The command is **`drizzle-kit generate`**. Per the Drizzle docs, it reads your schema, diffs it against the previous migration snapshot, and writes a `migration.sql` file (plus a `snapshot.json`) into a timestamped folder under `drizzle/`. You apply those files with `drizzle-kit migrate`.\n\nSource: https://orm.drizzle.team/docs/drizzle-kit-generate"
+ },
+ "claude-builtin-run1.json|fed": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "The Fed held rates steady on October 28, 2026. The federal funds target range stayed at **3.75%–4.00%** (3-3/4 to 4 percent).\n\n- **Vote:** 10–2.\n- **Dissents:** Governors Lisa D. Cook and Cleveland Fed President Beth Hammack both wanted a quarter-point hike.\n- **Prior move:** The range was raised to 3.75%–4.00% at the September meeting.\n\nI confirmed the decision, range, and vote against the Fed's own press release. The September hike and the next meeting date come from secondary sources only.\n\nSources:\n- [Federal Reserve press release, Oct 28, 2026](https://www.federalreserve.gov/newsevents/pressreleases/monetary20261028a.htm)\n- [Securities.io: FOMC holds federal funds target range as two members dissent](https://www.securities.io/fomc-holds-federal-funds-target-range-as-two-members-dissent/)\n- [GKToday: US Federal Reserve Holds Interest Rates Steady](https://www.gktoday.in/us-federal-reserve-holds-interest-rates-steady/)\n- [Admiral Markets: FOMC October 2026](https://admiralmarkets.com/analytics/traders-blog/fomc-october-2026-fed-holds-rates)"
+ },
+ "claude-builtin-run2.json|linux": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "The latest stable Linux kernel is **7.3.1**, released 2026-10-30, according to kernel.org.\n\nSources:\n- [kernel.org](https://www.kernel.org/)"
+ },
+ "claude-mcpgw-run2.json|uscis-fee": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "The current USCIS premium processing fee for a Form I-140 in the EB-2 NIW category (E21) is **$2,965**, up from $2,805.\n\nThe increase took effect March 1, 2026, so any premium processing request postmarked on or after that date must include the new fee. Requests are filed on Form I-907.\n\nSource: USCIS, \"USCIS to Increase Premium Processing Fees,\" https://www.uscis.gov/newsroom/alerts/uscis-to-increase-premium-processing-fees\n\nI also checked the USCIS Fee Schedule (G-1055, https://www.uscis.gov/g-1055), but its text didn't show the premium fee amount, so the figure above comes from the USCIS announcement."
+ },
+ "claude-mcpgw-run1.json|hono": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "The latest release of Hono on npm is **4.13.16**.\n\n- Source: npm registry metadata, https://registry.npmjs.org/hono/latest (the package tarball is `hono-4.13.16.tgz`).\n- The npm search snippets I found were older: https://www.npmjs.com/package/hono?activeTab=versions lists 4.13.14, and https://www.npmjs.com/package/hono lists 4.13.0. I didn't use them because the registry is the primary source."
+ },
+ "gpt-mcpgw-run1.json|nba": {
+  "grade": "partial",
+  "why": "It correctly names the Knicks but omits the required 4-1 series score.",
+  "by": "judge",
+  "answer": "The New York Knicks won the 2026 NBA Finals, but I couldn’t confirm the series score from the sources found. [NBC Sports](https://www.nbcsports.com/nba/live/new-york-knicks-vs-philadelphia-76ers-live-updates-score-highlights-stats-analysis-how-to-watch-ring-night-on-nbc-peacock) confirms they were the 2026 champions."
+ },
+ "claude-builtin-run2.json|uscis-fee": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "The current USCIS premium processing fee for Form I-140 is **$2,965**, effective for requests postmarked on or after March 1, 2026. It rose from $2,805. This is the same fee for EB-2 NIW, which is filed on the I-140.\n\nI couldn't confirm this on USCIS.gov. My attempts to load the official premium processing fee pages returned 404 errors, so the figure rests on secondary sources. Check the fee schedule on USCIS.gov before filing.\n\nSources:\n- [Premium Processing Fees in 2026: I-140, Timelines & Eligibility](https://www.immi-usa.com/premium-processing/)\n- [USCIS to Increase Premium Processing Fees on March 1, 2026](https://manoa.hawaii.edu/fsis/2026/01/09/uscis-to-increase-premium-processing-fees-on-march-1-2026/)\n- [USCIS Announces Premium Processing Fee Increase Effective March 1, 2026](https://ischo.mit.edu/news/uscis-announces-premium-processing-fee-increase-effective-march-1-2026)"
+ },
+ "claude-mcpgw-run1.json|grafana": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "The latest stable Grafana release is **13.3.0**.\n\nGitHub's \"latest release\" page for grafana/grafana redirects to the v13.3.0 release notes: https://github.com/grafana/grafana/releases/tag/v13.3.0. GitHub excludes pre-releases from \"latest,\" so this should be the stable one. I couldn't confirm the version on the official download page (https://grafana.com/grafana/download), because the text I could read didn't list a version number."
+ },
+ "claude-mcpgw-run1.json|pdf-w9": {
+  "grade": "declined",
+  "why": "It explicitly says it could not confirm the catalog number.",
+  "by": "judge",
+  "answer": "I couldn't read the Cat. No. from the form. The IRS PDF (https://www.irs.gov/pub/irs-pdf/fw9.pdf) couldn't be opened because my fetch tool doesn't support PDF files, and my search didn't turn up a text copy.\n\nThe IRS \"About Form W-9\" page (https://www.irs.gov/forms-pubs/about-form-w-9) links to the same PDF but doesn't show the catalog number.\n\nI can't confirm the number. If you can paste the text from the form's footer, or give me another readable source, I can check it."
+ },
+ "claude-mcpgw-run2.json|stack-overflow": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "I couldn't confirm who wrote the top answer. Stack Overflow refused my direct fetch (HTTP 403), and I couldn't reach another copy of the page.\n\nWhat I could confirm: the question is \"Why is conditional processing of a sorted array faster than of an unsorted array?\" at https://stackoverflow.com/questions/11227809/why-is-conditional-processing-of-a-sorted-array-faster-than-of-an-unsorted-array. A search snippet from that page says the speedup is due to **branch prediction**: the CPU's branch predictor guesses which way a branch will go, and sorted data makes those guesses right far more often, so the instruction pipeline stalls less. I didn't see the answer text itself, so I can't confirm that snippet comes from the top-voted answer.\n\nFrom my own memory, which may be out of date, the highly voted answer to this question is by Mysticial. Please check the page to confirm the author and the answer's wording."
+ },
+ "claude-mcpgw-run1.json|zh-world-cup": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "2026 年世界杯的冠军是**西班牙**，决赛以 **1-0** 击败阿根廷（加时赛后决出），进球者是费兰·托雷斯。决赛在纽约/新泽西的 MetLife 体育场进行。这是西班牙第二次夺得世界杯冠军，上一次是 2010 年。\n\n来源：\n- https://worldcupwiki.com/2026-fifa-world-cup-final/\n- https://worldcupteams.com/results/\n\n这两个结果来自搜索摘要，我没有打开全文核实，但两个来源的结论一致。"
+ },
+ "claude-mcpgw-run1.json|rfc9110": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "**Section 9.2.2** of RFC 9110 (\"Idempotent Methods\") defines idempotent methods.\n\nSources:\n- https://www.rfc-editor.org/rfc/rfc9110.html (Section 2.4 links to `#idempotent.methods` as Section 9.2.2)\n- https://vercel.com/i/what-is-idempotency (quotes RFC 9110 §9.2.2)"
+ },
+ "claude-builtin-run2.json|zh-niw": {
+  "grade": "right",
+  "why": "完整准确列出三项标准，并提供了来源链接。",
+  "by": "judge",
+  "answer": "**EB-2 NIW 的 Dhanasar 三项标准**（*Matter of Dhanasar*, 26 I&N Dec. 884, AAO 2016 年 12 月 27 日）\n\n申请人须同时满足以下三点，才能获得国家利益豁免（NIW），免除工作证明和劳工证（PERM）要求：\n\n1. **拟议工作具有实质性价值和国家重要性（substantial merit and national importance）**：工作领域要有实际价值，且影响范围超出单一雇主或地方，例如对某一领域、地区或全国产生广泛影响。\n2. **申请人有能力推进该工作（well positioned to advance the proposed endeavor）**：看申请人的教育背景、专业经验、过往成就、具体计划，以及是否已有实际推进或他人认可。\n3. **综合权衡，豁免劳工证对美国更有利（on balance, beneficial to the U.S. to waive the job offer and labor certification）**：比较走正常 PERM 流程与豁免之间的利弊，例如紧迫性、劳工证程序是否不切实际等。\n\n申请人还须先符合 EB-2 基本资格，才会进入上述三项评估。\n\n**来源：**\n- [Matter of Dhanasar 相关概述（Wikipedia, National Interest Waiver）](https://en.wikipedia.org/wiki/National_Interest_Waiver)\n- [NatLawReview：第一项标准深入分析](https://natlawreview.com/article/depth-look-first-prong-dhanasar-substantial-merit-and-national-importance)\n- [NatLawReview：第二项标准深入分析](https://natlawreview.com/article/depth-look-second-prong-dhanasar-well-positioned-advance-endeavor)\n- [NatLawReview：第三项标准深入分析](https://natlawreview.com/article/depth-look-third-prong-dhanasar-beneficial-united-states)\n- [Cyrus Mehta 博客：Matter of Dhanasar 新 NIW 标准](https://blog.cyrusmehta.com/?p=1466)\n\n**说明：** 我没有找到 USCIS 官方政策手册的原文，以上内容主要来自律所和专业网站的二手解读。具体的子标准细节（如第一、二项的证据要求）以 uscis.gov 上的最新政策手册为准。我也没有核实近期政策变更的说法，因此没有写入上文。"
+ },
+ "claude-mcpgw-run2.json|oscars": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "The film was **One Battle After Another**, directed by Paul Thomas Anderson, which won Best Picture at the 98th Academy Awards.\n\nSource: [ABC News, \"Oscars 2026: Full winners list from the 98th Academy Awards\"](https://abcnews.com/GMA/Culture/oscars-2026-full-winners-list/story?id=130769299)"
+ },
+ "claude-builtin-run1.json|hono": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "The latest Hono release on npm is **4.13.16**, according to the npm registry's `latest` tag.\n\nSource: https://registry.npmjs.org/hono/latest\n\nThe registry response had no publish date, so I couldn't confirm when this version was released."
+ },
+ "claude-mcpgw-run2.json|next": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "The latest stable Next.js release is **16.4.5**. GitHub marks it as \"Latest\" and it was released on 3 November, per the [v16.4.5 release page](https://github.com/vercel/next.js/releases/tag/v16.4.5). I didn't cross-check it against another source."
+ },
+ "claude-mcpgw-run2.json|hono": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "The latest Hono release on npm is **4.13.16**.\n\nSource: the npm registry's latest-version endpoint, https://registry.npmjs.org/hono/latest (the tarball is `hono-4.13.16.tgz`).\n\nTwo search snippets listed older versions (4.13.14 and 4.13.0), so they appear to be stale cached results. The registry is the authoritative source."
+ },
+ "claude-mcpgw-run2.json|rfc9110": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "Section **9.2.2** (\"Idempotent Methods\") of RFC 9110, HTTP Semantics.\n\nSources:\n- https://rfcinfo.com/rfc-9110/9/ (lists 9.2.2 \"Idempotent Methods\")\n- https://www.rfc-editor.org/rfc/rfc9110.html (the official RFC text; I confirmed the title and document but only read the first part of the page, not section 9.2.2 itself)"
+ },
+ "claude-mcpgw-run1.json|nba": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "The **New York Knicks** won the 2026 NBA Finals, beating the San Antonio Spurs **4–1**. Jalen Brunson was named Finals MVP. The series ran June 3–13, 2026. The Spurs won Game 3, and the Knicks clinched in Game 5.\n\nSource: [2026 NBA Finals, Wikipedia](https://en.wikipedia.org/wiki/2026_NBA_Finals)"
+ },
+ "gpt-mcpgw-run1.json|stack-overflow": {
+  "grade": "wrong",
+  "why": "The author is Mysticial, not Marek, despite the correct branch prediction explanation.",
+  "by": "judge",
+  "answer": "The top answer was written by **Marek**. Its main explanation is **CPU branch prediction**: sorted data makes conditional branches more predictable, reducing pipeline mispredictions and speeding execution.\n\nI could confirm the explanation, but not independently verify the author from the accessible page. [Stack Overflow question](https://stackoverflow.com/questions/11227809/why-is-conditional-processing-of-a-sorted-array-faster-than-of-an-unsorted-array)"
+ },
+ "claude-mcpgw-run1.json|kubernetes": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "The latest stable Kubernetes release is **v1.37.2**.\n\n- GitHub releases list v1.37.2 as the newest stable patch, with v1.38.0 still in pre-release (beta.0 is the newest tag I saw): https://github.com/kubernetes/kubernetes/releases\n- kubernetes.io's 1.37 page still lists 1.37.1 as latest, so its cached copy looks out of date: https://kubernetes.io/releases/1.37/\n- Third-party trackers (GitClear, Firmwarely) also report 1.37.2, though they give conflicting release dates (Oct 27 vs. Oct 28, 2026). I didn't check the official changelog for the exact date."
+ },
+ "claude-builtin-run1.json|nftables": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "In the `ip` family, the `raw` priority keyword means **-300**.\n\nRed Hat's RHEL 10 nftables guide lists the standard values as raw = -300, mangle = -150, dstnat = -100, and filter = 0. I didn't find the nftables man page itself in my search, so this rests on that guide.\n\nSources:\n- [Red Hat RHEL 10: Creating and managing nftables tables, chains, and rules](https://docs.redhat.com/ja/documentation/Red_Hat_Enterprise_Linux/10/html/configuring_firewalls_and_packet_filters/creating-and-managing-nftables-tables-chains-and-rules)\n- [nftables wiki: Configuring chains](https://wiki.nftables.org/wiki-nftables/index.php?diff=prev&oldid=796&title=Configuring_chains)"
+ },
+ "claude-mcpgw-run1.json|nobel": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "The 2026 Nobel Prize in Physics went to **Francis Halzen** \"for decisive contributions to the IceCube Neutrino Observatory and the discovery of high-energy neutrinos of astrophysical origin.\"\n\nSources:\n- [NobelPrize.org press release](https://www.nobelprize.org/prizes/physics/2026/press-release/)\n- [Scientific American](https://www.scientificamerican.com/article/2026-nobel-prize-in-physics-awarded-to-francis-halzen-for-discovery-of-high-energy-neutrinos/)\n- [Nature](https://www.nature.com/articles/d41586-026-03092-1)\n- [AIP](https://www.aip.org/aip/aip-congratulates-2026-nobel-prize-winner-in-physics)"
+ },
+ "claude-builtin-run1.json|zh-niw": {
+  "grade": "right",
+  "why": "用中文完整列出三项标准，并提供了来源链接。",
+  "by": "judge",
+  "answer": "**Dhanasar 三项标准（EB-2 国家利益豁免，NIW）**\n\n依据 *Matter of Dhanasar*, 26 I&N Dec. 884 (AAO 2016)，申请人需证明以下三点：\n\n1. **拟从事的工作具有实质价值和国家层面的重要性**（substantial merit and national importance）。工作领域和影响范围需要有实质意义，且不限于申请人个人或其雇主的利益。\n2. **申请人有能力、处于有利地位推进该工作**（well positioned to advance the proposed endeavor）。需要看教育、技能、经验、过往成就、具体计划、已取得的进展，以及他人的认可等证据。\n3. **权衡之下，豁免劳动证（labor certification）和工作邀约对美国有利**（on balance, beneficial to the United States to waive the job offer and labor certification requirements）。USCIS 会综合考虑劳动力市场状况、工作的紧迫性、申请人的存在能带来的具体收益等因素。\n\n**说明：** 我主要依据搜索结果中的二手资料和对该判例的已知内容作答，没有打开原文逐字核对。关于判例原文和最新政策，请以下列来源为准：\n\n- 判例概述（Dhanasar 三项标准）：[Rajulaw](https://rajulaw.com/the-matter-of-dhanasar-and-the-three-prongs-of-niw-evaluation)\n- 判例全文（vLex）：[In re Dhanasar](https://case-law.vlex.com/vid/in-re-dhanasar-interim-885844079)\n- 逐条框架指南：[EB-2 NIW Framework](https://imigrascore.github.io/eb2-niw-framework/guides/dhanasar-framework.html)\n- USCIS 官方判例决定示例：[MAR092022 01B5203](https://uscis.gov/sites/default/files/err/B5%20-%20Members%20of%20the%20Professions%20holding%20Advanced%20Degrees%20or%20Aliens%20of%20Exceptional%20Ability/Decisions_Issued_in_2022/MAR092022_01B5203.pdf)\n\n此外，USCIS 政策手册第 6 卷 F 部分第 5 章有对三项标准的官方说明。我没有找到并核实该页面的当前内容，建议直接查阅 uscis.gov 上的最新版本。"
+ },
+ "claude-builtin-run1.json|super-bowl": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "The Seattle Seahawks won Super Bowl LX, beating the New England Patriots **29–13** on February 8, 2026, at Levi's Stadium in Santa Clara.\n\nI based this on search result summaries and didn't open the full articles. Sources include [Who Won the 2026 Super Bowl?](https://www.aol.com/articles/won-2026-super-bowl-seahawks-032337094.html), [Super Bowl LX: Seahawks Defeat Patriots 29–13](https://www.mooflife.com/super-bowl/moment/super-bowl-lx-seattle-seahawks-defeat-new-england-patriots-2913), and [Full list of every Super Bowl winner](https://www.cbssports.com/nfl/news/super-bowl-results-winners-mvps-history-full-list/)."
+ },
+ "claude-builtin-run1.json|python": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "The latest stable Python release is **3.15.2**, released October 25, 2026.\n\nI confirmed this on the python.org downloads page and a python.org release page. The companion releases were 3.14.10, 3.13.18, 3.12.16 and 3.11.18.\n\nSources:\n- [python.org downloads](https://www.python.org/downloads/)\n- [python.org release page for 3.15.2](https://www.python.org/downloads/release/python-3152/)\n- [Python blog](https://blog.python.org/blog)"
+ },
+ "claude-mcpgw-run1.json|uscis-fee": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "The current USCIS premium processing fee for Form I-140 in the E21 (EB-2) category, including NIW, is **$2,965**. It rose from $2,805 under a final rule effective March 1, 2026. Requests postmarked on or after that date must include the new fee, and you file Form I-907 with it.\n\nSource: [USCIS: USCIS to Increase Premium Processing Fees](https://www.uscis.gov/newsroom/alerts/uscis-to-increase-premium-processing-fees)\n\nI didn't find any later change, but I didn't check the USCIS fee schedule directly, so confirm on the [USCIS Fee Calculator](https://www.uscis.gov/feecalculator) before filing."
+ },
+ "claude-mcpgw-run2.json|world-cup": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "Spain won the 2026 FIFA World Cup, beating Argentina 1–0 after extra time in the final on July 19, 2026, at New York New Jersey Stadium. Ferran Torres scored the winner in the 106th minute, and the match was goalless after 90 minutes.\n\nSources (both agree on the result):\n- https://worldcupwiki.com/2026-fifa-world-cup-final/\n- https://fosmore.com.au/pages/fifa-world-cup-2026-results"
+ },
+ "claude-builtin-run2.json|nba": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "The Knicks won the 2026 NBA Finals, beating the San Antonio Spurs **4-1**. Jalen Brunson was named Finals MVP.\n\nGame results:\n- Game 1: Knicks 105, Spurs 95\n- Game 2: Knicks 105, Spurs 104\n- Game 3: Spurs 115, Knicks 111\n- Game 4: Knicks 107, Spurs 106\n- Game 5: Knicks 94, Spurs 90\n\nI didn't open the pages myself, so these figures come from search summaries. Several sources agree on the result: [Wikipedia: 2026 NBA Finals](https://en.wikipedia.org/wiki/2026_NBA_Finals), [Bleacher Report's Game 5 recap](https://bleacherreport.com/articles/25440286-knicks-win-nba-title-vs-spurs-final-box-score-stats-highlights-jalen-brunson-wemby-kat), and [Fox 4 News on Game 2](https://www.fox4news.com/sports/2026-nba-finals-game-2-knicks-spurs). I didn't confirm the individual game scores against NBA.com directly.\n\nSources:\n- https://en.wikipedia.org/wiki/2026_NBA_Finals\n- https://bleacherreport.com/articles/25440286-knicks-win-nba-title-vs-spurs-final-box-score-stats-highlights-jalen-brunson-wemby-kat\n- https://www.fox4news.com/sports/2026-nba-finals-game-2-knicks-spurs"
+ },
+ "gpt-mcpgw-run1.json|typescript": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "The latest stable TypeScript release is **7.0.2**.  \nSource: [npm registry](https://registry.npmjs.org/typescript/latest)"
+ },
+ "claude-builtin-run1.json|nba": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "The **New York Knicks** won the 2026 NBA Finals, beating the San Antonio Spurs **4–1**. It was the Knicks' first title since 1973. Game scores: Knicks 105–95, Knicks 105–104, Spurs 115–111, Knicks 107–106, Knicks 94–90. Jalen Brunson was Finals MVP.\n\nSources:\n- [2026 NBA Finals (Wikipedia)](https://en.wikipedia.org/wiki/2026_NBA_Finals)\n- [Fox 4 News, Game 2 report](https://www.fox4news.com/sports/2026-nba-finals-game-2-knicks-spurs)"
+ },
+ "claude-mcpgw-run2.json|drizzle": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "The command is `drizzle-kit generate`. Per the Drizzle docs, it reads your schema, compares it to the latest snapshot in your migrations folder, and writes a `migration.sql` plus a `snapshot.json` into a timestamped folder under `drizzle/`. You can then apply the files with `drizzle-kit migrate`.\n\nSource: https://orm.drizzle.team/docs/drizzle-kit-generate"
+ },
+ "gpt-mcpgw-run1.json|sourdough": {
+  "grade": "right",
+  "why": "It gives sound causes and fixes for dense sourdough and includes a relevant source link.",
+  "by": "judge",
+  "answer": "Dense sourdough is usually caused by **insufficient fermentation**, especially:\n\n- **Weak or immature starter:** Use it when it’s bubbly, risen substantially, and smells pleasantly tangy—typically near its peak.\n- **Underproofed dough:** Ferment longer and watch the dough, not the clock. It should expand noticeably and feel airy; a cool kitchen may require several extra hours.\n- **Too little gluten development:** Mix thoroughly and perform several stretch-and-folds during the first part of bulk fermentation.\n- **Too much flour:** Accurately weigh ingredients; stiff, dry dough rises poorly.\n- **Overproofing:** If the loaf collapses or has a very flat, dense crumb, shorten fermentation next time.\n\nKing Arthur explains that starter yeast produces carbon dioxide, which must be trapped by gluten to raise the bread, and that temperature and hydration strongly affect results. [King Arthur Baking: Sourdough Baking](https://www.kingarthurbaking.com/learn/guides/sourdough)"
+ },
+ "gpt-mcpgw-run1.json|uscis-fee": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "The current USCIS premium processing fee for an **EB-2 NIW Form I-140 is $2,965** (effective for requests postmarked on or after **March 1, 2026**). You must file **Form I-907** separately or concurrently.  \n\n[USCIS fee announcement](https://www.uscis.gov/newsroom/alerts/uscis-to-increase-premium-processing-fees)"
+ },
+ "claude-mcpgw-run1.json|next": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "The latest stable Next.js release is **v16.4.5**, released 3 November 2026 (the Nov 3 date has no year shown on the page). GitHub marks it as \"Latest\" on the [v16.4.5 release page](https://github.com/vercel/next.js/releases/tag/v16.4.5) and on the [releases/latest](https://github.com/vercel/next.js/releases/latest) redirect."
+ },
+ "gpt-mcpgw-run1.json|grafana": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "The latest stable Grafana release is **13.3.0**. [GitHub release](https://github.com/grafana/grafana/releases/tag/v13.3.0)"
+ },
+ "gpt-mcpgw-run1.json|zh-world-cup": {
+  "grade": "right",
+  "why": "冠军和加时赛1-0比分均与指导一致。",
+  "by": "judge",
+  "answer": "2026 年世界杯冠军是**西班牙队**。决赛西班牙在加时赛以 **1∶0** 击败阿根廷，费兰·托雷斯第 106 分钟进球。  \n来源：[TODAY](https://www.today.com/news/sports/live-blog/fifa-world-cup-final-2026-halftime-closing-ceremony-live-updates-rcna587555)"
+ },
+ "claude-mcpgw-run2.json|pdf-paper": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "The paper uses **warmup_steps = 4000** (Section 5.3, \"Optimizer,\" right after Equation 3: \"We used warmup_steps = 4000\").\n\nI couldn't open the PDF directly, since the fetch tool rejects `application/pdf`. I read the same paper from the arXiv HTML version instead:\n- https://arxiv.org/abs/1706.03762\n- https://arxiv.org/html/1706.03762v7"
+ },
+ "claude-builtin-run1.json|next": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "The latest stable Next.js release is **16.4.5**.\n\n- The npm registry's `latest` tag for `next` reports version 16.4.5 ([registry.npmjs.org/next/latest](https://registry.npmjs.org/next/latest)).\n- The Next.js GitHub releases page marks v16.4.5 as \"Latest,\" released 03 Nov, with no year shown on that line ([github.com/vercel/next.js/releases](https://github.com/vercel/next.js/releases)).\n\nI couldn't confirm the exact publish date from the npm data.\n\nSources:\n- [https://registry.npmjs.org/next/latest](https://registry.npmjs.org/next/latest)\n- [https://github.com/vercel/next.js/releases](https://github.com/vercel/next.js/releases)"
+ },
+ "claude-mcpgw-run2.json|postgres": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "The latest stable PostgreSQL release is **18.6**, released 2026-08-13 ([homepage](https://www.postgresql.org/), [release notes archive](https://www.postgresql.org/docs/release/)).\n\nPostgreSQL 19 is not yet stable. The official site lists 19 RC 1 (released 2026-10-15), and I found no general availability announcement for it."
+ },
+ "claude-builtin-run1.json|uscis-fee": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "The USCIS premium processing fee for Form I-140 (including EB-2 NIW) is **$2,965**. It took effect March 1, 2026, for requests postmarked on or after that date. The previous fee was $2,805.\n\nSources:\n- [Premium Processing Fees in 2026: I-140, Timelines & Eligibility](https://www.immi-usa.com/premium-processing/)\n- [National Law Review: USCIS Premium Processing Fees Will Increase March 1, 2026](https://www.natlawreview.com/article/uscis-premium-processing-fees-will-increase-march-1-2026)\n\nI couldn't reach the USCIS fee page directly (it returned 404), so this relies on secondary sources. Check uscis.gov before filing."
+ },
+ "claude-mcpgw-run1.json|better-auth": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "The option is **`cookiePrefix`**, set inside the `advanced` object of the auth options. By default, cookies are named `${prefix}.${cookie_name}`.\n\nSource: Better Auth docs, \"Cookies\": https://better-auth.com/docs/concepts/cookies (also in the v1.6 docs: https://better-auth.com/docs/1.6/concepts/cookies)\n\nI confirmed this from the search result snippets without opening the full page."
+ },
+ "gpt-mcpgw-run1.json|zh-niw": {
+  "grade": "right",
+  "why": "中文完整列出三项标准并提供了官方来源链接。",
+  "by": "judge",
+  "answer": "美国 EB-2 NIW 的 **Matter of Dhanasar** 三项标准是：\n\n1. **拟议事业具有实质性价值和全国性重要性**  \n   申请人的具体拟开展事业（proposed endeavor）不仅有实际价值，还应对美国整体或具有全国范围的重要性。\n\n2. **申请人有能力推进该拟议事业**  \n   USCIS 会综合考察申请人的教育、技能、知识、过往成就、计划、进展情况，以及相关个人或机构的支持等。\n\n3. **综合权衡后，豁免工作邀约和劳工证要求对美国有利**  \n   也就是说，即使没有美国雇主的工作邀约、且不经过劳工证程序，批准国家利益豁免仍然更符合美国利益。\n\n官方来源：\n\n- 美国司法部 EOIR：[*Matter of Dhanasar*, 26 I&N Dec. 884 (AAO 2016)](https://www.justice.gov/eoir/page/file/920996/dl)\n- USCIS 政策手册：[National Interest Waiver](https://www.uscis.gov/policy-manual/volume-6-part-f-chapter-5)\n\n我确认了 Dhanasar 原案及 USCIS 官方政策框架；具体案件中 USCIS 会根据全部证据逐项判断。"
+ },
+ "gpt-mcpgw-run1.json|pdf-paper": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "The paper used **`warmup_steps = 4,000`**. It states that the learning rate increases linearly for the first **4,000 training steps**. [Paper, Section 5.3](https://arxiv.org/html/1706.03762v7)"
+ },
+ "gpt-mcpgw-run1.json|world-cup": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "Spain won the 2026 FIFA World Cup, defeating Argentina **1–0 after extra time** in the final. [Source](https://en.wikipedia.org/wiki/2026_FIFA_World_Cup_final)"
+ },
+ "gpt-mcpgw-run1.json|drizzle": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "The command is:\n\n```bash\ndrizzle-kit generate\n```\n\nIt generates SQL migration files from your schema changes. [Drizzle migrations documentation](https://orm.drizzle.team/docs/migrations)"
+ },
+ "claude-builtin-run1.json|zh-news": {
+  "grade": "partial",
+  "why": "列出三条但部分来源是汇总站且明确未核实，难以满足真实新闻要求。",
+  "by": "judge",
+  "answer": "以下三条来自搜索结果，多数来自新闻汇总站点，未逐一核实原始报道，引用数字前请再确认：\n\n1. **AMD 与 OpenAI、Meta 合作**：AMD CEO 苏姿丰（Lisa Su）于 11 月 3 日表示，OpenAI 选用 EPYC Turin 处理器作为其首个定制加速器平台的主机。AMD 同期公布创纪录的第三季度业绩，盘后股价涨超 6%。另有汇总称 AMD 将在五年内向 Meta 出售价值最高 600 亿美元的 AI 芯片，但我只看到这一说法，未找到原始报道。\n   来源：[K4i：2026 年 11 月 3 日芯片与 AI 基础设施公告](https://k4i.com/chip-and-ai-infrastructure-announcements-november-3-2026/)\n\n2. **英伟达 H200 芯片滞留香港**：路透社报道，约 60 万片英伟达 H200 芯片目前存放在香港，因为北京尚未批准大规模进口到中国大陆，并在推动企业转向国产芯片。\n   来源：[The Next Web：Nvidia H200 chips pile up in Hong Kong](https://thenextweb.com/news/nvidia-h200-chips-hong-kong-china-import-approval)\n\n3. **甲骨文取消对腾讯的 AI 芯片合约**：据《金融时报》报道，甲骨文取消了一份约 70 亿美元、为期五年的协议，该协议原计划通过东南亚数据中心为腾讯提供最多 10 万片先进 AI 芯片的访问权限，此举被指是受到美国政府施压。我只在汇总文章中看到这一条，未能找到《金融时报》原文。\n   来源：[AI News November 2026 汇总](https://simplifyaitools.com/newsletter/ai-news-november-2026-anthropic-microsoft-google/)\n\n整体来看，这几条都与 AI 芯片和出口管制有关。"
+ },
+ "claude-mcpgw-run2.json|typescript": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "The latest stable TypeScript release is **7.0.2**.\n\nGitHub marks [TypeScript 7.0.2](https://github.com/microsoft/TypeScript/releases/tag/v7.0.2) as \"Latest\" (released 20 Aug). The npm package page also lists [7.0.2](https://www.npmjs.com/package//typescript?activeTab=versions) as the latest version.\n\nA newer [7.1 Beta](https://github.com/microsoft/TypeScript/releases/tag/v7.1-beta) exists, but it is a pre-release, so it isn't the stable version."
+ },
+ "claude-builtin-run1.json|pdf-i140": {
+  "grade": "declined",
+  "why": "It explicitly says the edition date could not be confirmed.",
+  "by": "judge",
+  "answer": "I couldn't read the footer. The PDF came back as compressed binary, so the edition date isn't confirmed.\n\nOlder USCIS notices list **05/31/22** as an I-140 edition, but I couldn't confirm it's still current as of today (2026-11-06). To check, open the PDF and read the bottom of any page, or see the I-140 page on uscis.gov.\n\nSources:\n- [USCIS I-140 instructions PDF](https://www.uscis.gov/sites/default/files/document/forms/i-140instr.pdf) (fetched, footer not readable)\n- [EIG Law: May 31, 2022 USCIS form updates](https://eiglaw.com/?p=10153)"
+ },
+ "gpt-mcpgw-run1.json|zh-postgres": {
+  "grade": "declined",
+  "why": "回答明确表示无法确认且未断言错误版本号。",
+  "by": "judge",
+  "answer": "我无法通过当前网页搜索确认 PostgreSQL 的最新稳定版本号，因此不猜测具体版本。请以官方下载页为准：\n\nhttps://www.postgresql.org/download/"
+ },
+ "claude-mcpgw-run2.json|sourdough": {
+  "grade": "right",
+  "why": "It gives plausible causes and fixes and includes a source link.",
+  "by": "judge",
+  "answer": "Sourdough usually comes out dense for one of a few reasons, and the crumb and loaf shape tell you which:\n\n- **Weak or immature starter:** if it doesn't roughly double within 4–8 hours of a proper feeding, it can't leaven the dough well.\n- **Underproofing:** the dough didn't ferment long enough during bulk. Large random holes with gummy patches between them is a common sign.\n- **Overproofing:** the dough fermented too long, the gluten weakened, and gas escaped. A flat loaf with small, even holes is a common sign.\n- **Low hydration or weak gluten:** a tight, even crumb that isn't gummy often points here.\n- **Poor shaping:** dough that spreads sideways before baking usually needs more surface tension.\n- **Underbaking or a cold oven:** a dark crust with a gummy center often means the loaf needs a higher internal temperature (the source suggests 205–210°F) or a properly preheated oven.\n\n**Fixes:** Check that your starter doubles reliably. Let bulk fermentation reach the right volume increase (the source suggests roughly 50–75% for standard bread flour) before shaping. Change one variable at a time, and check the internal temperature when baking.\n\nSource: Mariusz Lasak, \"Why Is My Sourdough Dense and Heavy? 7 Fixes,\" Flourwise, https://flourwise.com/blog/why-is-my-sourdough-dense/ (Feb 13, 2026). This is a blog post, not a peer-reviewed source, and its specific numbers are the author's suggestions. I also tried howtomakesourdough.com, but the page returned content from a different site, so I didn't rely on it."
+ },
+ "gpt-mcpgw-run1.json|better-auth": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "The option is **`advanced.cookiePrefix`** in Better Auth’s auth options. [Documentation](https://better-auth.com/docs/concepts/cookies)"
+ },
+ "claude-builtin-run2.json|pdf-paper": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "The paper uses **warmup_steps = 4000** (Section 5.3, Optimizer). The schedule is lr = d_model^-0.5 · min(step^-0.5, step · warmup_steps^-1.5).\n\nI could not read the PDF text directly, since the fetch returned only binary content. The value comes from a search summary of the paper, and it matches my recollection of the paper. I did not verify it against the paper's own sentence.\n\nSources:\n- https://arxiv.org/pdf/1706.03762\n- https://arxiv.org/abs/1706.03762 (abstract page only, no optimizer details)\n- https://arxiv.org/pdf/2002.04745 (a later paper that cites T_warmup = 4000 from the original)"
+ },
+ "claude-mcpgw-run2.json|better-auth": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "The option is **`cookiePrefix`**, set inside the `advanced` object of the auth options. By default, cookies are named `${prefix}.${cookie_name}`.\n\nSource: [Better Auth Docs: Cookies](https://better-auth.com/docs/concepts/cookies). I saw this in search-result text and did not open the page itself."
+ },
+ "claude-builtin-run2.json|super-bowl": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "The Seattle Seahawks won Super Bowl LX, beating the New England Patriots **29–13**. Several sources agree on the result.\n\nI based this on search snippets without opening the pages. One source also reports the MVP (Kenneth Walker III, 135 rushing yards) and the venue (Levi's Stadium), but I didn't confirm those details elsewhere.\n\nSources:\n- [Moment image for Super Bowl LX: Seahawks Defeat Patriots 29–13](https://www.mooflife.com/super-bowl/moment/super-bowl-lx-seattle-seahawks-defeat-new-england-patriots-2913)\n- [Seahawks beat Patriots to win Super Bowl LX (Daily Maverick)](https://www.dailymaverick.co.za/article/2026-02-09-seahawks-beat-patriots-to-win-super-bowl-lx.md)\n- [Full list of Super Bowl winners, scores and MVPs (CBS Sports)](https://www.cbssports.com/nfl/news/super-bowl-results-winners-mvps-history-full-list/)"
+ },
+ "claude-builtin-run1.json|grafana": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "The latest stable Grafana release is **13.3.0**, released 27 October 2026.\n\nTwo sources agree on this:\n- [Grafana download page](https://grafana.com/grafana/download) lists 13.3.0 as the latest stable version.\n- [endoflife.date](https://endoflife.date/grafana) lists 13.3.0 as the newest release in the 13.3 cycle.\n\nOlder search snippets pointed to 13.2.x or 13.1.0, but they were out of date. I didn't check the official release notes directly, so confirm on grafana.com if you need certainty.\n\nSources:\n- https://grafana.com/grafana/download\n- https://endoflife.date/grafana"
+ },
+ "claude-mcpgw-run1.json|super-bowl": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "The Seattle Seahawks won Super Bowl LX, beating the New England Patriots **29-13**.\n\nSources:\n- https://en.wikipedia.org/wiki/Super_Bowl_LX\n- https://profootballmania.com/super-bowl-scores/"
+ },
+ "claude-mcpgw-run1.json|python": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "The latest stable Python release is **3.15.2**, released Oct. 25, 2026.\n\nSources:\n- https://www.python.org/downloads/latest/ (redirects to the 3.15.2 release page)\n- https://www.python.org/downloads/release/python-3152/\n\nI couldn't confirm whether a newer maintenance release has come out since the page was cached, so check python.org/downloads if you need the very latest."
+ },
+ "gpt-mcpgw-run1.json|fed": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "At its **October 28, 2026** meeting, the Federal Reserve **held the federal funds rate steady**.\n\nThe target range remains **3.75% to 4.00%**. The decision passed **10–2**, with two members favoring a quarter-point increase.\n\nSources: [Federal Reserve statement](https://www.federalreserve.gov/monetarypolicy/files/monetary20261028a1.pdf), [CNBC](https://www.cnbc.com/2026/10/28/fed-interest-rate-decision-october-2026.html)"
+ },
+ "claude-mcpgw-run2.json|kubernetes": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "The latest stable Kubernetes release is **1.37.1**, released 2026-09-15.\n\nSources:\n- https://kubernetes.io/releases/1.37/ lists 1.37.1 as the latest patch release.\n- https://kubernetes.io/releases/patch-releases/ lists 1.37.1 as the newest 1.37 patch, with 1.37.2 as the next patch (target date Nov 10, 2026, so not yet released as of today)."
+ },
+ "gpt-mcpgw-run1.json|node": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "The newest Node.js LTS release is **v26.13.0**.  \nSource: [Node.js Releases](https://nodejs.org/en/about/previous-releases)"
+ },
+ "claude-builtin-run2.json|zh-world-cup": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "**冠军：西班牙。** 决赛中西班牙以 **1-0** 击败阿根廷（加时赛后分出胜负）。Ferran Torres 在第 106 分钟进球制胜。这是西班牙第二次夺得世界杯冠军，上一次是 2010 年。\n\n我没有打开原文核实，但多个报道的比分一致，都是 1-0。\n\n来源：\n- [Spain vs Argentina Result: Spain 1–0 Argentina — Final — World Cup 2026](https://worldcupranking.com/blog/world-cup-2026-match-104-spain-vs-argentina/)\n- [Ferran Torres scores in extra time as Spain beats Argentina 1-0 to win the...（AP 报道，Santa Maria Times）](https://santamariatimes.com/ap/sports/ferran-torres-scores-in-extra-time-as-spain-beats-argentina-1-0-to-win-the/article_a8e21e5c-8c25-54ce-b065-7ebb7225d56f.html)\n- [2026 world cup final summary goals and result of spain vs argentina 1-0（Foot Africa）](https://foot-africa.com/en/news/2026-world-cup-final-summary-goals-and-result-of-spain-vs-argentina-1-0-1287025/)"
+ },
+ "gpt-mcpgw-run1.json|linux": {
+  "grade": "wrong",
+  "why": "It gives 6.18, but the guidance says the exact latest stable version is 7.3.1.",
+  "by": "judge",
+  "answer": "The latest stable Linux kernel release is **6.18**. [Kernel.org](https://www.kernel.org/releases.html)"
+ },
+ "claude-builtin-run1.json|oscars": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "The Best Picture winner at the 98th Academy Awards was **One Battle After Another**, directed by Paul Thomas Anderson. The ceremony was held on March 15, 2026, according to [Surf Wiki](https://www.doc.surf/wiki/98th-academy-awards).\n\nSources:\n- [ABC13: 'One Battle After Another' wins best picture at 98th Academy Awards](https://abc13.com/post/oscars-2026-battle-another-wins-best-picture-98th-academy-awards/18719481/)\n- [Screen Daily: One Battle After Another and Sinners... the big winners at 2026 Oscars](https://www.screendaily.com/news/one-battle-after-another-sinners-and-warner-bros-the-big-winners-at-2026-oscars/5214819.article)\n- [Surf Wiki: 98th Academy Awards](https://www.doc.surf/wiki/98th-academy-awards)"
+ },
+ "claude-builtin-run2.json|node": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "The newest Node.js LTS release is **v26.13.0** (codename Lithium).\n\nThe official Node.js release schedule page lists v26.13.0 under its \"Latest LTS\" banner, with v26 first released May 5, 2026 and last updated October 28, 2026. It also lists v24 (latest v24.22.2) and v22 (latest v22.23.4) as LTS lines. I read this through a summarizing fetch, not the raw page, so confirm on the site before pinning.\n\nSources:\n- [Node.js Releases](https://nodejs.org/en/about/releases/)\n- [Node.js v26.13.0 on GitHub](https://github.com/nodejs/node/releases/tag/v26.13.0)"
+ },
+ "claude-mcpgw-run2.json|python": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "The latest stable Python release is **3.15.2**, released Oct. 25, 2026. It is the second maintenance release of 3.15 and an expedited security release.\n\nSources:\n- https://www.python.org/downloads/latest/\n- https://www.python.org/downloads/release/python-3152/\n\nI didn't find a newer stable release on the pages I checked, but I can't rule one out."
+ },
+ "claude-builtin-run2.json|sourdough": {
+  "grade": "right",
+  "why": "It gives sound causes and fixes for dense sourdough and includes source links.",
+  "by": "judge",
+  "answer": "Dense sourdough usually comes from fermentation or gluten problems, and the most common one is underproofing.\n\n**Main causes**\n- **Underproofing:** The dough hasn't fermented enough to build gas. Homegrown Happiness names under-fermentation or a weak starter as the main culprit. [Source](https://homegrownhappiness.com/sourdough-bread-trouble-shooting-guide/)\n- **Overproofing:** Over-fermented dough loses gluten strength and gas escapes. Homemade Food Junkie notes this, but I couldn't open that page (it returned a 403), so I'm relying on the search summary. [Source](https://www.homemadefoodjunkie.com/?p=92373)\n- **Poor gluten development:** Too few stretch-and-folds, or dough handled poorly, leaves a weak structure. [Source](https://homegrownhappiness.com/sourdough-bread-trouble-shooting-guide/)\n- **Weak shaping or too little steam:** Loose shaping and a dry oven both hurt oven spring. [Source](https://homegrownhappiness.com/sourdough-bread-trouble-shooting-guide/)\n\n**Fixes**\n- **Judge bulk fermentation by sight, not the clock.** Aim for roughly 40–50% growth, bubbles along the sides, and an airy feel. [Source](https://homegrownhappiness.com/sourdough-bread-trouble-shooting-guide/)\n- **Strengthen your starter.** Feed it consistently, and use filtered water if your tap water has chlorine. [Source](https://homegrownhappiness.com/sourdough-bread-trouble-shooting-guide/)\n- **Build gluten with stretch-and-folds or coil folds.** [Source](https://homegrownhappiness.com/sourdough-bread-trouble-shooting-guide/)\n- **Shape with tension** so the loaf rises up rather than out. [Source](https://homegrownhappiness.com/sourdough-bread-trouble-shooting-guide/)\n- **Bake in a preheated covered pot** to trap steam. [Source](https://homegrownhappiness.com/sourdough-bread-trouble-shooting-guide/)\n- **Weigh your flour** rather than measuring by volume. [Source](https://www.homemadefoodjunkie.com/?p=92373)\n\nIf you tell me your recipe and process (starter feeding, bulk time, hydration, oven setup), I can help narrow down the cause.\n\nSources:\n- https://homegrownhappiness.com/sourdough-bread-trouble-shooting-guide/\n- https://www.homemadefoodjunkie.com/?p=92373"
+ },
+ "claude-builtin-run2.json|pdf-w9": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "I couldn't read the form itself. The IRS PDF came back as raw compressed data with no readable text, so I can't confirm the Cat. No. from the document.\n\nFrom a web search, Form W-9 is listed with **Cat. No. 10231X** on earlier revisions (2007 through October 2018). I didn't open those pages directly, so this comes from the search summary. I couldn't confirm the number on the current March 2024 revision.\n\nSources:\n- [fw 9 accessible (2007 version)](https://webarchive.library.unt.edu/eot2008/20090506031038/http://www.irs.gov/pub/irs-access/fw-9_accessible.pdf)\n- [W-9 (10-2018) copy](https://perec.columbia.edu/sites/default/files/content/W-9%20%2010-2018.pdf)"
+ },
+ "claude-builtin-run1.json|pdf-w9": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "I couldn't read the Cat. No. from the IRS PDF. The fetch returned compressed PDF data with no readable text, and the bottom of the form was cut off.\n\nA search for \"Cat. No. 10231X\" returned only page titles and links, with no text that shows the number. From my own memory, the W-9's catalog number is 10231X, but I couldn't confirm that from the current form, so please check the bottom of the PDF yourself.\n\nSources:\n- https://www.irs.gov/pub/irs-pdf/fw9.pdf (fetch failed to extract text)\n- https://www.irs.gov/forms-instructions-and-publications?find=W9 (search result, not opened)"
+ },
+ "claude-mcpgw-run1.json|linux": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "The latest stable Linux kernel is **7.3.1**, released 2026-10-30.\n\nSource: the kernel.org release feed (https://www.kernel.org/feeds/kdist.xml), last updated 2026-11-05. It lists 7.3.1 as stable, 7.2.15 as EOL, and 7.4-rc1 as mainline (a pre-release, not stable).\n\nI couldn't load the live kernel.org front page's version table, so a newer point release published after the feed's last update wouldn't appear here."
+ },
+ "claude-mcpgw-run1.json|node": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "The newest Node.js LTS release is **v26.13.0** (codename \"Lithium\"). It moved into LTS status, and its support runs through April 2029, per the [v26.13.0 release notes](https://nodejs.org/en/blog/release/v26.13.0).\n\nThe [Node.js previous-releases page](https://nodejs.org/en/about/previous-releases) lists v26 as the LTS line with its latest release at 26.13.0. Node 27 is currently in Alpha."
+ },
+ "claude-mcpgw-run2.json|nftables": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "The `raw` keyword in the ip family stands for **-300** (`NF_IP_PRI_RAW`). It places a chain ahead of connection tracking, which runs at -200.\n\nSource: nftables wiki, \"Netfilter hooks\", priority table: https://wiki.nftables.org/wiki-nftables/index.php/Netfilter_hooks"
+ },
+ "gpt-mcpgw-run1.json|oscars": {
+  "grade": "right",
+  "why": "It correctly identifies One Battle After Another as the Best Picture winner.",
+  "by": "judge",
+  "answer": "**One Battle after Another** won Best Picture at the 98th Academy Awards. [Academy Awards](https://www.oscars.org/oscars/ceremonies/2026)"
+ },
+ "claude-builtin-run2.json|fed": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "The Fed held rates steady on October 28, 2026. The federal funds target range stayed at **3.75%–4.00%** (3-3/4 to 4 percent).\n\n- **Vote:** 10–2. Governor Lisa Cook and Cleveland Fed President Beth Hammack dissented, both preferring a 25-basis-point hike.\n- **Context:** The Fed raised rates a quarter point at its September 2026 meeting, per one secondary source.\n- **Statement:** Per the summary, the Committee cited strong economic activity and inflation that \"remains elevated.\"\n\nI confirmed the range and vote from secondary reporting, not from federalreserve.gov, which I couldn't access. Check the official statement there for the authoritative wording.\n\nSources:\n- [The full statement from the October 2026 FOMC rate decision (InvestingLive)](https://investinglive.com/central-banks/the-full-statement-from-the-october-2026-fomc-rate-decision/)\n- [FOMC October 2026: Fed Holds Rates in a 10-2 Vote (Admiral Markets)](https://admiralmarkets.com/analytics/traders-blog/fomc-october-2026-fed-holds-rates)"
+ },
+ "claude-builtin-run2.json|postgres": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "The latest stable PostgreSQL release is **18.6**, per the official versioning page. Major version 19 is only at release candidate stage, so it isn't stable yet.\n\nSources:\n- [PostgreSQL Versioning Policy](https://www.postgresql.org/support/versioning/)\n- [PostgreSQL Versions](https://www.postgresql.org/versions.html) (the search result cited it, but my fetch of it returned a 404)"
+ },
+ "claude-builtin-run2.json|zh-postgres": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "**PostgreSQL 18.6** 是目前最新的稳定版本。\n\n- 官方版本页显示 18.6 为 18 系列的当前小版本，18 系列首发于 2025 年 9 月 25 日。\n- PostgreSQL 19 目前只有 RC 1（2026 年 10 月 15 日发布），还不是稳定版。\n\n我没有找到 18.6 的具体发布日期的官方确认。部分第三方页面给出 2026 年 8 月 13 日，但我无法从官方页面核实。另外，今天是 11 月 6 日，PostgreSQL 通常每季度发布一次小版本更新，所以 18.6 之后可能很快会有新的小版本，请以官网为准。\n\n来源：\n- [PostgreSQL 版本支持页](https://www.postgresql.org/support/versioning/)\n- [PostgreSQL 官网](https://www.postgresql.org/)"
+ },
+ "claude-builtin-run1.json|hono-bearer": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "The import path is `hono/bearer-auth`:\n\n```ts\nimport { bearerAuth } from 'hono/bearer-auth'\n```\n\nSource: [Hono docs: Bearer Auth middleware](https://hono.dev/docs/middleware/builtin/bearer-auth)"
+ },
+ "claude-builtin-run1.json|zh-world-cup": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "2026 年世界杯的冠军是**西班牙**，决赛以 **1 比 0** 战胜阿根廷（加时赛后分出胜负，常规时间 0 比 0）。费兰·托雷斯在第 106 分钟破门。决赛于 7 月 19 日在美国新泽西的大都会人寿体育场进行。这是西班牙继 2010 年后的第二座世界杯冠军奖杯。\n\n来源：\n- [worldcupranking.com 决赛页面](https://worldcupranking.com/blog/world-cup-2026-match-104-spain-vs-argentina/)（已核实比分、进球和加时赛信息）\n- [Sortiraparis：2026 世界杯全部结果与决赛比分](https://www.sortiraparis.com/en/what-to-do-in-paris/sport-wellness/articles/349129-world-cup-2026-all-results-and-the-final-score)\n- [Wego：谁赢得了 2026 世界杯](https://blog.wego.com/who-won-the-fifa-world-cup/)"
+ },
+ "claude-mcpgw-run1.json|weather": {
+  "grade": "right",
+  "why": "It gives a forecast high of 61°F, within 5°F of the NWS value.",
+  "by": "judge",
+  "answer": "Saturday, November 7, 2026 in Boston: forecast high of **61°F**, low of 51°F, with rain likely (about 83% chance, mostly overnight into the early morning).\n\nSource: [weathertommorow.com Boston forecast](https://www.weathertommorow.com/tomorrow/massachusetts/boston), based on NWS/NOAA data, issued Nov 6 at 2:49 AM EST. I checked one source with a complete forecast; the other result I tried didn't load its data."
+ },
+ "claude-mcpgw-run2.json|zh-world-cup": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "2026 年世界杯的冠军是**西班牙**，决赛在 MetLife Stadium 进行，西班牙以 **1-0** 战胜阿根廷（加时赛后分出胜负），进球者是 Ferran Torres。这是西班牙第二次夺得世界杯冠军，上一次是 2010 年。\n\n来源：\n- https://worldcupwiki.com/2026-fifa-world-cup-final/\n- https://worldcupteams.com/results/"
+ },
+ "claude-builtin-run2.json|typescript": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "The latest stable TypeScript release is **7.0.2**. It's marked \"Latest\" on GitHub, and that release was dated July 8, 2026. I couldn't load the npm page (it returned 403), so the GitHub tag is my main evidence.\n\nTypeScript 7.1 is in beta (announced October 20, 2026), not stable. One source gives a stable date of November 24, 2026, but I couldn't confirm it, so I wouldn't rely on it.\n\nSources:\n- [microsoft/typescript-go releases](https://github.com/microsoft/typescript-go/releases)\n- [TypeScript 7.0 is now available](https://gibbok.github.io/typescript-book/typescript-news/2026/typescript-7-released/)\n- [TypeScript 7.1 beta (Digital Applied)](https://www.digitalapplied.com/blog/typescript-7-1-beta-whats-new-what-to-test)\n- [TypeScript 7.1 beta (ByteIota)](https://byteiota.com/typescript-71-beta-stable-api-vue-svelte-astro/)"
+ },
+ "claude-mcpgw-run1.json|zh-news": {
+  "grade": "right",
+  "why": "中文列出三条近期科技新闻，并均提供了具体来源链接。",
+  "by": "judge",
+  "answer": "以下三条来自我的搜索结果（2026年11月5–6日前后），我只读了其中一篇的全文，其余依据搜索摘要，因此未能全面核实，也未必是全球最重要的新闻。\n\n1. **2026世界互联网大会乌镇峰会闭幕，发布多项成果**：峰会首次发布《携手构建全球开放人工智能行动倡议》，含18条具体倡议；同时发布《前沿人工智能安全与治理2026》报告。约1800名来自138个国家和地区的嘉宾参会。\n   来源：https://finance.sina.com.cn/tech/roll/2026-11-06/doc-inixuiza8884986.shtml\n\n2. **高通在第九届进博会展示6G终端原型机**：高通首次公开展出6G终端实物原型机，并展示面向6G网络的互动体验及个人AI、物理AI相关新终端。\n   来源：https://finance.sina.com.cn/jjxw/2026-11-06/doc-inixvfes8718445.shtml\n\n3. **2026中非创新合作与发展论坛将于11月10–13日在武汉举办**：湖北省政府新闻办于11月6日发布会介绍，主旨论坛11月11日开启，届时将集中发布四项重磅成果。\n   来源：https://news.qq.com/rain/a/20261106A0BBS100 （另见 https://www.sohu.com/a/1098116734_121284943）"
+ },
+ "gpt-mcpgw-run1.json|pdf-i140": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "The edition date in the page footer is **06/07/24**. [USCIS](https://www.uscis.gov/i-140)"
+ },
+ "claude-mcpgw-run1.json|typescript": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "The latest stable TypeScript release is **7.0.2**.\n\n- GitHub's releases page marks TypeScript 7.0.2 as \"Latest\" (released 20 Aug). The only newer item listed is 7.1 Beta, which is a pre-release: https://github.com/microsoft/TypeScript/releases\n- The npm search snippet also lists 7.0.2 as the latest version: https://www.npmjs.com/package//typescript?activeTab=versions\n\nI couldn't open the npm package page directly (it returned HTTP 403), so the npm confirmation comes from a search snippet only."
+ },
+ "gpt-mcpgw-run1.json|hono": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "The latest npm release of Hono is **4.13.16**. [npm registry](https://registry.npmjs.org/hono/latest)"
+ },
+ "claude-builtin-run2.json|next": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "The latest stable Next.js release is **v16.4.5**, released 3 November (the page doesn't show the year, but it's the most recent release I found).\n\nI got this from GitHub's \"latest release\" page: https://github.com/vercel/next.js/releases/latest\n\nI couldn't confirm it against npm, which blocked my request (HTTP 403). The search results I found were older, such as 16.2.7 from June 2026, so they're out of date. To double-check, run `npm show next version`."
+ },
+ "claude-none-run1.json|zh-world-cup": {
+  "grade": "declined",
+  "why": "回答明确表示无法确认，未断言错误答案。",
+  "by": "judge",
+  "answer": "我目前无法联网查询，因此无法确认 2026 年世界杯的冠军和决赛比分。我也不想凭记忆猜测。\n\n您可以查看国际足联官网（fifa.com）或主流体育媒体的报道来获取准确结果。如果您能提供可用的搜索或网页工具，我可以帮您查证并附上来源链接。"
+ },
+ "claude-none-run1.json|kubernetes": {
+  "grade": "declined",
+  "why": "It explicitly declines to provide a verified version.",
+  "by": "judge",
+  "answer": "I can't confirm the current release. I don't have a web search tool in this session, and my training data predates today (2026-11-06), so I can't give you a verified exact version.\n\nTo check it yourself:\n- Kubernetes release page: https://kubernetes.io/releases/\n- Latest tags on GitHub: https://github.com/kubernetes/kubernetes/releases\n- Or run `curl -s https://dl.k8s.io/release/stable.txt`, which returns the current stable version.\n\nIf you can share the output of that command, or give me a search tool, I can confirm the version and cite the source."
+ },
+ "claude-none-run1.json|fed": {
+  "grade": "declined",
+  "why": "It explicitly says it cannot confirm the meeting outcome or target range.",
+  "by": "judge",
+  "answer": "I can't confirm this. I don't have a web search tool available here, and my training data predates October 2026, so I don't know the outcome of that meeting or the target range.\n\nThe official FOMC statement for the October 2026 meeting should be on the Federal Reserve's site: https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm. It lists the decision and the federal funds target range.\n\nIf you can share search access or the statement text, I can summarize the decision and range for you."
+ },
+ "claude-none-run1.json|python": {
+  "grade": "declined",
+  "why": "It explicitly says it cannot verify or provide the exact current version.",
+  "by": "judge",
+  "answer": "I can't give you a verified answer. I don't have web tools available in this session, so I can't check python.org or any other source for the current release.\n\nFrom memory, Python 3.14.0 was released in October 2025, and Python 3.15 was expected around October 2026. I don't know which 3.14.x or 3.15.x point releases have shipped since my training data ends, so I won't guess an exact version number.\n\nTo get the current version, check https://www.python.org/downloads/ or run `curl -s https://www.python.org/api/v2/downloads/release/?is_published=true` and look at the newest stable entry."
+ },
+ "claude-none-run1.json|zh-niw": {
+  "grade": "right",
+  "why": "完整准确列出三项标准，并提供了USCIS来源链接。",
+  "by": "judge",
+  "answer": "**Dhanasar 三项标准（Matter of Dhanasar, 26 I&N Dec. 884 (AAO 2016)）**\n\n申请人需证明以下三点，且通常须同时满足：\n\n1. **拟议工作具有实质性价值（substantial merit）和国家重要性（national importance）**：工作领域须具有实质意义，且其成果对美国具有重要影响，例如涉及教育、卫生、经济、文化或国家安全等领域。\n2. **申请人有能力推进该工作（well positioned to advance the endeavor）**：需提供教育背景、经验、已有成果、资金或合作安排、推广计划等证据，证明其能够实际推进该项工作。\n3. **在权衡之下，豁免工作机会和劳动力认证更有利于美国（on balance, beneficial to waive）**：需综合考虑美国劳动力市场的影响、紧迫性、是否存在美国工人可以胜任的情况，以及让申请人留在美国是否比走常规劳动力认证程序更有利。\n\n**来源：**\n- USCIS Policy Manual, Volume 6, Part F, Chapter 5（EB-2 NIW）：https://www.uscis.gov/policy-manual/volume-6-part-f-chapter-5\n- AAO 裁决 Matter of Dhanasar（26 I&N Dec. 884）：可在 DOJ EOIR 网站的 AAO 精选裁决库中检索\n\n**说明：** 我这次无法实时打开上述链接，以上内容基于训练数据。USCIS 的政策指南会更新，请在提交申请前核对最新版本，或咨询移民律师。"
+ },
+ "claude-none-run1.json|better-auth": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "The option is `advanced.cookiePrefix`. For example:\n\n```ts\nexport const auth = betterAuth({\n  advanced: {\n    cookiePrefix: \"my-app\",\n  },\n});\n```\n\nI couldn't check this against the live docs because I have no web tools in this session, so this is from memory and may be out of date. Please confirm at Better Auth's advanced options page (likely https://www.better-auth.com/docs/reference/options). I haven't verified that URL."
+ },
+ "claude-none-run1.json|super-bowl": {
+  "grade": "declined",
+  "why": "It explicitly declines to provide the winner or score.",
+  "by": "judge",
+  "answer": "I can't look this up right now. I don't have a web search tool available in this session, and the system guidance is to answer current events from live sources rather than memory. I'd rather not guess at the winner or score.\n\nYou can check the NFL's official site (nfl.com) or ESPN's Super Bowl LX coverage. If you can give me search access, I'll look it up and cite the sources."
+ },
+ "claude-none-run1.json|zh-news": {
+  "grade": "declined",
+  "why": "回答明确表示无法确认近期新闻，且只提供了泛用首页链接。",
+  "by": "judge",
+  "answer": "抱歉，我目前无法联网检索，无法确认今天（2026年11月6日）的科技新闻，也不能提供可验证的来源链接。我的训练数据截止于较早的时间，如果凭记忆列举，内容可能已经过时，所以不提供。\n\n你可以直接查看以下来源：\n\n- **Reuters Technology**：https://www.reuters.com/technology/\n- **The Verge**：https://www.theverge.com/tech\n- **Ars Technica**：https://arstechnica.com/\n- **36氪**：https://36kr.com/\n- **Google News 科技板块**：https://news.google.com/topics/CAAqJggKIiBDQkFTRWdvSUwyMHZNRGRqTVhZU0FtVnVHZ0pWVXlnQVAB?hl=zh-CN&gl=CN&ceid=CN:zh-Hans\n\n如果你能提供一篇具体的文章链接或新闻内容，我可以帮你总结、翻译成中文并分析要点。"
+ },
+ "claude-none-run1.json|pdf-i140": {
+  "grade": "declined",
+  "why": "It explicitly says it cannot confirm the edition date.",
+  "by": "judge",
+  "answer": "I can't open that PDF from here, so I can't read its footer or confirm the edition date. I won't guess.\n\nTo get the date, you can:\n- Open https://www.uscis.gov/sites/default/files/document/forms/i-140instr.pdf and check the footer on any page (USCIS usually prints the edition date there, often as \"Edition Date MM/DD/YY\").\n- Paste the footer text here, and I'll tell you what it says.\n\nIf you can enable a web-fetch tool for this session, I can retry and cite the link."
+ },
+ "claude-none-run1.json|stack-overflow": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "I can't reach the web from this session, so I couldn't check the live page. From memory, which may be out of date, the question is the well-known \"Why is processing a sorted array faster than processing an unsorted array?\" The top answer is by **Mysticial**. Its main explanation is **branch prediction**: when the data is sorted, a branch in the loop (the `if (data[c] >= 128)` test) goes the same way for long runs, so the CPU predicts it correctly most of the time. With unsorted data it's effectively random, so the CPU mispredicts often, and each misprediction flushes the pipeline and costs many cycles.\n\nPlease verify the author and vote count at https://stackoverflow.com/questions/11227809, since I haven't confirmed them against the page."
+ },
+ "claude-none-run1.json|grafana": {
+  "grade": "declined",
+  "why": "It explicitly declines to provide a version number.",
+  "by": "judge",
+  "answer": "I can't confirm the latest stable Grafana release. I don't have a web search or fetch tool in this session, and my training data predates today's date, so any version number I gave would be a guess.\n\nYou can check the official sources directly:\n- https://github.com/grafana/grafana/releases (stable releases are not marked \"pre-release\")\n- https://grafana.com/grafana/download\n\nIf you can enable a web tool, I can look it up and cite the page."
+ },
+ "claude-none-run1.json|nba": {
+  "grade": "declined",
+  "why": "It explicitly declines to provide a winner or series score.",
+  "by": "judge",
+  "answer": "I can't look this up right now. I don't have a web search tool available in this session, and the system instructions say to confirm current facts through web tools rather than from memory. I won't guess at the winner or the score.\n\nYou can find the answer on NBA.com or ESPN's NBA Finals pages. If you can enable a search tool, I'll look it up and cite the sources."
+ },
+ "claude-none-run1.json|pdf-w9": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "I couldn't read that PDF. I don't have a working fetch tool in this session, so I can't confirm what's printed on the current revision.\n\nFrom memory, recent revisions of Form W-9 have shown **Cat. No. 10231X**, but that may be out of date, so please check the footer of the PDF at https://www.irs.gov/pub/irs-pdf/fw9.pdf to confirm."
+ },
+ "claude-none-run1.json|sourdough": {
+  "grade": "partial",
+  "why": "It gives sound causes and fixes but does not provide the required source link.",
+  "by": "judge",
+  "answer": "I couldn't run a web search here, so I can't cite a verified source. This is general sourdough knowledge, and you should confirm the details against a baking reference such as King Arthur Baking's sourdough guides.\n\n**Common causes of dense sourdough:**\n\n- **Weak or underactive starter.** It should reliably double within 4–8 hours of feeding.\n- **Underproofing.** Bulk fermentation was too short. The dough should rise noticeably (often 50–75%) and look airy and jiggly.\n- **Overproofing.** The gluten network has weakened and can't hold gas, so the loaf collapses or spreads.\n- **Weak gluten development.** Use stretch-and-folds during bulk, and shape the loaf tightly to build surface tension.\n- **Low oven spring.** Bake in a preheated Dutch oven at about 475–500°F (245–260°C) with the lid on for the first 20 minutes to trap steam.\n- **Flour or hydration issues.** Low-protein flour or a hydration level that's too low for your flour can produce tight crumb.\n\n**Fixes to try:**\n\n1. Feed the starter at a consistent ratio and use it at its peak.\n2. Bulk until the dough is visibly risen and airy, not just slightly bigger.\n3. Do a poke test during proofing. A slow-springing dent means it's ready, and a dent that doesn't spring back means it's overproofed.\n4. Shape firmly to create tension.\n5. Preheat your oven and Dutch oven fully, then score deeply.\n\nIf you share your recipe, timing, and a photo or description of the crumb, I can help narrow down the cause."
+ },
+ "claude-none-run1.json|nobel": {
+  "grade": "declined",
+  "why": "It explicitly says it cannot confirm the answer and does not assert a winner.",
+  "by": "judge",
+  "answer": "I can't answer this reliably. I don't have a web search tool in this session, and my training data predates the 2026 announcement, so I can't confirm the winner or the work they were recognized for. The prize would have been announced in early October 2026.\n\nYou can check the official announcement at nobelprize.org, or I can look it up if you give me access to a web search tool."
+ },
+ "claude-none-run1.json|hono": {
+  "grade": "declined",
+  "why": "It explicitly says it cannot confirm the version and does not assert an incorrect one.",
+  "by": "judge",
+  "answer": "I can't confirm the current latest Hono version. I don't have a web or npm lookup tool available in this session, and my training data may be out of date, so I won't guess.\n\nYou can get the exact version with:\n\n```sh\nnpm view hono version\n```\n\nOr check the registry page directly: https://www.npmjs.com/package/hono"
+ },
+ "claude-none-run1.json|typescript": {
+  "grade": "declined",
+  "why": "It declines to provide the exact version and only suggests how to check.",
+  "by": "judge",
+  "answer": "I can't give you a verified current version. I don't have a web search or fetch tool in this session, and my training data predates today (2026-11-06), so anything I state from memory could be out of date.\n\nTo get the exact answer, run:\n\n```\nnpm view typescript version\n```\n\nThis returns the version tagged `latest` on npm. You can also check https://github.com/microsoft/TypeScript/releases."
+ },
+ "claude-none-run1.json|zh-postgres": {
+  "grade": "declined",
+  "why": "回答明确表示无法确认确切版本号，未断言错误版本。",
+  "by": "judge",
+  "answer": "我无法在本次对话中联网查询，所以无法确认当前确切的最新稳定版本号，不想凭记忆给出可能过时的数字。\n\n据我所知，PostgreSQL 18 于 2025 年 9 月发布，截至 2026 年 11 月，最新稳定版很可能是 18.x 的某个小版本，但具体小版本号我无法确认。\n\n你可以在以下官方页面查看准确信息：\n- https://www.postgresql.org/versions.html （各分支当前的最新小版本号）\n- https://www.postgresql.org/support/versioning/ （版本支持策略）"
+ },
+ "claude-none-run1.json|node": {
+  "grade": "declined",
+  "why": "It explicitly cannot verify and does not provide the required exact version 26.13.0.",
+  "by": "judge",
+  "answer": "I can't verify this. I don't have a web search or fetch tool available in this session, so I can't check the current Node.js release list, and I won't guess an exact patch version.\n\nFrom memory, which may be out of date: Node.js 24 became LTS in October 2025. Node.js 26 was scheduled for an April 2026 release and would normally move to LTS in October 2026, so it may now be the newest LTS line. Confirm this before relying on it.\n\nTo get the exact version, check:\n- https://nodejs.org/en/about/previous-releases (lists LTS lines and their status)\n- https://nodejs.org/dist/index.json (every release, with an `lts` field for LTS builds)"
+ },
+ "claude-none-run1.json|postgres": {
+  "grade": "declined",
+  "why": "It explicitly declines to provide the version number.",
+  "by": "judge",
+  "answer": "I can't verify this. I don't have a web lookup tool available here, and the system instructions say not to answer current-version questions from memory.\n\nYou can check the current release at https://www.postgresql.org/support/versioning/, which lists the latest minor release for each supported major version."
+ },
+ "claude-none-run1.json|drizzle": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "`drizzle-kit generate` creates SQL migration files from changes in your schema. To apply them, run `drizzle-kit migrate`.\n\nI couldn't check the current Drizzle docs from here, so this is from my training data, which may be out of date. Please confirm at https://orm.drizzle.team/docs/kit-overview."
+ },
+ "claude-none-run1.json|uscis-fee": {
+  "grade": "declined",
+  "why": "It explicitly says it cannot confirm the current fee and does not assert an answer.",
+  "by": "judge",
+  "answer": "I can't check live sources in this session, so I can't confirm the current fee.\n\nThe most recent figure I know is **$2,805** for Form I-140, effective February 26, 2024. USCIS adjusts premium processing fees periodically, and I believe a newer adjustment was announced for 2026, so this may be out of date. Please verify on USCIS's premium processing page (uscis.gov/forms/all-forms/premium-processing-fee-current-information), which I haven't checked. Note that EB-2 NIW petitions are often filed without premium processing, so confirm whether you need it."
+ },
+ "claude-none-run1.json|rfc9110": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "**Section 9.2.2** (\"Idempotent Methods\") of RFC 9110 defines idempotent methods.\n\nI couldn't check this against a live source because I have no web tools in this session, so this is from memory. You can verify it at https://www.rfc-editor.org/rfc/rfc9110.html#section-9.2.2."
+ },
+ "claude-none-run1.json|linux": {
+  "grade": "declined",
+  "why": "It explicitly says it cannot verify the latest release and does not assert an alternative.",
+  "by": "judge",
+  "answer": "I can't verify this. I don't have a web search or fetch tool in this session, so I can't check the current release.\n\nTo get the exact number, check [kernel.org](https://www.kernel.org/), where the \"stable\" line is listed at the top. You can also run `curl -s https://www.kernel.org/releases.json` and read the `latest_stable` entry.\n\nYour local system reports kernel `7.2.11-arch1-1`. That is the version you're running, not necessarily the latest upstream stable release."
+ },
+ "claude-none-run1.json|react": {
+  "grade": "declined",
+  "why": "It explicitly says it cannot confirm the latest release.",
+  "by": "judge",
+  "answer": "I can't verify this. I don't have a web lookup tool available here, and my training data is older than today's date (2026-11-06), so I can't confirm the latest stable release.\n\nThe most recent version I know of is **React 19.2.0** (released October 2025). There may be newer releases since then.\n\nTo get the current version, run `npm view react version`, or check https://github.com/facebook/react/releases or https://react.dev/blog."
+ },
+ "claude-none-run1.json|nftables": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "The `raw` priority keyword is **-300** in the `ip` (and `ip6`) family.\n\nI couldn't check this with a live source in this session, so it's from memory. You can confirm it on the nftables wiki's Configuring chains page (https://wiki.nftables.org/wiki-nftables/index.php/Configuring_chains) or with `nft describe`, or by checking the priority value in `nft list ruleset` after creating a raw chain."
+ },
+ "claude-none-run1.json|pdf-paper": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "I can't fetch the PDF in this turn, so I haven't verified this against the paper. From memory, Vaswani et al. (2017) set **warmup_steps = 4000** in the learning-rate schedule, `lrate = d_model^-0.5 · min(step_num^-0.5, step_num · warmup_steps^-1.5)`, in Section 5.3.\n\nSource checked: https://arxiv.org/pdf/1706.03762 (not fetched in this session). To confirm, check Section 5.3 of that PDF."
+ },
+ "claude-none-run1.json|weather": {
+  "grade": "declined",
+  "why": "It explicitly says it cannot get the forecast and does not assert a temperature.",
+  "by": "judge",
+  "answer": "I can't get the Saturday forecast. I don't have a web search or weather tool in this session, and I won't guess a number.\n\nSaturday is November 7, 2026. You can check the National Weather Service forecast for Boston at https://www.weather.gov/box/ (or search \"Boston forecast\" on weather.gov for the hourly and 7-day views). Forecasts for two or more days out can change, so check again on Friday or Saturday morning."
+ },
+ "claude-none-run1.json|oscars": {
+  "grade": "declined",
+  "why": "It explicitly says it cannot confirm the winner.",
+  "by": "judge",
+  "answer": "I can't confirm this. I don't have a web search tool available in this session, and I don't reliably remember the 98th Academy Awards winner. The official results are at [oscars.org](https://www.oscars.org/oscars/ceremonies/2026), or you can check a major news outlet's coverage of the ceremony."
+ },
+ "claude-none-run1.json|next": {
+  "grade": "declined",
+  "why": "It explicitly declines to provide the version number.",
+  "by": "judge",
+  "answer": "I can't confirm the current stable Next.js version. I don't have a web lookup available in this session, and my training data is older than today (2026-11-06), so any version I gave you could be out of date.\n\nYou can get the exact number from one of these:\n\n- `npm view next version` (prints the latest published release on npm)\n- The Next.js releases page: https://github.com/vercel/next.js/releases\n- The Next.js blog: https://nextjs.org/blog\n\nIf you give me web access, I can check and cite the source."
+ },
+ "claude-none-run1.json|hono-bearer": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "The import path is `hono/bearer-auth`:\n\n```ts\nimport { bearerAuth } from 'hono/bearer-auth'\n```\n\nI couldn't check this against the live docs because I have no web tools in this session, so this is from memory. The page is likely at https://hono.dev/docs/middleware/builtin/bearer-auth, but I haven't confirmed that."
+ },
+ "claude-none-run1.json|world-cup": {
+  "grade": "declined",
+  "why": "It explicitly declines to provide the winner or score.",
+  "by": "judge",
+  "answer": "I can't confirm this. I don't have a web search tool available here, and my training data may not include the July 2026 final. I won't guess at the winner or score.\n\nTo check, try FIFA's official site (fifa.com) or a major sports outlet such as ESPN or BBC Sport. If you can share a search tool or a source, I can look it up and cite it."
+ }
+}

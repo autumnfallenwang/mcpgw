@@ -1,0 +1,1688 @@
+{
+ "summary": {
+  "label": "engines",
+  "date": "2026-11-06T14:55:42.860Z",
+  "searches": 31,
+  "on_topic_pct": 96,
+  "on_topic": "139/145",
+  "first_ok": "28/31",
+  "empty": 2,
+  "failed": 0,
+  "median_search_secs": 0.6,
+  "by_kind": {
+   "docs": "28/30",
+   "debug": "10/10",
+   "fresh": "19/20",
+   "news": "5/5",
+   "everyday": "20/20",
+   "facts": "15/15",
+   "chinese": "15/15",
+   "science": "2/5",
+   "it": "5/5",
+   "operators": "15/15",
+   "longkw": "5/5"
+  },
+  "engines": {
+   "duckduckgo": 100,
+   "yahoo": 130,
+   "duckduckgo news": 5,
+   "arxiv": 5,
+   "stackoverflow": 2,
+   "github": 3
+  },
+  "pages": 0,
+  "usable_pages": 0,
+  "median_fetch_secs": 0,
+  "median_link_share_pct": 0,
+  "not_usable": []
+ },
+ "searches": [
+  {
+   "kind": "docs",
+   "query": "kubernetes networkpolicy documentation",
+   "args": {},
+   "results": [
+    {
+     "url": "https://kubernetes.io/docs/concepts/services-networking/network-policies/",
+     "title": "Network Policies - Kubernetes",
+     "engines": [
+      "duckduckgo",
+      "yahoo"
+     ],
+     "on": true
+    },
+    {
+     "url": "https://kubernetes.io/docs/reference/kubernetes-api/networking/network-policy-v1/",
+     "title": "NetworkPolicy - Kubernetes",
+     "engines": [
+      "duckduckgo",
+      "yahoo"
+     ],
+     "on": true
+    },
+    {
+     "url": "https://networkpolicy.io/",
+     "title": "Network Policy Editor for Kubernetes",
+     "engines": [
+      "duckduckgo",
+      "yahoo"
+     ],
+     "on": true
+    },
+    {
+     "url": "https://kubernetes-docsy-staging.netlify.app/docs/concepts/services-networking/network-policies/",
+     "title": "Network Policies | Kubernetes",
+     "engines": [
+      "duckduckgo",
+      "yahoo"
+     ],
+     "on": true
+    },
+    {
+     "url": "https://kube-network-policies.sigs.k8s.io/docs/concepts/",
+     "title": "Concepts | Kubernetes Network Policies",
+     "engines": [
+      "duckduckgo",
+      "yahoo"
+     ],
+     "on": true
+    }
+   ],
+   "onTopic": 5,
+   "firstOk": true,
+   "error": null,
+   "cached": false,
+   "secs": 0.8
+  },
+  {
+   "kind": "docs",
+   "query": "hono web framework documentation",
+   "args": {},
+   "results": [
+    {
+     "url": "https://hono.dev/docs",
+     "title": "Hono - Web framework built on Web Standards",
+     "engines": [
+      "duckduckgo",
+      "yahoo"
+     ],
+     "on": true
+    },
+    {
+     "url": "https://hono.dev/",
+     "title": "Hono - Web framework built on Web Standards",
+     "engines": [
+      "duckduckgo",
+      "yahoo"
+     ],
+     "on": true
+    },
+    {
+     "url": "https://github.com/honojs/hono",
+     "title": "GitHub - honojs/hono: Web framework built on Web Standards",
+     "engines": [
+      "duckduckgo",
+      "yahoo"
+     ],
+     "on": true
+    },
+    {
+     "url": "https://hono.ubitools.com/",
+     "title": "Hono - Web framework built on Web Standards",
+     "engines": [
+      "duckduckgo",
+      "yahoo"
+     ],
+     "on": true
+    },
+    {
+     "url": "https://hono-ja.pages.dev/docs/",
+     "title": "Hono - Web 標準に基づいた Web フレームワーク",
+     "engines": [
+      "duckduckgo",
+      "yahoo"
+     ],
+     "on": true
+    }
+   ],
+   "onTopic": 5,
+   "firstOk": true,
+   "error": null,
+   "cached": false,
+   "secs": 0.5
+  },
+  {
+   "kind": "docs",
+   "query": "python asyncio taskgroup docs",
+   "args": {},
+   "results": [
+    {
+     "url": "https://docs.python.org/3.11/library/asyncio-task.html",
+     "title": "Coroutines and Tasks — Python 3.11.18 documentation",
+     "engines": [
+      "duckduckgo",
+      "yahoo"
+     ],
+     "on": true
+    },
+    {
+     "url": "https://docs.python.org/3/library/asyncio.html",
+     "title": "asyncio — Asynchronous I/O — Python 3.15.2 documentation",
+     "engines": [
+      "duckduckgo",
+      "yahoo"
+     ],
+     "on": false
+    },
+    {
+     "url": "https://superfastpython.com/asyncio-taskgroup/",
+     "title": "How to use asyncio.TaskGroup – SuperFastPython",
+     "engines": [
+      "duckduckgo",
+      "yahoo"
+     ],
+     "on": true
+    },
+    {
+     "url": "https://www.geeksforgeeks.org/python/python-taskgroups-with-asyncio/",
+     "title": "Python Taskgroups with asyncIO - GeeksforGeeks",
+     "engines": [
+      "duckduckgo",
+      "yahoo"
+     ],
+     "on": true
+    },
+    {
+     "url": "https://realpython.com/async-io-python/",
+     "title": "Python's asyncio: A Hands-On Walkthrough – Real Python",
+     "engines": [
+      "duckduckgo",
+      "yahoo"
+     ],
+     "on": false
+    }
+   ],
+   "onTopic": 3,
+   "firstOk": true,
+   "error": null,
+   "cached": false,
+   "secs": 0.6
+  },
+  {
+   "kind": "docs",
+   "query": "drizzle orm migrations guide",
+   "args": {},
+   "results": [
+    {
+     "url": "https://orm.drizzle.team/docs/migrations",
+     "title": "Drizzle ORM - Migrations",
+     "engines": [
+      "duckduckgo",
+      "yahoo"
+     ],
+     "on": true
+    },
+    {
+     "url": "https://orm.drizzle.team/docs/drizzle-kit-migrate",
+     "title": "Drizzle ORM - `migrate`",
+     "engines": [
+      "duckduckgo",
+      "yahoo"
+     ],
+     "on": true
+    },
+    {
+     "url": "https://joyalajohney.hashnode.dev/drizzleorm-migrations-guide",
+     "title": "DrizzleORM Migrations Guide - Joyal's Blog",
+     "engines": [
+      "duckduckgo",
+      "yahoo"
+     ],
+     "on": true
+    },
+    {
+     "url": "https://devencyclopedia.com/blog/drizzle-orm-migrations-drizzle-kit",
+     "title": "Drizzle ORM Migrations: A Practical drizzle-kit Guide",
+     "engines": [
+      "duckduckgo",
+      "yahoo"
+     ],
+     "on": true
+    },
+    {
+     "url": "https://github.com/codewithelmor/Drizzle-ORM-Complete-Guide",
+     "title": "Drizzle ORM: Complete Guide - GitHub",
+     "engines": [
+      "duckduckgo",
+      "yahoo"
+     ],
+     "on": true
+    }
+   ],
+   "onTopic": 5,
+   "firstOk": true,
+   "error": null,
+   "cached": false,
+   "secs": 0.6
+  },
+  {
+   "kind": "docs",
+   "query": "better-auth cookie prefix option",
+   "args": {},
+   "results": [
+    {
+     "url": "https://better-auth.com/docs/concepts/cookies",
+     "title": "Cookies | Better Auth",
+     "engines": [
+      "duckduckgo",
+      "yahoo"
+     ],
+     "on": true
+    },
+    {
+     "url": "https://better-auth.com/docs/1.6/concepts/cookies",
+     "title": "v1.6 - Cookies | Better Auth",
+     "engines": [
+      "duckduckgo",
+      "yahoo"
+     ],
+     "on": true
+    },
+    {
+     "url": "https://github.com/mpsuesser/scraped-docs-better-auth/blob/main/concepts/cookies.md",
+     "title": "scraped-docs-better-auth/concepts/cookies.md at main ... - GitHub",
+     "engines": [
+      "duckduckgo",
+      "yahoo"
+     ],
+     "on": true
+    },
+    {
+     "url": "https://github.com/better-auth/better-auth/discussions/3949",
+     "title": "Cookie Prefix Not Working · better-auth better-auth ... - GitHub",
+     "engines": [
+      "duckduckgo",
+      "yahoo"
+     ],
+     "on": true
+    },
+    {
+     "url": "https://deepwiki.com/better-auth/better-auth/4.2-cookie-infrastructure-and-cookie-cache",
+     "title": "Cookie Infrastructure & Cookie Cache | better-auth/better-auth - DeepWiki",
+     "engines": [
+      "duckduckgo",
+      "yahoo"
+     ],
+     "on": true
+    }
+   ],
+   "onTopic": 5,
+   "firstOk": true,
+   "error": null,
+   "cached": false,
+   "secs": 0.8
+  },
+  {
+   "kind": "docs",
+   "query": "nftables prerouting raw priority",
+   "args": {},
+   "results": [
+    {
+     "url": "https://wiki.nftables.org/wiki-nftables/index.php/Configuring_chains",
+     "title": "Configuring chains - nftables wiki",
+     "engines": [
+      "duckduckgo",
+      "yahoo"
+     ],
+     "on": true
+    },
+    {
+     "url": "https://wiki.nftables.org/wiki-nftables/index.php/Netfilter_hooks",
+     "title": "Netfilter hooks - nftables wiki",
+     "engines": [
+      "duckduckgo",
+      "yahoo"
+     ],
+     "on": true
+    },
+    {
+     "url": "https://unix.stackexchange.com/questions/419851/when-and-how-to-use-chain-priorities-in-nftables",
+     "title": "When and how to use chain priorities in nftables - linux",
+     "engines": [
+      "duckduckgo",
+      "yahoo"
+     ],
+     "on": true
+    },
+    {
+     "url": "https://documentation.ubuntu.com/security/security-features/network/firewall/nftables/",
+     "title": "nftables - Ubuntu security documentation",
+     "engines": [
+      "duckduckgo",
+      "yahoo"
+     ],
+     "on": true
+    },
+    {
+     "url": "https://serverfault.com/questions/1050907/nftables-chain-with-priority-300-raw-still-sees-fragments-why",
+     "title": "nftables chain with priority -300 (raw) still sees fragments; why?",
+     "engines": [
+      "duckduckgo",
+      "yahoo"
+     ],
+     "on": true
+    }
+   ],
+   "onTopic": 5,
+   "firstOk": true,
+   "error": null,
+   "cached": false,
+   "secs": 0.6
+  },
+  {
+   "kind": "debug",
+   "query": "kubernetes pod CrashLoopBackOff how to debug",
+   "args": {},
+   "results": [
+    {
+     "url": "https://kodekloud.com/blog/debug-crashloopbackoff/",
+     "title": "How to Debug CrashLoopBackOff in a Container or Pod",
+     "engines": [
+      "duckduckgo",
+      "yahoo"
+     ],
+     "on": true
+    },
+    {
+     "url": "https://stackoverflow.com/questions/44673957/kubernetes-how-to-debug-crashloopbackoff",
+     "title": "Kubernetes: how to debug CrashLoopBackOff - Stack Overflow",
+     "engines": [
+      "duckduckgo",
+      "yahoo"
+     ],
+     "on": true
+    },
+    {
+     "url": "https://oneuptime.com/blog/post/2026-01-19-kubernetes-debug-crashloopbackoff/view",
+     "title": "How to Debug CrashLoopBackOff Pods in Kubernetes",
+     "engines": [
+      "duckduckgo",
+      "yahoo"
+     ],
+     "on": true
+    },
+    {
+     "url": "https://buglyst.com/learn/guides/kubernetes-pod-crashloopbackoff-debug",
+     "title": "How to Debug Kubernetes CrashLoopBackOff Pods | Buglyst",
+     "engines": [
+      "duckduckgo",
+      "yahoo"
+     ],
+     "on": true
+    },
+    {
+     "url": "https://reintech.io/blog/how-to-debug-pods-kubernetes-troubleshooting-guide",
+     "title": "How to Debug Pods in Kubernetes: Complete Troubleshooting Guide",
+     "engines": [
+      "duckduckgo",
+      "yahoo"
+     ],
+     "on": true
+    }
+   ],
+   "onTopic": 5,
+   "firstOk": true,
+   "error": null,
+   "cached": false,
+   "secs": 0.7
+  },
+  {
+   "kind": "debug",
+   "query": "TypeError cannot read properties of undefined reading map react",
+   "args": {},
+   "results": [
+    {
+     "url": "https://stackoverflow.com/questions/69080597/%C3%97-typeerror-cannot-read-properties-of-undefined-reading-map",
+     "title": "× TypeError: Cannot read properties of undefined (reading 'map')",
+     "engines": [
+      "duckduckgo",
+      "yahoo"
+     ],
+     "on": true
+    },
+    {
+     "url": "https://stackoverflow.com/questions/24706267/error-cannot-read-property-map-of-undefined",
+     "title": "reactjs - Error : Cannot read property 'map' of undefined ...",
+     "engines": [
+      "duckduckgo",
+      "yahoo"
+     ],
+     "on": true
+    },
+    {
+     "url": "https://snipshift.dev/blog/fix-cannot-read-properties-undefined-map",
+     "title": "Fix: 'TypeError: Cannot Read Properties of Undefined (Reading Map ...",
+     "engines": [
+      "duckduckgo",
+      "yahoo"
+     ],
+     "on": true
+    },
+    {
+     "url": "https://bobbyhadz.com/blog/react-typeerror-cannot-read-property-map-of-undefined",
+     "title": "Cannot read properties of undefined (reading 'map') in React",
+     "engines": [
+      "duckduckgo",
+      "yahoo"
+     ],
+     "on": true
+    },
+    {
+     "url": "https://kinsta.com/blog/typeerror-cannot-read-property-map-of-undefined/",
+     "title": "How \"TypeError: Cannot Read Property 'Map' of Undefined\" - Kinsta",
+     "engines": [
+      "duckduckgo",
+      "yahoo"
+     ],
+     "on": true
+    }
+   ],
+   "onTopic": 5,
+   "firstOk": true,
+   "error": null,
+   "cached": false,
+   "secs": 0.6
+  },
+  {
+   "kind": "fresh",
+   "query": "latest stable postgresql version",
+   "args": {},
+   "results": [
+    {
+     "url": "https://www.postgresql.org/docs/release/",
+     "title": "Release Notes - PostgreSQL",
+     "engines": [
+      "duckduckgo",
+      "yahoo"
+     ],
+     "on": true
+    },
+    {
+     "url": "https://www.postgresql.org/",
+     "title": "PostgreSQL: The world's most advanced open source database",
+     "engines": [
+      "duckduckgo",
+      "yahoo"
+     ],
+     "on": true
+    },
+    {
+     "url": "https://versionlog.com/postgresql/",
+     "title": "PostgreSQL Latest Version - Support Lifecycle & EOL",
+     "engines": [
+      "duckduckgo",
+      "yahoo"
+     ],
+     "on": true
+    },
+    {
+     "url": "https://patchletter.com/en/software/postgresql",
+     "title": "PostgreSQL: latest version & changelog — patchletter",
+     "engines": [
+      "duckduckgo",
+      "yahoo"
+     ],
+     "on": true
+    },
+    {
+     "url": "https://releasebot.io/updates/postgresql",
+     "title": "Postgresql Release Notes - October 2026 Latest Updates - Releasebot",
+     "engines": [
+      "duckduckgo",
+      "yahoo"
+     ],
+     "on": true
+    }
+   ],
+   "onTopic": 5,
+   "firstOk": true,
+   "error": null,
+   "cached": false,
+   "secs": 0.6
+  },
+  {
+   "kind": "fresh",
+   "query": "latest node.js LTS version",
+   "args": {},
+   "results": [
+    {
+     "url": "https://nodejs.org/en/blog/release/v24.11.0",
+     "title": "Node.js 24.11.0 (LTS)",
+     "engines": [
+      "duckduckgo",
+      "yahoo"
+     ],
+     "on": true
+    },
+    {
+     "url": "https://nodejs.org/en/download",
+     "title": "Download Node.js®",
+     "engines": [
+      "duckduckgo",
+      "yahoo"
+     ],
+     "on": true
+    },
+    {
+     "url": "https://versionlog.com/nodejs/",
+     "title": "Node.js Latest Version - Support Lifecycle, LTS & EOL",
+     "engines": [
+      "duckduckgo",
+      "yahoo"
+     ],
+     "on": true
+    },
+    {
+     "url": "https://versionlog.com/nodejs/24/",
+     "title": "Node.js 24 (LTS) - What's New, Support Lifecycle & EOL",
+     "engines": [
+      "duckduckgo",
+      "yahoo"
+     ],
+     "on": true
+    },
+    {
+     "url": "https://techearl.com/nodejs-lts-vs-current",
+     "title": "Node.js LTS vs Current: Which Version Should You Use?",
+     "engines": [
+      "duckduckgo",
+      "yahoo"
+     ],
+     "on": true
+    }
+   ],
+   "onTopic": 5,
+   "firstOk": true,
+   "error": null,
+   "cached": false,
+   "secs": 0.7
+  },
+  {
+   "kind": "fresh",
+   "query": "current linux kernel stable version",
+   "args": {},
+   "results": [
+    {
+     "url": "https://www.kernel.org/releases.html",
+     "title": "Active kernel releases",
+     "engines": [
+      "duckduckgo",
+      "yahoo"
+     ],
+     "on": true
+    },
+    {
+     "url": "https://www.kernel.org/",
+     "title": "The Linux Kernel Archives",
+     "engines": [
+      "duckduckgo",
+      "yahoo"
+     ],
+     "on": true
+    },
+    {
+     "url": "https://en.wikipedia.org/wiki/Linux_kernel_version_history",
+     "title": "Linux kernel version history - Wikipedia",
+     "engines": [
+      "duckduckgo",
+      "yahoo"
+     ],
+     "on": true
+    },
+    {
+     "url": "https://distro.watch/releases",
+     "title": "Latest Linux distro releases & versions (2026) | distro.watch",
+     "engines": [
+      "duckduckgo",
+      "yahoo"
+     ],
+     "on": false
+    },
+    {
+     "url": "https://github.com/torvalds/linux",
+     "title": "GitHub - torvalds/linux: Linux kernel source tree · GitHub",
+     "engines": [
+      "duckduckgo",
+      "yahoo"
+     ],
+     "on": true
+    }
+   ],
+   "onTopic": 4,
+   "firstOk": true,
+   "error": null,
+   "cached": false,
+   "secs": 0.8
+  },
+  {
+   "kind": "fresh",
+   "query": "latest python release",
+   "args": {},
+   "results": [
+    {
+     "url": "https://www.python.org/downloads/latest/",
+     "title": "Python Release Python 3.15.2 | Python.org",
+     "engines": [
+      "duckduckgo",
+      "yahoo"
+     ],
+     "on": true
+    },
+    {
+     "url": "https://www.python.org/downloads/",
+     "title": "Download Python | Python.org",
+     "engines": [
+      "duckduckgo",
+      "yahoo"
+     ],
+     "on": true
+    },
+    {
+     "url": "http://devguide.python.org/versions/",
+     "title": "Status of Python versions",
+     "engines": [
+      "duckduckgo",
+      "yahoo"
+     ],
+     "on": true
+    },
+    {
+     "url": "https://releasebytes.com/python",
+     "title": "Latest Python Releases, Changelog & Updates - ReleaseBytes",
+     "engines": [
+      "duckduckgo",
+      "yahoo"
+     ],
+     "on": true
+    },
+    {
+     "url": "https://docs.python.org/3/whatsnew/3.15.html",
+     "title": "What’s new in Python 3.15 — Python 3.15.2 documentation",
+     "engines": [
+      "duckduckgo",
+      "yahoo"
+     ],
+     "on": true
+    }
+   ],
+   "onTopic": 5,
+   "firstOk": true,
+   "error": null,
+   "cached": false,
+   "secs": 0.6
+  },
+  {
+   "kind": "news",
+   "query": "AI news this week",
+   "args": {
+    "category": "news",
+    "time_range": "week"
+   },
+   "results": [],
+   "onTopic": 0,
+   "firstOk": false,
+   "error": null,
+   "cached": false,
+   "secs": 0
+  },
+  {
+   "kind": "news",
+   "query": "federal reserve interest rate decision",
+   "args": {
+    "category": "news"
+   },
+   "results": [
+    {
+     "url": "https://www.foxbusiness.com/economy/federal-reserve-interest-rate-decision-october-28-2026",
+     "title": "Federal Reserve makes interest rate decision ahead of midterms",
+     "engines": [
+      "duckduckgo news"
+     ],
+     "on": true
+    },
+    {
+     "url": "https://www.thestreet.com/fed/shutdown-clouds-federal-reserve-interest-rate-cut-decision",
+     "title": "Shutdown clouds Federal Reserve interest rate cut decision",
+     "engines": [
+      "duckduckgo news"
+     ],
+     "on": true
+    },
+    {
+     "url": "https://www.usatoday.com/story/money/economy/2026/10/28/federal-reserve-october-interest-rate-decision--live/92441632007/",
+     "title": "Federal Reserve holds interest rates steady despite inflation concerns",
+     "engines": [
+      "duckduckgo news"
+     ],
+     "on": true
+    },
+    {
+     "url": "https://finance.yahoo.com/economy/policy/articles/us-federal-leaves-interest-rates-183335430.html",
+     "title": "US Federal Reserve leaves interest rates unchanged",
+     "engines": [
+      "duckduckgo news"
+     ],
+     "on": true
+    },
+    {
+     "url": "https://www.cnn.com/2026/10/28/business/live-news/federal-reserve-interest-rate-october",
+     "title": "Fed keeps interest rates unchanged, but two officials dissented in favor of a rate hike",
+     "engines": [
+      "duckduckgo news"
+     ],
+     "on": true
+    }
+   ],
+   "onTopic": 5,
+   "firstOk": true,
+   "error": null,
+   "cached": false,
+   "secs": 0.4
+  },
+  {
+   "kind": "news",
+   "query": "nba news today",
+   "args": {
+    "category": "news",
+    "time_range": "day"
+   },
+   "results": [],
+   "onTopic": 0,
+   "firstOk": false,
+   "error": null,
+   "cached": false,
+   "secs": 0
+  },
+  {
+   "kind": "everyday",
+   "query": "weather boston today",
+   "args": {},
+   "results": [
+    {
+     "url": "https://weather.com/us/massachusetts/city/boston/today",
+     "title": "Weather Forecast and Conditions for Boston, Massachusetts - The Weather ...",
+     "engines": [
+      "duckduckgo",
+      "yahoo"
+     ],
+     "on": true
+    },
+    {
+     "url": "https://www.accuweather.com/en/us/boston/02108/hourly-weather-forecast/348735",
+     "title": "Boston, MA Hourly Weather | AccuWeather",
+     "engines": [
+      "duckduckgo",
+      "yahoo"
+     ],
+     "on": true
+    },
+    {
+     "url": "https://www.nbcboston.com/weather/",
+     "title": "Boston, MA weather forecast – NBC10 Boston",
+     "engines": [
+      "duckduckgo",
+      "yahoo"
+     ],
+     "on": true
+    },
+    {
+     "url": "https://weather.com/en-NA/us/massachusetts/city/boston/today",
+     "title": "Weather forecast and conditions for Boston, Massachusetts, United ...",
+     "engines": [
+      "duckduckgo",
+      "yahoo"
+     ],
+     "on": true
+    },
+    {
+     "url": "https://www.easeweather.com/north-america/united-states/massachusetts/suffolk-county/boston/today",
+     "title": "Boston, United States Weather Today – Hourly Forecast",
+     "engines": [
+      "duckduckgo",
+      "yahoo"
+     ],
+     "on": true
+    }
+   ],
+   "onTopic": 5,
+   "firstOk": true,
+   "error": null,
+   "cached": false,
+   "secs": 0.8
+  },
+  {
+   "kind": "everyday",
+   "query": "best time to visit japan",
+   "args": {},
+   "results": [
+    {
+     "url": "https://www.japanhighlights.com/japan/best-time-to-visit",
+     "title": "Best & Worst Time to Visit Japan 2026/2027 (First-Timer Guide)",
+     "engines": [
+      "duckduckgo",
+      "yahoo"
+     ],
+     "on": true
+    },
+    {
+     "url": "https://en.japantravel.com/blog/best-time-to-visit-japan/72418",
+     "title": "Best Time to Visit Japan: Seasons, Months, Weather & Events - Japan Travel",
+     "engines": [
+      "duckduckgo",
+      "yahoo"
+     ],
+     "on": true
+    },
+    {
+     "url": "https://www.travelandleisure.com/travel-tips/best-time-to-visit-japan",
+     "title": "The Best and Worst Times to Visit Japan - Travel",
+     "engines": [
+      "duckduckgo",
+      "yahoo"
+     ],
+     "on": true
+    },
+    {
+     "url": "https://www.lonelyplanet.com/articles/best-time-to-travel-to-japan",
+     "title": "The Best Time to Visit Japan - Lonely Planet",
+     "engines": [
+      "duckduckgo",
+      "yahoo"
+     ],
+     "on": true
+    },
+    {
+     "url": "https://besttimetovisit.com/best-time-to-visit-japan.php",
+     "title": "Best Time to Visit Japan (Month-by-Month Guide)",
+     "engines": [
+      "duckduckgo",
+      "yahoo"
+     ],
+     "on": true
+    }
+   ],
+   "onTopic": 5,
+   "firstOk": true,
+   "error": null,
+   "cached": false,
+   "secs": 0.9
+  },
+  {
+   "kind": "everyday",
+   "query": "why does my sourdough bread come out dense and how do i fix it",
+   "args": {},
+   "results": [
+    {
+     "url": "https://howtomakesourdough.com/overproofed-sourdough/why-is-my-sourdough-bread-dense/",
+     "title": "Why Is My Sourdough Bread Dense? 7 Real Causes and How to Fix Each One ...",
+     "engines": [
+      "duckduckgo",
+      "yahoo"
+     ],
+     "on": true
+    },
+    {
+     "url": "https://flourwise.com/blog/why-is-my-sourdough-dense/",
+     "title": "Why Is My Sourdough Dense and Heavy? 7 Fixes - flourwise.com",
+     "engines": [
+      "duckduckgo",
+      "yahoo"
+     ],
+     "on": true
+    },
+    {
+     "url": "https://sourdoughsavvy.com/why-is-my-sourdough-dense/",
+     "title": "Why Is My Sourdough Dense? (8 Real Causes + Fixes)",
+     "engines": [
+      "duckduckgo",
+      "yahoo"
+     ],
+     "on": true
+    },
+    {
+     "url": "https://homegrownhappiness.com/sourdough-bread-trouble-shooting-guide/",
+     "title": "No More Dense Sourdough - A Sourdough Guide - Home Grown Happiness",
+     "engines": [
+      "duckduckgo",
+      "yahoo"
+     ],
+     "on": true
+    },
+    {
+     "url": "https://keepitsweetkitchen.com/flat-sourdough-bread/",
+     "title": "Why Is My Sourdough Bread Flat and Dense? 3 Easy Fixes",
+     "engines": [
+      "duckduckgo",
+      "yahoo"
+     ],
+     "on": true
+    }
+   ],
+   "onTopic": 5,
+   "firstOk": true,
+   "error": null,
+   "cached": false,
+   "secs": 0.6
+  },
+  {
+   "kind": "everyday",
+   "query": "iphone 17 pro price",
+   "args": {},
+   "results": [
+    {
+     "url": "https://www.bestbuy.com/site/all-iphone/iphone-17-pro/pcmcat1757084508699.c?id=pcmcat1757084508699%2F",
+     "title": "iPhone 17 Pro - Best Buy",
+     "engines": [
+      "duckduckgo",
+      "yahoo"
+     ],
+     "on": true
+    },
+    {
+     "url": "https://www.apple.com/shop/buy-iphone/iphone-17",
+     "title": "Shop iPhone 17 - Apple",
+     "engines": [
+      "duckduckgo",
+      "yahoo"
+     ],
+     "on": true
+    },
+    {
+     "url": "https://swappa.com/prices/apple-iphone-17-pro",
+     "title": "Apple iPhone 17 Pro Prices, November 2026 - Swappa",
+     "engines": [
+      "duckduckgo",
+      "yahoo"
+     ],
+     "on": true
+    },
+    {
+     "url": "https://www.att.com/buy/phones/apple-iphone-17-pro.html",
+     "title": "Buy iPhone 17 Pro | Price, Colors and Plans | AT&T",
+     "engines": [
+      "duckduckgo",
+      "yahoo"
+     ],
+     "on": true
+    },
+    {
+     "url": "https://www.t-mobile.com/cell-phone/apple-iphone-17-pro",
+     "title": "Apple iPhone 17 Pro: Deals, Features, Specs & Prices - T-Mobile",
+     "engines": [
+      "duckduckgo",
+      "yahoo"
+     ],
+     "on": true
+    }
+   ],
+   "onTopic": 5,
+   "firstOk": true,
+   "error": null,
+   "cached": false,
+   "secs": 0.7
+  },
+  {
+   "kind": "facts",
+   "query": "who is the CEO of anthropic",
+   "args": {},
+   "results": [
+    {
+     "url": "https://en.wikipedia.org/wiki/Dario_Amodei",
+     "title": "Dario Amodei - Wikipedia",
+     "engines": [
+      "duckduckgo",
+      "yahoo"
+     ],
+     "on": true
+    },
+    {
+     "url": "https://www.anthropic.com/company/leadership",
+     "title": "Leadership at Anthropic \\ Anthropic",
+     "engines": [
+      "duckduckgo",
+      "yahoo"
+     ],
+     "on": true
+    },
+    {
+     "url": "https://en.wikipedia.org/wiki/Anthropic",
+     "title": "Anthropic - Wikipedia",
+     "engines": [
+      "duckduckgo",
+      "yahoo"
+     ],
+     "on": true
+    },
+    {
+     "url": "https://www.forbes.com/profile/dario-amodei/",
+     "title": "Dario Amodei - Forbes",
+     "engines": [
+      "duckduckgo",
+      "yahoo"
+     ],
+     "on": true
+    },
+    {
+     "url": "https://www.forbes.com/profile/daniela-amodei/",
+     "title": "Daniela Amodei - Forbes",
+     "engines": [
+      "duckduckgo",
+      "yahoo"
+     ],
+     "on": true
+    }
+   ],
+   "onTopic": 5,
+   "firstOk": true,
+   "error": null,
+   "cached": false,
+   "secs": 0.8
+  },
+  {
+   "kind": "facts",
+   "query": "boston residential tax exemption deadline",
+   "args": {},
+   "results": [
+    {
+     "url": "https://www.boston.gov/departments/assessing/residential-exemption",
+     "title": "Residential Exemption - Boston.gov",
+     "engines": [
+      "duckduckgo",
+      "yahoo"
+     ],
+     "on": true
+    },
+    {
+     "url": "https://www.boston.gov/sites/default/files/file/2025/09/FY26%20ResExempt%20Q1%20Q2_5.pdf",
+     "title": "PDF Residential Exemption - Boston.gov",
+     "engines": [
+      "duckduckgo",
+      "yahoo"
+     ],
+     "on": true
+    },
+    {
+     "url": "https://juanrealestate.blog/boston-residential-tax-exemption/",
+     "title": "Boston Residential Tax Exemption: How to Save on Property Taxes",
+     "engines": [
+      "duckduckgo",
+      "yahoo"
+     ],
+     "on": true
+    },
+    {
+     "url": "https://content.boston.gov/sites/default/files/file/2026/06/FY27%20ResExempt%20Q1%20Q2_0.pdf",
+     "title": "PDF What is the Residential Exemption? - content.boston.gov",
+     "engines": [
+      "duckduckgo",
+      "yahoo"
+     ],
+     "on": true
+    },
+    {
+     "url": "https://www.goodrichboston.com/real-estate-faqs/boston-residential-tax-exemption/",
+     "title": "Boston Residential Tax Exemption 2026: Up to $4,353 Off",
+     "engines": [
+      "duckduckgo",
+      "yahoo"
+     ],
+     "on": true
+    }
+   ],
+   "onTopic": 5,
+   "firstOk": true,
+   "error": null,
+   "cached": false,
+   "secs": 0.7
+  },
+  {
+   "kind": "facts",
+   "query": "uscis eb2 niw premium processing fee",
+   "args": {},
+   "results": [
+    {
+     "url": "https://www.uscis.gov/newsroom/alerts/uscis-to-increase-premium-processing-fees",
+     "title": "USCIS to Increase Premium Processing Fees",
+     "engines": [
+      "duckduckgo",
+      "yahoo"
+     ],
+     "on": true
+    },
+    {
+     "url": "https://immigrationquestion.com/blog/eb2-niw-premium-processing-visa-costs/",
+     "title": "EB-2 NIW Premium Processing & Fees 2025 | Full Cost Guide",
+     "engines": [
+      "duckduckgo",
+      "yahoo"
+     ],
+     "on": true
+    },
+    {
+     "url": "https://www.uscis.gov/i-907",
+     "title": "Request for Premium Processing Service | USCIS",
+     "engines": [
+      "duckduckgo",
+      "yahoo"
+     ],
+     "on": true
+    },
+    {
+     "url": "https://fedlaws.org/eb-2-niw-premium-processing-45-day-clock-fees-and-limits/",
+     "title": "EB-2 NIW Premium Processing: 45-Day Clock, Fees, and Limits",
+     "engines": [
+      "duckduckgo",
+      "yahoo"
+     ],
+     "on": true
+    },
+    {
+     "url": "https://www.lockeimmigration.com/niw/topics/premium-processing",
+     "title": "EB-2 NIW Premium Processing: Cost, Timing, and Limits",
+     "engines": [
+      "duckduckgo",
+      "yahoo"
+     ],
+     "on": true
+    }
+   ],
+   "onTopic": 5,
+   "firstOk": true,
+   "error": null,
+   "cached": false,
+   "secs": 0.8
+  },
+  {
+   "kind": "chinese",
+   "query": "如何申请美国 NIW 移民",
+   "args": {
+    "language": "zh"
+   },
+   "results": [
+    {
+     "url": "https://zhuanlan.zhihu.com/p/602467301",
+     "title": "纯干货！美国NIW移民项目——法案＋政策详解！ - 知乎",
+     "engines": [
+      "yahoo"
+     ],
+     "on": true
+    },
+    {
+     "url": "https://zhuanlan.zhihu.com/p/1909219153656673515",
+     "title": "美国 NIW 移民申请要求详细解析！ - 知乎",
+     "engines": [
+      "yahoo"
+     ],
+     "on": true
+    },
+    {
+     "url": "https://nyislaw.com/zh/practice/eb2-niw/",
+     "title": "[2026指南] 美国国家利益豁免 NIW 绿卡申请条件、流程及排期解析",
+     "engines": [
+      "yahoo"
+     ],
+     "on": true
+    },
+    {
+     "url": "https://gloryabroad.com/blog/niw-complete-guide-2026",
+     "title": "NIW 国家利益豁免完全指南（2026年最新）",
+     "engines": [
+      "yahoo"
+     ],
+     "on": true
+    },
+    {
+     "url": "https://www.globevisa.com.cn/united-states/us-eb2-national-interest-waiver",
+     "title": "美国高技术人才NIW-申请条件-办理费用-美国移民-环球出国移民",
+     "engines": [
+      "yahoo"
+     ],
+     "on": true
+    }
+   ],
+   "onTopic": 5,
+   "firstOk": true,
+   "error": null,
+   "cached": false,
+   "secs": 0.5
+  },
+  {
+   "kind": "chinese",
+   "query": "如何申请美国 NIW 移民",
+   "args": {},
+   "results": [
+    {
+     "url": "https://zhuanlan.zhihu.com/p/602467301",
+     "title": "纯干货！美国NIW移民项目——法案＋政策详解！ - 知乎",
+     "engines": [
+      "yahoo"
+     ],
+     "on": true
+    },
+    {
+     "url": "https://zhuanlan.zhihu.com/p/1909219153656673515",
+     "title": "美国 NIW 移民申请要求详细解析！ - 知乎",
+     "engines": [
+      "yahoo"
+     ],
+     "on": true
+    },
+    {
+     "url": "https://nyislaw.com/zh/practice/eb2-niw/",
+     "title": "[2026指南] 美国国家利益豁免 NIW 绿卡申请条件、流程及排期解析",
+     "engines": [
+      "yahoo"
+     ],
+     "on": true
+    },
+    {
+     "url": "https://gloryabroad.com/blog/niw-complete-guide-2026",
+     "title": "NIW 国家利益豁免完全指南（2026年最新）",
+     "engines": [
+      "yahoo"
+     ],
+     "on": true
+    },
+    {
+     "url": "https://www.globevisa.com.cn/united-states/us-eb2-national-interest-waiver",
+     "title": "美国高技术人才NIW-申请条件-办理费用-美国移民-环球出国移民",
+     "engines": [
+      "yahoo"
+     ],
+     "on": true
+    }
+   ],
+   "onTopic": 5,
+   "firstOk": true,
+   "error": null,
+   "cached": false,
+   "secs": 0.7
+  },
+  {
+   "kind": "chinese",
+   "query": "今天 科技 新闻",
+   "args": {
+    "language": "zh"
+   },
+   "results": [
+    {
+     "url": "https://www.thepaper.cn/channel_119908",
+     "title": "科技新闻_最新科技要闻_澎湃新闻",
+     "engines": [
+      "yahoo"
+     ],
+     "on": true
+    },
+    {
+     "url": "https://www.toutiao.com/article/7656640211637879330/",
+     "title": "今日十大科技新闻 - 今日头条",
+     "engines": [
+      "yahoo"
+     ],
+     "on": true
+    },
+    {
+     "url": "https://www.guancha.cn/KeJiQianYan",
+     "title": "科技前沿-观察者网",
+     "engines": [
+      "yahoo"
+     ],
+     "on": true
+    },
+    {
+     "url": "https://news.cctv.com/tech/",
+     "title": "科技新闻_央视网 (cctv.com)",
+     "engines": [
+      "yahoo"
+     ],
+     "on": true
+    },
+    {
+     "url": "https://remoshuang.com/c/tech",
+     "title": "今日科技热点｜科技今日新闻实时更新 - 行业热点资讯",
+     "engines": [
+      "yahoo"
+     ],
+     "on": true
+    }
+   ],
+   "onTopic": 5,
+   "firstOk": true,
+   "error": null,
+   "cached": false,
+   "secs": 0.6
+  },
+  {
+   "kind": "science",
+   "query": "attention is all you need paper",
+   "args": {
+    "category": "science"
+   },
+   "results": [
+    {
+     "url": "http://arxiv.org/abs/cond-mat/0309395v2",
+     "title": "This paper has been withdrawn",
+     "engines": [
+      "arxiv"
+     ],
+     "on": false
+    },
+    {
+     "url": "http://arxiv.org/abs/2512.19700v1",
+     "title": "\"All You Need\" is Not All You Need for a Paper Title: On the Origins of a Scientific Meme",
+     "engines": [
+      "arxiv"
+     ],
+     "on": true
+    },
+    {
+     "url": "http://arxiv.org/abs/2105.02723v1",
+     "title": "Do You Even Need Attention? A Stack of Feed-Forward Layers Does Surprisingly Well on ImageNet",
+     "engines": [
+      "arxiv"
+     ],
+     "on": true
+    },
+    {
+     "url": "http://arxiv.org/abs/1806.11202v1",
+     "title": "Quit When You Can: Efficient Evaluation of Ensembles with Ordering Optimization",
+     "engines": [
+      "arxiv"
+     ],
+     "on": false
+    },
+    {
+     "url": "http://arxiv.org/abs/2103.05236v2",
+     "title": "GAN Vocoder: Multi-Resolution Discriminator Is All You Need",
+     "engines": [
+      "arxiv"
+     ],
+     "on": false
+    }
+   ],
+   "onTopic": 2,
+   "firstOk": false,
+   "error": null,
+   "cached": false,
+   "secs": 0.2
+  },
+  {
+   "kind": "it",
+   "query": "hono middleware example",
+   "args": {
+    "category": "it"
+   },
+   "results": [
+    {
+     "url": "https://stackoverflow.com/q/79821141",
+     "title": "Hono tRPC-server body issue",
+     "engines": [
+      "stackoverflow"
+     ],
+     "on": true
+    },
+    {
+     "url": "https://stackoverflow.com/q/78656122",
+     "title": "TypeScript Error with Prisma Client and withAccelerate Extension in Hono Middleware",
+     "engines": [
+      "stackoverflow"
+     ],
+     "on": true
+    },
+    {
+     "url": "https://github.com/febriadj/hono-jwt",
+     "title": "febriadj/hono-jwt",
+     "engines": [
+      "github"
+     ],
+     "on": true
+    },
+    {
+     "url": "https://github.com/emrancu/hono-remix-cloudflare-boilerplate",
+     "title": "emrancu/hono-remix-cloudflare-boilerplate",
+     "engines": [
+      "github"
+     ],
+     "on": true
+    },
+    {
+     "url": "https://github.com/notyel/example-hono-backend",
+     "title": "notyel/example-hono-backend",
+     "engines": [
+      "github"
+     ],
+     "on": true
+    }
+   ],
+   "onTopic": 5,
+   "firstOk": true,
+   "error": null,
+   "cached": false,
+   "secs": 0.6
+  },
+  {
+   "kind": "operators",
+   "query": "site:postgresql.org release notes",
+   "args": {},
+   "results": [
+    {
+     "url": "https://www.postgresql.org/docs/release/17.11/",
+     "title": "Release Notes - PostgreSQL",
+     "engines": [
+      "yahoo"
+     ],
+     "on": true
+    },
+    {
+     "url": "https://www.postgresql.org/docs/release/19.0/",
+     "title": "Release Notes - PostgreSQL",
+     "engines": [
+      "yahoo"
+     ],
+     "on": true
+    },
+    {
+     "url": "https://jdbc.postgresql.org/changelogs/2026-10-07-42.7.14-release/",
+     "title": "PostgreSQL JDBC Driver 42.7.14 Released | pgJDBC",
+     "engines": [
+      "yahoo"
+     ],
+     "on": true
+    },
+    {
+     "url": "https://wiki.postgresql.org/wiki/Version_History",
+     "title": "Version History - PostgreSQL wiki",
+     "engines": [
+      "yahoo"
+     ],
+     "on": true
+    },
+    {
+     "url": "https://odbc.postgresql.org/changelog/",
+     "title": "Changelog – psqlODBC",
+     "engines": [
+      "yahoo"
+     ],
+     "on": true
+    }
+   ],
+   "onTopic": 5,
+   "firstOk": true,
+   "error": null,
+   "cached": false,
+   "secs": 0.5
+  },
+  {
+   "kind": "operators",
+   "query": "site:postgresql.org/about/news release",
+   "args": {},
+   "results": [
+    {
+     "url": "https://www.postgresql.org/about/news/postgresql-18-released-3142/",
+     "title": "PostgreSQL 18 Released!",
+     "engines": [
+      "yahoo"
+     ],
+     "on": true
+    },
+    {
+     "url": "https://www.postgresql.org/about/news/postgresql-19-rc-1-released-3409/",
+     "title": "PostgreSQL 19 RC 1 Released!",
+     "engines": [
+      "yahoo"
+     ],
+     "on": true
+    },
+    {
+     "url": "https://www.postgresql.org/about/news/postgresql-181-177-1611-1515-1420-and-1323-released-3171/",
+     "title": "PostgreSQL: PostgreSQL 18.1, 17.7, 16.11, 15.15, 14.20, and ...",
+     "engines": [
+      "yahoo"
+     ],
+     "on": true
+    },
+    {
+     "url": "https://www.postgresql.org/about/news/postgresql-183-179-1613-1517-and-1422-released-3246/",
+     "title": "PostgreSQL: PostgreSQL 18.3, 17.9, 16.13, 15.17, and 14.22 ...",
+     "engines": [
+      "yahoo"
+     ],
+     "on": true
+    },
+    {
+     "url": "https://www.postgresql.org/about/news/postgresql-186-1711-1615-1519-1424-and-19-beta-3-released-3365/",
+     "title": "PostgreSQL 18.6, 17.11, 16.15, 15.19, 14.24 and 19 Beta 3 ...",
+     "engines": [
+      "yahoo"
+     ],
+     "on": true
+    }
+   ],
+   "onTopic": 5,
+   "firstOk": true,
+   "error": null,
+   "cached": false,
+   "secs": 0.4
+  },
+  {
+   "kind": "operators",
+   "query": "site:kubernetes.io network policy",
+   "args": {},
+   "results": [
+    {
+     "url": "https://kubernetes.io/docs/concepts/services-networking/network-policies/",
+     "title": "Network Policies - Kubernetes",
+     "engines": [
+      "yahoo"
+     ],
+     "on": true
+    },
+    {
+     "url": "https://kubernetes.io/docs/reference/kubernetes-api/networking/network-policy-v1/",
+     "title": "NetworkPolicy - Kubernetes",
+     "engines": [
+      "yahoo"
+     ],
+     "on": true
+    },
+    {
+     "url": "https://v1-35.docs.kubernetes.io/docs/tasks/administer-cluster/network-policy-provider/calico-network-policy/",
+     "title": "Use Calico for NetworkPolicy | Kubernetes",
+     "engines": [
+      "yahoo"
+     ],
+     "on": true
+    },
+    {
+     "url": "https://kubernetes.io/docs/tasks/administer-cluster/declare-network-policy/",
+     "title": "Declare Network Policy - Kubernetes",
+     "engines": [
+      "yahoo"
+     ],
+     "on": true
+    },
+    {
+     "url": "https://kubernetes.io/docs/tasks/administer-cluster/network-policy-provider/",
+     "title": "Install a Network Policy Provider - Kubernetes",
+     "engines": [
+      "yahoo"
+     ],
+     "on": true
+    }
+   ],
+   "onTopic": 5,
+   "firstOk": true,
+   "error": null,
+   "cached": false,
+   "secs": 0.5
+  },
+  {
+   "kind": "longkw",
+   "query": "PostgreSQL 18 minor release notes August 2026",
+   "args": {},
+   "results": [
+    {
+     "url": "https://www.postgresql.org/docs/release/18.6/",
+     "title": "Release Notes - PostgreSQL",
+     "engines": [
+      "duckduckgo",
+      "yahoo"
+     ],
+     "on": true
+    },
+    {
+     "url": "https://www.postgresql.org/docs/release/18/",
+     "title": "Release Notes - PostgreSQL",
+     "engines": [
+      "duckduckgo",
+      "yahoo"
+     ],
+     "on": true
+    },
+    {
+     "url": "https://pgpedia.info/postgresql-versions/postgresql-18.html",
+     "title": "PostgreSQL 18 - pgPedia - a PostgreSQL Encyclopedia",
+     "engines": [
+      "duckduckgo",
+      "yahoo"
+     ],
+     "on": true
+    },
+    {
+     "url": "https://versionlog.com/postgresql/18/",
+     "title": "PostgreSQL 18 - What's New, Support Lifecycle & EOL",
+     "engines": [
+      "duckduckgo",
+      "yahoo"
+     ],
+     "on": true
+    },
+    {
+     "url": "https://velqory.com/blogue/postgresql-atualizacao-menor-13-agosto-2026",
+     "title": "PostgreSQL: prepare the 13 August minor release | Velqory",
+     "engines": [
+      "duckduckgo",
+      "yahoo"
+     ],
+     "on": true
+    }
+   ],
+   "onTopic": 5,
+   "firstOk": true,
+   "error": null,
+   "cached": false,
+   "secs": 0.6
+  }
+ ],
+ "pages": []
+}
