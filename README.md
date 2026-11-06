@@ -7,8 +7,8 @@ Models only know what was in their training data. mcpgw gives home apps such as
 [homestorm](https://github.com/autumnfallenwang/homestorm), and MCP harnesses such as Claude Code and Codex, one place
 to reach tools: `web_search` and `web_fetch` first, more later.
 
-**Status:** no code yet. The design and decisions are done; next is a deployed skeleton (M2 in
-[the plan](docs/plan.md)).
+**Status:** live at http://mcpgw.arch.internal, with `web_search` and `web_fetch` on the home k3s cluster. See
+[the plan](docs/plan.md).
 
 ## How it works, in short
 
@@ -22,6 +22,31 @@ to reach tools: `web_search` and `web_fetch` first, more later.
 - **Leaks:** a page can tell a model to send private data to an address it controls, and mcpgw can't tell where a URL
   came from. So apps limit which URLs may be fetched, and harnesses ask before each fetch.
 - **Home network only:** no public exposure and no auth in v1.
+
+## Develop locally
+
+Needs Node 26, pnpm 10 and Docker.
+
+```sh
+pnpm install
+docker run -d --name searxng-dev -p 127.0.0.1:8180:8080 -e SEARXNG_SECRET=dev \
+  -v "$PWD/deploy/chart/files:/etc/searxng:ro" searxng/searxng:2026.11.5-3e95f6cd2
+ALLOWED_HOSTS=127.0.0.1 SEARXNG_URL=http://127.0.0.1:8180 pnpm dev   # on :3002
+```
+
+- `pnpm test`: all tests, including hostile pages against the workers (about 10 s). No network or SearXNG needed.
+- `pnpm lint`, `pnpm typecheck`.
+
+## Deploy
+
+GHCR image, the Helm chart in `deploy/chart`, and an Argo CD Application in `arch-infra` (`apps/mcpgw.yaml`; review copy in
+`deploy/arch-infra/`), like the sibling apps.
+
+- **CI** (`.github/workflows/build.yml`): lint, types and tests, then the image tagged with the commit SHA, then the tag
+  bumped in arch-infra. The bump needs an `ARCH_INFRA_TOKEN` repo secret; without it the job skips with a warning and the
+  tag is bumped by hand.
+- **Logs:** `{namespace="mcpgw"} | json | event="tool.call"`. One request: `| json | req_id="<id>"`.
+- **Check it's healthy:** `curl http://mcpgw.arch.internal/health` shows the service and its search backend.
 
 ## Who can use it
 

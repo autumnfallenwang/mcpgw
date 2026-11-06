@@ -39,8 +39,9 @@ have a bug.
 
 ## Consequences
 
-- The test table in M4 comes before any page-reading code.
-- k3s runs here with no flag disabling network policies, and `argocd` already has some, but enforcement isn't proven.
-  M4 proves it from inside the pod, with the app's checks out of the way.
+- The test table came before any page-reading code, and `ipaddr.js` classed every odd form correctly, including
+  NAT64 and 6to4.
+- Enforcement is proven: from inside the pods, with the app's checks out of the way, every private target is refused,
+  while a pod with no policy reaches them.
 - Nothing can use `web_fetch` to read home services. That's intended: home data gets its own read-only tools later.
 - This protects the network and not the conversation. Leaks are [0007](0007-keeping-data-from-leaking-through-web-fetch.md).

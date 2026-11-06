@@ -38,8 +38,8 @@ it isn't trivial, rendering JavaScript pages, public exposure.
 | D7 | Apps limit which URLs may be fetched; harnesses ask before each fetch | **recommended option taken; the user hasn't picked it explicitly:** [ADR 0007](adr/0007-keeping-data-from-leaking-through-web-fetch.md) |
 | D8 | Home network only, no auth in v1 | **recommended option taken; the user needs to confirm the network is trusted:** [ADR 0008](adr/0008-home-network-only-no-auth.md) |
 | D9 | Search behind a replaceable provider; SearXNG first | decided: [ADR 0009](adr/0009-search-behind-a-replaceable-provider.md) |
-| D10 | Add a hosted search fallback? | open, decided from the M3 trial |
-| D11 | PDF in v1 or later? | open, decided during M4 |
+| D10 | Hosted search fallback? | **not now:** the M3 trial found results for all 21 queries, so nothing justifies paying yet. Bing carries most of it, and weak spots are on the record ([progress.md](progress.md)). The provider layer makes it a small change later ([ADR 0009](adr/0009-search-behind-a-replaceable-provider.md)) |
+| D11 | PDF in v1 or later? | **later:** v1 refuses PDFs with a clear message. Parsing them needs a heavy library and adds attack surface, and no finish line depends on it |
 
 When a decision is made, record it as an ADR in [adr/](adr/), update this table, and log it in
 [progress.md](progress.md).
@@ -67,48 +67,52 @@ couldn't cover: Traefik, the real hostname, and a second device.
 - [x] Public repo `autumnfallenwang/mcpgw`, like the sibling apps (made public by the user)
 - [x] README, plan, progress, ADRs 0001–0009, `.gitignore`, `.dockerignore`
 
-### M2: Deployed skeleton ⬜
+### M2: Deployed skeleton ✅
 
-- [ ] pnpm project: Hono, pino, zod 4, Vitest, Biome, `tsc`
-- [ ] `/health` and `/` on the outer app, and JSON logs in the house shape
-- [ ] `/mcp` on SDK v2 with the Host and Origin settings, and `web_search` returning canned results
-- [ ] Tests: both protocol versions, `_meta` reaching the v2 client, wrong `Host` 403, any `Origin` 403, `GET` and
+- [x] pnpm project: Hono, pino, zod 4, Vitest, Biome, `tsc`
+- [x] `/health` and `/` on the outer app, and JSON logs in the house shape
+- [x] `/mcp` on SDK v2 with the Host and Origin settings, and `web_search` returning canned results
+- [x] Tests: both protocol versions, `_meta` reaching the v2 client, wrong `Host` 403, any `Origin` 403, `GET` and
   `DELETE` 405, `/health` 200 with a pod-IP `Host`
-- [ ] Dockerfile, Helm chart, CI, `apps/mcpgw.yaml` in arch-infra
-- [ ] **By the user:** DNS name `mcpgw.arch.internal` on the router
-- [ ] **Finish line, at the real hostname through Traefik:**
-  - Claude Code and Codex both call the tool, from this machine and from a second device;
-  - Claude Code's long-lived `subscriptions/listen` request survives while idle;
+- [x] Dockerfile, Helm chart, CI, `apps/mcpgw.yaml` in arch-infra
+- [x] **By the user:** DNS name `mcpgw.arch.internal` on the router
+- [x] **At the real hostname through Traefik:**
+  - Claude Code and Codex both call the tool from this machine;
+  - a `subscriptions/listen` stream, replayed from what Claude Code really sends, held for 330 s until the test ended
+    it, with the SDK's keepalive every 15 s;
   - a call to the in-cluster address from a pod works;
   - Kubernetes probes pass, and Loki shows only JSON.
+- [ ] **By the user:** the same from a second device on the network, which can't be done from this machine:
+  `curl http://mcpgw.arch.internal/health`
 
-### M3: `web_search` ⬜
+### M3: `web_search` ✅
 
-- [ ] `SearchProvider` interface and the SearXNG implementation; local SearXNG container for dev
-- [ ] Text and `_meta` output, cache, concurrency limit, errors that say what to do next
-- [ ] SearXNG in the chart (no ingress), ConfigMap, pinned image, Secret (**created by the user**)
-- [ ] Unit and fake-SearXNG integration tests
-- [ ] **Finish line:** about 20 real queries from the home IP (news, docs, prices, non-English), reviewed with the
-  engine-error log, and D10 decided
+- [x] `SearchProvider` interface and the SearXNG implementation; local SearXNG container for dev
+- [x] Text and `_meta` output, cache, concurrency limit, errors that say what to do next
+- [x] SearXNG in the chart (no ingress), ConfigMap, pinned image. No Secret: the pod generates its own key at boot
+- [x] Unit and fake-SearXNG integration tests
+- [x] **Finish line:** 21 real queries from the home IP (news, docs, prices, non-English), reviewed with the engine
+  errors, and D10 decided
 
-### M4: `web_fetch` ⬜
+### M4: `web_fetch` ✅
 
-- [ ] The §6.1 checks and their test table first, before any page-reading code
-- [ ] Redirects, size and time limits, concurrency limit, URL length limit
-- [ ] Extraction behind `extract()`, output cleaning, `Accept: text/markdown`; compare Readability and Defuddle on
-  real pages; decide D11
-- [ ] NetworkPolicies for both Deployments
-- [ ] **Finish line, on the cluster:** a real page reads cleanly; a private URL is refused with a clear reason; from
-  inside the pod, with the app's checks out of the way, the LAN, llmgw and the service network are unreachable
+- [x] The §6.1 checks and their test table first, before any page-reading code
+- [x] Redirects, size and time limits, concurrency limit, URL length limit
+- [x] Extraction, output cleaning, `Accept: text/markdown`; Readability and Defuddle compared on real pages (Readability
+  stays); D11 decided
+- [x] Page parsing moved into capped workers, after a hostile page froze the main thread in testing
+- [x] NetworkPolicies for both Deployments
+- [x] **Finish line, on the cluster:** a real page reads cleanly; a private URL is refused with a clear reason; from
+  inside the pod, with the app's checks out of the way, the LAN, llmgw and the service network are refused, while a pod
+  with no policy reaches them
 
-### M5: homestorm uses it ⬜ (M9 in homestorm's plan, in its own repo)
+### M5: homestorm uses it 🔄 (M9 in homestorm's plan, in its own repo)
 
-Two items don't need mcpgw and can start any time: **today's date in the intro**, and **checking streaming
-`tool_calls` through llmgw**.
-
+- [x] Streaming `tool_calls` through llmgw checked on all three families, including SDK v2's schemas with `$schema`,
+  `tool_choice: "required"`, and `tool_choice: "none"` with tool history (needed for Claude's forced final answer)
+- [ ] Today's date in the intro
 - [ ] Update homestorm's ADR 0014 and plan, which still describe the REST mirror
-- [ ] `@modelcontextprotocol/client` in homestorm's API; check that llmgw and all three families accept the schemas
-  SDK v2 produces, which include `$schema`
+- [ ] `@modelcontextprotocol/client` in homestorm's API
 - [ ] Chair search, posted as one "Sources" message
 - [ ] Seat tools: the tool loop with a per-turn limit, and the URL rule from
   [ADR 0007](adr/0007-keeping-data-from-leaking-through-web-fetch.md)

@@ -4,8 +4,7 @@ The home cluster's **tool gateway**. llmgw gives apps one place to reach LLMs; m
 behind llmgw, one place to reach **tools**: web search first, then web fetch, later more. It speaks **MCP** (Model
 Context Protocol), so MCP harnesses on the home network can use it as well as the home apps.
 
-- **Status:** design, updated 2026-11-05 after testing against MCP `2026-07-28`, SDK v2, Claude Code and Codex.
-  Nothing is built yet.
+- **Status:** live at `http://mcpgw.arch.internal` since 2026-11-05. Progress is in [progress.md](progress.md).
 - **First consumer:** homestorm (`~/agentic/homestorm`), the chair-run multi-model meeting app.
 - **Sibling:** llmgw (`~/agentic/llm-gateway`, `http://llmgw.arch.internal`).
 - **See also:** decisions in [adr/](adr/), milestones in [plan.md](plan.md), the log in [progress.md](progress.md).
@@ -232,17 +231,19 @@ into Markdown for Agents answer with Markdown, which skips extraction.
 
 - `text/html`: main-content extraction, then converted to plain Markdown-ish text: headings, lists and links kept,
   scripts, styles, navigation and ads dropped. Mozilla Readability on linkedom to start, behind one `extract()`
-  function so Defuddle can be compared on real pages (the evidence between them is mixed).
+  function. Compared with Defuddle on real pages: Defuddle was 3–5× slower and not clearly better.
 - **Output is cleaned** (the spec requires it): hidden elements, HTML comments and invisible Unicode go, because
   they're where instructions to a model get hidden. This reduces the risk; it doesn't remove it (§6.3).
 - `text/plain`, `text/markdown`, `application/json`: returned as is, after the same Unicode cleaning.
-- `application/pdf`: text extraction (pdf.js or similar). Later if not trivial; v1 may refuse it with a clear
-  message.
+- `application/pdf`: refused with a clear message in v1 (D11 in the plan).
 - Pages that need JavaScript aren't rendered. Near-empty extractions say so. Anthropic's own fetch tool has the same
   limit.
 - Anything else: refused ("mcpgw can't read this type of file: image/png").
 - **Cache:** 10 minutes per final URL.
 - **Concurrency:** at most 8 fetches at once across all callers. A queue wait of over 10 s fails with a timeout.
+- **Parsing runs in workers:** two worker threads, each capped at 192 MB and 5 s per page. On the main thread a hostile
+  5 MB page took 9.5 s and 1.3 GB, freezing every caller. Now a page over either limit fails alone, the worker is thrown
+  away, and the model is told to try another source. All handling of page content happens there, including decoding.
 
 ## 6. Safety rules for `web_fetch`
 
@@ -284,9 +285,8 @@ NetworkPolicies are the second layer, in case a bug gets past §6.1:
   except `10.0.0.0/8`, `100.64.0.0/10`, `127.0.0.0/8`, `169.254.0.0/16`, `172.16.0.0/12` and `192.168.0.0/16`.
 - **`searxng` pods:** ingress from `mcpgw` pods only; egress to DNS and to TCP 80 and 443 outside those ranges.
 
-k3s runs here with no flag disabling network policies, and the cluster already has some in `argocd`, but enforcement
-hasn't been proven. M4 proves it by trying the blocked addresses from inside the pod, with the §6.1 checks out of
-the way.
+Proven at M4 from inside the pods, with the §6.1 checks out of the way: the node, the router, llmgw, homestorm, the
+Kubernetes API and cloud metadata are all refused, and a pod with no policy reaches them.
 
 ### 6.3 Keeping data from leaking
 
@@ -314,15 +314,17 @@ can't tell where a URL came from, so the rule has to live with whoever holds the
 | `FETCH_TIMEOUT_MS` | `15000` | |
 | `FETCH_MAX_BYTES` | `5242880` | |
 | `FETCH_MAX_URL_CHARS` | `250` | |
+| `FETCH_CACHE_TTL_S` | `600` | |
 | `LOG_LEVEL` | `info` | |
 
 **SearXNG `settings.yml`** (a ConfigMap):
 
 - `search.formats: [html, json]`: JSON must be turned on explicitly.
 - `server.limiter: false`: only mcpgw calls it, from inside the cluster.
-- `server.secret_key` from the env var `SEARXNG_SECRET` (a Kubernetes Secret, §8).
-- Engines: start with google, bing, duckduckgo, brave, wikipedia, github, stackoverflow, arxiv. Disable the rest
-  to keep upstream traffic low.
+- `server.secret_key` from the env var `SEARXNG_SECRET`, a random value the pod generates at boot. Nothing signed with
+  it outlives the pod, since the limiter and image proxy are off, so there's no Kubernetes Secret.
+- Engines: bing, duckduckgo, brave, wikipedia, github, stackoverflow, arxiv, bing news, duckduckgo news. The rest stay
+  off to keep upstream traffic low. Google is off because it refused every query from this IP.
 - Image: `searxng/searxng`, pinned to a dated tag such as `2026.11.5-3e95f6cd2`, never `latest`.
 
 ## 8. Deployment
@@ -336,17 +338,16 @@ can't tell where a URL came from, so the rule has to live with whoever holds the
   - Deployment `mcpgw` (1 replica to start; stateless, so more is safe) on container port 3002, and Service `mcpgw`
     on port 80, like llmgw. Probes on `/health`;
   - Deployment `searxng` and Service `searxng:8080`, cluster-internal only;
-  - ConfigMap `searxng-settings`;
+  - ConfigMap `searxng-settings`, from `deploy/chart/files/settings.yml`;
   - the §6.2 NetworkPolicies;
-  - Secret `mcpgw-secrets` with `SEARXNG_SECRET`. **The user creates it** (auto mode blocks Secret writes),
-    for example with a small `create-cluster-secret.sh` like homestorm's;
   - Ingress through Traefik: `mcpgw.arch.internal` to Service `mcpgw`. **SearXNG gets no ingress.** The user adds the
     DNS name on the router, as for homestorm (it has no wildcard, and the name doesn't resolve yet).
 - **Argo CD:** `apps/mcpgw.yaml` in arch-infra (the root app-of-apps), review copy in `deploy/arch-infra/`, tags
   pinned to the image SHA.
-- **Resources:** mcpgw about 128 MB RAM; SearXNG about 256 MB. Requests small, limits about twice that.
-- **Local dev:** `docker run -p 127.0.0.1:8180:8080 -e SEARXNG_SECRET=… -v ./dev/searxng:/etc/searxng
-  searxng/searxng:<tag>` with the same `settings.yml`, then `pnpm dev` on port 3002.
+- **Resources:** mcpgw uses about 75 MB and SearXNG about 100 MB. Both request 128 MB. mcpgw's limit is 512 MB, enough for
+  the main thread plus both workers at their caps.
+- **Local dev:** `docker run -p 127.0.0.1:8180:8080 -e SEARXNG_SECRET=dev -v ./deploy/chart/files:/etc/searxng:ro
+  searxng/searxng:<tag>`, then `ALLOWED_HOSTS=127.0.0.1 SEARXNG_URL=http://127.0.0.1:8180 pnpm dev` on port 3002.
 
 ## 9. Logging and tracing
 
@@ -419,12 +420,12 @@ path is the one thing the tests so far couldn't cover.
 
 1. **Does anything untrusted share the home network?** [ADR 0008](adr/0008-home-network-only-no-auth.md) assumes not,
    and the user hasn't confirmed it. If guests or IoT devices share it, add a bearer token before deploying.
-2. **PDF in v1 or later?** Depends on how clean a small extractor turns out.
-3. **SearXNG engine mix.** Start with the list in §7; tune it after a week of real use and the engine-error log.
-4. **Hosted fallback.** Decided after the M3 trial ([ADR 0009](adr/0009-search-behind-a-replaceable-provider.md)).
+2. **SearXNG engine mix.** Tune it after a week of real use and the engine-error log. Bing carries most of it today.
+3. **Sites that refuse mcpgw.** Stack Overflow and Medium answer 403 to its plain `User-Agent`. It's reported, not worked
+   around.
+4. **Hosted fallback.** Not for now; worth another look after real use ([ADR 0009](adr/0009-search-behind-a-replaceable-provider.md)).
 5. **Which search will harness models pick?** Both harnesses have their own web search, and the tests named the
    mcpgw tool in the prompt (Claude Code's built-ins were also turned off). Checked at M6.
-6. **Does Claude Code's long-lived `subscriptions/listen` request survive Traefik?** Checked at M2.
 
 ## 15. Standards and sources
 

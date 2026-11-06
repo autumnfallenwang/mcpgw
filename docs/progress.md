@@ -6,6 +6,45 @@ A dated log of what was done and decided, newest first. The plan and milestone s
 
 ## 2026-11-05
 
+- **M5 started: streaming tools checked through llmgw,** on Claude Haiku 5.5, GPT-5.6 Luna and DeepSeek Flash, with
+  mcpgw's real tool schemas. `tool_calls` assemble from their deltas, `$schema` is accepted, `tool_choice: "required"`
+  and `"none"` both work, the latter with tool history, which Claude needs. DeepSeek fetched `https://www.postgresql.org/`
+  from memory alongside its search, which is the kind of URL the source rule exists to refuse.
+- **M4 done: `web_fetch` on the cluster.**
+  - **A real bug found by trying the worst case.** On the main thread, 5 MB of tags took 9.5 s and 1.3 GB, which would
+    freeze every caller and get the pod killed. Pages are now parsed in workers with a memory cap and a time limit, so a
+    hostile page costs only its own request. Six hostile inputs are in the tests, including ones aimed at quadratic
+    regexes, and none stalled the main thread by more than 500 ms.
+  - **The network layer holds.** From inside the pod with a plain `fetch`, the node, the router, llmgw (by name, service
+    and pod), homestorm, the Kubernetes API and cloud metadata are all refused, while SearXNG and the public web work. A
+    pod with no policy reaches those same addresses, so it's the policy doing it.
+  - **Real pages.** 19 of 22 read in about half a second. Stack Overflow and Medium answer 403 to mcpgw's plain
+    `User-Agent`; they're reported as refused rather than worked around. Cloudflare's sites and modelcontextprotocol.io
+    answered `Accept: text/markdown` with clean Markdown.
+  - **Found on real pages:** Readability keeps a scrap of a home page (NPR's 1 MB page gave 213 characters), so a short
+    "article" now falls back to the whole page. Markdown documents take their title from the document.
+  - **Readability stays.** Defuddle was 3–5× slower and not clearly better: ahead on GitHub READMEs, behind on Wikipedia
+    and MDN.
+  - **D11:** PDFs are refused with a clear message for now.
+- **M3 done: `web_search` on SearXNG.** 21 queries from the home IP: results for all of them, mean 0.7 s, slowest 1.8 s.
+  - **Engines from this IP:** Bing answered 14 queries and DuckDuckGo 11, with 3 CAPTCHAs. Brave answered 5 before "too
+    many requests" suspended it, even with 1.5 s between queries. Google refused every query ("access denied"), so it's
+    off. Bing's own default was off, so it's turned on.
+  - **Weak spots:** niche technical queries ("how to pin dns lookup undici agent" led with Pinterest), and a location
+    query got the wrong town. A nonsense query still returned results.
+  - **D10:** no paid fallback for now. Worth another look after real use, since most of this rests on one engine.
+  - **No Secret after all:** SearXNG's key signs nothing that outlives the pod, so the pod generates one at boot. That
+    also removes the one manual step auto mode couldn't do.
+- **M2 done: the skeleton is live** at http://mcpgw.arch.internal, deployed through arch-infra.
+  - **Real harnesses through Traefik:** Claude Code and Codex both called the tool at the real hostname, logged as
+    `claude-code/2.1.318` and `codex-mcp-client/0.166.0` with no configuration.
+  - **Long-lived requests:** Traefik 3 has a 60 s read timeout by default, which looked like it might cut Claude Code's
+    `subscriptions/listen`. It doesn't: replayed from what Claude Code really sends, it held for 330 s until the test
+    ended it. The SDK sends a keepalive every 15 s.
+  - **Not tested:** a second device. That's the user's to try: `curl http://mcpgw.arch.internal/health`.
+  - **Open:** `ARCH_INFRA_TOKEN` isn't set on this repo, so CI skips the arch-infra tag bump, and tags are bumped by hand
+    as on homestorm.
+- **DNS:** `mcpgw.arch.internal` added by the user, and answered by the router.
 - **M1 done: the repo is public.** The user made it public, since auto mode refuses to. Checked with no credentials:
   the repo page and the raw README both load. Next is M2.
 - **Repo created, private at first:** `autumnfallenwang/mcpgw`, with README, plan, this log, ADRs 0001–0009, the updated

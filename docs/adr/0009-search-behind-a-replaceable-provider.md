@@ -29,8 +29,14 @@ will tell.
 - **SearXNG with no provider layer.** It saves one small interface, and then a fallback means reworking the tool. Not
   worth it, given how likely a fallback is.
 
+## Result of the trial (2026-11-05)
+
+21 queries from the home IP all found results, in 0.7 s on average. Google refused every query, so it's off. Brave
+suspended itself after 5 queries. Bing carries most of it, with DuckDuckGo behind it, and niche technical queries are
+the weak spot. **No paid fallback for now**: nothing justifies the cost yet, and this decision makes adding one small.
+
 ## Consequences
 
 - Swapping or adding a backend changes nothing for callers.
-- A hosted fallback would be mcpgw's first paid dependency and first API key, in the existing Secret.
+- A hosted fallback would be mcpgw's first paid dependency, and would add its first Secret.
 - Engine errors must be logged well enough to judge the trial (`searxng.error`).
