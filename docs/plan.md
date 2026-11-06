@@ -38,9 +38,11 @@ it isn't trivial, rendering JavaScript pages, public exposure.
 | D7 | Apps limit which URLs may be fetched | decided: [ADR 0007](adr/0007-keeping-data-from-leaking-through-web-fetch.md). Its harness rule isn't in use (D12) |
 | D8 | Only arch and the cluster can reach mcpgw and llmgw; no auth | decided by the user: [ADR 0008](adr/0008-only-arch-and-the-cluster-no-auth.md) |
 | D9 | Search behind a replaceable provider; SearXNG first | decided: [ADR 0009](adr/0009-search-behind-a-replaceable-provider.md) |
-| D10 | Hosted search fallback? | **not now:** the M3 trial found results for all 21 queries, so nothing justifies paying yet. Bing carries most of it, and weak spots are on the record ([progress.md](progress.md)). The provider layer makes it a small change later ([ADR 0009](adr/0009-search-behind-a-replaceable-provider.md)) |
+| D10 | Hosted search fallback? | **not now:** the M3 trial found results for all 21 queries, so nothing justifies paying yet. Bing carries most of it, and weak spots are on the record ([progress.md](progress.md)). The provider layer makes it a small change later ([ADR 0009](adr/0009-search-behind-a-replaceable-provider.md)) **Up for review in M9:** that trial counted whether results came back, not whether they were any good. |
 | D12 | Should harnesses use mcpgw? | **no, for now: the user's decision.** Only home apps call it: [ADR 0010](adr/0010-home-apps-only-for-now.md) |
-| D11 | PDF in v1 or later? | **later:** v1 refuses PDFs with a clear message. Parsing them needs a heavy library and adds attack surface, and no finish line depends on it |
+| D11 | PDF in v1 or later? | **later:** v1 refuses PDFs with a clear message. Parsing them needs a heavy library and adds attack surface, and no finish line depends on it **Up for review in M9, step 4.** |
+| D13 | Keep SearXNG as the search backend? | **yes for now, until the benchmark says otherwise:** nothing open source and self-hosted beat it in the 2026-11-06 research. It has no index of its own, so its quality depends on which engines tolerate it |
+| D14 | Can the M9 benchmark run Claude against mcpgw? | **open, the user's call.** An exception to [ADR 0010](adr/0010-home-apps-only-for-now.md): one question at a time, with no change to Claude's config |
 
 When a decision is made, record it as an ADR in [adr/](adr/), update this table, and log it in
 [progress.md](progress.md).
@@ -156,6 +158,58 @@ Decided by the user in [ADR 0008](adr/0008-only-arch-and-the-cluster-no-auth.md)
 - [x] Deployed, and checked in a browser on arch
 
 v1 is done after the remaining "by the user" items.
+
+### M9: Tool quality ⬜
+
+Planned with the user on 2026-11-06, to start later. Measure first, then change one thing at a time and measure again.
+
+First measurements, from the live tools on 2026-11-06. They came from a one-off test, not yet from the benchmark in step 0:
+
+| Measure | Today | Target |
+|---|---|---|
+| Search results on the topic | 61% of the top 5 | At least 90% |
+| First search result on the topic | 14 of 30 | |
+| Chinese and `site:` searches on the topic | 0 of 15, and 0 of 10 | |
+| Searches that came back empty, in a model test | 8 of 29 | Under 5% |
+| Pages with usable text | 23 of 35 | At least 75% |
+| Model answers right, GPT-5.6 Luna | 9 of 15, with 3 partial | Within about 10 points of Claude's |
+
+The targets are proposals. "On the topic" only means a result mentions the query's subject, not that it's correct, which is
+one reason step 0 comes first. The search numbers are probably somewhat worse than normal use, because the testing itself
+drew CAPTCHAs from the engines, all from one home IP.
+
+- [ ] **Step 0, benchmark:** `dev/benchmark/` in this repo, so any change can be measured the same way
+  - Same Claude model and questions, with only the tools changing: Claude Code's WebSearch and WebFetch as the baseline,
+    mcpgw today, and mcpgw after each step. It needs D14
+  - About 50 questions, run at least twice: fresh facts with answers pulled live from each project's own data, dated facts
+    with hand-checked answers, then documents, PDFs, Chinese, and sites that block us. Start with 30 on a cheaper model
+  - Answers are graded right, partial or wrong without knowing which setup produced them, and a confident wrong answer counts
+    worse than "I couldn't confirm". It also records empty searches, fetch success, tool calls and time
+  - It's paced to protect the home IP, and the Claude runs need weekly allowance to spare
+  - Limits: this measures Claude Code's search, not the API's tool, which needs a paid key. Claude Code's WebFetch may also
+    summarize pages before the model sees them, so fetching isn't a pure like-for-like
+- [ ] **Step 1, engines:** add Yahoo, drop Brave and re-check Bing, in the chart's SearXNG settings
+  - Yahoo alone scored 98% on the topic against 57% on the same 25 queries, with the first result on the topic 25 of 25
+    against 10 of 25, and Chinese and `site:` worked. That's one day from one IP, so it needs a backup engine
+  - Brave is nearly always rate-limited here. Google, Qwant, Startpage, Mojeek, Baidu and Sogou were blocked or failing too
+- [ ] **Step 2, honest search:** separate "nothing found" from "engines failed", retry once, and send Chinese queries with
+  a suitable language setting
+- [ ] **Step 3, cleaner fetch:** remove link addresses from page text. They take a median 23% of what's returned and up to
+  78% on Chinese pages, and homestorm refuses to follow them anyway ([ADR 0007](adr/0007-keeping-data-from-leaking-through-web-fetch.md))
+- [ ] **Step 4, PDFs:** read them in the existing limited workers. This reopens D11, so weigh the library's size and attack
+  surface against the gap: forms and papers are often PDFs
+- [ ] **Step 5, decide:** compare with Claude's baseline, and only add these if the numbers call for them
+  - Re-ranking: 86% to 98% in a simulation on 12 queries, and mostly useful if Bing stays
+  - A hosted search fallback when SearXNG comes back empty (D10), with Brave the first candidate on price. It needs no change
+    for callers ([ADR 0009](adr/0009-search-behind-a-replaceable-provider.md)), but queries would also go to that vendor
+
+**Deploying:** step 1 goes live on push, because Argo syncs the chart. Steps 2 to 4 need the image tag bumped in arch-infra, so
+ask first each time ([CLAUDE.md](../CLAUDE.md)).
+
+**Not planned:**
+- **JavaScript rendering:** it means running a heavy browser for a few pages, and Anthropic's own fetch tool doesn't do it.
+- **Disguising fetches as a browser:** sites that refuse mcpgw stay refused. Where one offers an official API, such as the npm
+  registry, a model can use that instead.
 
 ## Future work
 

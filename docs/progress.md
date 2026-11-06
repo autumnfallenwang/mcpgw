@@ -6,6 +6,14 @@ A dated log of what was done and decided, newest first. The plan and milestone s
 
 ## 2026-11-06
 
+- **M9 planned: how good are the tools for a chatbot?** Usable today, but not dependable yet. `web_search` is the weak link.
+  - **Measured on the live tools:** 61% of search results on the topic, 0 of 15 for Chinese and 0 of 10 for `site:`, and 8 of 29
+    searches empty in a model test. 23 of 35 pages gave usable text. GPT-5.6 Luna got 9 of 15 questions right, 3 partly.
+  - **Yahoo stood out:** alone on the same 25 queries, 98% on the topic against 57%. It isn't in the engine list yet.
+  - **Comparing with Claude's search:** not done yet. The plan is to build a benchmark first, in M9 step 0.
+  - **SearXNG stays for now** (D13). Stract and Whoogle are archived, YaCy and Marginalia have their own but smaller indexes, and
+    hosted APIs aren't open source.
+  - **Nothing was changed** in mcpgw or on the cluster for this. The user chose to update the plan now and do the work later.
 - **M8: a status page at `/docs`,** for looking at mcpgw in a browser on arch: version, search health, engines that failed in the
   last hour, the tools and their inputs, how to connect, and log queries. Not Swagger, since the tools all sit behind one
   `POST /mcp`. Checked in a real browser against the real SearXNG, and the page's client example was run for real.
