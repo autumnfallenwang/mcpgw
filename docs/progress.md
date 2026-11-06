@@ -6,7 +6,9 @@ A dated log of what was done and decided, newest first. The plan and milestone s
 
 ## 2026-11-05
 
-- **Repo created, private for now:** `autumnfallenwang/mcpgw`, with README, plan, this log, ADRs 0001–0009, the updated
+- **M1 done: the repo is public.** The user made it public, since auto mode refuses to. Checked with no credentials:
+  the repo page and the raw README both load. Next is M2.
+- **Repo created, private at first:** `autumnfallenwang/mcpgw`, with README, plan, this log, ADRs 0001–0009, the updated
   design and the test scripts under `dev/`. It's plain Markdown docs only for now: no code, no devkit scaffold. Auto
   mode refused to create a public repo, so making it public is the user's step, and the last item in M1. It should
   happen before M2, because the cluster pulls images anonymously and GHCR images inherit the repo's visibility.

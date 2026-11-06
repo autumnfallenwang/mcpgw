@@ -62,13 +62,10 @@ couldn't cover: Traefik, the real hostname, and a second device.
   ([dev/harness-check/](../dev/harness-check/))
 - [x] Design checked against MCP `2026-07-28`, SDK v2, OWASP and vendor docs, then corrected
 
-### M1: Repo and docs 🔄
+### M1: Repo and docs ✅
 
-- [x] Repo `autumnfallenwang/mcpgw`, private for now
+- [x] Public repo `autumnfallenwang/mcpgw`, like the sibling apps (made public by the user)
 - [x] README, plan, progress, ADRs 0001–0009, `.gitignore`, `.dockerignore`
-- [ ] **By the user:** make the repo public, like the sibling apps, before M2 (the cluster pulls images anonymously,
-  and GHCR images inherit the repo's visibility):
-  `gh repo edit autumnfallenwang/mcpgw --visibility public --accept-visibility-change-consequences`
 
 ### M2: Deployed skeleton ⬜
 
