@@ -9,7 +9,7 @@ A dated log of what was done and decided, newest first. The plan and milestone s
 - **M8: a status page at `/docs`,** for looking at mcpgw in a browser on arch: version, search health, engines that failed in the
   last hour, the tools and their inputs, how to connect, and log queries. Not Swagger, since the tools all sit behind one
   `POST /mcp`. Checked in a real browser against the real SearXNG, and the page's client example was run for real.
-  Not deployed yet: that needs the user's OK to bump the tag in arch-infra.
+  Deployed on the user's OK.
 - **Grafana:** mcpgw and homestorm added to the "Home apps — HTTP overview" dashboard.
 - **`CLAUDE.md`:** stay inside this repo unless the user asks for a specific change outside it.
 

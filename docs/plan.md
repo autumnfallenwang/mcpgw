@@ -149,11 +149,11 @@ Decided by the user in [ADR 0008](adr/0008-only-arch-and-the-cluster-no-auth.md)
 - [x] **By the user:** installed the firewall rule ([deploy/host/](../deploy/host/)), which also blocks Ollama from other devices.
   llmgw's Ollama calls still work
 
-### M8: Status page 🔄
+### M8: Status page ✅
 
 - [x] Read-only page at `/docs` ([design §4.2](design.md)), checked in a real browser against the real SearXNG
 - [x] mcpgw and homestorm added to Grafana's "Home apps — HTTP overview" dashboard
-- [ ] **Waiting for the user's OK:** deploy it, by bumping the image tag in arch-infra
+- [x] Deployed, and checked in a browser on arch
 
 v1 is done after the remaining "by the user" items.
 
