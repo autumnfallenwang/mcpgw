@@ -3,10 +3,11 @@ use_default_settings:
   engines:
     # Few engines, to keep upstream traffic low and the home IP from being refused. Google isn't
     # here: it refused every query from this IP in the M3 trial, and only added errors to the logs.
+    # Brave isn't either: it was nearly always rate-limited. See dev/benchmark/ before changing this.
     keep_only:
-      - bing
+      - yahoo
       - duckduckgo
-      - brave
+      - bing
       - wikipedia
       - github
       - stackoverflow
@@ -34,8 +35,13 @@ server:
 
 # keep_only leaves each engine's default on/off state, and Bing is off by default.
 engines:
+  - name: yahoo
+    disabled: false
+  # A backup. It returns the most off-topic results and ignores site:, so at this weight it fills in
+  # when the others have too little, rather than leading.
   - name: bing
     disabled: false
+    weight: 0.2
   - name: bing news
     disabled: false
   - name: duckduckgo news
