@@ -1,0 +1,578 @@
+{
+ "claude-mcpgw-run1.json|drizzle": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "The command is `drizzle-kit generate`. It reads your schema, compares it to the latest snapshot in your migrations folder, and writes the SQL migration file(s). The `drizzle-kit migrate` command then applies them to the database.\n\nSources:\n- https://orm.drizzle.team/docs/drizzle-kit-generate\n- https://orm.drizzle.team/docs/migrations"
+ },
+ "gpt-mcpgw-run1.json|pdf-i140": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "The edition date in the page footer is **06/07/24**.  \n[USCIS Form I-140 Instructions PDF](https://www.uscis.gov/sites/default/files/document/forms/i-140instr.pdf)"
+ },
+ "claude-mcpgw-run2.json|zh-niw": {
+  "grade": "right",
+  "why": "完整准确列出三项标准，并提供了来源链接。",
+  "by": "judge",
+  "answer": "**Dhanasar 三项标准**（*Matter of Dhanasar*, 26 I&N Dec. 884, AAO 2016）：申请人需证明以下三点，且整体上豁免劳工证更有利于美国：\n\n1. **拟议工作具有实质价值（substantial merit）且具有国家层面的重要性（national importance）**。\n2. **申请人有能力推进该工作（well positioned to advance the proposed endeavor）**。\n3. **综合权衡后，豁免劳工证对美国有利（on balance, beneficial to the United States to waive the job offer and labor certification requirements）**。\n\n来源：\n- 判例原文（DOJ EOIR 收录）：https://www.justice.gov/eoir/page/file/920996/dl\n- 概述：https://immigrationreadiness.com/guides/eb-2-niw-dhanasar/\n- 逐条说明：https://iaexperts.com/en/guides/matter-of-dhanasar-three-prongs\n\n注意：有一篇律所文章提到 2025 年有新的指导意见更新，但我没有核实其具体内容，如需最新要求，请以 USCIS Policy Manual 官方页面为准。"
+ },
+ "claude-mcpgw-run2.json|pdf-paper": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "The paper uses **warmup_steps = 4000** (Section 5.3, Equation 3). The learning rate rises linearly for the first 4000 steps, then decays proportionally to the inverse square root of the step number.\n\nSource: https://arxiv.org/pdf/1706.03762 (Section 5.3, \"Optimizer\")"
+ },
+ "gpt-mcpgw-run1.json|sourdough": {
+  "grade": "right",
+  "why": "It gives sound causes and fixes for dense sourdough and includes a source link.",
+  "by": "judge",
+  "answer": "Dense sourdough is usually **underproofed**: it didn’t ferment long enough to develop enough gas. Common causes include:\n\n- **Weak or immature starter:** Use it when it’s risen, bubbly, loose, and sour-smelling.\n- **Dough too cold:** Ferment it somewhere warmer or extend bulk fermentation.\n- **Shaping too early:** Wait until the dough is puffy, jiggly, and visibly expanded; a quick-springing poke indicates it needs more time.\n- **Too little water:** A stiff dough can produce a tight crumb—slightly increase hydration.\n- **Gummy rather than dense:** Bake longer and cool at least 1–2 hours before slicing.\n\nAlso avoid relying strictly on recipe times; temperature and starter strength change fermentation speed.\n\nSource: [Elevation Baking, “Why Is My Sourdough Dense?”](https://www.elevationbaking.com/adjustments/sourdough-dense-crumb)"
+ },
+ "claude-mcpgw-run1.json|zh-postgres": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "PostgreSQL 目前最新的稳定版本是 **18.6**。\n\n- 官方发布说明页面的 PostgreSQL 18 列表中，最新一项是 18.6，其上没有更高的 18.x 版本。[postgresql.org/docs/release/](https://www.postgresql.org/docs/release/)\n- 第三方站点 databasefaqs 称 18.6 发布于 2026-08-13，并说 18.5 从未发布。[databasefaqs.com](https://databasefaqs.com/postgresql-latest-version/) 我没能在官方页面上核实这个发布日期。\n- 下一个大版本 PostgreSQL 19 目前是 RC 1（2026-10-15 发布），还不是正式稳定版。[postgresql.org/docs/release/](https://www.postgresql.org/docs/release/)"
+ },
+ "gpt-mcpgw-run1.json|zh-world-cup": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "2026 年世界杯尚未举行（决赛计划于 2026 年 7 月 19 日进行），因此目前没有冠军或决赛比分。搜索结果中出现的“西班牙 1–0 阿根廷”并非可信的官方赛果，不能据此确认。"
+ },
+ "claude-mcpgw-run1.json|nobel": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "The 2026 Nobel Prize in Physics went to **Francis Halzen** \"for decisive contributions to the IceCube Neutrino Observatory and the discovery of high-energy neutrinos of astrophysical origin.\"\n\nSources: [NobelPrize.org press release](https://www.nobelprize.org/prizes/physics/2026/press-release/), [AIP](https://www.aip.org/aip/aip-congratulates-2026-nobel-prize-winner-in-physics), [Scientific American](https://www.scientificamerican.com/article/2026-nobel-prize-in-physics-awarded-to-francis-halzen-for-discovery-of-high-energy-neutrinos/)"
+ },
+ "claude-mcpgw-run1.json|super-bowl": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "The Seattle Seahawks won Super Bowl LX, beating the New England Patriots 29–13 on February 8, 2026, at Levi's Stadium in Santa Clara, California.\n\nSources:\n- https://www.espn.com/nfl/game/_/gameId/401772988/seahawks-patriots\n- https://en.wikipedia.org/wiki/Super_Bowl_LX\n- https://www.espn.com/nfl/story/_/id/47822193/2026-super-bowl-lx-patriots-seahawks-live-highlights-results"
+ },
+ "claude-mcpgw-run1.json|nftables": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "In the ip family, the `raw` priority keyword is **-300**, the traditional priority of the iptables raw table, placed before connection tracking.\n\nSource: [nftables wiki – Netfilter hooks](https://wiki.nftables.org/wiki-nftables/index.php/Netfilter_hooks) (priority table, which lists `raw` as -300 for all families except bridge, where the keyword values differ)."
+ },
+ "gpt-mcpgw-run1.json|super-bowl": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "The **Seattle Seahawks** won Super Bowl LX, defeating the **New England Patriots 29–13**. [ESPN](https://www.espn.com/nfl/story/_/id/47822193/2026-super-bowl-lx-patriots-seahawks-live-highlights-results)"
+ },
+ "gpt-mcpgw-run1.json|better-auth": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "The `advanced.cookiePrefix` option sets a custom cookie prefix:\n\n```ts\nadvanced: {\n  cookiePrefix: \"my-app\"\n}\n```\n\n[Better Auth cookie documentation](https://better-auth.com/docs/concepts/cookies)"
+ },
+ "claude-mcpgw-run2.json|python": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "The latest stable Python release is **3.15.2**, according to python.org's \"latest\" download page and the official release blog post.\n\nSources:\n- https://www.python.org/downloads/latest/ (lists Python 3.15.2)\n- https://blog.python.org/2026/10/python-3152-31410-31318-31216-31118/ (announced Oct 26, 2026)\n\nI didn't find a later stable release, but my check wasn't exhaustive. The python.org downloads page I fetched returned only a fallback version without the version number, so I couldn't confirm it there."
+ },
+ "claude-mcpgw-run2.json|rfc9110": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "Section **9.2.2** (\"Idempotent Methods\") of RFC 9110 defines idempotent methods.\n\nSources:\n- https://www.rfc-editor.org/rfc/rfc9110.html (the full RFC; section 2.4 cross-references Section 9.2.2 for automatic retries)\n- https://velog.io/@hansolo/RFC-9110-9.2.2-Idempotent-Methods (quotes the section heading and definition)\n\nI didn't read the 9.2.2 text directly from the RFC-editor page. The heading is confirmed by the velog quote and the cross-reference."
+ },
+ "gpt-mcpgw-run1.json|pdf-w9": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "The catalog number is **10231X**. [IRS Form W-9 PDF](https://www.irs.gov/pub/irs-pdf/fw9.pdf)"
+ },
+ "claude-mcpgw-run2.json|pdf-w9": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "The Cat. No. is **10231X**. It appears at the bottom of page 1 as \"Cat. No. 10231X Form W-9 (Rev. 3-2024).\"\n\nSource: https://www.irs.gov/pub/irs-pdf/fw9.pdf"
+ },
+ "gpt-mcpgw-run1.json|drizzle": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "The command is:\n\n```bash\ndrizzle-kit generate\n```\n\nTypically:\n\n```bash\nnpx drizzle-kit generate\n```\n\nIt generates SQL migration files from your Drizzle schema changes. [Drizzle documentation](https://orm.drizzle.team/docs/drizzle-kit-generate)"
+ },
+ "claude-mcpgw-run1.json|nba": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "The New York Knicks won the 2026 NBA Finals, beating the San Antonio Spurs **4–1**. The series ran June 3–13, 2026, and Jalen Brunson was named Finals MVP.\n\nSources:\n- https://en.wikipedia.org/wiki/2026_NBA_Finals\n- https://nbaplayoffpass.com/nba-finals-2026/"
+ },
+ "claude-mcpgw-run1.json|next": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "The latest stable Next.js release is **16.4.5**. GitHub marks it as \"Latest,\" and it was released on 3 November 2026. It's a security release that fixes several moderate advisories.\n\nSource: https://github.com/vercel/next.js/releases/tag/v16.4.5"
+ },
+ "claude-mcpgw-run1.json|sourdough": {
+  "grade": "right",
+  "why": "It gives plausible causes and fixes for dense sourdough and includes a source link.",
+  "by": "judge",
+  "answer": "Most dense sourdough comes from fermentation or handling problems, not the recipe. The usual causes and fixes:\n\n1. **Starter wasn't ready.** Feed it and wait until it visibly doubles and peaks before using it. A starter that takes 10–12 hours to double is too weak for a full loaf.\n2. **Underfermented bulk.** Look for about 50–75% volume increase, bubbles, and a jiggly dough before shaping. Cold kitchens (below about 68°F) need a longer bulk.\n3. **Overproofed.** If the loaf rose and then collapsed or spread, it fermented too long. Check it sooner next time.\n4. **Gummy middle from an underbake or early slicing.** Bake until the interior reaches about 205–210°F on an instant-read thermometer, and let it cool before cutting.\n5. **Weak shaping or a too-cool oven.** Tighten the dough when shaping, and preheat the Dutch oven 45–60 minutes so the loaf springs.\n\nFix one variable at a time and keep notes on starter activity, bulk temperature, and bake time.\n\nSources:\n- Sourdough Savvy, \"Why Is My Sourdough Dense? (8 Real Causes + Fixes)\": https://sourdoughsavvy.com/why-is-my-sourdough-dense/ (main source for the list above)\n- How to Make Sourdough, \"Why Is My Sourdough Bread Dense? 7 Real Causes and How to Fix Each One\": https://howtomakesourdough.com/overproofed-sourdough/why-is-my-sourdough-bread-dense/ (I only saw its search snippet; the fetched text was mismatched, so I didn't rely on it)"
+ },
+ "claude-mcpgw-run1.json|postgres": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "The latest stable PostgreSQL release is **18.6**, released 2026-08-13.\n\nPostgreSQL 19 is in release candidate stage (RC 1 was released 2026-10-15), so it isn't stable yet. I didn't find a general-availability announcement for 19, but the homepage I checked may not be current.\n\nSources:\n- https://www.postgresql.org/ (current minor releases and the PostgreSQL 19 RC 1 announcement)\n- https://www.postgresql.org/support/versioning/ (18.6 listed as the current minor for major version 18)"
+ },
+ "gpt-mcpgw-run1.json|nobel": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "The 2026 Nobel Prize in Physics was awarded to **Francis Halzen** of the University of Wisconsin–Madison:\n\n> “For decisive contributions to the IceCube Neutrino Observatory and the discovery of high-energy neutrinos of astrophysical origin.”\n\nHe was recognized for leading the development of IceCube, a neutrino detector built into Antarctic ice. [Nobel Prize announcement](https://www.nobelprize.org/prizes/physics/2026/press-release/)"
+ },
+ "claude-mcpgw-run2.json|stack-overflow": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "I couldn't open the Stack Overflow page itself (it returned HTTP 403), so this comes from search results and secondary sources.\n\n**Author:** Mysticial appears to have written the top answer. A secondary summary of the thread credits \"answers by Mysticial\" first among the contributors ([caspimind.com](https://caspimind.com/videos/why-sorted-arrays-are-faster/)). I haven't confirmed the vote counts, so treat \"top\" as likely rather than verified.\n\n**Main explanation:** Branch prediction. The loop's `if (data[c] >= 128)` branch is unpredictable on random data, so the CPU mispredicts often (roughly half the time), and each misprediction flushes the instruction pipeline. Sorted data makes the condition true for one long run and then false for another, so the predictor is almost always right. The question's own text is consistent with this: it's about conditional processing of a sorted versus unsorted array ([stackoverflow.com](https://stackoverflow.com/questions/11227809/why-is-conditional-processing-of-a-sorted-array-faster-than-of-an-unsorted-array)).\n\nSources:\n- https://stackoverflow.com/questions/11227809/why-is-conditional-processing-of-a-sorted-array-faster-than-of-an-unsorted-array (search snippet only)\n- https://caspimind.com/videos/why-sorted-arrays-are-faster/"
+ },
+ "claude-mcpgw-run1.json|world-cup": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "Spain won the 2026 FIFA World Cup, beating Argentina 1–0 after extra time in the final on July 19, 2026, at MetLife Stadium in East Rutherford, New Jersey. Ferran Torres scored the winner from a Nico Williams header.\n\nSources:\n- https://en.wikipedia.org/wiki/2026_FIFA_World_Cup_final\n- https://www.worldcupmatchtime.com/en/world-cup-2026-results\n- https://worldcupwiki.com/2026-fifa-world-cup-final/"
+ },
+ "claude-mcpgw-run1.json|grafana": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "The latest stable Grafana release is **13.3.0**, released 27 Oct 2026.\n\nSources:\n- https://github.com/grafana/grafana/releases/tag/v13.3.0 (GitHub's \"latest release\" page resolved to this tag)\n- https://versionlog.com/grafana/ (lists 13.3.0 as \"Latest Stable\")\n\nI didn't check the official grafana.com download page directly, so the two sources above are what this answer rests on."
+ },
+ "claude-mcpgw-run2.json|drizzle": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "**`drizzle-kit generate`** generates SQL migration files from your schema changes. You then apply them with `drizzle-kit migrate`.\n\nSources:\n- https://orm.drizzle.team/docs/migrations\n- https://orm.drizzle.team/docs/drizzle-kit-generate"
+ },
+ "claude-mcpgw-run1.json|oscars": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "*One Battle After Another* won Best Picture at the 98th Academy Awards, held March 15, 2026. Paul Thomas Anderson also won Best Director for it.\n\nSources:\n- https://abcnews.com/GMA/Culture/oscars-2026-full-winners-list/story?id=130769299\n- https://www.oscars.org/oscars/ceremonies/2026\n- https://en.wikipedia.org/wiki/98th_Academy_Awards"
+ },
+ "claude-mcpgw-run1.json|rfc9110": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "Section **9.2.2** (\"Idempotent Methods\") of RFC 9110 defines idempotent methods. It sits under 9.2 (Common Method Properties).\n\nSources:\n- https://rfcinfo.com/rfc-9110/9/ (quotes 9.2.2 text)\n- https://www.rfc-editor.org/rfc/rfc9110.html (the RFC itself)"
+ },
+ "claude-mcpgw-run2.json|nftables": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "The `raw` keyword in the `ip` family stands for **-300**.\n\nSource: [nftables wiki – Netfilter hooks](https://wiki.nftables.org/wiki-nftables/index.php/Netfilter_hooks), which lists `raw` as -300 (NF_IP_PRI_RAW) for the inet, ip, and ip6 families. The wiki notes that bridge-family keywords map to different values, so `raw` is -300 only for the ip family."
+ },
+ "claude-mcpgw-run2.json|nba": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "The New York Knicks won the 2026 NBA Finals, beating the San Antonio Spurs **4–1**. The series ran June 3–13, 2026, and Jalen Brunson was named Finals MVP.\n\nSources:\n- https://en.wikipedia.org/wiki/2026_NBA_Finals\n- https://nbaplayoffpass.com/nba-finals-2026/"
+ },
+ "claude-mcpgw-run2.json|typescript": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "The latest stable TypeScript release is **7.0.2**.\n\nSources:\n- npm package page: https://www.npmjs.com/package/typescript (lists \"Latest version: 7.0.2\")\n- DevCurrent: https://devcurrent.net/tech/typescript (says 7.0.2 was released August 20, 2026)\n- versio.io: https://www.versio.io/en/product-release-end-of-life-eol-microsoft-typescript.html\n\nI confirmed this from search snippets only and didn't open the pages or the GitHub releases page, so check there if you need certainty."
+ },
+ "gpt-mcpgw-run1.json|zh-news": {
+  "grade": "right",
+  "why": "用中文列出三条近期科技新闻，并提供了具体来源链接。",
+  "by": "judge",
+  "answer": "截至 **2026年11月6日**，我找到并能较可靠确认的科技新闻有：\n\n1. **AI芯片先进封装成为新竞争焦点**：AI基础设施建设推动全球加大对先进封装的投资，芯片产业竞争正从设计、制造延伸至封装环节。  \n   来源：[路透社](https://www.reuters.com/world/asia-pacific/ai-boom-turns-chip-packaging-into-next-battleground-semiconductors-2026-11-06/)\n\n2. **科技股因AI投资与监管担忧大跌**：市场担心AI数据中心扩张受政策限制，科技股和半导体股遭遇明显抛售。  \n   来源：[路透社](https://www.reuters.com/business/view-tech-stock-rout-accelerates-retreat-ai-trade-2026-11-05/)\n\n3. **AI基础设施支出前景引发市场不安**：投资者在通胀数据和企业财报公布前，重新评估AI热潮的高额资本开支能否持续。  \n   来源：[路透社](https://www.reuters.com/business/wall-st-week-ahead-tech-swoon-roils-market-us-inflation-data-tap-2026-11-06/)\n\n说明：我无法直接打开路透社全文，因此以上依据搜索结果摘要整理；其他搜索到的部分“新模型发布”等消息缺乏可靠来源，未列入。"
+ },
+ "claude-mcpgw-run2.json|oscars": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "**One Battle After Another** won Best Picture at the 98th Academy Awards, held March 15, 2026. Paul Thomas Anderson won Best Director for it.\n\nSources:\n- https://abcnews.com/GMA/Culture/oscars-2026-full-winners-list/story?id=130769299\n- https://www.oscars.org/oscars/ceremonies/2026\n- https://en.wikipedia.org/wiki/98th_Academy_Awards"
+ },
+ "gpt-mcpgw-run1.json|world-cup": {
+  "grade": "wrong",
+  "why": "It contradicts the guidance, which states Spain beat Argentina 1-0 after extra time.",
+  "by": "judge",
+  "answer": "The 2026 FIFA World Cup final has not yet been played. It is scheduled for **July 19, 2026**, so there is currently no winner or final score."
+ },
+ "claude-mcpgw-run1.json|node": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "The newest Node.js LTS release is **26.13.0** (the Lithium line, v26).\n\n- nodejs.org's release table lists v26 as LTS, and v24 and v22 as LTS too. Those are older lines, so v26 is the newest. https://nodejs.org/en/about/previous-releases\n- The patch number 26.13.0 (released 28 Oct 2026) comes from versionlog.com, a third-party site. I didn't confirm it on an official nodejs.org page, so check https://nodejs.org/en/download or the release blog before relying on the exact number. https://versionlog.com/nodejs/"
+ },
+ "claude-mcpgw-run1.json|pdf-paper": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "The paper uses **warmup_steps = 4000** (Section 5.3, Optimizer, Eq. 3). The learning rate rises linearly for the first 4000 steps, then decays proportionally to the inverse square root of the step number.\n\nSource: https://arxiv.org/pdf/1706.03762"
+ },
+ "gpt-mcpgw-run1.json|linux": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "The latest stable Linux kernel release is **7.3.1**. [kernel.org](https://www.kernel.org/finger_banner)"
+ },
+ "claude-mcpgw-run1.json|uscis-fee": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "The current USCIS premium processing fee for a Form I-140 in the EB-2 NIW category (E21) is **$2,965**. It has been in effect since March 1, 2026, when it replaced the previous $2,805 fee. Requests postmarked on or after that date must include the new fee and a Form I-907.\n\nSources:\n- USCIS official alert: https://www.uscis.gov/newsroom/alerts/uscis-to-increase-premium-processing-fees (fee table lists E21 NIW and non-NIW at $2,965)\n- GreenCardTracker: https://greencardtracker.com/articles/i-140-premium-processing-2026"
+ },
+ "claude-mcpgw-run2.json|better-auth": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "The option is `cookiePrefix`, set in the `advanced` object of the auth options. The default prefix is \"better-auth\", so cookies follow the format `${prefix}.${cookie_name}`.\n\n```ts\nexport const auth = betterAuth({\n    advanced: {\n        cookiePrefix: \"my-app\"\n    }\n})\n```\n\nSource: [Better Auth docs – Cookies](https://better-auth.com/docs/concepts/cookies)"
+ },
+ "claude-mcpgw-run2.json|grafana": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "The latest stable Grafana release is **13.3.0**.\n\nSource: GitHub's \"latest release\" page redirects to the Grafana v13.3.0 release notes: https://github.com/grafana/grafana/releases/tag/v13.3.0\n\nGitHub's \"latest\" flag excludes pre-releases, so this should be the newest stable build. I couldn't confirm the release date, because the official download page didn't show a version number when I fetched it."
+ },
+ "gpt-mcpgw-run1.json|fed": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "The Federal Reserve **held interest rates steady** at its October 28, 2026, meeting. The federal funds target range remains **3.75%–4.00%**. The decision passed 10–2, with two members favoring a 0.25-point increase. [Federal Reserve statement](https://www.federalreserve.gov/monetarypolicy/files/monetary20261028a1.pdf)"
+ },
+ "gpt-mcpgw-run1.json|grafana": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "The latest stable Grafana release I found is **13.3.0**.\n\nSources: [Grafana GitHub releases](https://github.com/grafana/grafana/releases), [Grafana documentation](https://grafana.com/docs/grafana/latest/whatsnew/)."
+ },
+ "gpt-mcpgw-run1.json|hono": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "The latest npm release of Hono is **4.13.16**. [npm registry](https://registry.npmjs.org/hono/latest)"
+ },
+ "claude-mcpgw-run2.json|fed": {
+  "grade": "right",
+  "why": "It correctly states that rates were held unchanged at 3.75% to 4.00%.",
+  "by": "judge",
+  "answer": "The Fed held rates steady at its October 27–28, 2026 meeting. The federal funds target range stays at **3-3/4% to 4%**.\n\n- **Vote:** 10–2. Lisa Cook and Beth Hammack dissented, both preferring a 1/4-point increase.\n- **Statement:** The Committee said it will keep ample reserves in the banking system. It described economic activity as expanding at a strong pace and inflation as still elevated, and said it will act to return inflation to its 2% goal in a timely way.\n\nSources:\n- Fed statement: https://www.federalreserve.gov/newsevents/pressreleases/monetary20261028a.htm\n- CNBC: https://www.cnbc.com/2026/10/28/fed-interest-rate-decision-october-2026.html\n- Fed Gazette: https://fedgazette.com/articles/fomc-statement-october-2026/"
+ },
+ "claude-mcpgw-run2.json|super-bowl": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "The Seattle Seahawks won Super Bowl LX, beating the New England Patriots 29–13 on February 8, 2026, at Levi's Stadium in Santa Clara, California.\n\nSources:\n- https://en.wikipedia.org/wiki/Super_Bowl_LX\n- https://www.espn.com/nfl/game/_/gameId/401772988/seahawks-patriots"
+ },
+ "claude-mcpgw-run1.json|zh-niw": {
+  "grade": "right",
+  "why": "完整准确列出三项标准，并提供了来源链接。",
+  "by": "judge",
+  "answer": "**Dhanasar 三项标准**（出自 *Matter of Dhanasar*, 26 I&N Dec. 884 (AAO 2016)）：申请人需证明：\n\n1. **实质价值与国家重要性**：其拟从事的工作（endeavor）具有实质性价值（substantial merit）和国家层面的重要性（national importance）。\n2. **有能力推进**：申请人已做好充分准备，能够推动该工作（well positioned to advance the proposed endeavor）。\n3. **整体利益大于劳动力市场测试**：综合考虑，若免除劳动力证明（PERM/就业要约），对美国更有利（on balance, it would be beneficial to the United States to waive the requirements of a job offer and thus of a labor certification）。\n\n需要注意：三项标准是以\"优势证据\"（preponderance of the evidence）标准证明的，且申请人还须先证明符合 EB-2 资格（高等学位或同等学力的专业人士，或特殊能力人士）。\n\n**来源：**\n- 司法部 EOIR 上的 Dhanasar 判决全文：https://www.justice.gov/eoir/page/file/920996/dl\n- USCIS 政策手册 第6卷 F 部分 第5章（2025年12月18日更新）：https://www.uscis.gov/policy-manual/volume-6-part-f-chapter-5\n- USCIS 2025年1月15日 NIW 政策更新：https://www.uscis.gov/sites/default/files/document/policy-manual-updates/20250115-Employment-BasedNationalInterestWaivers.pdf\n\n我只通过搜索摘要确认了上述内容，未逐页完整阅读；如需具体证据要求或最新政策细节，请以 USCIS 政策手册原文为准，并咨询移民律师。"
+ },
+ "claude-mcpgw-run1.json|fed": {
+  "grade": "right",
+  "why": "It correctly states rates were held unchanged at 3.75% to 4.00%.",
+  "by": "judge",
+  "answer": "The Fed held rates steady at its October 27–28, 2026 meeting. The target range for the federal funds rate is **3-3/4 to 4 percent**, unchanged.\n\nThe vote was 10–2. Lisa Cook and Beth Hammack dissented, both preferring a 1/4-point increase. The statement says inflation \"remains elevated\" and that economic activity is expanding at a strong pace.\n\nSources:\n- Federal Reserve statement (primary source): https://www.federalreserve.gov/newsevents/pressreleases/monetary20261028a.htm\n- CNBC: https://www.cnbc.com/2026/10/28/fed-interest-rate-decision-october-2026.html"
+ },
+ "claude-mcpgw-run1.json|python": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "The latest stable Python release is **3.15.2**, released October 25, 2026.\n\nSources:\n- https://www.python.org/downloads/latest/ (lists Python 3.15.2)\n- https://blog.python.org/2026/10/python-3152-31410-31318-31216-31118/ (release announcement)\n\nI saw these only in search snippets. The python.org downloads page I fetched didn't show a version number, so I haven't checked for anything released after October 26."
+ },
+ "claude-mcpgw-run1.json|zh-news": {
+  "grade": "right",
+  "why": "用中文列出三条近期科技新闻并提供了具体来源链接。",
+  "by": "judge",
+  "answer": "以下是截至2026年11月6日的三条重要科技新闻，均来自我检索到的报道：\n\n1. **中国空间站超冷原子实验刷新人造物质最低温纪录**：中国科研团队利用空间站梦天舱的超冷原子实验柜，将铷原子云等效温度降至9.7皮开尔文，比2021年德国团队的38皮开尔文更接近绝对零度，成果发表于《科学》期刊。\n   来源：中华网（环球网转载）https://news.china.com/socialgd/10000169/20261106/49846653_all.html\n\n2. **美国科技股大跌，AI前景受质疑**：11月5日（周四），美国科技股一天蒸发约2.5万亿美元，标普500指数当日跌幅为2025年4月以来最大；首尔、东京、台北股市也接近或进入熊市。\n   来源：纽约时报 https://www.nytimes.com/2026/11/06/business/dealbook/tech-investors-ai-rout.html ；BBC 直播 https://www.bbc.com/news/live/cq62yy619r5dt\n\n3. **Anthropic上市计划面临不确定性**：据华尔街日报援引消息人士称，部分投资者担心Anthropic能否以高达1.5万亿美元的估值完成IPO，该上市原定下周左右进行，可能因市场动荡而推迟或缩减融资规模。\n   来源：纽约时报 https://www.nytimes.com/2026/11/06/business/dealbook/tech-investors-ai-rout.html\n\n注：第3条的细节来自纽约时报的预览版（全文未完整加载），且引用的是华尔街日报的未具名消息来源，请以原文为准。"
+ },
+ "gpt-mcpgw-run1.json|zh-niw": {
+  "grade": "right",
+  "why": "完整列出三项标准，并提供了来源链接。",
+  "by": "judge",
+  "answer": "美国 EB-2 NIW 的 **Matter of Dhanasar** 三项标准是：\n\n1. **拟议事业具有实质性价值和国家重要性**  \n   （Substantial Merit and National Importance）\n\n2. **申请人具备推进该拟议事业的良好条件**  \n   （Well Positioned to Advance the Proposed Endeavor）\n\n3. **综合衡量后，豁免工作邀约和劳工证要求对美国有利**  \n   （On Balance, Beneficial to the United States to Waive the Job Offer and Labor Certification Requirements）\n\n此外，申请人仍须先满足 EB-2 基础资格：具有高等学位或具备特殊能力。Dhanasar 标准主要用于判断是否应给予 **国家利益豁免（NIW）**。\n\n来源：  \n- 美国司法部官方判例：[*Matter of Dhanasar*, 26 I&N Dec. 884 (AAO 2016)](https://www.justice.gov/eoir/page/file/920996/dl)  \n- USCIS 国家利益豁免审理指南：[USCIS National Interest Waiver Adjudication Guidance](https://www.uscis.gov/sites/default/files/document/foia/National_Interest_Waiver_Adjudication_Guidance.pdf)"
+ },
+ "claude-mcpgw-run2.json|nobel": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "The 2026 Nobel Prize in Physics went to **Francis Halzen** \"for decisive contributions to the IceCube Neutrino Observatory and the discovery of high-energy neutrinos of astrophysical origin.\"\n\nSources: [NobelPrize.org press release](https://www.nobelprize.org/prizes/physics/2026/press-release/), [AIP](https://www.aip.org/aip/aip-congratulates-2026-nobel-prize-winner-in-physics), [Scientific American](https://www.scientificamerican.com/article/2026-nobel-prize-in-physics-awarded-to-francis-halzen-for-discovery-of-high-energy-neutrinos/)"
+ },
+ "claude-mcpgw-run1.json|react": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "The latest stable React release is **19.3.1**, released October 14, 2026.\n\nSources:\n- GitHub releases (react/react): https://github.com/react/react/releases lists 19.3.1 at the top, dated October 14, 2026.\n- npm: https://www.npmjs.com/package/react?activeTab=versions shows 19.3.1 as the latest version.\n- React 19.3 announcement (Sept 9, 2026): https://react.dev/blog/2026/09/09/react-19-3"
+ },
+ "claude-mcpgw-run1.json|pdf-w9": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "The Cat. No. on the form is **10231X**. It appears on page 1 as \"Cat. No. 10231X Form W-9 (Rev. 3-2024).\"\n\nSource: https://www.irs.gov/pub/irs-pdf/fw9.pdf"
+ },
+ "gpt-mcpgw-run1.json|react": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "The latest stable React release is **19.3.1**. [npm](https://www.npmjs.com/package/react?activeTab=versions)"
+ },
+ "gpt-mcpgw-run1.json|nftables": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "In the `ip` family, nftables’ `raw` priority keyword means **`-300`**. [Source](https://wiki.nftables.org/wiki-nftables/index.php/Netfilter_hooks)"
+ },
+ "claude-mcpgw-run2.json|postgres": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "The latest stable PostgreSQL release is **18.6**, released 2026-08-13. The PostgreSQL homepage lists it as the newest release across supported branches (18.6, 17.11, 16.15, 15.19, 14.24). PostgreSQL 19 is still in release candidate testing (RC1 was released 2026-10-15), so it isn't stable yet.\n\nSources:\n- https://www.postgresql.org/ (release list and PostgreSQL 19 RC1 announcement)\n- https://databasefaqs.com/postgresql-latest-version/ (also reports 18.6)\n\nMinor releases usually come out quarterly, so a newer minor release could appear soon. I didn't find one in my search results, but I haven't confirmed a date for it."
+ },
+ "claude-mcpgw-run2.json|zh-postgres": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "PostgreSQL 目前最新的稳定版本是 **18.6**，发布日期为 2026-08-13。\n\n依据：\n- 官网首页列出的最新稳定版本为 18.6（2026-08-13）：https://www.postgresql.org/\n- 第三方汇总页 patchletter 也写明 18.6，但日期格式不统一，我以官网日期为准：https://patchletter.com/en/software/postgresql\n\n另外，PostgreSQL 19 目前只有 RC 版本（官网显示 2026-10-15 发布 RC 1），尚未正式发布，因此不算稳定版。PostgreSQL 14 将于 2026-11-12 停止接收修复。"
+ },
+ "claude-mcpgw-run2.json|zh-world-cup": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "2026 年世界杯冠军是**西班牙**。决赛在 MetLife Stadium 进行，西班牙 **1-0** 阿根廷（加时赛后决出），Ferran Torres 打入制胜球。\n\n来源：\n- https://worldcupwiki.com/2026-fifa-world-cup-final/\n- https://worldcupteams.com/results/\n- https://en.wikipedia.org/wiki/2026_FIFA_World_Cup_final\n\n这几个来源比分一致，但决赛日期的记载不同（有的写 7 月 4 日，维基百科写 7 月 19 日），我没有进一步核实，以维基百科为准。"
+ },
+ "gpt-mcpgw-run1.json|nba": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "The **New York Knicks** won the 2026 NBA Finals, defeating the **San Antonio Spurs 4–1**. [Basketball-Reference](https://www.basketball-reference.com/playoffs/2026-nba-finals-knicks-vs-spurs.html)"
+ },
+ "gpt-mcpgw-run1.json|oscars": {
+  "grade": "right",
+  "why": "It correctly identifies One Battle After Another as the Best Picture winner.",
+  "by": "judge",
+  "answer": "**_One Battle after Another_** won Best Picture at the 98th Academy Awards. [Academy Awards](https://www.oscars.org/oscars/ceremonies/2026)"
+ },
+ "gpt-mcpgw-run1.json|stack-overflow": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "The top answer was written by **Mysticial**. Its main explanation is **CPU branch prediction**: sorted data makes the conditional branch’s outcome more predictable, reducing costly pipeline mispredictions.  \n\n[Stack Overflow question](https://stackoverflow.com/questions/11227809/why-is-conditional-processing-of-a-sorted-array-faster-than-of-an-unsorted-array)"
+ },
+ "gpt-mcpgw-run1.json|rfc9110": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "RFC 9110 defines idempotent methods in **Section 9.2.2, “Idempotent Methods.”**[RFC 9110](https://www.rfc-editor.org/rfc/rfc9110.html#section-9.2.2)"
+ },
+ "claude-mcpgw-run2.json|kubernetes": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "The latest stable Kubernetes release is **v1.37.2**.\n\n- GitHub's release list shows v1.37.2 as the newest stable patch, ahead of v1.36.6, v1.35.10 and v1.34.13. Only v1.38.0 pre-releases (alpha and beta) sit above it, so 1.38 is not yet stable. ([GitHub releases](https://github.com/kubernetes/kubernetes/releases))\n- The kubernetes.io 1.37 page I found says 1.37.1 was the latest patch as of its last update, so it is older than the GitHub listing. ([Kubernetes 1.37 docs](https://kubernetes.io/releases/1.37/))\n\nI couldn't open the 1.37.2 release notes to confirm its date, so I'm relying on the GitHub listing for that version."
+ },
+ "claude-mcpgw-run1.json|better-auth": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "The option is `cookiePrefix`, set in the `advanced` object of the auth options. The default prefix is \"better-auth\", so cookies are named `${prefix}.${cookie_name}`.\n\n```ts\nexport const auth = betterAuth({\n    advanced: {\n        cookiePrefix: \"my-app\"\n    }\n})\n```\n\nSource: [Better Auth docs: Cookies](https://better-auth.com/docs/concepts/cookies)"
+ },
+ "claude-mcpgw-run2.json|zh-news": {
+  "grade": "partial",
+  "why": "虽列出三条并有链接，但第三条为频道主页且未核实具体内容。",
+  "by": "judge",
+  "answer": "以下是 2026 年 11 月 6 日前后的三条科技新闻：\n\n1. **中国科学家制造出已知最冷的人造物质**：我国科研团队利用中国空间站梦天舱的超冷原子物理实验柜，制造出已知最冷的人造物质，刷新了低温纪录，研究成果已发表于《科学》期刊。\n   来源：https://news.china.com/socialgd/10000169/20261106/49846653_all.html\n\n2. **美国科技股大跌，市场担忧 AI 热潮降温**：周四美国科技股单日蒸发约 2.5 万亿美元，标普 500 指数当日跌幅为 2025 年 4 月以来最大。亚洲部分指数也接近或进入熊市。市场担心 AI 基础设施投入与收入之间的错配。据报道，Anthropic 原定下周末前后的 IPO 也因此受到质疑。\n   来源：https://www.nytimes.com/2026/11/06/business/dealbook/tech-investors-ai-rout.html （该页面仅显示预览，部分内容未能完整核实）\n   另见：https://www.bbc.com/news/live/cq62yy619r5dt\n\n3. **大型强子对撞机实验获得罕见粒子衰变证据**：澎湃新闻频道的标题显示，该实验首次获得一项罕见粒子衰变的证据。我只看到了标题摘要，未能打开原文核实细节。\n   来源：https://www.thepaper.cn/channel_119908\n\n说明：第三条的具体内容我只能确认标题，建议点开原文再核对。"
+ },
+ "gpt-mcpgw-run1.json|pdf-paper": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "The paper used **`warmup_steps = 4000`**. [Source](https://arxiv.org/pdf/1706.03762)"
+ },
+ "gpt-mcpgw-run1.json|node": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "The newest Node.js LTS release is **v26.13.0**. [Official Node.js releases](https://nodejs.org/en/blog/release)"
+ },
+ "claude-mcpgw-run1.json|hono-bearer": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "The import path is `hono/bearer-auth`, used like this:\n\n```ts\nimport { bearerAuth } from 'hono/bearer-auth'\n```\n\nSource: [Bearer Auth Middleware – Hono docs](https://hono.dev/docs/middleware/builtin/bearer-auth)"
+ },
+ "claude-mcpgw-run2.json|hono": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "The latest Hono release on npm is **4.13.16**.\n\nThe npm registry's `latest` endpoint returns this version: https://registry.npmjs.org/hono/latest\n\nSearch snippets listed older versions (4.13.0, 4.13.14), and one listed 5.0.0-rc.1 (https://releasealert.dev/npmjs/_/hono). The registry is the authoritative source. The 5.0.0-rc.1 is a prerelease, not the stable `latest` tag. I did not check the publish date of 4.13.16."
+ },
+ "claude-mcpgw-run2.json|weather": {
+  "grade": "right",
+  "why": "It gives about 62°F, matching the National Weather Service guidance.",
+  "by": "judge",
+  "answer": "The forecast high for Boston on Saturday, November 7, 2026 is **about 62°F**, with rain likely before 1 p.m. and a 60% chance of precipitation.\n\nSource: [National Weather Service forecast for Boston](https://forecast.weather.gov/MapClick.php?lat=42.3601&lon=-71.0589&unit=0&lg=english&FcstType=text), which is the official forecast. Another site, [WeatherShogun](https://weathershogun.com/weather/usa/ma/boston/2111/november/2026-11-07), shows a similar daytime high of 61°F."
+ },
+ "claude-mcpgw-run1.json|linux": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "The latest stable Linux kernel is **7.3.1**, released 2026-10-30, according to the kernel.org release feed ([releases.json](https://www.kernel.org/releases.json)).\n\nTwo related notes:\n- 7.4-rc1 (2026-11-01) is a release candidate, not a stable release ([same feed](https://www.kernel.org/releases.json)).\n- 7.2.15 was released 2026-11-01, but it is the final, end-of-life release of the 7.2 branch, so 7.3.1 is the current stable line ([LWN](https://lwn.net/Articles/1104629/))."
+ },
+ "claude-mcpgw-run2.json|next": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "The latest stable Next.js release is **16.4.5**. GitHub marks it as \"Latest,\" and it was released on 3 November (2026). The release is a security patch.\n\nSources:\n- https://github.com/vercel/next.js/releases/tag/v16.4.5\n- https://github.com/vercel/next.js/releases/latest (redirects to v16.4.5)"
+ },
+ "gpt-mcpgw-run1.json|weather": {
+  "grade": "right",
+  "why": "Around 60°F is within 5°F of the 62°F guidance.",
+  "by": "judge",
+  "answer": "Boston’s forecast high for Saturday is **around 60°F**. [Weather Underground](https://www.wunderground.com/severe/us/ma/boston)"
+ },
+ "claude-mcpgw-run1.json|zh-world-cup": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "2026 年世界杯的冠军是**西班牙**，决赛以 **1-0**（加时赛后）战胜阿根廷。进球者是 Ferran Torres。决赛于 7 月 19 日在新泽西 MetLife 体育场进行。\n\n来源：\n- https://en.wikipedia.org/wiki/2026_FIFA_World_Cup_final\n- https://worldcupwiki.com/2026-fifa-world-cup-final/\n- https://worldcupteams.com/results/"
+ },
+ "gpt-mcpgw-run1.json|zh-postgres": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "截至 **2026 年 11 月 6 日**，PostgreSQL 最新稳定版本是 **18.6**。  \nPostgreSQL 19 仍处于候选发布阶段，尚未正式稳定发布。\n\n来源：[PostgreSQL 官方发布说明](https://www.postgresql.org/docs/release/18.6/)"
+ },
+ "claude-mcpgw-run2.json|pdf-i140": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "The page footer reads **\"Form I-140 Instructions 06/07/24 Page X of 11\"**, so the edition date is **06/07/24** (June 7, 2024).\n\nA separate \"Draft Not for Production 06/11/2024\" stamp also appears on each page, but it's a marking, not the footer date. The text I received also shows OMB No. 1615-0015 with an expiration of 02/28/2027.\n\nSource: https://www.uscis.gov/sites/default/files/document/forms/i-140instr.pdf"
+ },
+ "gpt-mcpgw-run1.json|hono-bearer": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "The import path is:\n\n```ts\nimport { bearerAuth } from 'hono/bearer-auth'\n```\n\n[Hono Bearer Auth documentation](https://hono.dev/docs/middleware/builtin/bearer-auth)"
+ },
+ "claude-mcpgw-run2.json|hono-bearer": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "The import path is `hono/bearer-auth`:\n\n```ts\nimport { bearerAuth } from 'hono/bearer-auth'\n```\n\nSource: https://hono.dev/docs/middleware/builtin/bearer-auth"
+ },
+ "claude-mcpgw-run1.json|kubernetes": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "The latest stable Kubernetes release I could find is **v1.37.2**, but I'm only moderately confident in it.\n\n- **Support for v1.37.2:** GitClear lists it as released October 27, 2026, with v1.37.1 as the previous version. [gitclear.com](https://www.gitclear.com/open_repos/kubernetes/kubernetes/release/v1.37.2)\n- **Conflicting source:** The official [Kubernetes 1.37 page](https://kubernetes.io/releases/1.37/) still names 1.37.1 as the latest patch and lists 1.37.2 as upcoming, so it looks stale. I didn't find an official announcement of 1.37.2.\n- **Newer patches:** My search for v1.37.3 found nothing, but that doesn't rule one out.\n\nFor confirmation, check the [official Kubernetes GitHub releases page](https://github.com/kubernetes/kubernetes/releases)."
+ },
+ "claude-mcpgw-run2.json|react": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "The latest stable React release is **19.3.1**, released October 14, 2026.\n\nSources:\n- GitHub releases: https://github.com/react/react/releases (lists 19.3.1 at the top, dated October 14, 2026)\n- npm: https://www.npmjs.com/package/react?activeTab=versions (lists 19.3.1 as the latest version)"
+ },
+ "claude-mcpgw-run1.json|pdf-i140": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "The page footer reads **06/07/24** (\"Form I-140 Instructions 06/07/24 Page 1 of 11\"), and the same date appears on each page.\n\nThe text extraction also shows a separate \"06/11/2024\" near a \"Draft / Not for Production\" marking. That looks like a different stamp, not the edition date, but I can't confirm its placement from plain text.\n\nSource: https://www.uscis.gov/sites/default/files/document/forms/i-140instr.pdf"
+ },
+ "gpt-mcpgw-run1.json|kubernetes": {
+  "grade": "wrong",
+  "why": "It gives v1.37.0 instead of the correct latest stable version, 1.37.2.",
+  "by": "judge",
+  "answer": "The latest stable Kubernetes release is **v1.37.0**. [Kubernetes releases](https://kubernetes.io/releases/)"
+ },
+ "gpt-mcpgw-run1.json|postgres": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "The latest stable PostgreSQL release is **18.6**. [PostgreSQL](https://www.postgresql.org/)"
+ },
+ "claude-mcpgw-run2.json|uscis-fee": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "The current USCIS premium processing fee for a Form I-140 in the EB-2 NIW category (E21) is **$2,965**. It took effect March 1, 2026, up from $2,805. Submit it with Form I-907.\n\nSources:\n- USCIS: https://www.uscis.gov/newsroom/alerts/uscis-to-increase-premium-processing-fees\n- GreenCardTracker: https://greencardtracker.com/articles/i-140-premium-processing-2026"
+ },
+ "gpt-mcpgw-run1.json|python": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "The latest stable Python release is **Python 3.15.2**. [Python.org](https://www.python.org/downloads/release/python-3152/)"
+ },
+ "claude-mcpgw-run1.json|typescript": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "The latest stable TypeScript release is **7.0.2**.\n\nSources:\n- npm package page: https://www.npmjs.com/package/typescript (lists \"Latest version: 7.0.2\")\n- DevCurrent: https://devcurrent.net/tech/typescript (says 7.0.2 was released August 20, 2026)\n\nI didn't open the GitHub releases page, so I haven't checked it directly."
+ },
+ "claude-mcpgw-run2.json|world-cup": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "Spain won the 2026 FIFA World Cup, beating Argentina **1–0 after extra time** in the final at MetLife Stadium on 19 July 2026. Ferran Torres scored the winning goal.\n\nSources: [WorldCupWiki](https://worldcupwiki.com/2026-fifa-world-cup-final/), [WorldCupMatchTime](https://www.worldcupmatchtime.com/en/world-cup-2026-results), [Wikipedia](https://en.wikipedia.org/wiki/2026_FIFA_World_Cup_final)"
+ },
+ "claude-mcpgw-run2.json|linux": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "The latest stable kernel I could confirm is **Linux 7.3**, but I couldn't pin down an exact point release (such as 7.3.1) beyond that.\n\n- Linux 7.3 was released on October 18, 2026, per [9to5Linux](https://9to5linux.com/linux-kernel-7-3-officially-released-this-is-whats-new).\n- The 7.2 series is end-of-life. Its final release was 7.2.15 on November 1, 2026, per [LWN](https://lwn.net/Articles/1104629/) and [9to5Linux](https://9to5linux.com/linux-kernel-7-2-reaches-end-of-life-its-time-to-upgrade-to-linux-kernel-7-3).\n- The kernel.org homepage didn't list version numbers in the text I could read, so I couldn't check it directly. 9to5Linux returned HTTP 403, so I relied on search snippets for that article."
+ },
+ "gpt-mcpgw-run1.json|typescript": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "The latest stable TypeScript release is **7.0.2**. The npm registry’s `latest` tag confirms it: https://registry.npmjs.org/typescript/latest"
+ },
+ "claude-mcpgw-run2.json|sourdough": {
+  "grade": "right",
+  "why": "It gives sound causes and fixes for dense sourdough and includes source links.",
+  "by": "judge",
+  "answer": "Dense sourdough usually comes from a fermentation or handling problem, not the recipe. The most common causes are:\n\n- **Underproofing:** the dough didn't rise enough before baking. This can come from a weak or unready starter, or cold dough.\n- **Overproofing:** the dough fermented too long, lost its ability to hold gas, and collapsed or baked flat.\n- **Weak shaping:** the loaf spread or lost surface tension during shaping.\n- **Incomplete bake:** the loaf was underbaked, or sliced while still hot and gummy.\n- **Flour or hydration:** whole grain flour or changed flour/water weights can give a heavier crumb.\n\n**Fixes:**\n- Use a starter that has visibly doubled after feeding before you mix.\n- Mark the dough's starting level and check growth, rather than relying only on the clock.\n- Shape more firmly to build surface tension.\n- Bake fully, preheating the oven and Dutch oven well, and let the loaf cool before judging the crumb.\n\nSources: [How To Make Sourdough, \"Why Is My Sourdough Bread Dense?\"](https://howtomakesourdough.com/overproofed-sourdough/why-is-my-sourdough-bread-dense/) and the other search results it appeared with, such as [Flourwise](https://flourwise.com/blog/why-is-my-sourdough-dense/).\n\nNote: when I fetched the How To Make Sourdough link, the returned text was from a different site (flexsourdough.com), so the causes above are checked against that text. I didn't verify the rest of the pages in full."
+ },
+ "claude-mcpgw-run1.json|weather": {
+  "grade": "right",
+  "why": "It gives 62°F, matching the National Weather Service guidance.",
+  "by": "judge",
+  "answer": "The forecast high for Boston on Saturday, November 7, 2026 is about **62°F**, with rain likely and patchy fog, according to the National Weather Service. I only saw this in a search snippet, not the full page, so it could change.\n\nSource: [NWS 7-Day Forecast for Boston (42.36N, 71.07W)](https://forecast.weather.gov/MapClick.php?lat=42.36&lon=-71.07)"
+ },
+ "claude-mcpgw-run2.json|node": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "The newest Node.js LTS release is **26.13.0** (codename \"Lithium\").\n\n- Node.js's official previous-releases page lists v26 as LTS, with v24 and v22 also LTS: https://nodejs.org/en/about/previous-releases\n- The official v26.13.0 release post is marked LTS and notes the move of 26.x into Long Term Support: https://nodejs.org/en/blog/release/v26.13.0\n\nI didn't fetch the v26.13.0 post itself, so the exact version comes from search-result snippets. The other hits, including https://latestat.com/nodejs, also cite 26.13.0."
+ },
+ "claude-mcpgw-run1.json|hono": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "The latest Hono release on npm is **4.13.16**.\n\nThis comes from the npm registry's `latest` endpoint (https://registry.npmjs.org/hono/latest), which lists version 4.13.16 under the `latest` tag.\n\nThe search results were inconsistent. They reported 4.13.0, 4.13.14, and a 5.0.0-rc.1 prerelease, and I didn't confirm their dates. The registry is the authoritative source for the `latest` tag, so I'm going with 4.13.16. I didn't check its publish date."
+ },
+ "gpt-mcpgw-run1.json|uscis-fee": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "The current USCIS premium processing fee for an **EB-2 NIW Form I-140 is $2,965**. This fee applies to Form I-907 requests postmarked on or after **March 1, 2026**. [USCIS](https://www.uscis.gov/newsroom/alerts/uscis-to-increase-premium-processing-fees)"
+ },
+ "gpt-mcpgw-run1.json|next": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "The latest stable Next.js release is **16.4.5**. [npm](https://registry.npmjs.org/next/latest)"
+ },
+ "claude-mcpgw-run1.json|stack-overflow": {
+  "grade": "right",
+  "why": "Matched the key.",
+  "by": "key",
+  "answer": "I couldn't confirm who wrote the top answer. Stack Overflow returned HTTP 403 when I tried to open the question, and the mirror sites I found don't name the answer's author.\n\nThe main explanation is **branch prediction**. The question's code sums values above a threshold. On a sorted array, the `if (x > threshold)` branch is true for a long unbroken run, so the CPU predicts it almost perfectly. On a random array, the outcome flips unpredictably, so the predictor is wrong about half the time, and each misprediction flushes the pipeline. Secondary sources agree on this. The question also notes that caching was ruled out, since the array was just generated.\n\nSources:\n- https://stackoverflow.com/questions/11227809/why-is-conditional-processing-of-a-sorted-array-faster-than-of-an-unsorted-array (search snippet only; page not fetched)\n- https://www.w3tutorials.net/blog/why-is-processing-a-sorted-array-faster-than-processing-an-unsorted-array/\n- https://www.geeksforgeeks.org/dsa/faster-process-sorted-array-unsorted-array/\n\nIf you need the author, open the question page directly. From memory, I believe the top answer is by Mysticial, but I haven't verified that in this session."
+ }
+}

@@ -38,11 +38,11 @@ it isn't trivial, rendering JavaScript pages, public exposure.
 | D7 | Apps limit which URLs may be fetched | decided: [ADR 0007](adr/0007-keeping-data-from-leaking-through-web-fetch.md). Its harness rule isn't in use (D12) |
 | D8 | Only arch and the cluster can reach mcpgw and llmgw; no auth | decided by the user: [ADR 0008](adr/0008-only-arch-and-the-cluster-no-auth.md) |
 | D9 | Search behind a replaceable provider; SearXNG first | decided: [ADR 0009](adr/0009-search-behind-a-replaceable-provider.md) |
-| D10 | Hosted search fallback? | **not now:** the M3 trial found results for all 21 queries, so nothing justifies paying yet. Bing carries most of it, and weak spots are on the record ([progress.md](progress.md)). The provider layer makes it a small change later ([ADR 0009](adr/0009-search-behind-a-replaceable-provider.md)) **Up for review in M9:** that trial counted whether results came back, not whether they were any good. |
+| D10 | Hosted search fallback? | **not now:** M9 measured mcpgw at least level with Claude Code's own search, so nothing justifies paying yet. It's the fallback if the engines degrade |
 | D12 | Should harnesses use mcpgw? | **no, for now: the user's decision.** Only home apps call it: [ADR 0010](adr/0010-home-apps-only-for-now.md) |
 | D11 | PDF in v1 or later? | **now:** a measured gap, read in capped workers: [ADR 0011](adr/0011-read-pdfs-in-capped-workers.md) |
-| D13 | Keep SearXNG as the search backend? | **yes for now, until the benchmark says otherwise:** nothing open source and self-hosted beat it in the 2026-11-06 research. It has no index of its own, so its quality depends on which engines tolerate it |
-| D14 | Can the M9 benchmark run Claude against mcpgw? | **open, the user's call.** An exception to [ADR 0010](adr/0010-home-apps-only-for-now.md): one question at a time, with no change to Claude's config |
+| D13 | Keep SearXNG as the search backend? | **yes:** measured against Claude Code's own search in M9, and nothing open source and self-hosted beat it. The engine mix is [ADR 0012](adr/0012-search-engine-mix.md) |
+| D14 | Can the M9 benchmark run Claude against mcpgw? | **yes:** taken from the user's "go M9 e2e". One question at a time, with no change to Claude's config, so [ADR 0010](adr/0010-home-apps-only-for-now.md) stands |
 
 When a decision is made, record it as an ADR in [adr/](adr/), update this table, and log it in
 [progress.md](progress.md).
@@ -159,52 +159,53 @@ Decided by the user in [ADR 0008](adr/0008-only-arch-and-the-cluster-no-auth.md)
 
 v1 is done after the remaining "by the user" items.
 
-### M9: Tool quality ⬜
+### M9: Tool quality 🔄
 
-Planned with the user on 2026-11-06, to start later. Measure first, then change one thing at a time and measure again.
+Started with the user's "go M9 e2e" on 2026-11-06. How it's measured, and its limits, is in [dev/benchmark/](../dev/benchmark/).
 
-First measurements, from the live tools on 2026-11-06. They came from a one-off test, not yet from the benchmark in step 0:
+**Answers,** 32 questions run twice on Claude Haiku and once on GPT-5.6 Luna, graded blind. Scores run from -50 to 100:
 
-| Measure | Today | Target |
-|---|---|---|
-| Search results on the topic | 61% of the top 5 | At least 90% |
-| First search result on the topic | 14 of 30 | |
-| Chinese and `site:` searches on the topic | 0 of 15, and 0 of 10 | |
-| Searches that came back empty, in a model test | 8 of 29 | Under 5% |
-| Pages with usable text | 23 of 35 | At least 75% |
-| Model answers right, GPT-5.6 Luna | 9 of 15, with 3 partial | Within about 10 points of Claude's |
+| Setup | Score | Right | Wrong | Median time |
+|---|---|---|---|---|
+| Claude, no tools (the control) | 29.7 | 9 of 32 | 0 | 3 s |
+| Claude, its own search | 93 | 59 of 64 | 1 | 12 s |
+| Claude, mcpgw before | 97.7 | 62 of 64 | 0 | 6 s |
+| **Claude, mcpgw after steps 1 to 4** | **99.2** | **63 of 64** | **0** | **5 s** |
+| GPT, mcpgw before | 78.1 | 26 of 32 | 3 | 20 s |
+| **GPT, mcpgw after steps 1 to 4** | **90.6** | **30 of 32** | **2** | **16 s** |
 
-The targets are proposals. "On the topic" only means a result mentions the query's subject, not that it's correct, which is
-one reason step 0 comes first. The search numbers are probably somewhat worse than normal use, because the testing itself
-drew CAPTCHAs from the engines, all from one home IP.
+On 8 harder questions, too recent for a model to know, every setup with tools scored 100, and no tools scored 25. The gap to Claude's
+own search is a few questions, so read it as "at least level with it", not as proof that mcpgw is better.
 
-- [ ] **Step 0, benchmark:** `dev/benchmark/` in this repo, so any change can be measured the same way
-  - Same Claude model and questions, with only the tools changing: Claude Code's WebSearch and WebFetch as the baseline,
-    mcpgw today, and mcpgw after each step. It needs D14
-  - About 50 questions, run at least twice: fresh facts with answers pulled live from each project's own data, dated facts
-    with hand-checked answers, then documents, PDFs, Chinese, and sites that block us. Start with 30 on a cheaper model
-  - Answers are graded right, partial or wrong without knowing which setup produced them, and a confident wrong answer counts
-    worse than "I couldn't confirm". It also records empty searches, fetch success, tool calls and time
-  - It's paced to protect the home IP, and the Claude runs need weekly allowance to spare
-  - Limits: this measures Claude Code's search, not the API's tool, which needs a paid key. Claude Code's WebFetch may also
-    summarize pages before the model sees them, so fetching isn't a pure like-for-like
-- [ ] **Step 1, engines:** add Yahoo, drop Brave and re-check Bing, in the chart's SearXNG settings
-  - Yahoo alone scored 98% on the topic against 57% on the same 25 queries, with the first result on the topic 25 of 25
-    against 10 of 25, and Chinese and `site:` worked. That's one day from one IP, so it needs a backup engine
-  - Brave is nearly always rate-limited here. Google, Qwant, Startpage, Mojeek, Baidu and Sogou were blocked or failing too
-- [ ] **Step 2, honest search:** separate "nothing found" from "engines failed", retry once, and send Chinese queries with
-  a suitable language setting
-- [ ] **Step 3, cleaner fetch:** remove link addresses from page text. They take a median 23% of what's returned and up to
-  78% on Chinese pages, and homestorm refuses to follow them anyway ([ADR 0007](adr/0007-keeping-data-from-leaking-through-web-fetch.md))
-- [ ] **Step 4, PDFs:** read them in the existing limited workers. This reopens D11, so weigh the library's size and attack
-  surface against the gap: forms and papers are often PDFs
-- [ ] **Step 5, decide:** compare with Claude's baseline, and only add these if the numbers call for them
-  - Re-ranking: 86% to 98% in a simulation on 12 queries, and mostly useful if Bing stays
-  - A hosted search fallback when SearXNG comes back empty (D10), with Brave the first candidate on price. It needs no change
-    for callers ([ADR 0009](adr/0009-search-behind-a-replaceable-provider.md)), but queries would also go to that vendor
+**Tools alone:**
 
-**Deploying:** step 1 goes live on push, because Argo syncs the chart. Steps 2 to 4 need the image tag bumped in arch-infra, so
-ask first each time ([CLAUDE.md](../CLAUDE.md)).
+| Measure | Before | After steps 1 to 4 | Target |
+|---|---|---|---|
+| Search results on the topic | 83% | 96% | At least 90%: met |
+| First result on the topic | 25 of 31 | 30 of 31 | |
+| `site:` searches on the topic | 0 of 15 | 15 of 15 | |
+| Empty searches, GPT | 12 of 63 | 3 of 50 | Under 5%: 6% for GPT, 2% with Claude's included |
+| Failed fetches, Claude | 13 of 88 | 4 of 66 | |
+| PDFs read | 0 of 3 | 3 of 3 | |
+| Pages with usable text | 23 of 36 | 26 of 36 | At least 75%: **72%, missed** |
+| Share of text that's link addresses | 20% | 0% | |
+
+The 10 pages still unusable refuse mcpgw (6) or need JavaScript (4), and neither is planned to change.
+
+"After" ran the new image and engine mix in local containers, because auto mode blocked the deploy. The engine mix alone was also
+measured on the cluster: 83% to 94% on the topic. The first test, on 2026-11-05, scored 61% because it was unpaced and drew CAPTCHAs,
+so its numbers were replaced by these.
+
+- [x] **Step 0, benchmark:** [dev/benchmark/](../dev/benchmark/), with the baseline recorded
+- [x] **Step 1, engines:** Yahoo and DuckDuckGo lead, Bing is a backup and Brave goes ([ADR 0012](adr/0012-search-engine-mix.md)). **Live**
+- [x] **Step 2, honest search:** one more try for an empty result, which is never cached; narrow categories widen when they find too
+  little; `site:` is applied by mcpgw too; Chinese, Japanese and Korean queries ask for their own language. **Built, not deployed**
+- [x] **Step 3, cleaner fetch:** link addresses are left out unless `include_links` asks for them. **Built, not deployed**
+- [x] **Step 4, PDFs:** read in capped workers, with a limit on the whole process's memory after a small PDF proved it could take the
+  pod down ([ADR 0011](adr/0011-read-pdfs-in-capped-workers.md)). **Built, not deployed**
+- [x] **Step 5, decide:** no re-ranking and no hosted fallback, since the targets that matter are met without them
+- [ ] **Waiting for the user's OK:** deploy steps 2 to 4 by bumping the image tag in arch-infra to `f6e747a`, then confirm it on the
+  cluster with the benchmark and from homestorm's pod
 
 **Not planned:**
 - **JavaScript rendering:** it means running a heavy browser for a few pages, and Anthropic's own fetch tool doesn't do it.

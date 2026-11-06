@@ -6,6 +6,17 @@ A dated log of what was done and decided, newest first. The plan and milestone s
 
 ## 2026-11-06
 
+- **M9 built, with steps 2 to 4 waiting on a deploy.** Measured against Claude Code's own search, on the same model and questions,
+  graded blind: 99.2 with mcpgw, 93 with its own search, and 29.7 with no tools. GPT-5.6 Luna went from 78.1 to 90.6. Search results on
+  the topic went from 83% to 96%, `site:` from 0 to 15 of 15, and PDFs from 0 to 3 of 3. The numbers are in [the plan](plan.md).
+  - **The first conclusions below were too harsh.** That test was unpaced and drew CAPTCHAs. Paced, the old setup already scored 83%,
+    and it matched Claude's search with the engines healthy. What it lacked was reliability, PDFs and clean text.
+  - **Adding Yahoo alone barely helped** (86% to 88%). Moving Bing to the back did (94%): [ADR 0012](adr/0012-search-engine-mix.md).
+  - **A 0.2 MB PDF could have taken the pod down,** peaking at 626 MB, because a worker's heap cap doesn't see buffers. The pool now
+    limits the whole process's memory: [ADR 0011](adr/0011-read-pdfs-in-capped-workers.md).
+  - **GPT often picked `category: "it"`** (13 of 50 searches), which is only GitHub and Stack Overflow, and got little back. Narrow
+    categories now widen, which helped take its empty searches from 12 of 63 to 3 of 50.
+  - **Auto mode blocked the deploy** of steps 2 to 4, so production has the engine mix only until the user confirms.
 - **M9 planned: how good are the tools for a chatbot?** Usable today, but not dependable yet. `web_search` is the weak link.
   - **Measured on the live tools:** 61% of search results on the topic, 0 of 15 for Chinese and 0 of 10 for `site:`, and 8 of 29
     searches empty in a model test. 23 of 35 pages gave usable text. GPT-5.6 Luna got 9 of 15 questions right, 3 partly.
