@@ -58,7 +58,7 @@ const PAGES = [
   ["blog", "https://simonwillison.net/", ".", 2000],
   ["blog", "https://medium.com/@karpathy/software-2-0-a64152b37c35", "Software 2\\.0", 500],
   ["paper", "https://arxiv.org/abs/1706.03762", "[Aa]ttention", 500],
-  ["pdf", "https://arxiv.org/pdf/1706.03762", "warmup", 2000],
+  ["pdf", "https://arxiv.org/pdf/1706.03762", "[Aa]ttention", 2000],
   ["pdf", "https://www.uscis.gov/sites/default/files/document/forms/i-140instr.pdf", "Petition", 2000],
   ["pdf", "https://www.irs.gov/pub/irs-pdf/fw9.pdf", "10231X|W-9", 2000],
   ["gov", "https://www.uscis.gov/working-in-the-united-states/permanent-workers/employment-based-immigration-second-preference-eb-2", "[Nn]ational [Ii]nterest", 1000],

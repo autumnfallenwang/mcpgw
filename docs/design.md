@@ -66,7 +66,7 @@ JavaScript pages.
             ┌──────────── home k3s ─────────────────────────────────────┐
  homestorm ─┼─► llmgw  (models: Claude · GPT · DeepSeek)                  │
   (app)     │                                                            │
-            ├─► mcpgw ──► SearXNG ──► Bing · DuckDuckGo · Brave · …      │
+            ├─► mcpgw ──► SearXNG ──► Yahoo · DuckDuckGo · Bing · …      │
             │     │                                                      │
             │     └────► the public web (web_fetch, with the §6 guards)  │
             └────────────────────────────────────────────────────────────┘
@@ -436,11 +436,11 @@ path is the one thing the tests so far couldn't cover.
 
 ## 14. Open questions
 
-1. **SearXNG engine mix.** Measured on 2026-11-06, and it's the main weakness: Bing returns off-topic results, and most other
-   engines refuse the home IP. Fixing it is [M9 in the plan](plan.md).
+1. **SearXNG engine mix.** Chosen by measurement ([ADR 0012](adr/0012-search-engine-mix.md)). Any engine can start refusing the home IP, so
+   re-run [the benchmark](../dev/benchmark/) when search seems worse.
 2. **Sites that refuse mcpgw.** Stack Overflow, Medium, npm, AP, Allrecipes and Zhihu answer 403 to its plain `User-Agent`. It's
    reported, not worked around.
-3. **Hosted fallback.** Decided by M9's benchmark ([ADR 0009](adr/0009-search-behind-a-replaceable-provider.md)).
+3. **Hosted fallback.** Not now: M9 measured mcpgw at least level with Claude Code's own search ([ADR 0009](adr/0009-search-behind-a-replaceable-provider.md)).
 
 ## 15. Standards and sources
 

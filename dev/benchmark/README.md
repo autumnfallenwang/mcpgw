@@ -42,6 +42,22 @@ in `results/<label>/`. Dated questions go stale, so check their keys before rely
 **Pace it.** All of this comes from one home IP, and bursts draw CAPTCHAs from the engines, which then skews the results: an
 unpaced test on 2026-11-05 scored 61% on the topic where a paced one the next day scored 83%, on the same setup.
 
+## Results, 2026-11-06
+
+| Setup | Score | Right | Wrong | Median time |
+|---|---|---|---|---|
+| Claude, no tools | 29.7 | 9 of 32 | 0 | 3 s |
+| Claude, its own search | 93 | 59 of 64 | 1 | 12 s |
+| Claude, mcpgw before | 97.7 | 62 of 64 | 0 | 6 s |
+| Claude, mcpgw after M9 | 99.2 | 63 of 64 | 0 | 5 s |
+| GPT, mcpgw before | 78.1 | 26 of 32 | 3 | 20 s |
+| GPT, mcpgw after M9 | 90.6 | 30 of 32 | 2 | 16 s |
+
+Everything with tools scored 100 on the 8 hard questions, and no tools scored 25. Labels in `results/`: `baseline` and `baseline-hard`
+for before, `after` and `after-hard` for after, `step1` for the engine mix on the cluster, and `engines` for each mix tried. `after`
+ran the new image in local containers. `retrieval.json` under `after` says 25 of 36 pages, but the Transformer PDF was readable and only
+its check was too narrow, so it's 26. That check is corrected now.
+
 ## Limits
 
 - **Hand-picked and small:** 40 questions, on one Claude model and one GPT model.
