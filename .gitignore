@@ -1,0 +1,19 @@
+node_modules/
+dist/
+coverage/
+.env
+.env.*
+!.env.example
+cluster-secrets.env
+*.log
+*.tsbuildinfo
+.DS_Store
+.playwright-mcp/
+.claude/settings.local.json
+
+# Left behind by `npm i` in the throwaway scripts under dev/
+dev/*/package.json
+dev/*/package-lock.json
+
+# Account-specific notes (plans, balances, private links): never commit
+private/
