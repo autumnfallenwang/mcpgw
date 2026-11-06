@@ -1,0 +1,62 @@
+# Default values for the mcpgw chart. The Argo CD Application in arch-infra overrides image.tag.
+
+image:
+  repository: ghcr.io/autumnfallenwang/mcpgw
+  # CI bumps `tag` to a commit SHA in the Argo CD Application's parameters.
+  tag: latest
+  pullPolicy: IfNotPresent
+
+# Stateless, so more is safe.
+replicaCount: 1
+
+service:
+  port: 80
+  targetPort: 3002
+
+ingress:
+  enabled: true
+  className: traefik
+  host: mcpgw.arch.internal
+
+# Environment variables passed to the container. The deployment template iterates over this map.
+env:
+  PORT: "3002"
+  # Every name a caller uses must be here, or it gets a 403 (ADR 0003).
+  ALLOWED_HOSTS: mcpgw.arch.internal,mcpgw.mcpgw.svc.cluster.local
+  SEARCH_PROVIDER: canned
+  LOG_LEVEL: info
+
+resources:
+  requests:
+    cpu: 50m
+    memory: 128Mi
+  limits:
+    memory: 256Mi
+
+podSecurityContext:
+  runAsNonRoot: true
+  runAsUser: 1000
+  runAsGroup: 1000
+  fsGroup: 1000
+
+# This container handles pages chosen by a model, so it gets as little as possible.
+containerSecurityContext:
+  allowPrivilegeEscalation: false
+  readOnlyRootFilesystem: true
+  capabilities:
+    drop:
+      - ALL
+
+probes:
+  liveness:
+    httpGet:
+      path: /health
+      port: http
+    initialDelaySeconds: 10
+    periodSeconds: 30
+  readiness:
+    httpGet:
+      path: /health
+      port: http
+    initialDelaySeconds: 3
+    periodSeconds: 10

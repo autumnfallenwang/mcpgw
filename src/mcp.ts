@@ -1,0 +1,59 @@
+import { createMcpHonoApp } from "@modelcontextprotocol/hono";
+import { createMcpHandler, McpServer } from "@modelcontextprotocol/server";
+import type { Context } from "hono";
+import { APP_NAME, APP_VERSION } from "./config.js";
+import type { SearchProvider } from "./search/types.js";
+import { runTool } from "./tools/result.js";
+import { WEB_SEARCH_DESCRIPTION, webSearch, webSearchInput } from "./tools/web-search.js";
+
+export interface McpDeps {
+  allowedHosts: string[];
+  searchProvider: SearchProvider;
+}
+
+/**
+ * Neither tool changes anything on the caller's side, and both reach the open web. Without
+ * `readOnlyHint`, `codex exec` refused to run the tool. The same hint means Codex then runs it
+ * without asking, which is why ADR 0007 has `web_fetch` ask through a client setting instead.
+ */
+const ANNOTATIONS = {
+  readOnlyHint: true,
+  destructiveHint: false,
+  idempotentHint: true,
+  openWorldHint: true,
+};
+
+const SEARCH_TIMEOUT_MS = 20_000;
+
+export function createMcpApp(deps: McpDeps) {
+  // One fresh McpServer per request: this is what makes the endpoint stateless, and the default
+  // `legacy: "stateless"` also serves the 2025 protocol Codex still speaks (ADR 0003).
+  const handler = createMcpHandler(() => {
+    const server = new McpServer({ name: APP_NAME, version: APP_VERSION });
+    server.registerTool(
+      "web_search",
+      {
+        title: "Web search",
+        description: WEB_SEARCH_DESCRIPTION,
+        inputSchema: webSearchInput,
+        annotations: ANNOTATIONS,
+      },
+      (args) =>
+        runTool("web_search", () =>
+          webSearch(args, deps.searchProvider, AbortSignal.timeout(SEARCH_TIMEOUT_MS)),
+        ),
+    );
+    return server;
+  });
+
+  // host + allowedHosts: refuse any Host we don't serve. allowedOrigins: []: refuse every browser
+  // page. Without it a hostile Origin got a 200, because binding to all interfaces drops the SDK's
+  // defaults (dev/harness-check/README.md). Nothing in a browser should call mcpgw.
+  const mcp = createMcpHonoApp({
+    host: "0.0.0.0",
+    allowedHosts: deps.allowedHosts,
+    allowedOrigins: [],
+  });
+  mcp.all("/mcp", (c: Context) => handler.fetch(c.req.raw, { parsedBody: c.get("parsedBody") }));
+  return mcp;
+}

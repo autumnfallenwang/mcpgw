@@ -1,0 +1,34 @@
+# Argo CD Application CR for mcpgw. This file is the review copy that lives in THIS repo; the deployed
+# copy is committed to the arch-infra repo at apps/mcpgw.yaml (arch-infra is what Argo CD watches).
+# Keep the two in sync. CI bumps the arch-infra copy's image tag on each main build, if
+# ARCH_INFRA_TOKEN is set on this repo; otherwise it's bumped by hand.
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: mcpgw
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/autumnfallenwang/mcpgw.git
+    targetRevision: main
+    path: deploy/chart
+    helm:
+      releaseName: mcpgw
+      valueFiles:
+        - values.yaml
+      # The images are public on GHCR (they inherit the public repo's visibility), so the cluster
+      # needs no pull secret.
+      parameters:
+        - name: image.tag
+          value: "latest"
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: mcpgw
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+      - ServerSideApply=true
