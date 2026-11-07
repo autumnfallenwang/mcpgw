@@ -1,85 +1,87 @@
 # mcpgw's Grafana alert rules. The source of truth is here, next to the code that writes the log lines they read. To
-# install them, paste the group below into arch-infra's platform/observability/grafana/values.yaml, under `alerting` →
-# `rules.yaml` → `groups`, after the homeparentcontrol group: that file is what Argo CD deploys. Edit here first, then
-# paste there. Both queries were run against live Loki on 2026-11-07.
+# install them, copy the mcpgw group into arch-infra's platform/observability/grafana/values.yaml, under `alerting` →
+# `rules.yaml` → `groups`, after the homeparentcontrol group and indented to match: that file is what Argo CD deploys.
+# Edit here first, then copy there. Both queries were run against live Loki on 2026-11-07.
 #
 # ⚠️ Nothing receives these yet: Grafana has no contact point beyond its default email receiver, and there's no SMTP.
 # They show under Alerting in Grafana. ⚠️ No Go-template braces anywhere: the chart passes this through Helm's `tpl`.
 # Both rules treat No Data as OK, because the absence of failures is good news.
-      - orgId: 1
-        name: mcpgw
-        folder: mcpgw
-        interval: 5m
-        rules:
-          # ── M1. Searches are failing outright, not just one engine. This is what a model sees as "search is down".
-          - uid: mcpgw-m1-search-failing
-            title: Web search failing
-            condition: threshold
-            for: 0m
-            labels:
-              severity: warning
-              app: mcpgw
-            annotations:
-              summary: "web_search failed several times in the last 30 minutes"
-              description: >-
-                Every engine failed, SearXNG is down, or searches waited too long for their turn. Models are being
-                told to answer without searching. Check mcpgw's /docs page, then look at web_search tool calls in
-                Grafana Explore.
-            data:
-              - refId: query
-                relativeTimeRange: { from: 1800, to: 0 }
-                datasourceUid: loki
-                model:
-                  datasource: { type: loki, uid: loki }
-                  expr: >-
-                    sum(count_over_time({namespace="mcpgw"}
-                    | json | event="tool.call" | tool="web_search" | status!="ok" [30m])) or vector(0)
-                  queryType: instant
-                  refId: query
-              - refId: threshold
-                datasourceUid: __expr__
-                model:
-                  type: threshold
-                  expression: query
-                  refId: threshold
-                  conditions:
-                    - evaluator: { type: gt, params: [2] }
-            noDataState: OK
-            execErrState: Error
+apiVersion: 1
+groups:
+  - orgId: 1
+    name: mcpgw
+    folder: mcpgw
+    interval: 5m
+    rules:
+      # ── M1. Searches are failing outright, not just one engine. This is what a model sees as "search is down".
+      - uid: mcpgw-m1-search-failing
+        title: Web search failing
+        condition: threshold
+        for: 0m
+        labels:
+          severity: warning
+          app: mcpgw
+        annotations:
+          summary: "web_search failed several times in the last 30 minutes"
+          description: >-
+            Every engine failed, SearXNG is down, or searches waited too long for their turn. Models are being
+            told to answer without searching. Check mcpgw's /docs page, then look at web_search tool calls in
+            Grafana Explore.
+        data:
+          - refId: query
+            relativeTimeRange: { from: 1800, to: 0 }
+            datasourceUid: loki
+            model:
+              datasource: { type: loki, uid: loki }
+              expr: >-
+                sum(count_over_time({namespace="mcpgw"}
+                | json | event="tool.call" | tool="web_search" | status!="ok" [30m])) or vector(0)
+              queryType: instant
+              refId: query
+          - refId: threshold
+            datasourceUid: __expr__
+            model:
+              type: threshold
+              expression: query
+              refId: threshold
+              conditions:
+                - evaluator: { type: gt, params: [2] }
+        noDataState: OK
+        execErrState: Error
 
-          # ── M2. One engine keeps refusing. Search carries on with the others, so this is a slow signal: if it lasts
-          # for days, change the engine mix or reconsider the hosted fallback (plan D10). Four pauses in 3 hours means
-          # it refused for over half an hour straight, since each pause doubles: 5, 10, 20, then 40 minutes.
-          - uid: mcpgw-m2-engine-refusing
-            title: A search engine keeps refusing mcpgw
-            condition: threshold
-            for: 0m
-            labels:
-              severity: info
-              app: mcpgw
-            annotations:
-              summary: "A search engine has refused mcpgw for over half an hour"
-              description: >-
-                It answers with a CAPTCHA or "too many requests", or keeps timing out, so mcpgw is leaving it out and
-                searching with the others. The engine is the alert's engine label. Nothing to do unless it lasts for days.
-            data:
-              - refId: query
-                relativeTimeRange: { from: 10800, to: 0 }
-                datasourceUid: loki
-                model:
-                  datasource: { type: loki, uid: loki }
-                  expr: >-
-                    sum by (engine) (count_over_time({namespace="mcpgw"}
-                    | json | event="searxng.engine_paused" [3h])) or vector(0)
-                  queryType: instant
-                  refId: query
-              - refId: threshold
-                datasourceUid: __expr__
-                model:
-                  type: threshold
-                  expression: query
-                  refId: threshold
-                  conditions:
-                    - evaluator: { type: gt, params: [3] }
-            noDataState: OK
-            execErrState: Error
+      # ── M2. One engine keeps refusing. Search carries on with the others, so this is a slow signal: if it lasts
+      # for days, change the engine mix or reconsider the hosted fallback (plan D10). Four pauses in 3 hours means
+      # it refused for over half an hour straight, since each pause doubles: 5, 10, 20, then 40 minutes.
+      - uid: mcpgw-m2-engine-refusing
+        title: A search engine keeps refusing mcpgw
+        condition: threshold
+        for: 0m
+        labels:
+          severity: info
+          app: mcpgw
+        annotations:
+          summary: "A search engine has refused mcpgw for over half an hour"
+          description: >-
+            It answers with a CAPTCHA or "too many requests", or keeps timing out, so mcpgw is leaving it out and
+            searching with the others. The engine is the alert's engine label. Nothing to do unless it lasts for days.
+        data:
+          - refId: query
+            relativeTimeRange: { from: 10800, to: 0 }
+            datasourceUid: loki
+            model:
+              datasource: { type: loki, uid: loki }
+              expr: >-
+                sum by (engine) (count_over_time({namespace="mcpgw"}
+                | json | event="searxng.engine_paused" [3h])) or vector(0)
+              queryType: instant
+              refId: query
+          - refId: threshold
+            datasourceUid: __expr__
+            model:
+              type: threshold
+              expression: query
+              refId: threshold
+              conditions:
+                - evaluator: { type: gt, params: [3] }
+        noDataState: OK
+        execErrState: Error
