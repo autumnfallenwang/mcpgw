@@ -43,11 +43,13 @@ function publishedDay(value: string | null | undefined): string | undefined {
  */
 const REFUSAL = /captcha|too many requests|access denied/i;
 /**
- * Failures in a row that also count as refusing. Blocked, DuckDuckGo stopped answering CAPTCHA and timed out instead,
+ * Timeouts in a row that also count as refusing. Blocked, DuckDuckGo stopped answering CAPTCHA and timed out instead,
  * adding 5 s to every other search. Three in a row leaves out an engine that has stopped working, but not one that
- * timed out once.
+ * timed out once. Only timeouts count: Wikipedia answers HTTP 400 to odd queries such as `site:` ones, which costs no
+ * time, and leaving it out for that lost it on the next searches in a real meeting.
  */
-const FAILURES_IN_A_ROW = 3;
+const TIMEOUTS_IN_A_ROW = 3;
+const TIMEOUT = /timeout/i;
 /** How long an engine that refuses is left out. Doubled each time it refuses again, until it next returns results. */
 const PAUSE_FIRST_MS = 5 * 60_000;
 const PAUSE_MAX_MS = 60 * 60_000;
@@ -72,7 +74,7 @@ export function createSearxngProvider(baseUrl: string): SearchProvider {
   // Only for the status page, so memory is enough: Loki has the history as searxng.error.
   const issues = new Map<string, { reason: string; lastAt: number; count: number }>();
   const paused = new Map<string, { until: number; ms: number }>();
-  const failuresInARow = new Map<string, number>();
+  const timeoutsInARow = new Map<string, number>();
 
   return {
     name: "searxng",
@@ -138,10 +140,10 @@ export function createSearxngProvider(baseUrl: string): SearchProvider {
         const seen = issues.get(engine);
         const count = seen && now - seen.lastAt < ISSUE_WINDOW_MS ? seen.count + 1 : 1;
         issues.set(engine, { reason, lastAt: now, count });
-        const failures = (failuresInARow.get(engine) ?? 0) + 1;
-        failuresInARow.set(engine, failures);
-        if (REFUSAL.test(reason) || failures >= FAILURES_IN_A_ROW) {
-          failuresInARow.delete(engine);
+        const timeouts = (timeoutsInARow.get(engine) ?? 0) + (TIMEOUT.test(reason) ? 1 : 0);
+        timeoutsInARow.set(engine, timeouts);
+        if (REFUSAL.test(reason) || timeouts >= TIMEOUTS_IN_A_ROW) {
+          timeoutsInARow.delete(engine);
           const before = paused.get(engine);
           const ms = before ? Math.min(before.ms * 2, PAUSE_MAX_MS) : PAUSE_FIRST_MS;
           paused.set(engine, { until: now + ms, ms });
@@ -162,7 +164,7 @@ export function createSearxngProvider(baseUrl: string): SearchProvider {
       for (const r of body.results) {
         for (const engine of r.engines ?? []) {
           paused.delete(engine);
-          failuresInARow.delete(engine);
+          timeoutsInARow.delete(engine);
         }
         if (!r.url || !/^https?:\/\//.test(r.url)) continue;
         const published = publishedDay(r.publishedDate);

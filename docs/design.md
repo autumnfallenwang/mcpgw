@@ -219,11 +219,13 @@ Use web_fetch to read a page.
 - **Spacing:** searches run at least 2 s apart across all callers, in the order they arrive, and a burst waits rather than failing. A
   round of a real meeting sent 6 searches in 3 s, and DuckDuckGo answered with CAPTCHAs. A search that would wait over 30 s fails, so
   a runaway caller can't build an endless queue. Answers from the cache don't wait. Fetches run at least 0.2 s apart.
-- **Engines that refuse:** one that answers with a CAPTCHA, "too many requests" or "access denied", or fails 3 searches in a row,
+- **Engines that refuse:** one that answers with a CAPTCHA, "too many requests" or "access denied", or times out on 3 searches in a row,
   is left out for 5 minutes,
   through SearXNG's own preference cookie, doubling each time it refuses again up to an hour, until it next returns results.
   DuckDuckGo answered CAPTCHA on every search for over half an hour, even at one search a minute, and SearXNG asks it again each
-  time. Then it timed out instead, adding 5 s to every other search.
+  time. Then it timed out instead, adding 5 s to every other search. A shorter timeout for DuckDuckGo alone didn't help, since SearXNG waits as long as its
+  slowest engine's timeout. Other errors don't count: Wikipedia
+  answers HTTP 400 to odd queries, which costs no time.
 - **Time ranges on news:** SearXNG skips any engine with no time-range support when given a range, and that's nearly every news engine.
   So news searches send no range, and mcpgw drops results dated too long ago. Bing News and Brave News give no dates, so `time_range`
   can't be enforced on their results.

@@ -314,7 +314,7 @@ describe("SearXNG provider, against a fake SearXNG", () => {
     expect(lastCookie).toContain("bing news__news");
   });
 
-  it("leaves out an engine that failed 3 times in a row, but not one that failed once", async () => {
+  it("leaves out an engine that timed out 3 times in a row, but not one that timed out once", async () => {
     const provider = createSearxngProvider(base);
     const answer = (results: string[], failing: [string, string][]) => ({
       status: 200,
@@ -331,7 +331,13 @@ describe("SearXNG provider, against a fake SearXNG", () => {
       ],
     );
     await provider.search(QUERY, signal());
-    reply = answer(["bing"], [["duckduckgo", "Suspended: timeout"]]);
+    reply = answer(
+      ["bing"],
+      [
+        ["duckduckgo", "Suspended: timeout"],
+        ["wikipedia", "HTTP error"],
+      ],
+    );
     await provider.search(QUERY, signal());
     reply = answer(
       ["yahoo"],
@@ -346,6 +352,22 @@ describe("SearXNG provider, against a fake SearXNG", () => {
     expect(lastCookie).toContain("duckduckgo__general");
     // Bing answered in between, so its two timeouts weren't in a row.
     expect(lastCookie).not.toContain("bing__");
+    expect(lastCookie).not.toContain("wikipedia__");
+  });
+
+  it("keeps an engine that answers odd queries with an HTTP error, since that costs no time", async () => {
+    const provider = createSearxngProvider(base);
+    for (let n = 0; n < 4; n++) {
+      reply = {
+        status: 200,
+        body: {
+          results: [{ title: "A", url: "https://a.example/", engines: ["yahoo"] }],
+          unresponsive_engines: [["wikipedia", n === 0 ? "HTTP error" : "Suspended: HTTP error"]],
+        },
+      };
+      await provider.search(QUERY, signal());
+    }
+    expect(lastCookie).toBeUndefined();
   });
 
   it("doubles the pause each time an engine refuses again, up to an hour", async () => {

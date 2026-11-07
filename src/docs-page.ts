@@ -110,7 +110,7 @@ function engineSection(issues: EngineIssue[] | null) {
           <p class="note">
             SearXNG carries on with the other engines, so this doesn't mean search is down. A search
             only fails when every engine does. An engine that refused mcpgw, with a CAPTCHA or "too many
-            requests", or failed 3 searches in a row, is left out for 5 minutes, doubling each time it
+            requests", or timed out on 3 searches in a row, is left out for 5 minutes, doubling each time it
             refuses again, up to an hour.
           </p>`
     }
