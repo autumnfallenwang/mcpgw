@@ -16,7 +16,25 @@ A dated log of what was done and decided, newest first. The plan and milestone s
   out throughout, which matches the 90% measured with it blocked in ADR 0012.
 - **Upkeep's first pass** ([upkeep.md](upkeep.md)): the MCP spec and SDK are current, and hono went to 4.13.17. SearXNG stays
   pinned, since the newer image only changes engines we don't use.
-- **Not deployed:** auto mode blocked the image tag bump and the alert rules in arch-infra, so they wait for the user.
+- **Deployed on the user's OK,** as `20a3db6`, with the two alert rules in Grafana. CI had failed on the last 3 commits, because
+  Biome also formats YAML and rejected the alert rules file. I hadn't checked the run's result, so the first tag pointed at an image
+  that didn't exist. The new pod couldn't pull it and the old one kept serving, until `20a3db6` fixed the file.
+- **On the cluster:**
+  - **News:** 85% good results, up from 67% before these changes and 80% locally.
+  - **Pages:** 28 of 36 usable.
+  - **Search:** 90% on the topic with DuckDuckGo out throughout, and a median of 0.5 s.
+  - **Brave News:** it refused once during the test and was left out, as designed.
+- **A tuning meeting** (3 seats, 2 rounds):
+  - **Developer questions:** every seat read Stack Overflow and npm through the APIs, and every checkable answer was right, such as zod
+    4.6.7.
+  - **Everyday questions:** weather came from the National Weather Service, and the AI news was current.
+  - **Speed:** answers took 23 to 38 s. Searches waited up to about 10 s for their turn, more while DuckDuckGo's timeouts lasted.
+- **From the day's 91 homestorm tool calls:**
+  - **`it` searches:** every one fell back to general search.
+  - **Search times:** a median of 2.6 s and a 90th percentile of 8.9 s.
+  - **Wikipedia:** its HTTP 400s on `site:` queries had it left out for 5 minutes. Only timeouts count now (`4d0c581`, not deployed:
+    auto mode blocked the tag bump).
+  - **Tried and dropped:** a 3 s timeout for DuckDuckGo alone, since SearXNG waits as long as its slowest engine's timeout.
 
 - **The first real meeting on the cluster** worked end to end: 3 seats, one from each model family, over 2 rounds, with a search, a PDF, a site that refuses
   mcpgw, and a cluster address refused. It also found three problems:

@@ -238,11 +238,17 @@ The user chose the next steps on 2026-11-07: ship, official APIs, tune from real
   usable pages 26 to 28 of 36 in a local run, past the 75% target. Built and pushed, not deployed
 - [x] **Upkeep, first pass** ([upkeep.md](upkeep.md)): everything current but hono, now 4.13.17. SearXNG stays pinned: nothing since
   touches an engine we use
-- [ ] **Waiting for the user's OK, since auto mode blocked both:** deploy image `cef7f54`, and paste the alert rules into arch-infra
-- [ ] **Alert when engines fail:** the rules are written in `deploy/observability/`
+- [x] **Deployed on the user's OK** as `20a3db6`, the same code as `cef7f54`, whose image CI never built
+- [x] **Alerts in Grafana:** web search failing, and an engine that keeps refusing, from `deploy/observability/`. Nothing receives
+  them yet
+- [x] **Measured on the cluster:** news 85% good results, up from 67%; 28 of 36 pages usable; search 90% on the topic with
+  DuckDuckGo out; median search 0.5 s
+- [x] **First tuning from real use:** only timeouts now count toward leaving an engine out, since Wikipedia's HTTP 400s on odd
+  queries had it left out in a meeting. Built as `4d0c581`, not deployed: auto mode blocked the tag bump
 - [ ] **Measure again once DuckDuckGo and Brave recover:** the 2 s gap was a judgment call, because DuckDuckGo answered CAPTCHA
   throughout, even at one search a minute
-- [ ] **Tune from the logs** of more real meetings, once the above is deployed
+- [ ] **Keep tuning from real meetings.** Open: searches wait up to about 10 s for their turn, and answers take 23 to 38 s. The 2 s
+  gap stays until DuckDuckGo recovers and can be measured
 
 ## Future work
 
