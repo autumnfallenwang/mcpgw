@@ -86,3 +86,4 @@ Account-specific details stay in a local, gitignored `private/` folder.
 | [0010](docs/adr/0010-home-apps-only-for-now.md) | Only home apps call mcpgw, for now; harnesses aren't connected |
 | [0011](docs/adr/0011-read-pdfs-in-capped-workers.md) | Read PDFs in capped workers, with a limit on the whole process |
 | [0012](docs/adr/0012-search-engine-mix.md) | Yahoo and DuckDuckGo lead the search, with Bing as a backup |
+| [0013](docs/adr/0013-read-refusing-sites-through-official-apis.md) | Read Stack Overflow and npm through their official APIs |

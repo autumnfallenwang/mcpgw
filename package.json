@@ -20,7 +20,7 @@
     "@modelcontextprotocol/hono": "2.0.2",
     "@modelcontextprotocol/server": "2.4.0",
     "@mozilla/readability": "^0.6.0",
-    "hono": "^4.13.16",
+    "hono": "^4.13.17",
     "ipaddr.js": "^2.5.0",
     "linkedom": "^0.18.15",
     "pino": "^10.4.0",

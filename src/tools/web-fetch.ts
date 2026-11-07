@@ -90,6 +90,7 @@ export async function webFetch(args: WebFetchArgs, service: FetchService): Promi
       cached: page.cached,
     },
     logFields: {
+      ...(page.via ? { via: page.via } : {}),
       bytes: page.bytes,
       final_host: new URL(page.finalUrl).hostname,
       total_chars: page.text.length,

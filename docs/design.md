@@ -246,6 +246,10 @@ instructions, the text, then "(truncated: call again with start=N for more)" whe
 **`_meta` for apps:** `{ url, final_url, title, content_type, start, returned_chars, total_chars, truncated,
 fetched_at, cached }`. The page text is in `content` only, so it isn't sent twice.
 
+**Sites that refuse mcpgw but have an official API** are read through it: Stack Exchange questions from `api.stackexchange.com`, and
+npm package pages from the npm registry, with the README from jsDelivr. The model still gets the page's own URL to cite
+([ADR 0013](adr/0013-read-refusing-sites-through-official-apis.md)). Logged as `via` on `tool.call`.
+
 **Requests** send `Accept: text/markdown, text/html;q=0.9, text/plain;q=0.8, */*;q=0.1`. Cloudflare sites that opted
 into Markdown for Agents answer with Markdown, which skips extraction.
 

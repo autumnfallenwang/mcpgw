@@ -16,6 +16,8 @@ export interface ExtractJob {
   finalUrl: string;
   /** Keep link addresses in the text. Off by default: they're a median 23% of a page's text. */
   includeLinks?: boolean;
+  /** Read all of it, without looking for a main article: for documents mcpgw put together itself. */
+  wholePage?: boolean;
 }
 
 /**
@@ -106,7 +108,12 @@ export function markdownTitle(text: string): string | undefined {
 }
 
 /** Main-content extraction, then Markdown-ish text: headings and lists stay, and links on request. */
-export function extractHtml(html: string, baseUrl: string, includeLinks = false): ExtractedPage {
+export function extractHtml(
+  html: string,
+  baseUrl: string,
+  includeLinks = false,
+  wholePage = false,
+): ExtractedPage {
   // Most of a modern page's bytes are scripts and styles, so they go before anything is parsed.
   const markup = html
     .replace(/<!--[\s\S]*?-->/g, "")
@@ -132,6 +139,10 @@ export function extractHtml(html: string, baseUrl: string, includeLinks = false)
 
   let contentHtml = "";
   let title = pageTitle;
+  if (wholePage) {
+    const text = cleanText(createTurndown(baseUrl, includeLinks).turndown(wholePageHtml));
+    return { title, text };
+  }
   try {
     const article = new Readability(document as unknown as Document, {
       maxElemsToParse: MAX_ELEMENTS,
@@ -193,7 +204,12 @@ export function extractDocument(job: ExtractJob): ExtractedPage {
   const decoded = decode(job, isHtml);
 
   if (isHtml) {
-    const { title, text } = extractHtml(decoded, job.finalUrl, job.includeLinks ?? false);
+    const { title, text } = extractHtml(
+      decoded,
+      job.finalUrl,
+      job.includeLinks ?? false,
+      job.wholePage ?? false,
+    );
     return { title, text: text.slice(0, MAX_TEXT_CHARS) };
   }
 

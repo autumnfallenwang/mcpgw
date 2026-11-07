@@ -7,6 +7,7 @@ import { HTML_TYPES, isPdf } from "./extract.js";
 import { ExtractFailure, type ExtractorPool } from "./extractor-pool.js";
 import { type Fetcher, FetchFailure, HttpFailure } from "./fetcher.js";
 import { BlockedUrl } from "./guard.js";
+import { type ApiClient, ApiNotFound, type ApiReader, officialApiFor } from "./official-apis.js";
 
 export interface ReadablePage {
   url: string;
@@ -18,6 +19,8 @@ export interface ReadablePage {
   /** The page was larger than mcpgw reads, so its end is missing. */
   partial: boolean;
   fetchedAt: string;
+  /** The official API it was read through, for a site that refuses plain requests. */
+  via?: string;
 }
 
 export interface FetchServiceOptions {
@@ -29,6 +32,11 @@ export interface FetchServiceOptions {
 }
 
 const CACHE_ENTRIES = 100;
+
+const API_TOO_LARGE =
+  "This site's official API returned more than mcpgw reads. Try another source.";
+const API_FAILED =
+  "mcpgw couldn't read this through the site's official API right now. Try again later, or use another source.";
 
 const TEXT_TYPES = new Set([
   "text/plain",
@@ -93,13 +101,79 @@ export class FetchService {
     let page: ReadablePage;
     try {
       await this.pacer.wait();
-      page = await this.limiter.run(() => this.fetchAndExtract(url, includeLinks));
+      const api = officialApiFor(url);
+      page = await this.limiter.run(() =>
+        api ? this.readThroughApi(url, api, includeLinks) : this.fetchAndExtract(url, includeLinks),
+      );
     } catch (err) {
       throw this.toToolFailure(err);
     }
     this.cache.set(key(url), page);
     if (page.finalUrl !== url) this.cache.set(key(page.finalUrl), page);
     return { ...page, cached: false };
+  }
+
+  /** Through the same guarded fetcher as any page, so its limits and address checks still apply. */
+  private apiClient(): ApiClient & { bytes: number } {
+    const client = {
+      bytes: 0,
+      json: async (apiUrl: string) => {
+        const fetched = await this.fetcher.fetch(apiUrl);
+        client.bytes += fetched.bytes;
+        if (fetched.partial)
+          throw new ToolFailure(API_TOO_LARGE, "error", { reason: "api_too_large" });
+        return JSON.parse(fetched.body.toString("utf-8")) as unknown;
+      },
+      text: async (apiUrl: string) => {
+        try {
+          const fetched = await this.fetcher.fetch(apiUrl);
+          client.bytes += fetched.bytes;
+          return fetched.body.toString("utf-8");
+        } catch (err) {
+          if (err instanceof HttpFailure && err.status === 404) return null;
+          throw err;
+        }
+      },
+    };
+    return client;
+  }
+
+  private async readThroughApi(
+    url: string,
+    api: ApiReader,
+    includeLinks: boolean,
+  ): Promise<ReadablePage> {
+    const client = this.apiClient();
+    let doc: Awaited<ReturnType<ApiReader["read"]>>;
+    try {
+      doc = await api.read(client);
+    } catch (err) {
+      if (err instanceof ApiNotFound) throw new HttpFailure(404, new URL(url).hostname);
+      if (err instanceof ToolFailure || err instanceof HttpFailure || err instanceof FetchFailure) {
+        throw err;
+      }
+      if (err instanceof BlockedUrl) throw err;
+      throw new ToolFailure(API_FAILED, "error", { reason: "api_failed", via: api.via });
+    }
+    const contentType = doc.format === "html" ? "text/html" : "text/markdown";
+    const { text } = await this.extractors.run({
+      bytes: new TextEncoder().encode(doc.content),
+      contentType,
+      finalUrl: doc.finalUrl,
+      includeLinks,
+      wholePage: true,
+    });
+    return {
+      url,
+      finalUrl: doc.finalUrl,
+      title: doc.title,
+      contentType,
+      text,
+      bytes: client.bytes,
+      partial: false,
+      fetchedAt: new Date().toISOString(),
+      via: doc.via,
+    };
   }
 
   private async fetchAndExtract(url: string, includeLinks: boolean): Promise<ReadablePage> {
