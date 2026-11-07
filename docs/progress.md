@@ -32,8 +32,8 @@ A dated log of what was done and decided, newest first. The plan and milestone s
 - **From the day's 91 homestorm tool calls:**
   - **`it` searches:** every one fell back to general search.
   - **Search times:** a median of 2.6 s and a 90th percentile of 8.9 s.
-  - **Wikipedia:** its HTTP 400s on `site:` queries had it left out for 5 minutes. Only timeouts count now (`4d0c581`, not deployed:
-    auto mode blocked the tag bump).
+  - **Wikipedia:** its HTTP 400s on `site:` queries had it left out for 5 minutes. Only timeouts count now (`4d0c581`, deployed on
+    the user's go).
   - **Tried and dropped:** a 3 s timeout for DuckDuckGo alone, since SearXNG waits as long as its slowest engine's timeout.
 
 - **The first real meeting on the cluster** worked end to end: 3 seats, one from each model family, over 2 rounds, with a search, a PDF, a site that refuses

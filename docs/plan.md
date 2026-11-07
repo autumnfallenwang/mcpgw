@@ -244,7 +244,7 @@ The user chose the next steps on 2026-11-07: ship, official APIs, tune from real
 - [x] **Measured on the cluster:** news 85% good results, up from 67%; 28 of 36 pages usable; search 90% on the topic with
   DuckDuckGo out; median search 0.5 s
 - [x] **First tuning from real use:** only timeouts now count toward leaving an engine out, since Wikipedia's HTTP 400s on odd
-  queries had it left out in a meeting. Built as `4d0c581`, not deployed: auto mode blocked the tag bump
+  queries had it left out in a meeting. Deployed as `4d0c581` on the user's go
 - [ ] **Measure again once DuckDuckGo and Brave recover:** the 2 s gap was a judgment call, because DuckDuckGo answered CAPTCHA
   throughout, even at one search a minute
 - [ ] **Keep tuning from real meetings.** Open: searches wait up to about 10 s for their turn, and answers take 23 to 38 s. The 2 s
