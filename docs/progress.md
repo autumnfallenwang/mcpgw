@@ -6,6 +6,18 @@ A dated log of what was done and decided, newest first. The plan and milestone s
 
 ## 2026-11-07
 
+- **Next steps chosen by the user:** ship what's ready, official APIs for sites that refuse mcpgw, tune from real use, and monthly
+  upkeep. Nothing else is planned yet. From here, homestorm is changed only where mcpgw needs data from it.
+- **Engines that refuse are left out.** DuckDuckGo went from CAPTCHAs to timing out, which added 5 s to every other search. An
+  engine that refuses, or fails 3 searches in a row, is now left out for 5 minutes, doubling up to an hour. Locally, searches went
+  from 5.0, 0.6 and 5.0 s to about 0.6 s each.
+- **Stack Overflow and npm now read through their official APIs** ([ADR 0013](adr/0013-read-refusing-sites-through-official-apis.md)).
+  Locally, usable pages went from 26 to 28 of 36. Search was 90% on the topic against 98% the day before, because DuckDuckGo was
+  out throughout, which matches the 90% measured with it blocked in ADR 0012.
+- **Upkeep's first pass** ([upkeep.md](upkeep.md)): the MCP spec and SDK are current, and hono went to 4.13.17. SearXNG stays
+  pinned, since the newer image only changes engines we don't use.
+- **Not deployed:** auto mode blocked the image tag bump and the alert rules in arch-infra, so they wait for the user.
+
 - **The first real meeting on the cluster** worked end to end: 3 seats, one from each model family, over 2 rounds, with a search, a PDF, a site that refuses
   mcpgw, and a cluster address refused. It also found three problems:
   - **One round sends a burst:** 6 searches in 3 s, and DuckDuckGo answered with CAPTCHAs. Searches are now spaced 2 s apart.
