@@ -1,0 +1,668 @@
+{
+ "label": "news-before",
+ "date": "2026-11-07",
+ "judge": "gpt-5.6-terra",
+ "runs": [
+  {
+   "summary": {
+    "name": "mcpgw",
+    "good_of_5_each": "40/60",
+    "pct": 67,
+    "en": "26/40",
+    "zh": "14/20",
+    "empty": 0,
+    "errors": 0
+   },
+   "rows": [
+    {
+     "lang": "en",
+     "query": "important technology news November 7 2026 today",
+     "range": "day",
+     "results": [
+      {
+       "title": "[Breaking News] Nagoya Institute of Technology: Analysis and Outlook of Application Status for the 2027 School Recommendation Selection (Recommendation I)",
+       "url": "https://note.com/pond_math/n/n763fc52b81cd?hl=en",
+       "published": null,
+       "engines": [
+        "bing news"
+       ],
+       "good": false
+      },
+      {
+       "title": "Why are professional hedge funds suffering massive losses right now?",
+       "url": "https://note.com/solavia_ansbach/n/n5085c8e0912e?hl=en",
+       "published": null,
+       "engines": [
+        "bing news"
+       ],
+       "good": false
+      },
+      {
+       "title": "McCOY GLOBAL ANNOUNCES THIRD QUARTER 2026 RESULTS",
+       "url": "https://www.newswire.ca/news-releases/mccoy-global-announces-third-quarter-2026-results-895767326.html",
+       "published": null,
+       "engines": [
+        "bing news"
+       ],
+       "good": false
+      },
+      {
+       "title": "Top 10 Cryptocurrencies In Canada For November 6, 2026",
+       "url": "https://www.forbes.com/advisor/ca/investing/cryptocurrency/top-10-cryptocurrencies/",
+       "published": null,
+       "engines": [
+        "bing news"
+       ],
+       "good": false
+      },
+      {
+       "title": "SAF's Digital and Intelligence Service launches new training command to keep pace with evolving threats",
+       "url": "https://www.channelnewsasia.com/singapore/saf-training-command-digital-intelligence-service-cyber-threats-6530311",
+       "published": null,
+       "engines": [
+        "bing news"
+       ],
+       "good": true
+      }
+     ],
+     "good": 1,
+     "error": null
+    },
+    {
+     "lang": "en",
+     "query": "technology news November 7 2026 AI cybersecurity semiconductor",
+     "range": "day",
+     "results": [
+      {
+       "title": "The Impact of US Midterm Elections 2026 on India and Global Policies",
+       "url": "https://smestreet.in/global/the-impact-of-us-midterm-elections-2026-on-india-and-global-policies-12791474",
+       "published": null,
+       "engines": [
+        "bing news"
+       ],
+       "good": false
+      },
+      {
+       "title": "IBM (NYSE: IBM) Shares Fall Below Their Long-Term Trend Line",
+       "url": "https://www.rswebsols.com/news/ibm-nyse-ibm-shares-fall-below-their-long-term-trend-line/",
+       "published": null,
+       "engines": [
+        "bing news"
+       ],
+       "good": false
+      },
+      {
+       "title": "Here's What a $10,000 Investment in Micron Stock Could Be Worth in 2028 (Hint: Big Gains Ahead)",
+       "url": "https://www.fool.com/investing/2026/11/07/heres-what-a-10000-investment-in-micron-stock-co/",
+       "published": null,
+       "engines": [
+        "bing news"
+       ],
+       "good": true
+      },
+      {
+       "title": "2026 Senate Election Results",
+       "url": "https://www.foxnews.com/elections/2026/midterm-results/senate",
+       "published": null,
+       "engines": [
+        "bing news"
+       ],
+       "good": false
+      },
+      {
+       "title": "2026 Governor Election Results by State",
+       "url": "https://www.foxnews.com/elections/2026/midterm-results/governor",
+       "published": null,
+       "engines": [
+        "bing news"
+       ],
+       "good": false
+      }
+     ],
+     "good": 1,
+     "error": null
+    },
+    {
+     "lang": "en",
+     "query": "AI news this week",
+     "range": "week",
+     "results": [
+      {
+       "title": "AI in property listings is false advertising, house-hunters say",
+       "url": "https://www.msn.com/en-us/money/real-estate/ai-in-property-listings-is-false-advertising-house-hunters-say/ar-AA2gVMEa",
+       "published": null,
+       "engines": [
+        "bing news"
+       ],
+       "good": true
+      },
+      {
+       "title": "Democrats planning flood of AI bills when they take control of Congress",
+       "url": "https://www.msn.com/en-us/news/other/democrats-planning-flood-of-ai-bills-when-they-take-control-of-congress/ar-AA2gUjiG",
+       "published": null,
+       "engines": [
+        "bing news"
+       ],
+       "good": true
+      },
+      {
+       "title": "OpenAI, Arm and Qualcomm executives react to post-midterm AI sell-off",
+       "url": "https://www.cnbc.com/2026/11/06/tech-executives-ai-data-center-selloff-midterms.html",
+       "published": null,
+       "engines": [
+        "bing news"
+       ],
+       "good": true
+      },
+      {
+       "title": "Not Nvidia. Not Palantir. The Midterms Just Made This Magnificent Artificial Intelligence (AI) Stock the Safer Bet.",
+       "url": "https://www.msn.com/en-us/news/other/not-nvidia-not-palantir-the-midterms-just-made-this-magnificent-artificial-intelligence-ai-stock-the-safer-bet/ar-AA2gTazi",
+       "published": null,
+       "engines": [
+        "bing news"
+       ],
+       "good": true
+      },
+      {
+       "title": "AI stocks bounce back after $2.5 trillion wipeout, but questions remain",
+       "url": "https://www.msn.com/en-us/money/top-stocks/ai-stocks-bounce-back-after-2-5-trillion-wipe-out/ar-AA2gQsv8",
+       "published": null,
+       "engines": [
+        "bing news"
+       ],
+       "good": true
+      }
+     ],
+     "good": 5,
+     "error": null
+    },
+    {
+     "lang": "en",
+     "query": "federal reserve interest rate decision",
+     "range": "month",
+     "results": [
+      {
+       "title": "Federal Reserve makes interest rate decision ahead of midterms",
+       "url": "https://www.foxbusiness.com/economy/federal-reserve-interest-rate-decision-october-28-2026",
+       "published": null,
+       "engines": [
+        "bing news"
+       ],
+       "good": true
+      },
+      {
+       "title": "Federal Reserve holds interest rates steady despite inflation concerns",
+       "url": "https://www.usatoday.com/story/money/economy/2026/10/28/federal-reserve-october-interest-rate-decision--live/92441632007/",
+       "published": null,
+       "engines": [
+        "bing news"
+       ],
+       "good": true
+      },
+      {
+       "title": "Federal Reserve expected to hold interest rates steady in last decision before midterm elections",
+       "url": "https://www.foxbusiness.com/economy/federal-reserve-expected-hold-interest-rates-steady-midterm-elections-week-away",
+       "published": null,
+       "engines": [
+        "bing news"
+       ],
+       "good": true
+      },
+      {
+       "title": "Fed keeps interest rates unchanged, but two officials dissented in favor of a rate hike",
+       "url": "https://www.cnn.com/2026/10/28/business/live-news/federal-reserve-interest-rate-october",
+       "published": null,
+       "engines": [
+        "bing news"
+       ],
+       "good": true
+      },
+      {
+       "title": "US Federal Reserve leaves interest rates unchanged",
+       "url": "https://finance.yahoo.com/economy/policy/articles/us-federal-leaves-interest-rates-183335430.html",
+       "published": null,
+       "engines": [
+        "bing news"
+       ],
+       "good": true
+      }
+     ],
+     "good": 5,
+     "error": null
+    },
+    {
+     "lang": "en",
+     "query": "nba news today",
+     "range": "day",
+     "results": [
+      {
+       "title": "Luka Doncic decided to make his 61-foot heave punctuating 53-point effort in win over Blazers",
+       "url": "https://www.msn.com/en-us/sports/basketball/luka-doncic-decided-to-make-his-61-foot-heave-punctuating-53-point-effort-in-win-over-blazers/ar-AA2gWvuQ",
+       "published": null,
+       "engines": [
+        "bing news"
+       ],
+       "good": true
+      },
+      {
+       "title": "Golden State Warriors Announce Injury Report vs. Orlando Magic (Nov. 7)",
+       "url": "https://sports.yahoo.com/articles/golden-state-warriors-announce-injury-082041661.html",
+       "published": null,
+       "engines": [
+        "bing news"
+       ],
+       "good": true
+      },
+      {
+       "title": "Lakers’ Ziaire Williams confuses Luka Doncic with Austin Reaves: ‘wrong white person’",
+       "url": "https://nypost.com/2026/11/07/sports/lakers-ziaire-williams-confuses-luka-doncic-with-austin-reaves/",
+       "published": null,
+       "engines": [
+        "bing news"
+       ],
+       "good": true
+      },
+      {
+       "title": "Where to watch Army vs. Air Force today: Channel, live stream, time, schedule for service academy game",
+       "url": "https://sports.yahoo.com/articles/where-watch-army-vs-air-080001992.html",
+       "published": null,
+       "engines": [
+        "bing news"
+       ],
+       "good": false
+      },
+      {
+       "title": "【動画】河村勇輝の負傷退場後の行動に称賛…NBA Gリーグ公式も拍手 ファン「これができるのが河村勇輝」",
+       "url": "https://www.sportingnews.com/jp/nba/news/nba-g-league-praises-yuki-kawamura-his-actions-after-injury-forced-exit/ab9ae4f998098eaa10d47a3a",
+       "published": null,
+       "engines": [
+        "bing news"
+       ],
+       "good": true
+      }
+     ],
+     "good": 4,
+     "error": null
+    },
+    {
+     "lang": "en",
+     "query": "US midterm election results",
+     "range": "week",
+     "results": [
+      {
+       "title": "Inside the Democratic effort to turn outrage over data centers against Ken Paxton and other Republicans",
+       "url": "https://www.cnn.com/2026/11/07/politics/democrats-midterms-data-centers-ken-paxton-james-talarico",
+       "published": null,
+       "engines": [
+        "bing news"
+       ],
+       "good": true
+      },
+      {
+       "title": "Florida Democrats ‘fired up to deliver’ after GOP gerrymander fails",
+       "url": "https://www.ms.now/11th-hour/watch/florida-democrats-fired-up-to-deliver-after-gop-gerrymander-fails-2519973443631",
+       "published": null,
+       "engines": [
+        "bing news"
+       ],
+       "good": true
+      },
+      {
+       "title": "CA-4 race remains close between Eric Jones, Mike Thompson",
+       "url": "https://www.msn.com/en-us/news/other/ca-4-race-remains-close-between-eric-jones-mike-thompson/vi-AA2gVENA",
+       "published": null,
+       "engines": [
+        "bing news"
+       ],
+       "good": true
+      },
+      {
+       "title": "A snapshot look at Tuesday's election",
+       "url": "https://bismarcktribune.com/news/community/mandannews/article_31daee03-080f-4102-99c4-d9d0635efb1d.html",
+       "published": null,
+       "engines": [
+        "bing news"
+       ],
+       "good": true
+      },
+      {
+       "title": "Colom confident as Mississippi appears poised to ‘pick another senator’",
+       "url": "https://www.ms.now/the-briefing-with-jen-psaki/watch/colom-confident-as-mississippi-appears-poised-to-pick-another-senator-2519967811537",
+       "published": null,
+       "engines": [
+        "bing news"
+       ],
+       "good": true
+      }
+     ],
+     "good": 5,
+     "error": null
+    },
+    {
+     "lang": "en",
+     "query": "stock market news today",
+     "range": "day",
+     "results": [
+      {
+       "title": "Will Earnings Miss Change EverCommerce Stock Narrative",
+       "url": "https://finance.yahoo.com/markets/stocks/articles/earnings-miss-change-evercommerce-stock-081321041.html",
+       "published": null,
+       "engines": [
+        "bing news"
+       ],
+       "good": true
+      },
+      {
+       "title": "Indian Stock Market in Samvat 2083: Why Betting On Quality Over Momentum Could Be The Right Approach",
+       "url": "https://www.timesnownews.com/business-economy/markets/indian-stock-market-in-samvat-2083-why-betting-on-quality-over-momentum-could-be-the-right-approach-article-156478700",
+       "published": null,
+       "engines": [
+        "bing news"
+       ],
+       "good": true
+      },
+      {
+       "title": "Peter Schiff Predicts Gold Boom, Says Political Shift Threatens To Send Inflation Soaring — ‘Sign Of Things To Come’",
+       "url": "https://stocktwits.com/news-articles/markets/equity/peter-schiff-gold-boom-political-shift-threatens-inflation-soaring/cNGVpgIR9Il",
+       "published": null,
+       "engines": [
+        "bing news"
+       ],
+       "good": false
+      },
+      {
+       "title": "The Democrat's blue tsunami turned stock markets red across the world",
+       "url": "https://www.msn.com/en-in/news/other/the-democrats-blue-tsunami-turned-stock-markets-red-across-the-world/ar-AA2gWvyu",
+       "published": null,
+       "engines": [
+        "bing news"
+       ],
+       "good": true
+      },
+      {
+       "title": "NSE's Electronic Gold Receipts record over ₹23 crore turnover on debut: How investors can buy",
+       "url": "https://www.cnbctv18.com/market/nse-electronic-gold-receipts-over-rs-23-crore-turnover-on-debut-how-investors-can-buy-20029464.htm",
+       "published": null,
+       "engines": [
+        "bing news"
+       ],
+       "good": true
+      }
+     ],
+     "good": 4,
+     "error": null
+    },
+    {
+     "lang": "en",
+     "query": "boston local news",
+     "range": "week",
+     "results": [
+      {
+       "title": "Boston Mayor Wu not deterred by criticism, lightning threat to mark $325M White Stadium milestone",
+       "url": "https://www.msn.com/en-us/news/other/boston-mayor-wu-not-deterred-by-criticism-lightning-threat-to-mark-325m-white-stadium-milestone/ar-AA2gUZiB",
+       "published": null,
+       "engines": [
+        "bing news"
+       ],
+       "good": false
+      },
+      {
+       "title": "Boston mom says son with Type 1 diabetes may lose place at Catholic school amid nursing shortage",
+       "url": "https://www.msn.com/en-us/news/other/boston-mom-says-son-with-type-1-diabetes-may-lose-place-at-catholic-school-amid-nursing-shortage/ar-AA2gVDwH",
+       "published": null,
+       "engines": [
+        "bing news"
+       ],
+       "good": false
+      },
+      {
+       "title": "Telangana student Sreeja Reddy goes missing in Boston",
+       "url": "https://www.msn.com/en-in/news/other/telangana-student-sreeja-reddy-goes-missing-in-boston/ar-AA2gWmkQ",
+       "published": null,
+       "engines": [
+        "bing news"
+       ],
+       "good": false
+      },
+      {
+       "title": "CASINO TEAMSTERS WIN STRIKE AT ENCORE BOSTON HARBOR",
+       "url": "https://www.prnewswire.com/news-releases/casino-teamsters-win-strike-at-encore-boston-harbor-302932291.html",
+       "published": null,
+       "engines": [
+        "bing news"
+       ],
+       "good": false
+      },
+      {
+       "title": "Snowport Holiday Market returns to Boston’s Seaport",
+       "url": "https://whdh.com/news/snowport-holiday-market-returns-to-bostons-seaport/",
+       "published": null,
+       "engines": [
+        "bing news"
+       ],
+       "good": true
+      }
+     ],
+     "good": 1,
+     "error": null
+    },
+    {
+     "lang": "zh",
+     "query": "科技新闻 2026年11月7日",
+     "range": "day",
+     "results": [
+      {
+       "title": "2026年11月7日 AI 精选科技新闻摘要 | E-Ink 新闻日报",
+       "url": "https://news.e-ink.me/zh/archive/2026-11-07",
+       "published": null,
+       "engines": [
+        "yahoo"
+       ],
+       "good": true
+      },
+      {
+       "title": "2026年11月7日新闻摘要｜29件热点与原始来源 - 热摸爽",
+       "url": "https://remoshuang.com/daily/2026-11-07",
+       "published": null,
+       "engines": [
+        "yahoo"
+       ],
+       "good": false
+      },
+      {
+       "title": "AI资讯日报 2026年11月7日 | 何夕2077",
+       "url": "https://hex2077.dev/zh-CN/docs/2026-11/2026-11-07/",
+       "published": null,
+       "engines": [
+        "yahoo"
+       ],
+       "good": true
+      },
+      {
+       "title": "新浪AI热点小时报丨2026年11月07日10时_今日实时AI热点速递|机器人|智...",
+       "url": "https://k.sina.com.cn/article_7857201856_1d45362c001908ty3a.html",
+       "published": null,
+       "engines": [
+        "yahoo"
+       ],
+       "good": false
+      },
+      {
+       "title": "科技拾玖｜每日科技热点（2026年11月7日） - 知乎",
+       "url": "https://zhuanlan.zhihu.com/p/2102320735867889037",
+       "published": null,
+       "engines": [
+        "yahoo"
+       ],
+       "good": true
+      }
+     ],
+     "good": 3,
+     "error": null
+    },
+    {
+     "lang": "zh",
+     "query": "今日 科技新闻 2026年11月7日",
+     "range": "day",
+     "results": [
+      {
+       "title": "2026年11月7日新闻摘要｜29件热点与原始来源 - 热摸爽",
+       "url": "https://remoshuang.com/daily/2026-11-07",
+       "published": null,
+       "engines": [
+        "yahoo"
+       ],
+       "good": false
+      },
+      {
+       "title": "AI资讯日报 2026年11月7日 | 何夕2077",
+       "url": "https://hex2077.dev/zh-CN/docs/2026-11/2026-11-07/",
+       "published": null,
+       "engines": [
+        "yahoo"
+       ],
+       "good": true
+      },
+      {
+       "title": "新浪AI热点小时报丨2026年11月07日10时_今日实时AI热点速递|机器人|智...",
+       "url": "https://k.sina.com.cn/article_7857201856_1d45362c001908ty3a.html",
+       "published": null,
+       "engines": [
+        "yahoo"
+       ],
+       "good": false
+      },
+      {
+       "title": "新浪科技热点小时报丨2026年11月07日04时_今日实时科技热点速递",
+       "url": "https://cj.sina.com.cn/articles/view/7857201856/1d45362c001908tx2s",
+       "published": null,
+       "engines": [
+        "yahoo"
+       ],
+       "good": true
+      },
+      {
+       "title": "科技拾玖｜每日科技热点（2026年11月7日） - 知乎",
+       "url": "https://zhuanlan.zhihu.com/p/2102320735867889037",
+       "published": null,
+       "engines": [
+        "yahoo"
+       ],
+       "good": true
+      }
+     ],
+     "good": 3,
+     "error": null
+    },
+    {
+     "lang": "zh",
+     "query": "人工智能 最新消息",
+     "range": "week",
+     "results": [
+      {
+       "title": "Anthropic的IPO定价可能下调至1万亿美元",
+       "url": "https://eu.36kr.com/zh/p/4057942380451458",
+       "published": null,
+       "engines": [
+        "bing news"
+       ],
+       "good": true
+      },
+      {
+       "title": "人工智能 - 最新人工智能实时滚动快讯，聚合所有人工智能相关热门新闻...",
+       "url": "http://tags.sina.com.cn/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD",
+       "published": null,
+       "engines": [
+        "yahoo"
+       ],
+       "good": true
+      },
+      {
+       "title": "AI 日报 · 每天 10 分钟，跟上最新 AI 趋势",
+       "url": "https://aidaily.fyi/zh",
+       "published": null,
+       "engines": [
+        "yahoo"
+       ],
+       "good": true
+      },
+      {
+       "title": "人工智能 - 最新人工智能实时滚动快讯，聚合所有人工智能相关热门新闻...",
+       "url": "https://tags.news.sina.com.cn/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD",
+       "published": null,
+       "engines": [
+        "yahoo"
+       ],
+       "good": true
+      },
+      {
+       "title": "每日 AI 资讯 - 猫目",
+       "url": "https://maomu.com/news",
+       "published": null,
+       "engines": [
+        "yahoo"
+       ],
+       "good": true
+      }
+     ],
+     "good": 5,
+     "error": null
+    },
+    {
+     "lang": "zh",
+     "query": "美国 中期选举 结果",
+     "range": "week",
+     "results": [
+      {
+       "title": "美国选举官员继续计票，部分州中期选举结果仍未揭晓",
+       "url": "https://www.voachinese.com/a/us-election-officials-count-votes-with-midterm-election-results-undecided-in-some-states-20261106/8219728.html",
+       "published": null,
+       "engines": [
+        "bing news"
+       ],
+       "good": true
+      },
+      {
+       "title": "美国中期选举掀“蓝色浪潮” 将怎样影响世界",
+       "url": "https://www.bbc.com/zhongwen/watch/c5vgjjr77wvxo/simp",
+       "published": null,
+       "engines": [
+        "bing news"
+       ],
+       "good": true
+      },
+      {
+       "title": "国际丨一场中期选举，预示美国2028总统大选提前开场？",
+       "url": "https://www.bjnews.com.cn/detail/1793942236129437.html",
+       "published": null,
+       "engines": [
+        "bing news"
+       ],
+       "good": true
+      },
+      {
+       "title": "中期选举结果引发美科技股恐慌性抛售 日韩台股重挫 救市声起 香港 ...",
+       "url": "https://v.ifeng.com/c/8xpz4g8NXjC",
+       "published": null,
+       "engines": [
+        "bing news"
+       ],
+       "good": false
+      },
+      {
+       "title": "中期选举正式落幕，民主党攻破40年得州阵地，马斯克面临全面清算",
+       "url": "https://www.sohu.com/a/1098393305_122656896",
+       "published": null,
+       "engines": [
+        "bing news"
+       ],
+       "good": false
+      }
+     ],
+     "good": 3,
+     "error": null
+    }
+   ]
+  }
+ ]
+}

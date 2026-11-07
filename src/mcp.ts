@@ -42,11 +42,17 @@ export const TOOLS = {
   },
 };
 
+/** The tools only change with a new image and are the same for everyone, so anyone may keep them for a while. */
+const TOOL_LIST_CACHE = { ttlMs: 5 * 60_000, cacheScope: "public" } as const;
+
 export function createMcpApp(deps: McpDeps) {
   // One fresh McpServer per request: this is what makes the endpoint stateless, and the default
   // `legacy: "stateless"` also serves the 2025 protocol Codex still speaks (ADR 0003).
   const handler = createMcpHandler(() => {
-    const server = new McpServer({ name: APP_NAME, version: APP_VERSION });
+    const server = new McpServer(
+      { name: APP_NAME, version: APP_VERSION },
+      { cacheHints: { "tools/list": TOOL_LIST_CACHE, "server/discover": TOOL_LIST_CACHE } },
+    );
     server.registerTool("web_search", TOOLS.web_search, (args) =>
       runTool("web_search", () => webSearch(args, deps.search)),
     );

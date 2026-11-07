@@ -216,6 +216,12 @@ Use web_fetch to read a page.
 - **Cache:** identical arguments return the cached result for 10 minutes (in memory, an LRU of 500 entries).
 - **Concurrency:** at most 4 SearXNG requests at once across all callers, so upstream engines don't start refusing
   the home IP. A queue wait of over 10 s fails the call with a timeout.
+- **Spacing:** searches run at least 2 s apart across all callers, in the order they arrive, and a burst waits rather than failing. A
+  round of a real meeting sent 6 searches in 3 s, and DuckDuckGo answered with CAPTCHAs. A search that would wait over 30 s fails, so
+  a runaway caller can't build an endless queue. Answers from the cache don't wait. Fetches run at least 0.2 s apart.
+- **Time ranges on news:** SearXNG skips any engine with no time-range support when given a range, and that's nearly every news engine.
+  So news searches send no range, and mcpgw drops results dated too long ago. Bing News and Brave News give no dates, so `time_range`
+  can't be enforced on their results.
 
 ### 5.2 `web_fetch`
 
@@ -325,7 +331,9 @@ can't tell where a URL came from, so the rule has to live with whoever holds the
 | `SEARXNG_URL` | `http://searxng.mcpgw.svc.cluster.local:8080` | SearXNG base URL (dev: `http://127.0.0.1:8180`) |
 | `SEARCH_CACHE_TTL_S` | `600` | |
 | `SEARCH_CONCURRENCY` | `4` | |
+| `SEARCH_MIN_GAP_MS` | `2000` | The least time between searches, across all callers |
 | `FETCH_CONCURRENCY` | `8` | |
+| `FETCH_MIN_GAP_MS` | `200` | The least time between fetches, across all callers |
 | `FETCH_TIMEOUT_MS` | `15000` | |
 | `FETCH_MAX_BYTES` | `5242880` | |
 | `FETCH_MAX_URL_CHARS` | `250` | |
@@ -338,7 +346,7 @@ can't tell where a URL came from, so the rule has to live with whoever holds the
 - `server.limiter: false`: only mcpgw calls it, from inside the cluster.
 - `server.secret_key` from the env var `SEARXNG_SECRET`, a random value the pod generates at boot. Nothing signed with
   it outlives the pod, since the limiter and image proxy are off, so there's no Kubernetes Secret.
-- Engines: bing, duckduckgo, brave, wikipedia, github, stackoverflow, arxiv, bing news, duckduckgo news. The rest stay
+- Engines: yahoo, duckduckgo, bing, wikipedia, github, stackoverflow, arxiv, bing news, brave.news ([ADR 0012](adr/0012-search-engine-mix.md)). The rest stay
   off to keep upstream traffic low. Google is off because it refused every query from this IP.
 - Image: `searxng/searxng`, pinned to a dated tag such as `2026.11.5-3e95f6cd2`, never `latest`.
 

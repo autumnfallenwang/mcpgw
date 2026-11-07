@@ -1,8 +1,9 @@
 import { createServer, type Server } from "node:http";
 import type { AddressInfo } from "node:net";
-import { afterAll, beforeAll, describe, expect, it, vi } from "vitest";
+import { afterAll, afterEach, beforeAll, describe, expect, it, vi } from "vitest";
 import { TtlCache } from "../src/lib/cache.js";
 import { Limiter, QueueTimeout } from "../src/lib/limiter.js";
+import { Pacer } from "../src/lib/pacer.js";
 import { createSearxngProvider } from "../src/search/searxng.js";
 import { SearchService } from "../src/search/service.js";
 import type { SearchOutcome, SearchProvider, SearchQuery } from "../src/search/types.js";
@@ -60,6 +61,60 @@ describe("Limiter", () => {
   });
 });
 
+describe("Pacer", () => {
+  afterEach(() => vi.useRealTimers());
+
+  it("spaces a burst out, in the order it arrived", async () => {
+    vi.useFakeTimers();
+    const pacer = new Pacer(1000, 30_000);
+    const done: number[] = [];
+    const calls = [0, 1, 2].map((n) => pacer.wait().then(() => done.push(n)));
+    await vi.advanceTimersByTimeAsync(0);
+    expect(done).toEqual([0]);
+    await vi.advanceTimersByTimeAsync(999);
+    expect(done).toEqual([0]);
+    await vi.advanceTimersByTimeAsync(1);
+    expect(done).toEqual([0, 1]);
+    await vi.advanceTimersByTimeAsync(1000);
+    await Promise.all(calls);
+    expect(done).toEqual([0, 1, 2]);
+  });
+
+  it("doesn't delay a call once the gap has passed", async () => {
+    vi.useFakeTimers();
+    const pacer = new Pacer(1000, 30_000);
+    await pacer.wait();
+    await vi.advanceTimersByTimeAsync(5000);
+    let ran = false;
+    void pacer.wait().then(() => {
+      ran = true;
+    });
+    await vi.advanceTimersByTimeAsync(0);
+    expect(ran).toBe(true);
+  });
+
+  it("refuses a call that would wait too long, without using up a turn", async () => {
+    vi.useFakeTimers();
+    const pacer = new Pacer(1000, 1500);
+    void pacer.wait();
+    void pacer.wait();
+    await expect(pacer.wait()).rejects.toBeInstanceOf(QueueTimeout);
+    await vi.advanceTimersByTimeAsync(2000);
+    let ran = false;
+    void pacer.wait().then(() => {
+      ran = true;
+    });
+    await vi.advanceTimersByTimeAsync(0);
+    expect(ran).toBe(true);
+  });
+
+  it("does nothing with no gap", async () => {
+    const pacer = new Pacer(0, 0);
+    await pacer.wait();
+    await pacer.wait();
+  });
+});
+
 describe("SearchService", () => {
   function counting(outcome: SearchOutcome | Error) {
     const provider: SearchProvider & { calls: number } = {
@@ -74,6 +129,46 @@ describe("SearchService", () => {
     return provider;
   }
   const same = <T>(x: T) => x;
+
+  it("spaces searches out, but not ones the cache can answer", async () => {
+    vi.useFakeTimers();
+    try {
+      const provider = counting({
+        results: [{ title: "A", url: "https://a.example/", snippet: "", engines: [] }],
+        suggestions: [],
+      });
+      const service = new SearchService(provider, {
+        cacheTtlMs: 60_000,
+        concurrency: 4,
+        minGapMs: 1000,
+      });
+      const first = service.search(QUERY, same);
+      const second = service.search({ ...QUERY, query: "silver" }, same);
+      await vi.advanceTimersByTimeAsync(0);
+      expect(provider.calls).toBe(1);
+      await vi.advanceTimersByTimeAsync(1000);
+      expect(provider.calls).toBe(2);
+      await Promise.all([first, second]);
+      expect((await service.search(QUERY, same)).cached).toBe(true);
+      expect(provider.calls).toBe(2);
+    } finally {
+      vi.useRealTimers();
+    }
+  });
+
+  it("says so when too many searches are waiting", async () => {
+    const provider = counting({ results: [], suggestions: [] });
+    const service = new SearchService(provider, {
+      cacheTtlMs: 60_000,
+      concurrency: 4,
+      minGapMs: 60_000,
+      maxPaceWaitMs: 10,
+    });
+    void service.search(QUERY, same, { retryEmpty: false });
+    await expect(service.search({ ...QUERY, query: "silver" }, same)).rejects.toThrow(
+      "Too many searches",
+    );
+  });
 
   it("serves identical arguments from the cache, and different ones fresh", async () => {
     const provider = counting({
@@ -179,6 +274,28 @@ describe("SearXNG provider, against a fake SearXNG", () => {
 
   const signal = () => AbortSignal.timeout(1000);
 
+  it("checks news dates itself, since a time range would make SearXNG skip most news engines", async () => {
+    const daysAgo = (days: number) => new Date(Date.now() - days * 86_400_000).toISOString();
+    reply = {
+      status: 200,
+      body: {
+        results: [
+          { title: "Today", url: "https://a.example/", publishedDate: daysAgo(0) },
+          { title: "Last night", url: "https://b.example/", publishedDate: daysAgo(1) },
+          { title: "Last month", url: "https://c.example/", publishedDate: daysAgo(30) },
+          { title: "No date", url: "https://d.example/", publishedDate: null },
+        ],
+        unresponsive_engines: [],
+      },
+    };
+    const provider = createSearxngProvider(base);
+    const day = await provider.search({ ...QUERY, timeRange: "day", category: "news" }, signal());
+    expect(lastUrl.searchParams.has("time_range")).toBe(false);
+    expect(day.results.map((r) => r.title)).toEqual(["Today", "Last night", "No date"]);
+    const any = await provider.search({ ...QUERY, category: "news" }, signal());
+    expect(any.results).toHaveLength(4);
+  });
+
   it("sends the arguments and maps the results", async () => {
     reply = {
       status: 200,
@@ -199,12 +316,12 @@ describe("SearXNG provider, against a fake SearXNG", () => {
       },
     };
     const provider = createSearxngProvider(base);
-    const out = await provider.search({ ...QUERY, timeRange: "week", category: "news" }, signal());
+    const out = await provider.search({ ...QUERY, timeRange: "week", category: "it" }, signal());
     expect(Object.fromEntries(lastUrl.searchParams)).toEqual({
       q: "gold",
       format: "json",
       language: "en",
-      categories: "news",
+      categories: "it",
       time_range: "week",
     });
     expect(out.results).toEqual([

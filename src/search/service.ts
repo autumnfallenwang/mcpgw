@@ -1,5 +1,6 @@
 import { TtlCache } from "../lib/cache.js";
 import { Limiter, QueueTimeout } from "../lib/limiter.js";
+import { Pacer } from "../lib/pacer.js";
 import { ToolFailure } from "../tools/result.js";
 import type { SearchHit, SearchProvider, SearchQuery } from "./types.js";
 
@@ -20,19 +21,25 @@ export interface SearchServiceOptions {
   queueWaitMs?: number;
   timeoutMs?: number;
   retryDelayMs?: number;
+  /** The least time between upstream searches. Default 0, so none. */
+  minGapMs?: number;
+  /** How long a search may wait its turn before failing. */
+  maxPaceWaitMs?: number;
 }
 
 const CACHE_ENTRIES = 500;
 
 /**
- * A provider with the two protections that keep upstream engines from refusing the home IP: a
- * short cache, and a cap on requests at once across all callers. Engines often come back empty for a
+ * A provider with the protections that keep upstream engines from refusing the home IP: a short cache,
+ * a cap on requests at once, and a gap between them, across all callers. One round of a real meeting
+ * sent 6 searches in 3 seconds, and DuckDuckGo answered with CAPTCHAs. Engines often come back empty for a
  * moment, so an empty result gets one more try and is never cached: 8 of 29 searches in a real model
  * test came back empty, and a cached one would have stayed empty for 10 minutes.
  */
 export class SearchService {
   private readonly cache: TtlCache<StoredSearch>;
   private readonly limiter: Limiter;
+  private readonly pacer: Pacer;
   private readonly timeoutMs: number;
   private readonly retryDelayMs: number;
 
@@ -42,6 +49,7 @@ export class SearchService {
   ) {
     this.cache = new TtlCache(options.cacheTtlMs, CACHE_ENTRIES);
     this.limiter = new Limiter(options.concurrency, options.queueWaitMs ?? 10_000);
+    this.pacer = new Pacer(options.minGapMs ?? 0, options.maxPaceWaitMs ?? 30_000);
     this.timeoutMs = options.timeoutMs ?? 20_000;
     this.retryDelayMs = options.retryDelayMs ?? 1_500;
   }
@@ -62,6 +70,7 @@ export class SearchService {
     if (hit) return { ...hit, cached: true, retried: false };
 
     const once = async (): Promise<StoredSearch> => {
+      await this.pacer.wait();
       const outcome = await this.limiter.run(() =>
         this.provider.search(query, AbortSignal.timeout(this.timeoutMs)),
       );

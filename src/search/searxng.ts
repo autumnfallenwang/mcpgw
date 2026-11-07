@@ -35,6 +35,13 @@ function publishedDay(value: string | null | undefined): string | undefined {
   return day && /^\d{4}-\d{2}-\d{2}$/.test(day) ? day : undefined;
 }
 
+/** A day's slack, since engines date stories in other time zones and a story from last night is still today's news. */
+const RANGE_DAYS = { day: 2, week: 8, month: 32, year: 367 };
+
+function cutoffFor(range: SearchQuery["timeRange"]): number | null {
+  return range ? Date.now() - RANGE_DAYS[range] * 86_400_000 : null;
+}
+
 export function createSearxngProvider(baseUrl: string): SearchProvider {
   // Only for the status page, so memory is enough: Loki has the history as searxng.error.
   const issues = new Map<string, { reason: string; lastAt: number; count: number }>();
@@ -58,7 +65,12 @@ export function createSearxngProvider(baseUrl: string): SearchProvider {
       url.searchParams.set("format", "json");
       url.searchParams.set("language", query.language);
       url.searchParams.set("categories", query.category);
-      if (query.timeRange) url.searchParams.set("time_range", query.timeRange);
+      // SearXNG skips any engine with no time-range support when given a range, and that's nearly every news
+      // engine: a real meeting's news searches were left with Bing News alone. So news is checked by date here.
+      const newsCutoff = query.category === "news" ? cutoffFor(query.timeRange) : null;
+      if (query.timeRange && query.category !== "news") {
+        url.searchParams.set("time_range", query.timeRange);
+      }
 
       let body: z.infer<typeof responseSchema>;
       try {
@@ -98,6 +110,7 @@ export function createSearxngProvider(baseUrl: string): SearchProvider {
       for (const r of body.results) {
         if (!r.url || !/^https?:\/\//.test(r.url)) continue;
         const published = publishedDay(r.publishedDate);
+        if (newsCutoff && published && Date.parse(published) < newsCutoff) continue;
         results.push({
           title: r.title?.trim() || r.url,
           url: r.url,

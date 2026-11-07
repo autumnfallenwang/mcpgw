@@ -3,7 +3,7 @@ use_default_settings:
   engines:
     # Few engines, to keep upstream traffic low and the home IP from being refused. Google isn't
     # here: it refused every query from this IP in the M3 trial, and only added errors to the logs.
-    # Brave isn't either: it was nearly always rate-limited. See dev/benchmark/ before changing this.
+    # Brave's general search isn't either: it was nearly always rate-limited. See dev/benchmark/ before changing this.
     keep_only:
       - yahoo
       - duckduckgo
@@ -13,7 +13,9 @@ use_default_settings:
       - stackoverflow
       - arxiv
       - bing news
-      - duckduckgo news
+      - brave.news
+      # brave.news won't load without it. It's turned off below.
+      - brave
 
 general:
   instance_name: mcpgw
@@ -44,8 +46,11 @@ engines:
     weight: 0.2
   - name: bing news
     disabled: false
-  - name: duckduckgo news
+  # Scored by a judge model, alone and with Bing News: dev/benchmark/news.mjs. If it's rate-limited, Bing News carries on.
+  - name: brave.news
     disabled: false
+  - name: brave
+    disabled: true
 
 outgoing:
   request_timeout: 5.0

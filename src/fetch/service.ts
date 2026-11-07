@@ -1,6 +1,7 @@
 import { TtlCache } from "../lib/cache.js";
 import { Limiter, QueueTimeout } from "../lib/limiter.js";
 import { log } from "../lib/logger.js";
+import { Pacer } from "../lib/pacer.js";
 import { ToolFailure } from "../tools/result.js";
 import { HTML_TYPES, isPdf } from "./extract.js";
 import { ExtractFailure, type ExtractorPool } from "./extractor-pool.js";
@@ -23,6 +24,8 @@ export interface FetchServiceOptions {
   cacheTtlMs: number;
   concurrency: number;
   queueWaitMs?: number;
+  /** The least time between fetches, so a runaway caller can only go so fast. Default 0, so none. */
+  minGapMs?: number;
 }
 
 const CACHE_ENTRIES = 100;
@@ -70,6 +73,7 @@ function failureMessage(err: FetchFailure): string {
 export class FetchService {
   private readonly cache: TtlCache<ReadablePage>;
   private readonly limiter: Limiter;
+  private readonly pacer: Pacer;
 
   constructor(
     private readonly fetcher: Fetcher,
@@ -78,6 +82,7 @@ export class FetchService {
   ) {
     this.cache = new TtlCache(options.cacheTtlMs, CACHE_ENTRIES);
     this.limiter = new Limiter(options.concurrency, options.queueWaitMs ?? 10_000);
+    this.pacer = new Pacer(options.minGapMs ?? 0, options.queueWaitMs ?? 10_000);
   }
 
   async read(url: string, includeLinks = false): Promise<ReadablePage & { cached: boolean }> {
@@ -87,6 +92,7 @@ export class FetchService {
 
     let page: ReadablePage;
     try {
+      await this.pacer.wait();
       page = await this.limiter.run(() => this.fetchAndExtract(url, includeLinks));
     } catch (err) {
       throw this.toToolFailure(err);

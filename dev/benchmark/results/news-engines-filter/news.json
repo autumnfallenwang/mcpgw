@@ -1,0 +1,2044 @@
+{
+ "label": "news-engines-filter",
+ "date": "2026-11-07",
+ "judge": "gpt-5.6-terra",
+ "runs": [
+  {
+   "summary": {
+    "name": "yahoo news",
+    "good_of_5_each": "18/60",
+    "pct": 30,
+    "en": "18/40",
+    "zh": "0/20",
+    "empty": 5,
+    "errors": 0
+   },
+   "rows": [
+    {
+     "lang": "en",
+     "query": "important technology news November 7 2026 today",
+     "range": "day",
+     "results": [
+      {
+       "title": "Stock Market Today, Nov. 5: Nasdaq Suffers Worst Day in 18 Months as AI Trade...",
+       "url": "https://finance.yahoo.com/markets/stocks/articles/stock-market-today-nov-5-221502761.html?fr=sycsrp_catchall",
+       "published": "2026-11-06T08:38:01.398815",
+       "engines": [
+        "yahoo news"
+       ],
+       "good": true
+      },
+      {
+       "title": "First Advantage Reports Third Quarter 2026 Results",
+       "url": "https://pr.newsaegis.com/article/First-Advantage-Reports-Third-Quarter-2026-Results/6aec6292871c4c723c116adf",
+       "published": "2026-11-05T08:38:01.399773",
+       "engines": [
+        "yahoo news"
+       ],
+       "good": false
+      },
+      {
+       "title": "Girls Know How® Books Celebrates Young Readers Week With Promotion on QVC®",
+       "url": "https://pr.lagrandeobserver.com/article/Girls-Know-Howr-Books-Celebrates-Young-Readers-Week-With-Promotion-on-QVCr/6aedd732871c4c723c117385",
+       "published": "2026-11-06T08:38:01.399977",
+       "engines": [
+        "yahoo news"
+       ],
+       "good": false
+      },
+      {
+       "title": "'Miraculous' – Tadej Pogačar's heart rate data and sleep scores revealed in new ...",
+       "url": "https://www.yahoo.com/lifestyle/articles/miraculous-tadej-poga-ars-heart-120505940.html?fr=sycsrp_catchall",
+       "published": "2026-11-06T11:38:01.400205",
+       "engines": [
+        "yahoo news"
+       ],
+       "good": false
+      },
+      {
+       "title": "Full Jubal Show from Thursday November 5th 2026 - The Jubal Show ON DEMAND |...",
+       "url": "https://www.iheart.com/podcast/1119-the-jubal-show-on-demand-71175065/episode/full-jubal-show-from-thursday-november-349332198/",
+       "published": "2026-11-05T08:38:01.400427",
+       "engines": [
+        "yahoo news"
+       ],
+       "good": false
+      }
+     ],
+     "good": 1,
+     "error": null
+    },
+    {
+     "lang": "en",
+     "query": "technology news November 7 2026 AI cybersecurity semiconductor",
+     "range": "day",
+     "results": [],
+     "good": 0,
+     "error": null
+    },
+    {
+     "lang": "en",
+     "query": "AI news this week",
+     "range": "week",
+     "results": [
+      {
+       "title": "AI stocks halt their brutal, worldwide sell-off as Wall Street trims its loss...",
+       "url": "https://www.stamfordadvocate.com/business/article/worldwide-sell-off-ai-stocks-halts-us-stocks-22515440.php",
+       "published": "2026-11-06T15:38:07.658791",
+       "engines": [
+        "yahoo news"
+       ],
+       "good": true
+      },
+      {
+       "title": "Inside the Democratic effort to turn outrage over data centers against Ken...",
+       "url": "https://www.yahoo.com/news/politics/articles/inside-democratic-effort-turn-outrage-080015799.html?fr=sycsrp_catchall",
+       "published": "2026-11-07T08:00:07.659022",
+       "engines": [
+        "yahoo news"
+       ],
+       "good": true
+      },
+      {
+       "title": "SoundHound AI Stock Dips: What's Going On? - SoundHound AI (NASDAQ:SOUN)",
+       "url": "https://www.benzinga.com/trading-ideas/movers/26/11/62989163/soundhound-ai-stock-dips-whats-going-on",
+       "published": "2026-11-06T15:38:07.659220",
+       "engines": [
+        "yahoo news"
+       ],
+       "good": true
+      },
+      {
+       "title": "AST SpaceMobile Sinks 15% as AI Rout Swamps Space Force Contract News",
+       "url": "https://finance.yahoo.com/markets/stocks/articles/ast-spacemobile-sinks-15-ai-220832371.html?fr=sycsrp_catchall",
+       "published": "2026-11-06T08:38:07.659416",
+       "engines": [
+        "yahoo news"
+       ],
+       "good": true
+      },
+      {
+       "title": "... of Belleville’ Director Sylvain Chomet Fires Back at AI Accusations Over Dio...",
+       "url": "https://www.yahoo.com/entertainment/movies/articles/triplets-belleville-director-sylvain-chomet-081253978.html?fr=sycsrp_catchall",
+       "published": "2026-11-07T08:13:07.659611",
+       "engines": [
+        "yahoo news"
+       ],
+       "good": true
+      }
+     ],
+     "good": 5,
+     "error": null
+    },
+    {
+     "lang": "en",
+     "query": "federal reserve interest rate decision",
+     "range": "month",
+     "results": [
+      {
+       "title": "Fed Chair Kevin Warsh Is Planning to Break 45 Years of Precedent With a Stunning...",
+       "url": "https://finance.yahoo.com/economy/policy/articles/fed-chair-kevin-warsh-planning-093500424.html?fr=sycsrp_catchall",
+       "published": "2026-11-06T09:38:11.829403",
+       "engines": [
+        "yahoo news"
+       ],
+       "good": false
+      },
+      {
+       "title": "Best CD rates today, Friday, November 6, 2026: Several offers over 4.50%,...",
+       "url": "https://finance.yahoo.com/personal-finance/banking/article/best-cd-rates-today-friday-november-6-2026-several-offers-over-450-including-one-up-to-5-apy-110000130.html?fr=sycsrp_catchall",
+       "published": "2026-11-06T10:38:11.829662",
+       "engines": [
+        "yahoo news"
+       ],
+       "good": false
+      },
+      {
+       "title": "Best CD rates today, Thursday, November 5, 2026: Lock in up to 4.55% APY",
+       "url": "https://finance.yahoo.com/personal-finance/banking/article/best-cd-rates-today-thursday-november-5-2026-lock-in-up-to-455-apy-110000684.html?fr=sycsrp_catchall",
+       "published": "2026-11-05T08:38:11.829918",
+       "engines": [
+        "yahoo news"
+       ],
+       "good": false
+      },
+      {
+       "title": "Mortgage Professional Says High Rates Could Have an Unexpected Benefit for...",
+       "url": "https://finance.yahoo.com/real-estate/articles/mortgage-professional-says-high-rates-120041823.html?fr=sycsrp_catchall",
+       "published": "2026-10-31T08:38:11.830182",
+       "engines": [
+        "yahoo news"
+       ],
+       "good": false
+      },
+      {
+       "title": "US Treasury Traders Make Bullish Bets Ahead of Jobs Report",
+       "url": "https://finance.yahoo.com/markets/options/articles/us-treasury-traders-bullish-bets-084324989.html?fr=sycsrp_catchall",
+       "published": "2026-11-06T08:38:11.830459",
+       "engines": [
+        "yahoo news"
+       ],
+       "good": false
+      }
+     ],
+     "good": 0,
+     "error": null
+    },
+    {
+     "lang": "en",
+     "query": "nba news today",
+     "range": "day",
+     "results": [
+      {
+       "title": "Where to watch Grizzlies vs. Thunder today: Channel, live stream, time, TV...",
+       "url": "https://www.sportingnews.com/us/nba/news/watch-grizzlies-thunder-channel-stream-time-schedule-nba/95fc12961a1eef973f2bbe12",
+       "published": "2026-11-06T08:38:15.896224",
+       "engines": [
+        "yahoo news"
+       ],
+       "good": true
+      },
+      {
+       "title": "Where to watch Tennessee vs. Kentucky today: Channel, live stream, time,...",
+       "url": "https://sports.yahoo.com/articles/where-watch-tennessee-vs-kentucky-072002736.html?fr=sycsrp_catchall",
+       "published": "2026-11-07T07:38:15.896499",
+       "engines": [
+        "yahoo news"
+       ],
+       "good": false
+      },
+      {
+       "title": "Lakers' Luka Doncic Named Early MVP Favorite by NBA Insider",
+       "url": "https://sports.yahoo.com/articles/lakers-luka-doncic-named-early-194311293.html?fr=sycsrp_catchall",
+       "published": "2026-11-06T19:38:15.896741",
+       "engines": [
+        "yahoo news"
+       ],
+       "good": true
+      },
+      {
+       "title": "Where to watch Army vs. Air Force today: Channel, live stream, time, schedule...",
+       "url": "https://sports.yahoo.com/articles/where-watch-army-vs-air-080001992.html?fr=sycsrp_catchall",
+       "published": "2026-11-07T08:00:15.897182",
+       "engines": [
+        "yahoo news"
+       ],
+       "good": false
+      },
+      {
+       "title": "Best NBA prediction market apps: How to trade game winners, player props and...",
+       "url": "https://www.sportingnews.com/us/predictions-markets/news/best-nba-prediction-market-apps-how-trade/efd9b013012246a5db45b573",
+       "published": "2026-11-06T16:38:15.897408",
+       "engines": [
+        "yahoo news"
+       ],
+       "good": false
+      }
+     ],
+     "good": 2,
+     "error": null
+    },
+    {
+     "lang": "en",
+     "query": "US midterm election results",
+     "range": "week",
+     "results": [
+      {
+       "title": "US midterm election results in graphics and charts",
+       "url": "https://www.reuters.com/graphics/US-ELECTIONS/GRAPHICS-BLOG/akpelkldzvr/",
+       "published": "2026-11-05T08:38:20.325966",
+       "engines": [
+        "yahoo news"
+       ],
+       "good": true
+      },
+      {
+       "title": "US Midterm Elections 2026 live stream — where to watch results as they happen",
+       "url": "https://www.yahoo.com/news/politics/articles/us-midterm-elections-2026-live-170000498.html?fr=sycsrp_catchall",
+       "published": "2026-11-03T08:38:20.326249",
+       "engines": [
+        "yahoo news"
+       ],
+       "good": false
+      },
+      {
+       "title": "US midterm elections 2026 results: Democrats seize House and Senate as Trump fir...",
+       "url": "https://me.mashable.com/culture/77918/us-midterm-elections-2026-results-democrats-seize-house-and-senate-as-trump-fires-back-with-veto-pos",
+       "published": "2026-11-04T08:38:20.326497",
+       "engines": [
+        "yahoo news"
+       ],
+       "good": true
+      },
+      {
+       "title": "US midterm elections aftermath: Crude, USD, Nasdaq, Dow Jones, GBP in focus...",
+       "url": "https://www.fxstreet.com/analysis/us-midterm-elections-aftermath-crude-usd-nasdaq-dow-jones-gbp-in-focus-video-202611050910",
+       "published": "2026-11-05T08:38:20.326740",
+       "engines": [
+        "yahoo news"
+       ],
+       "good": true
+      },
+      {
+       "title": "Tesla: Shares Fall Following US Midterm Election Results; Maintaining Valuation...",
+       "url": "https://global.morningstar.com/en-eu/stocks/tesla-shares-fall-following-us-midterm-election-results-maintaining-valuation",
+       "published": "2026-11-06T13:38:20.326973",
+       "engines": [
+        "yahoo news"
+       ],
+       "good": false
+      }
+     ],
+     "good": 3,
+     "error": null
+    },
+    {
+     "lang": "en",
+     "query": "stock market news today",
+     "range": "day",
+     "results": [
+      {
+       "title": "Stock Market Today: Dow Rises After Postelection Rally; Cava, Dutch Bros Plunge...",
+       "url": "https://www.investors.com/market-trend/stock-market-today/dow-jones-sp500-nasdaq-election-rally-cava-dutch-bros/",
+       "published": "2026-11-05T08:38:24.607467",
+       "engines": [
+        "yahoo news"
+       ],
+       "good": false
+      },
+      {
+       "title": "Stock Market News for Nov 5, 2026",
+       "url": "https://finance.yahoo.com/markets/stocks/articles/stock-market-news-nov-5-132500891.html?fr=sycsrp_catchall",
+       "published": "2026-11-05T08:38:24.607737",
+       "engines": [
+        "yahoo news"
+       ],
+       "good": false
+      },
+      {
+       "title": "Stock Market Today (Nov. 6, 2026): Nasdaq, S&P 500 rise after midterms AI rout",
+       "url": "https://finance.yahoo.com/markets/stocks/articles/stock-market-today-nov-6-144816072.html?fr=sycsrp_catchall",
+       "published": "2026-11-06T14:38:24.608031",
+       "engines": [
+        "yahoo news"
+       ],
+       "good": true
+      },
+      {
+       "title": "Stock Market Today, Nov. 5: Nvidia Slides on AI Chip Selloff as Election...",
+       "url": "https://finance.yahoo.com/markets/stocks/articles/stock-market-today-nov-5-220938210.html?fr=sycsrp_catchall",
+       "published": "2026-11-06T08:38:24.608256",
+       "engines": [
+        "yahoo news"
+       ],
+       "good": false
+      },
+      {
+       "title": "Nasdaq Plunges 1,421 Points, Dow Slides 1,833 Points in Tech Rout: Stock Market...",
+       "url": "https://finance.yahoo.com/markets/stocks/articles/nasdaq-plunges-1-421-points-211503123.html?fr=sycsrp_catchall",
+       "published": "2026-11-06T08:38:24.608476",
+       "engines": [
+        "yahoo news"
+       ],
+       "good": true
+      }
+     ],
+     "good": 2,
+     "error": null
+    },
+    {
+     "lang": "en",
+     "query": "boston local news",
+     "range": "week",
+     "results": [
+      {
+       "title": "New voice of Boston Logan Airport revealed after 6,000 auditions and 35,000...",
+       "url": "https://www.yahoo.com/news/articles/voice-boston-logan-airport-revealed-123315867.html?fr=sycsrp_catchall",
+       "published": "2026-11-05T08:38:29.043724",
+       "engines": [
+        "yahoo news"
+       ],
+       "good": true
+      },
+      {
+       "title": "Did you follow the local news this week? Take our Greater Boston news quiz.",
+       "url": "https://www.boston.com/community/quizzes/greater-boston-news-quiz-nov-6-2026-election-healey-daylight-saving-celebs/",
+       "published": "2026-11-06T11:38:29.043982",
+       "engines": [
+        "yahoo news"
+       ],
+       "good": true
+      },
+      {
+       "title": "Encore Boston workers reach new contract, end strike",
+       "url": "https://www.yahoo.com/news/us/articles/encore-boston-workers-reach-contract-015027625.html?fr=sycsrp_catchall",
+       "published": "2026-11-06T08:38:29.044203",
+       "engines": [
+        "yahoo news"
+       ],
+       "good": true
+      },
+      {
+       "title": "Encore Casino reaches agreement with union workers, ending months-long strike -...",
+       "url": "https://whdh.com/news/encore-casino-reaches-agreement-with-union-workers-ending-months-long-strike/",
+       "published": "2026-11-06T08:38:29.044428",
+       "engines": [
+        "yahoo news"
+       ],
+       "good": true
+      },
+      {
+       "title": "Snowport Holiday Market returns to Boston’s Seaport - Boston News, Weather, Spor...",
+       "url": "https://whdh.com/news/snowport-holiday-market-returns-to-bostons-seaport/",
+       "published": "2026-11-06T14:38:29.044665",
+       "engines": [
+        "yahoo news"
+       ],
+       "good": true
+      }
+     ],
+     "good": 5,
+     "error": null
+    },
+    {
+     "lang": "zh",
+     "query": "科技新闻 2026年11月7日",
+     "range": "day",
+     "results": [],
+     "good": 0,
+     "error": null
+    },
+    {
+     "lang": "zh",
+     "query": "今日 科技新闻 2026年11月7日",
+     "range": "day",
+     "results": [],
+     "good": 0,
+     "error": null
+    },
+    {
+     "lang": "zh",
+     "query": "人工智能 最新消息",
+     "range": "week",
+     "results": [],
+     "good": 0,
+     "error": null
+    },
+    {
+     "lang": "zh",
+     "query": "美国 中期选举 结果",
+     "range": "week",
+     "results": [],
+     "good": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "summary": {
+    "name": "bing news",
+    "good_of_5_each": "37/60",
+    "pct": 62,
+    "en": "27/40",
+    "zh": "10/20",
+    "empty": 2,
+    "errors": 0
+   },
+   "rows": [
+    {
+     "lang": "en",
+     "query": "important technology news November 7 2026 today",
+     "range": "day",
+     "results": [],
+     "good": 0,
+     "error": null
+    },
+    {
+     "lang": "en",
+     "query": "technology news November 7 2026 AI cybersecurity semiconductor",
+     "range": "day",
+     "results": [
+      {
+       "title": "Power Semiconductor Module Market - Global Forecast 2026-2032 | Electrification, AI Data Centers, and Wide-Bandgap Adoption Drive 7.68% CAGR Toward USD 76.66 Billion",
+       "url": "https://finance.yahoo.com/technology/articles/power-semiconductor-module-market-global-143000022.html",
+       "published": null,
+       "engines": [
+        "bing news"
+       ],
+       "good": false
+      },
+      {
+       "title": "Global Semiconductor Metrology & Inspection Market Forecast, 2026-2032 | AI, Advanced Packaging, and Fab Expansion Drive 7.54% CAGR Toward USD 21.99 Billion by 2032",
+       "url": "https://finance.yahoo.com/technology/articles/global-semiconductor-metrology-inspection-market-143600289.html",
+       "published": null,
+       "engines": [
+        "bing news"
+       ],
+       "good": false
+      },
+      {
+       "title": "Fox News AI Newsletter: 7 key midterm states put tech boom in focus",
+       "url": "https://www.foxnews.com/tech/fox-news-ai-newsletter-7-key-midterm-states-put-tech-boom-focus",
+       "published": null,
+       "engines": [
+        "bing news"
+       ],
+       "good": true
+      },
+      {
+       "title": "Infineon at electronica 2026: Technology for the AI era, from data centers into robots and onto the road",
+       "url": "https://www.marketscreener.com/news/infineon-at-electronica-2026-technology-for-the-ai-era-from-data-centers-into-robots-and-onto-the-ce785dd2da8cf322",
+       "published": null,
+       "engines": [
+        "bing news"
+       ],
+       "good": true
+      },
+      {
+       "title": "WISeQey Announces Preliminary Nine-Month 2026 Financial Results and Provides Corporate Update",
+       "url": "https://www.tmcnet.com/usubmit/2026/11/03/10474053.htm",
+       "published": null,
+       "engines": [
+        "bing news"
+       ],
+       "good": false
+      }
+     ],
+     "good": 2,
+     "error": null
+    },
+    {
+     "lang": "en",
+     "query": "AI news this week",
+     "range": "week",
+     "results": [
+      {
+       "title": "Democrats planning flood of AI bills when they take control of Congress",
+       "url": "https://www.msn.com/en-us/news/other/democrats-planning-flood-of-ai-bills-when-they-take-control-of-congress/ar-AA2gUjiG",
+       "published": null,
+       "engines": [
+        "bing news"
+       ],
+       "good": true
+      },
+      {
+       "title": "OpenAI, Arm and Qualcomm executives react to post-midterm AI sell-off",
+       "url": "https://www.cnbc.com/2026/11/06/tech-executives-ai-data-center-selloff-midterms.html",
+       "published": null,
+       "engines": [
+        "bing news"
+       ],
+       "good": true
+      },
+      {
+       "title": "Not Nvidia. Not Palantir. The Midterms Just Made This Magnificent Artificial Intelligence (AI) Stock the Safer Bet.",
+       "url": "https://www.msn.com/en-us/news/other/not-nvidia-not-palantir-the-midterms-just-made-this-magnificent-artificial-intelligence-ai-stock-the-safer-bet/ar-AA2gTazi",
+       "published": null,
+       "engines": [
+        "bing news"
+       ],
+       "good": false
+      },
+      {
+       "title": "AI stocks bounce back after $2.5 trillion wipeout, but questions remain",
+       "url": "https://www.msn.com/en-us/money/top-stocks/ai-stocks-bounce-back-after-2-5-trillion-wipeout-but-questions-remain/ar-AA2gQsv8",
+       "published": null,
+       "engines": [
+        "bing news"
+       ],
+       "good": true
+      },
+      {
+       "title": "AI data centers took a beating in the midterm elections. A reckoning may be ahead for tech giants",
+       "url": "https://www.twincities.com/2026/11/06/ai-data-center-development-regulations/",
+       "published": null,
+       "engines": [
+        "bing news"
+       ],
+       "good": true
+      }
+     ],
+     "good": 4,
+     "error": null
+    },
+    {
+     "lang": "en",
+     "query": "federal reserve interest rate decision",
+     "range": "month",
+     "results": [
+      {
+       "title": "Federal Reserve makes interest rate decision ahead of midterms",
+       "url": "https://www.foxbusiness.com/economy/federal-reserve-interest-rate-decision-october-28-2026",
+       "published": null,
+       "engines": [
+        "bing news"
+       ],
+       "good": true
+      },
+      {
+       "title": "Federal Reserve holds interest rates steady despite inflation concerns",
+       "url": "https://www.usatoday.com/story/money/economy/2026/10/28/federal-reserve-october-interest-rate-decision--live/92441632007/",
+       "published": null,
+       "engines": [
+        "bing news"
+       ],
+       "good": true
+      },
+      {
+       "title": "Federal Reserve expected to hold interest rates steady in last decision before midterm elections",
+       "url": "https://www.foxbusiness.com/economy/federal-reserve-expected-hold-interest-rates-steady-midterm-elections-week-away",
+       "published": null,
+       "engines": [
+        "bing news"
+       ],
+       "good": true
+      },
+      {
+       "title": "US Federal Reserve leaves interest rates unchanged",
+       "url": "https://finance.yahoo.com/economy/policy/articles/us-federal-leaves-interest-rates-183335430.html",
+       "published": null,
+       "engines": [
+        "bing news"
+       ],
+       "good": true
+      },
+      {
+       "title": "Fed keeps interest rates unchanged, but two officials dissented in favor of a rate hike",
+       "url": "https://www.cnn.com/2026/10/28/business/live-news/federal-reserve-interest-rate-october",
+       "published": null,
+       "engines": [
+        "bing news"
+       ],
+       "good": true
+      }
+     ],
+     "good": 5,
+     "error": null
+    },
+    {
+     "lang": "en",
+     "query": "nba news today",
+     "range": "day",
+     "results": [
+      {
+       "title": "NBA season live updates: Doncic hits 53 points in Lakers NBA Cup win, LeBron loses on Cavs return",
+       "url": "https://www.nytimes.com/athletic/live-blogs/nba-news-games-scores-stats-schedule-analysis-live-updates/HBD7r0ZK2u47/",
+       "published": null,
+       "engines": [
+        "bing news"
+       ],
+       "good": true
+      },
+      {
+       "title": "3 Overreactions as Mavericks Move to 2-0 in NBA Cup Play With Win Over Jazz",
+       "url": "https://sports.yahoo.com/articles/3-overreactions-mavericks-move-2-033410886.html",
+       "published": null,
+       "engines": [
+        "bing news"
+       ],
+       "good": true
+      },
+      {
+       "title": "NBA Cup 2026: Luka Dončić's 53-point night leads Lakers comeback win, Cavaliers snap Sixers' 5-game winning streak",
+       "url": "https://sports.yahoo.com/nba/breaking-news/article/nba-cup-2026-luka-doncics-53-point-night-leads-lakers-comeback-win-cavaliers-snap-sixers-5-game-winning-streak-060524958.html",
+       "published": null,
+       "engines": [
+        "bing news"
+       ],
+       "good": true
+      },
+      {
+       "title": "Philadelphia 76ers vs. Cleveland Cavaliers Live NBA Updates, Scores and Highlights",
+       "url": "https://bleacherreport.com/liveblogs/25530009-philadelphia-76ers-vs-cleveland-cavaliers-live-nba-updates-scores-and-highlights",
+       "published": null,
+       "engines": [
+        "bing news"
+       ],
+       "good": true
+      },
+      {
+       "title": "NBA roundup: Luka Doncic stays hot with 53 points in Lakers' win",
+       "url": "https://www.miamiherald.com/sports/nba/article317971203.html",
+       "published": null,
+       "engines": [
+        "bing news"
+       ],
+       "good": true
+      }
+     ],
+     "good": 5,
+     "error": null
+    },
+    {
+     "lang": "en",
+     "query": "US midterm election results",
+     "range": "week",
+     "results": [
+      {
+       "title": "Florida Democrats ‘fired up to deliver’ after GOP gerrymander fails",
+       "url": "https://www.ms.now/11th-hour/watch/florida-democrats-fired-up-to-deliver-after-gop-gerrymander-fails-2519973443631",
+       "published": null,
+       "engines": [
+        "bing news"
+       ],
+       "good": true
+      },
+      {
+       "title": "CA-4 race remains close between Eric Jones, Mike Thompson",
+       "url": "https://www.msn.com/en-us/news/other/ca-4-race-remains-close-between-eric-jones-mike-thompson/vi-AA2gVENA",
+       "published": null,
+       "engines": [
+        "bing news"
+       ],
+       "good": true
+      },
+      {
+       "title": "A snapshot look at Tuesday's election",
+       "url": "https://bismarcktribune.com/news/community/mandannews/article_31daee03-080f-4102-99c4-d9d0635efb1d.html",
+       "published": null,
+       "engines": [
+        "bing news"
+       ],
+       "good": true
+      },
+      {
+       "title": "Colom confident as Mississippi appears poised to ‘pick another senator’",
+       "url": "https://www.ms.now/the-briefing-with-jen-psaki/watch/colom-confident-as-mississippi-appears-poised-to-pick-another-senator-2519967811537",
+       "published": null,
+       "engines": [
+        "bing news"
+       ],
+       "good": true
+      },
+      {
+       "title": "The Blue Wave Undertow Continues: Live Updates",
+       "url": "https://www.msn.com/en-us/news/other/the-blue-wave-undertow-continues-live-updates/ar-AA2gJLHr",
+       "published": null,
+       "engines": [
+        "bing news"
+       ],
+       "good": true
+      }
+     ],
+     "good": 5,
+     "error": null
+    },
+    {
+     "lang": "en",
+     "query": "stock market news today",
+     "range": "day",
+     "results": [
+      {
+       "title": "Stock market today: Nasdaq, S&P 500 soar in early trading as chip stocks rebound from huge sell-off",
+       "url": "https://www.msn.com/en-us/money/top-stocks/stock-market-today-nasdaq-s-p-500-soar-in-early-trading-as-chip-stocks-rebound-from-huge-sell-off/ar-AA2gT0P3",
+       "published": null,
+       "engines": [
+        "bing news"
+       ],
+       "good": true
+      },
+      {
+       "title": "How the Midterm Stock Market Rout Compares With Previous Crashes",
+       "url": "https://www.newsweek.com/midterm-stock-market-rout-compared-previous-crashes-12677266",
+       "published": null,
+       "engines": [
+        "bing news"
+       ],
+       "good": true
+      },
+      {
+       "title": "Stock Market Today, Nov. 6: AMD Surges 11% on Record Quarterly Revenue and Stronger Growth Outlook",
+       "url": "https://finance.yahoo.com/markets/stocks/articles/stock-market-today-nov-6-222502683.html",
+       "published": null,
+       "engines": [
+        "bing news"
+       ],
+       "good": true
+      },
+      {
+       "title": "Stock Market Today, Nov. 6: Iren Soars 20% on Strong AI Cloud Revenue Growth",
+       "url": "https://finance.yahoo.com/markets/stocks/articles/stock-market-today-nov-6-221801072.html",
+       "published": null,
+       "engines": [
+        "bing news"
+       ],
+       "good": true
+      },
+      {
+       "title": "Stock Market Today (Nov. 4, 2026): Dow climbs as Democrats take House and Senate",
+       "url": "https://www.msn.com/en-us/news/money/stock-market-today-nov-4-2026-dow-climbs-as-democrats-take-house-and-senate/ar-AA2gKfra",
+       "published": null,
+       "engines": [
+        "bing news"
+       ],
+       "good": false
+      }
+     ],
+     "good": 4,
+     "error": null
+    },
+    {
+     "lang": "en",
+     "query": "boston local news",
+     "range": "week",
+     "results": [
+      {
+       "title": "Did you follow the local news this week? Take our Greater Boston news quiz.",
+       "url": "https://www.boston.com/community/quizzes/greater-boston-news-quiz-nov-6-2026-election-healey-daylight-saving-celebs/",
+       "published": null,
+       "engines": [
+        "bing news"
+       ],
+       "good": true
+      },
+      {
+       "title": "He started in a dorm room. Now thousands turn to him to understand Boston",
+       "url": "https://www.msn.com/en-us/news/news/he-started-in-a-dorm-room-now-thousands-turn-to-him-to-understand-boston/ar-AA2fJkZq",
+       "published": null,
+       "engines": [
+        "bing news"
+       ],
+       "good": true
+      }
+     ],
+     "good": 2,
+     "error": null
+    },
+    {
+     "lang": "zh",
+     "query": "科技新闻 2026年11月7日",
+     "range": "day",
+     "results": [],
+     "good": 0,
+     "error": null
+    },
+    {
+     "lang": "zh",
+     "query": "今日 科技新闻 2026年11月7日",
+     "range": "day",
+     "results": [
+      {
+       "title": "新浪科技热点小时报丨2026年11月07日06时_今日实时科技热点速递",
+       "url": "https://cj.sina.com.cn/articles/view/7857201856/1d45362c001908txey",
+       "published": null,
+       "engines": [
+        "bing news"
+       ],
+       "good": true
+      }
+     ],
+     "good": 1,
+     "error": null
+    },
+    {
+     "lang": "zh",
+     "query": "人工智能 最新消息",
+     "range": "week",
+     "results": [
+      {
+       "title": "【ETF动向】11月4日人工智能ETF华富基金涨5.56%，份额增加9000万份",
+       "url": "https://www.msn.cn/zh-cn/news/other/etf%E5%8A%A8%E5%90%91-11%E6%9C%884%E6%97%A5%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BDetf%E5%8D%8E%E5%AF%8C%E5%9F%BA%E9%87%91%E6%B6%A8556-%E4%BB%BD%E9%A2%9D%E5%A2%9E%E5%8A%A09000%E4%B8%87%E4%BB%BD/ar-AA2gLsT7?ocid=BingNewsVerp",
+       "published": null,
+       "engines": [
+        "bing news"
+       ],
+       "good": true
+      },
+      {
+       "title": "【ETF动向】11月4日人工智能ETF易方达基金涨7.77%，份额增加1.4亿份",
+       "url": "https://www.msn.cn/zh-cn/news/other/etf%E5%8A%A8%E5%90%91-11%E6%9C%884%E6%97%A5%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BDetf%E6%98%93%E6%96%B9%E8%BE%BE%E5%9F%BA%E9%87%91%E6%B6%A8777-%E4%BB%BD%E9%A2%9D%E5%A2%9E%E5%8A%A014%E4%BA%BF%E4%BB%BD/ar-AA2gLP1J?ocid=BingNewsVerp",
+       "published": null,
+       "engines": [
+        "bing news"
+       ],
+       "good": true
+      },
+      {
+       "title": "美国中期选举最新消息！AI算力主线强势爆发，创业板人工智能ETF ...",
+       "url": "https://finance.sina.com.cn/money/fund/etf/2026-11-04/doc-inixqaaz8088217.shtml",
+       "published": null,
+       "engines": [
+        "bing news"
+       ],
+       "good": true
+      },
+      {
+       "title": "2026年10月最新科技新闻：AI人工智能领域合集",
+       "url": "https://news.qq.com/rain/a/20261014A0AQ7P00",
+       "published": null,
+       "engines": [
+        "bing news"
+       ],
+       "good": false
+      },
+      {
+       "title": "人工智能ETF华富(515980)连续3天净流入，北美云厂商开启新一轮密集 ...",
+       "url": "https://www.jiemian.com/article/15290685.html",
+       "published": null,
+       "engines": [
+        "bing news"
+       ],
+       "good": true
+      }
+     ],
+     "good": 4,
+     "error": null
+    },
+    {
+     "lang": "zh",
+     "query": "美国 中期选举 结果",
+     "range": "week",
+     "results": [
+      {
+       "title": "美国中期选举结果出炉：民主党夺回国会两院，州长选举中取得突破",
+       "url": "https://news.qq.com/rain/a/20261104A0BFGN00",
+       "published": null,
+       "engines": [
+        "bing news"
+       ],
+       "good": true
+      },
+      {
+       "title": "美国中期选举计票工作正在进行，结果将决定国会控制权归属",
+       "url": "https://www.voachinese.com/a/vote-counting-underway-in-us-midterm-elections-to-determine-control-of-congress-20261104/8218796.html",
+       "published": null,
+       "engines": [
+        "bing news"
+       ],
+       "good": true
+      },
+      {
+       "title": "美国中期选举结果对中国和世界各国意味着什么？",
+       "url": "https://www.bbc.com/zhongwen/articles/ckreyrxvg3xyo/simp",
+       "published": null,
+       "engines": [
+        "bing news"
+       ],
+       "good": true
+      },
+      {
+       "title": "美国中期选举结果开创多项历史先例",
+       "url": "https://www.voachinese.com/a/us-election-wins-include-historic-firsts-20261104/8218913.html",
+       "published": null,
+       "engines": [
+        "bing news"
+       ],
+       "good": true
+      },
+      {
+       "title": "美国中期选举结果如何影响特朗普政府的关税和贸易议程？｜全球 ...",
+       "url": "https://finance.sina.com.cn/roll/2026-11-05/doc-inixryuh6233315.shtml",
+       "published": null,
+       "engines": [
+        "bing news"
+       ],
+       "good": true
+      }
+     ],
+     "good": 5,
+     "error": null
+    }
+   ]
+  },
+  {
+   "summary": {
+    "name": "google news",
+    "good_of_5_each": "0/60",
+    "pct": 0,
+    "en": "0/40",
+    "zh": "0/20",
+    "empty": 12,
+    "errors": 0
+   },
+   "rows": [
+    {
+     "lang": "en",
+     "query": "important technology news November 7 2026 today",
+     "range": "day",
+     "results": [],
+     "good": 0,
+     "error": null
+    },
+    {
+     "lang": "en",
+     "query": "technology news November 7 2026 AI cybersecurity semiconductor",
+     "range": "day",
+     "results": [],
+     "good": 0,
+     "error": null
+    },
+    {
+     "lang": "en",
+     "query": "AI news this week",
+     "range": "week",
+     "results": [],
+     "good": 0,
+     "error": null
+    },
+    {
+     "lang": "en",
+     "query": "federal reserve interest rate decision",
+     "range": "month",
+     "results": [],
+     "good": 0,
+     "error": null
+    },
+    {
+     "lang": "en",
+     "query": "nba news today",
+     "range": "day",
+     "results": [],
+     "good": 0,
+     "error": null
+    },
+    {
+     "lang": "en",
+     "query": "US midterm election results",
+     "range": "week",
+     "results": [],
+     "good": 0,
+     "error": null
+    },
+    {
+     "lang": "en",
+     "query": "stock market news today",
+     "range": "day",
+     "results": [],
+     "good": 0,
+     "error": null
+    },
+    {
+     "lang": "en",
+     "query": "boston local news",
+     "range": "week",
+     "results": [],
+     "good": 0,
+     "error": null
+    },
+    {
+     "lang": "zh",
+     "query": "科技新闻 2026年11月7日",
+     "range": "day",
+     "results": [],
+     "good": 0,
+     "error": null
+    },
+    {
+     "lang": "zh",
+     "query": "今日 科技新闻 2026年11月7日",
+     "range": "day",
+     "results": [],
+     "good": 0,
+     "error": null
+    },
+    {
+     "lang": "zh",
+     "query": "人工智能 最新消息",
+     "range": "week",
+     "results": [],
+     "good": 0,
+     "error": null
+    },
+    {
+     "lang": "zh",
+     "query": "美国 中期选举 结果",
+     "range": "week",
+     "results": [],
+     "good": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "summary": {
+    "name": "qwant news",
+    "good_of_5_each": "24/60",
+    "pct": 40,
+    "en": "24/40",
+    "zh": "0/20",
+    "empty": 5,
+    "errors": 0
+   },
+   "rows": [
+    {
+     "lang": "en",
+     "query": "important technology news November 7 2026 today",
+     "range": "day",
+     "results": [
+      {
+       "title": "USA TODAY Co. cuts $100 million in annual costs after search hits ad sales",
+       "url": "https://ppc.land/usa-today-co-cuts-100-million-in-annual-costs-after-search-hits-ad-sales/",
+       "published": "2026-11-06T21:25:57",
+       "engines": [
+        "qwant news"
+       ],
+       "good": true
+      },
+      {
+       "title": "Video. Latest news bulletin | November 7th, 2026 – Morning",
+       "url": "https://www.euronews.com/video/2026/11/07/latest-news-bulletin-november-7th-2026-morning",
+       "published": "2026-11-07T07:00:32",
+       "engines": [
+        "qwant news"
+       ],
+       "good": false
+      },
+      {
+       "title": "'Miraculous' – Tadej Pogačar's heart rate data and sleep scores revealed in new documentary",
+       "url": "https://www.cyclingnews.com/pro-cycling/teams-riders/miraculous-tadej-pogacars-heart-rate-data-and-sleep-scores-revealed-in-new-documentary/",
+       "published": "2026-11-06T12:05:05",
+       "engines": [
+        "qwant news"
+       ],
+       "good": false
+      },
+      {
+       "title": "Okpebholo donates N10m for Edo corps members’ feeding",
+       "url": "https://punchng.com/okpebholo-donates-n10m-for-edo-corps-members-feeding/",
+       "published": "2026-11-06T18:15:40",
+       "engines": [
+        "qwant news"
+       ],
+       "good": false
+      }
+     ],
+     "good": 1,
+     "error": null
+    },
+    {
+     "lang": "en",
+     "query": "technology news November 7 2026 AI cybersecurity semiconductor",
+     "range": "day",
+     "results": [],
+     "good": 0,
+     "error": null
+    },
+    {
+     "lang": "en",
+     "query": "AI news this week",
+     "range": "week",
+     "results": [
+      {
+       "title": "Your Business May Be Invisible to AI. Here Are 7 Simple Fixes You Can Make This Week.",
+       "url": "https://www.entrepreneur.com/building-a-business/how-to-improve-ai-visibility-for-businesses",
+       "published": "2026-11-06T19:00:00",
+       "engines": [
+        "qwant news"
+       ],
+       "good": true
+      },
+      {
+       "title": "Ziff Davis loses 37% of Google traffic as publishers count the AI bill",
+       "url": "https://ppc.land/ziff-davis-loses-37-of-google-traffic-as-publishers-count-the-ai-bill/",
+       "published": "2026-11-07T07:00:06",
+       "engines": [
+        "qwant news"
+       ],
+       "good": true
+      },
+      {
+       "title": "Uber Only Had Four Rides Booked By AI Agents Last Week",
+       "url": "https://www.thurrott.com/a-i/343596/uber-only-had-four-rides-booked-by-ai-agents-last-week",
+       "published": "2026-11-06T16:36:28",
+       "engines": [
+        "qwant news"
+       ],
+       "good": true
+      },
+      {
+       "title": "Apple Is Reportedly Slashing AI Budgets. Here’s Why Employees Are Worried.",
+       "url": "https://www.entrepreneur.com/business-news/apple-is-reportedly-slashing-ai-budgets-heres-why-employees-are-worried",
+       "published": "2026-11-06T15:54:00",
+       "engines": [
+        "qwant news"
+       ],
+       "good": true
+      },
+      {
+       "title": "Global AI Stocks React to Democrats' U.S. Midterms Win",
+       "url": "https://foreignpolicy.com/2026/11/06/ai-stock-market-us-midterms-democrats-data-centers-regulation/",
+       "published": "2026-11-06T21:59:39",
+       "engines": [
+        "qwant news"
+       ],
+       "good": true
+      }
+     ],
+     "good": 5,
+     "error": null
+    },
+    {
+     "lang": "en",
+     "query": "federal reserve interest rate decision",
+     "range": "month",
+     "results": [
+      {
+       "title": "U.S. adds 165,000 jobs as unemployment rate falls to 4.1%",
+       "url": "https://www.staradvertiser.com/2026/11/06/breaking-news/u-s-adds-165000-jobs-as-unemployment-rate-falls-to-4-1/",
+       "published": "2026-11-06T20:30:00",
+       "engines": [
+        "qwant news"
+       ],
+       "good": true
+      },
+      {
+       "title": "Richmond Fed's Barkin Says he Expects More Rate Hikes But Unsure About How Many or When",
+       "url": "https://www.ibtimes.com/barkin-expects-more-fed-rate-hikes-3809451",
+       "published": "2026-11-05T15:39:40",
+       "engines": [
+        "qwant news"
+       ],
+       "good": true
+      },
+      {
+       "title": "Robust U.S. Jobs Market Boosts December Rate Hike Chances",
+       "url": "https://seekingalpha.com/article/4964094-robust-us-jobs-market-boosts-december-rate-hike-chances",
+       "published": "2026-11-06T15:30:00",
+       "engines": [
+        "qwant news"
+       ],
+       "good": true
+      },
+      {
+       "title": "Bank of England Raises Rates for First Time in Three Years",
+       "url": "https://www.nytimes.com/2026/11/05/business/bank-of-england-interest-rates-inflation.html",
+       "published": "2026-11-05T12:14:08",
+       "engines": [
+        "qwant news"
+       ],
+       "good": false
+      },
+      {
+       "title": "Gold futures pull back as strong U.S. payrolls report boosts dollar, yields",
+       "url": "https://seekingalpha.com/news/4668653-gold-futures-pull-back-as-strong-us-payrolls-report-boosts-dollar-yields",
+       "published": "2026-11-06T22:45:20",
+       "engines": [
+        "qwant news"
+       ],
+       "good": true
+      }
+     ],
+     "good": 4,
+     "error": null
+    },
+    {
+     "lang": "en",
+     "query": "nba news today",
+     "range": "day",
+     "results": [
+      {
+       "title": "NBA games on today, full TV schedule for Friday, November 6",
+       "url": "https://www.thebiglead.com/nba-games-on-today-full-tv-schedule-for-friday-november-6/",
+       "published": "2026-11-06T20:26:40",
+       "engines": [
+        "qwant news"
+       ],
+       "good": true
+      },
+      {
+       "title": "Best NBA Prop Bets Today (Predictions for Giannis, Luka Doncic, Trae Young, LaMelo Ball, Cooper Flagg and More)",
+       "url": "https://www.si.com/nba/wizards/onsi/three-wizards-storylines-to-monitor-as-trae-young-sets-for-second-chance-at-hawks-revenge-01m6rtmpwf2b",
+       "published": "2026-11-06T18:09:16",
+       "engines": [
+        "qwant news"
+       ],
+       "good": false
+      },
+      {
+       "title": "Best NBA Prop Bets Today (Predictions for Tyrese Maxey, Anthony Davis and Luka Doncic)",
+       "url": "https://www.si.com/betting/best-nba-prop-bets-today-predictions-for-tyrese-maxey-anthony-davis-and-luka-doncic",
+       "published": "2026-11-06T13:32:10",
+       "engines": [
+        "qwant news"
+       ],
+       "good": false
+      },
+      {
+       "title": "Peter’s Points: NBA Best Bets Today (Predictions, Prop Bets for Luka Doncic, Trae Young, Celtics vs. Hornets)",
+       "url": "https://www.si.com/betting/nba-best-bets-today-predictions-prop-bets-for-luka-doncic-trae-young-celtics-vs-hornets",
+       "published": "2026-11-06T13:27:35",
+       "engines": [
+        "qwant news"
+       ],
+       "good": false
+      },
+      {
+       "title": "NBA games on today, full TV schedule for Thursday, November 5",
+       "url": "https://www.thebiglead.com/nba-games-on-today-full-tv-schedule-for-thursday-november-5/",
+       "published": "2026-11-05T17:12:33",
+       "engines": [
+        "qwant news"
+       ],
+       "good": false
+      }
+     ],
+     "good": 1,
+     "error": null
+    },
+    {
+     "lang": "en",
+     "query": "US midterm election results",
+     "range": "week",
+     "results": [
+      {
+       "title": "U.S. Midterm Election Results Land in Ukraine",
+       "url": "https://foreignpolicy.com/2026/11/04/us-midterms-democrats-ukraine-russia/",
+       "published": "2026-11-04T18:41:21",
+       "engines": [
+        "qwant news"
+       ],
+       "good": true
+      },
+      {
+       "title": "Did a data centre revolt affect the US midterm election results?",
+       "url": "https://www.bbc.co.uk/news/articles/crvg9yyz5437o",
+       "published": "2026-11-06T06:01:13",
+       "engines": [
+        "qwant news"
+       ],
+       "good": true
+      },
+      {
+       "title": "What U.S. midterm election results could mean for Canada",
+       "url": "https://torontosun.com/news/national/what-midterm-election-results-mean-for-canada",
+       "published": "2026-11-04T21:46:55",
+       "engines": [
+        "qwant news"
+       ],
+       "good": true
+      },
+      {
+       "title": "Martin Rowson on the US midterm election results – cartoon",
+       "url": "https://www.theguardian.com/commentisfree/picture/2026/nov/04/martin-rowson-us-midterm-election-results-cartoon",
+       "published": "2026-11-04T17:40:50",
+       "engines": [
+        "qwant news"
+       ],
+       "good": true
+      },
+      {
+       "title": "Tell us: how do you feel about the US midterm election results?",
+       "url": "https://www.theguardian.com/us-news/2026/nov/04/tell-us-how-do-you-feel-about-the-us-midterm-election-results",
+       "published": "2026-11-04T09:53:27",
+       "engines": [
+        "qwant news"
+       ],
+       "good": true
+      }
+     ],
+     "good": 5,
+     "error": null
+    },
+    {
+     "lang": "en",
+     "query": "stock market news today",
+     "range": "day",
+     "results": [
+      {
+       "title": "Stock Market Today: Stocks Rise Modestly, but Can't Offset Yesterday's Bloodbath",
+       "url": "https://www.barrons.com/livecoverage/stock-market-news-today-110626/card/expect-more-fireworks-as-markets-adjust-to-the-new-ai-reality-wFIfdz7tvtYiMg8P4sh3",
+       "published": "2026-11-06T09:48:29",
+       "engines": [
+        "qwant news"
+       ],
+       "good": true
+      },
+      {
+       "title": "Stock market today: Nasdaq plunges 5% amid chip stock wipeout, Dow and S&P 500 erase post-election rally gains",
+       "url": "https://finance.yahoo.com/markets/live/stock-market-today-thursday-november-5-dow-sp-500-nasdaq-plunge-chip-stocks-melt-down-193726491.html",
+       "published": "2026-11-05T20:45:12",
+       "engines": [
+        "qwant news"
+       ],
+       "good": false
+      },
+      {
+       "title": "Stock Market Today: Dow Futures Rise, Nasdaq Drops as AI Rotation Accelerates",
+       "url": "https://www.barrons.com/livecoverage/stock-market-news-today-110526/card/kospi-tumbles-on-chips-rout-pressuring-u-s-tech-futures-PtrbqUngaDqddBRShFJ0",
+       "published": "2026-11-05T10:05:07",
+       "engines": [
+        "qwant news"
+       ],
+       "good": false
+      },
+      {
+       "title": "Global AI Stocks React to Democrats' U.S. Midterms Win",
+       "url": "https://foreignpolicy.com/2026/11/06/ai-stock-market-us-midterms-democrats-data-centers-regulation/",
+       "published": "2026-11-06T21:59:39",
+       "engines": [
+        "qwant news"
+       ],
+       "good": true
+      },
+      {
+       "title": "Trump Blames Voters For Stock Market Rout, Day After Taking Credit For Bounce",
+       "url": "https://www.mediaite.com/media/news/trump-blames-voters-for-stock-market-rout-day-after-taking-credit-for-bounce/",
+       "published": "2026-11-06T03:07:04",
+       "engines": [
+        "qwant news"
+       ],
+       "good": true
+      }
+     ],
+     "good": 3,
+     "error": null
+    },
+    {
+     "lang": "en",
+     "query": "boston local news",
+     "range": "week",
+     "results": [
+      {
+       "title": "Green Line tunnel will be closed from North Station to Kenmore next week",
+       "url": "https://www.boston.com/news/local-news/2026/11/06/green-line-tunnel-will-be-closed-from-north-station-to-kenmore-next-week/",
+       "published": "2026-11-07T02:20:09",
+       "engines": [
+        "qwant news"
+       ],
+       "good": true
+      },
+      {
+       "title": "Voters reject Question 7 on statewide minimum lot sizes",
+       "url": "https://www.boston.com/news/local-news/2026/11/06/voters-reject-question-7-on-statewide-minimum-lot-sizes/",
+       "published": "2026-11-06T18:49:15",
+       "engines": [
+        "qwant news"
+       ],
+       "good": true
+      },
+      {
+       "title": "BPD looking for bicyclist they say assaulted pedestrian after verbal altercation",
+       "url": "https://www.boston.com/news/local-news/2026/11/05/boston-police-bicyclist-alleged-assault-pedestrian-verbal-altercation/",
+       "published": "2026-11-05T16:41:34",
+       "engines": [
+        "qwant news"
+       ],
+       "good": true
+      },
+      {
+       "title": "What Boston meteorologists are saying about ‘widespread soaking rainfall’ into the weekend",
+       "url": "https://www.boston.com/weather/local-news/2026/11/05/boston-ma-weather-rain-forecast-nov-2026/",
+       "published": "2026-11-05T16:24:09",
+       "engines": [
+        "qwant news"
+       ],
+       "good": true
+      },
+      {
+       "title": "Here’s what’s taking over the former Blanchard’s in Allston",
+       "url": "https://www.boston.com/news/local-news/2026/11/05/heres-whats-taking-over-the-former-blanchards-in-allston/",
+       "published": "2026-11-06T02:22:50",
+       "engines": [
+        "qwant news"
+       ],
+       "good": true
+      }
+     ],
+     "good": 5,
+     "error": null
+    },
+    {
+     "lang": "zh",
+     "query": "科技新闻 2026年11月7日",
+     "range": "day",
+     "results": [],
+     "good": 0,
+     "error": null
+    },
+    {
+     "lang": "zh",
+     "query": "今日 科技新闻 2026年11月7日",
+     "range": "day",
+     "results": [],
+     "good": 0,
+     "error": null
+    },
+    {
+     "lang": "zh",
+     "query": "人工智能 最新消息",
+     "range": "week",
+     "results": [],
+     "good": 0,
+     "error": null
+    },
+    {
+     "lang": "zh",
+     "query": "美国 中期选举 结果",
+     "range": "week",
+     "results": [],
+     "good": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "summary": {
+    "name": "brave.news",
+    "good_of_5_each": "39/60",
+    "pct": 65,
+    "en": "29/40",
+    "zh": "10/20",
+    "empty": 2,
+    "errors": 0
+   },
+   "rows": [
+    {
+     "lang": "en",
+     "query": "important technology news November 7 2026 today",
+     "range": "day",
+     "results": [
+      {
+       "title": "Top Science News -- ScienceDaily",
+       "url": "https://www.sciencedaily.com/news/top/science/",
+       "published": null,
+       "engines": [
+        "brave.news"
+       ],
+       "good": false
+      },
+      {
+       "title": "Artificial Intelligence News -- ScienceDaily",
+       "url": "https://www.sciencedaily.com/news/computers_math/artificial_intelligence/",
+       "published": null,
+       "engines": [
+        "brave.news"
+       ],
+       "good": false
+      },
+      {
+       "title": "Top Tech News Roundup for Today, November 5, 2026: Google’s $17B AI Data Center, Nvidia, Zipline’s $1.5B Funding, and Nasdaq’s 5.5% Plunge - Tech Startups",
+       "url": "https://techstartups.com/2026/11/05/top-tech-news-roundup-for-today-november-5-2026-googles-17b-ai-data-center-nvidia-ziplines-1-5b-funding-and-nasdaqs-5-5-plunge",
+       "published": null,
+       "engines": [
+        "brave.news"
+       ],
+       "good": false
+      },
+      {
+       "title": "Top Tech News Roundup for Today, November 4, 2026: Google’s $15B AI Bet, Meta’s €53B Bond Demand, Canva’s Restructuring, and SpaceX’s 5G Push - Tech Startups",
+       "url": "https://techstartups.com/2026/11/04/top-tech-news-roundup-for-today-november-4-2026-googles-15b-ai-bet-metas-e53b-bond-demand-canvas-restructuring-and-spacexs-5g-push",
+       "published": null,
+       "engines": [
+        "brave.news"
+       ],
+       "good": false
+      },
+      {
+       "title": "Latest news bulletin | November 7th, 2026 – Morning - Yahoo News Canada",
+       "url": "https://ca.news.yahoo.com/latest-news-bulletin-november-7th-060032195.html",
+       "published": null,
+       "engines": [
+        "brave.news"
+       ],
+       "good": false
+      }
+     ],
+     "good": 0,
+     "error": null
+    },
+    {
+     "lang": "en",
+     "query": "technology news November 7 2026 AI cybersecurity semiconductor",
+     "range": "day",
+     "results": [
+      {
+       "title": "Top Tech News Roundup for Today, November 5, 2026: Google’s $17B AI Data Center, Nvidia, Zipline’s $1.5B Funding, and Nasdaq’s 5.5% Plunge - Tech Startups",
+       "url": "https://techstartups.com/2026/11/05/top-tech-news-roundup-for-today-november-5-2026-googles-17b-ai-data-center-nvidia-ziplines-1-5b-funding-and-nasdaqs-5-5-plunge",
+       "published": null,
+       "engines": [
+        "brave.news"
+       ],
+       "good": false
+      },
+      {
+       "title": "Artificial Intelligence News -- ScienceDaily",
+       "url": "https://www.sciencedaily.com/news/computers_math/artificial_intelligence/",
+       "published": null,
+       "engines": [
+        "brave.news"
+       ],
+       "good": false
+      },
+      {
+       "title": "TechLatest AI & Tech Weekly #41 - Techlatest.net",
+       "url": "https://techlatestnet.substack.com/p/techlatest-ai-and-tech-weekly-41",
+       "published": null,
+       "engines": [
+        "brave.news"
+       ],
+       "good": false
+      },
+      {
+       "title": "AI News This Week: Nov. 6, 2026 Roundup and My Take | Newegg Insider",
+       "url": "https://newegg.com/insider/ai-news-this-week-november-2-6-2026",
+       "published": null,
+       "engines": [
+        "brave.news"
+       ],
+       "good": true
+      },
+      {
+       "title": "#Cybersecurity News: November 6, 2026",
+       "url": "https://theparkernathan.substack.com/p/cybersecurity-news-november-6-2026",
+       "published": null,
+       "engines": [
+        "brave.news"
+       ],
+       "good": true
+      }
+     ],
+     "good": 2,
+     "error": null
+    },
+    {
+     "lang": "en",
+     "query": "AI news this week",
+     "range": "week",
+     "results": [
+      {
+       "title": "‘Total bloodbath’: Democrats‘ sweeping wins rock Wall Street over AI fears - POLITICO",
+       "url": "https://www.politico.com/news/2026/11/06/midterms-democrats-ai-wall-street-01153458",
+       "published": null,
+       "engines": [
+        "brave.news"
+       ],
+       "good": true
+      },
+      {
+       "title": "US tech stocks edge up after AI slowdown fears hit value of firms - live updates - BBC News",
+       "url": "https://www.bbc.com/news/live/cq62yy619r5dt",
+       "published": null,
+       "engines": [
+        "brave.news"
+       ],
+       "good": true
+      },
+      {
+       "title": "Stocks plunge as election outcome and AI worries crush tech shares",
+       "url": "https://www.nbcnews.com/business/markets/tech-stocks-plunge-ai-midterms-rcna607650",
+       "published": null,
+       "engines": [
+        "brave.news"
+       ],
+       "good": true
+      },
+      {
+       "title": "Could the US midterms put a pin in the AI bubble?",
+       "url": "https://bbc.com/news/articles/crlykkzwwpydo",
+       "published": null,
+       "engines": [
+        "brave.news"
+       ],
+       "good": true
+      },
+      {
+       "title": "AI News This Week: Nov. 6, 2026 Roundup and My Take | Newegg Insider",
+       "url": "https://newegg.com/insider/ai-news-this-week-november-2-6-2026",
+       "published": null,
+       "engines": [
+        "brave.news"
+       ],
+       "good": true
+      }
+     ],
+     "good": 5,
+     "error": null
+    },
+    {
+     "lang": "en",
+     "query": "federal reserve interest rate decision",
+     "range": "month",
+     "results": [
+      {
+       "title": "Fed rate decision October 2026",
+       "url": "https://www.cnbc.com/2026/10/28/fed-meeting-today-live-updates.html",
+       "published": null,
+       "engines": [
+        "brave.news"
+       ],
+       "good": true
+      },
+      {
+       "title": "WATCH: Warsh holds briefing after Fed leaves key interest rate unchanged | PBS News",
+       "url": "https://www.pbs.org/newshour/economy/watch-live-fed-chair-warsh-holds-briefing-after-latest-interest-rate-decision",
+       "published": null,
+       "engines": [
+        "brave.news"
+       ],
+       "good": true
+      },
+      {
+       "title": "Fed interest rate decision October 2026: Fed holds rates steady",
+       "url": "https://www.cnbc.com/2026/10/28/fed-interest-rate-decision-october-2026.html",
+       "published": null,
+       "engines": [
+        "brave.news"
+       ],
+       "good": true
+      },
+      {
+       "title": "Federal Reserve leaves US interest rates unchanged - BBC News",
+       "url": "https://www.bbc.com/news/live/ck62ylq5v7v1t",
+       "published": null,
+       "engines": [
+        "brave.news"
+       ],
+       "good": true
+      },
+      {
+       "title": "Federal Reserve to announce its latest interest rate today. Here's what economists expect. - CBS News",
+       "url": "https://www.cbsnews.com/news/federal-reserve-interest-rates-october-meeting/",
+       "published": null,
+       "engines": [
+        "brave.news"
+       ],
+       "good": true
+      }
+     ],
+     "good": 5,
+     "error": null
+    },
+    {
+     "lang": "en",
+     "query": "nba news today",
+     "range": "day",
+     "results": [
+      {
+       "title": "NBA games on today, full TV schedule for Friday, November 6 - Yahoo Sports",
+       "url": "https://sports.yahoo.com/articles/nba-games-today-full-tv-202640863.html",
+       "published": null,
+       "engines": [
+        "brave.news"
+       ],
+       "good": true
+      },
+      {
+       "title": "NBA season live updates: Doncic hits 53 points in Lakers NBA Cup win, LeBron loses on Cavs return - The Athletic",
+       "url": "https://www.nytimes.com/athletic/live-blogs/nba-news-games-scores-stats-schedule-analysis-live-updates/HBD7r0ZK2u47/",
+       "published": null,
+       "engines": [
+        "brave.news"
+       ],
+       "good": true
+      },
+      {
+       "title": "NBA news: Here's how ESPN welcomed Jason Kidd ahead of his NBA Today debut",
+       "url": "https://clutchpoints.com/nba/nba-stories/nba-news-how-espn-welcomed-jason-kidd-nba-today-debut",
+       "published": null,
+       "engines": [
+        "brave.news"
+       ],
+       "good": true
+      },
+      {
+       "title": "NBA News, Scores & Expert Analysis | Sports Illustrated",
+       "url": "https://www.si.com/nba",
+       "published": null,
+       "engines": [
+        "brave.news"
+       ],
+       "good": false
+      },
+      {
+       "title": "NBA buzz: Latest on trades, news, roster moves and intel - ESPN",
+       "url": "https://www.espn.com/nba/story/_/id/50028196/2026-27-nba-buzz-latest-live-updates-news-intel-trades-deals",
+       "published": null,
+       "engines": [
+        "brave.news"
+       ],
+       "good": true
+      }
+     ],
+     "good": 4,
+     "error": null
+    },
+    {
+     "lang": "en",
+     "query": "US midterm election results",
+     "range": "week",
+     "results": [
+      {
+       "title": "Midterm Elections Live Updates: Democrats’ Lead in Mississippi Senate Race Grows - The New York Times",
+       "url": "https://www.nytimes.com/live/2026/11/06/us/midterm-elections-trump",
+       "published": null,
+       "engines": [
+        "brave.news"
+       ],
+       "good": true
+      },
+      {
+       "title": "Midterm Elections Live Updates: Democrats Project Power as G.O.P. Reels in a Reordered Washington - The New York Times",
+       "url": "https://www.nytimes.com/live/2026/11/04/us/midterm-election-results-democrats",
+       "published": null,
+       "engines": [
+        "brave.news"
+       ],
+       "good": true
+      },
+      {
+       "title": "U.S. House Elections 2026 Live Results: Democrats Win Control",
+       "url": "https://www.nbcnews.com/politics/2026-elections/house-results",
+       "published": null,
+       "engines": [
+        "brave.news"
+       ],
+       "good": true
+      },
+      {
+       "title": "Midterm election 2026 live results: Dems take back Congress, Vance says 'obvious' reason Republicans lost is Iran war - ABC7 New York",
+       "url": "https://abc7ny.com/live-updates/midterm-elections-2026-live-updates-election-results-key-races-us/20001292/",
+       "published": null,
+       "engines": [
+        "brave.news"
+       ],
+       "good": true
+      },
+      {
+       "title": "2026 midterm election live updates as Trump announces White House shakeup",
+       "url": "https://www.cbsnews.com/live-updates/midterm-election-results-2026-democrats-house-senate-trump/",
+       "published": null,
+       "engines": [
+        "brave.news"
+       ],
+       "good": true
+      }
+     ],
+     "good": 5,
+     "error": null
+    },
+    {
+     "lang": "en",
+     "query": "stock market news today",
+     "range": "day",
+     "results": [
+      {
+       "title": "Stock market news for Nov. 6, 2026",
+       "url": "https://www.cnbc.com/2026/11/05/stock-market-today-live-updates.html",
+       "published": null,
+       "engines": [
+        "brave.news"
+       ],
+       "good": false
+      },
+      {
+       "title": "Donald Trump rips Democrats after post-Election Day stock market losses",
+       "url": "https://thehill.com/homenews/administration/6203425-donald-trump-stock-market-losses-2026-midterms-economy/",
+       "published": null,
+       "engines": [
+        "brave.news"
+       ],
+       "good": true
+      },
+      {
+       "title": "Stock Market Today: Dow, S&P Live Updates for November 6 - Bloomberg",
+       "url": "https://www.bloomberg.com/news/articles/2026-11-05/stock-market-today-dow-s-p-live-updates",
+       "published": null,
+       "engines": [
+        "brave.news"
+       ],
+       "good": false
+      },
+      {
+       "title": "What sparked the stock market’s $2.5 trillion sell-off? | CNN Business",
+       "url": "https://www.cnn.com/2026/11/06/investing/tech-selloff-explainer",
+       "published": null,
+       "engines": [
+        "brave.news"
+       ],
+       "good": true
+      },
+      {
+       "title": "U.S. Hiring Picks Up and Unemployment Falls - The New York Times",
+       "url": "https://www.nytimes.com/live/2026/11/06/business/jobs-report-stocks-market-economy",
+       "published": null,
+       "engines": [
+        "brave.news"
+       ],
+       "good": true
+      }
+     ],
+     "good": 3,
+     "error": null
+    },
+    {
+     "lang": "en",
+     "query": "boston local news",
+     "range": "week",
+     "results": [
+      {
+       "title": "Voice of Logan winner is Christopher Donisi – NBC Boston",
+       "url": "https://www.nbcboston.com/news/local/voice-of-logan-winner-christopher-donisi-massport-boston/4044191/",
+       "published": null,
+       "engines": [
+        "brave.news"
+       ],
+       "good": true
+      },
+      {
+       "title": "Did you follow the local news this week? Take our Greater Boston news quiz.",
+       "url": "https://www.boston.com/community/quizzes/greater-boston-news-quiz-nov-6-2026-election-healey-daylight-saving-celebs/",
+       "published": null,
+       "engines": [
+        "brave.news"
+       ],
+       "good": true
+      },
+      {
+       "title": "Encore Boston workers reach new contract, end strike – Boston 25 News",
+       "url": "https://www.boston25news.com/news/local/encore-boston-workers-reach-new-contract-end-strike/XVFCZNJUG5CBHBGY5SZ4OFBP4I/",
+       "published": null,
+       "engines": [
+        "brave.news"
+       ],
+       "good": true
+      },
+      {
+       "title": "Catch up with the Boston Jewish Film Festival, and more local arts news - The Boston Globe",
+       "url": "https://www.bostonglobe.com/2026/11/06/arts/boston-jewish-film-festival/",
+       "published": null,
+       "engines": [
+        "brave.news"
+       ],
+       "good": true
+      },
+      {
+       "title": "What Boston meteorologists are saying about 'widespread soaking rainfall' into the weekend",
+       "url": "https://www.boston.com/weather/local-news/2026/11/05/boston-ma-weather-rain-forecast-nov-2026/",
+       "published": null,
+       "engines": [
+        "brave.news"
+       ],
+       "good": true
+      }
+     ],
+     "good": 5,
+     "error": null
+    },
+    {
+     "lang": "zh",
+     "query": "科技新闻 2026年11月7日",
+     "range": "day",
+     "results": [
+      {
+       "title": "新浪AI热点小时报丨2026年11月07日13时_今日实时AI热点速递|html|智能体|英特尔|机器人|衣食_新浪新闻",
+       "url": "https://k.sina.com.cn/article_7857201856_1d45362c001908typi.html",
+       "published": null,
+       "engines": [
+        "brave.news"
+       ],
+       "good": true
+      },
+      {
+       "title": "新浪互联网热点小时报丨2026年11月07日13时_今日实时互联网热点速递|AI|html|机器人|手机|传音_新浪新闻",
+       "url": "https://k.sina.com.cn/article_7857201856_1d45362c001908tyt2.html",
+       "published": null,
+       "engines": [
+        "brave.news"
+       ],
+       "good": true
+      },
+      {
+       "title": "新浪科技热点小时报丨2026年11月07日11时_今日实时科技热点速递|html|spacex|黎锦|ibm|博会_新浪新闻",
+       "url": "https://k.sina.com.cn/article_7857201856_1d45362c001908tybq.html",
+       "published": null,
+       "engines": [
+        "brave.news"
+       ],
+       "good": true
+      },
+      {
+       "title": "新浪科技热点小时报丨2026年11月07日07时_今日实时科技热点速递|美元|微信|无人机|进博会|html_新浪新闻",
+       "url": "https://k.sina.com.cn/article_7857201856_1d45362c001908txl4.html",
+       "published": null,
+       "engines": [
+        "brave.news"
+       ],
+       "good": true
+      },
+      {
+       "title": "新浪科技热点小时报丨2026年11月07日10时_今日实时科技热点速递|html|微软|机器人|甲骨文|宝马_新浪新闻",
+       "url": "https://k.sina.com.cn/article_7857201856_1d45362c001908ty7q.html",
+       "published": null,
+       "engines": [
+        "brave.news"
+       ],
+       "good": true
+      }
+     ],
+     "good": 5,
+     "error": null
+    },
+    {
+     "lang": "zh",
+     "query": "今日 科技新闻 2026年11月7日",
+     "range": "day",
+     "results": [
+      {
+       "title": "新浪机器学习热点小时报丨2026年11月07日16时_今日实时机器学习热点速递|AI|html|机器人|金鸡|蔡司_新浪新闻",
+       "url": "https://k.sina.com.cn/article_7857201856_1d45362c001908tz9i.html",
+       "published": null,
+       "engines": [
+        "brave.news"
+       ],
+       "good": true
+      },
+      {
+       "title": "新浪AI热点小时报丨2026年11月07日16时_今日实时AI热点速递|进博会|短剧|机器人|阿斯利康|终端_新浪新闻",
+       "url": "https://k.sina.com.cn/article_7857201856_1d45362c001908tz96.html",
+       "published": null,
+       "engines": [
+        "brave.news"
+       ],
+       "good": true
+      },
+      {
+       "title": "新浪数码热点小时报丨2026年11月07日16时_今日实时数码热点速递|内存|荣耀magic|台式机|手机|哈苏_新浪新闻",
+       "url": "https://k.sina.com.cn/article_7857201856_1d45362c001908tza2.html",
+       "published": null,
+       "engines": [
+        "brave.news"
+       ],
+       "good": true
+      },
+      {
+       "title": "新浪科技热点小时报丨2026年11月07日11时_今日实时科技热点速递|html|spacex|黎锦|ibm|博会_新浪新闻",
+       "url": "https://k.sina.com.cn/article_7857201856_1d45362c001908tybq.html",
+       "published": null,
+       "engines": [
+        "brave.news"
+       ],
+       "good": true
+      },
+      {
+       "title": "新浪科技热点小时报丨2026年11月07日10时_今日实时科技热点速递|html|微软|机器人|甲骨文|宝马_新浪新闻",
+       "url": "https://k.sina.com.cn/article_7857201856_1d45362c001908ty7q.html",
+       "published": null,
+       "engines": [
+        "brave.news"
+       ],
+       "good": true
+      }
+     ],
+     "good": 5,
+     "error": null
+    },
+    {
+     "lang": "zh",
+     "query": "人工智能 最新消息",
+     "range": "week",
+     "results": [],
+     "good": 0,
+     "error": null
+    },
+    {
+     "lang": "zh",
+     "query": "美国 中期选举 结果",
+     "range": "week",
+     "results": [],
+     "good": 0,
+     "error": null
+    }
+   ]
+  }
+ ]
+}

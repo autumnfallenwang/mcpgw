@@ -6,10 +6,12 @@ import {
   FETCH_CONCURRENCY,
   FETCH_MAX_BYTES,
   FETCH_MAX_URL_CHARS,
+  FETCH_MIN_GAP_MS,
   FETCH_TIMEOUT_MS,
   PORT,
   SEARCH_CACHE_TTL_S,
   SEARCH_CONCURRENCY,
+  SEARCH_MIN_GAP_MS,
   SEARCH_PROVIDER,
   SEARXNG_URL,
 } from "./config.js";
@@ -32,6 +34,7 @@ function searchProvider(): SearchProvider {
 const search = new SearchService(searchProvider(), {
   cacheTtlMs: SEARCH_CACHE_TTL_S * 1000,
   concurrency: SEARCH_CONCURRENCY,
+  minGapMs: SEARCH_MIN_GAP_MS,
 });
 
 const fetchService = new FetchService(
@@ -44,6 +47,7 @@ const fetchService = new FetchService(
   {
     cacheTtlMs: FETCH_CACHE_TTL_S * 1000,
     concurrency: FETCH_CONCURRENCY,
+    minGapMs: FETCH_MIN_GAP_MS,
   },
 );
 

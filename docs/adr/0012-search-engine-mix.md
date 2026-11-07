@@ -14,7 +14,7 @@ Mojeek, Baidu and Sogou refused or failed for this IP.
 
 - **Yahoo and DuckDuckGo lead** general search.
 - **Bing stays at weight 0.2,** as a backup that fills in when the others have too little.
-- **Bing News and DuckDuckGo News** still serve news.
+- **Bing News and Brave News** serve news (changed on 2026-11-07, below).
 - **Brave goes.**
 
 ## Measured
@@ -47,3 +47,24 @@ itself had drawn CAPTCHAs. Simply adding Yahoo barely helped: what made the diff
 - **Any engine can start refusing this IP at any time,** Yahoo included. This is the mix that works today, not a permanent answer, so
   re-run `dev/benchmark/retrieval.mjs` when search seems worse.
 - **Yahoo and DuckDuckGo are one failure each from weaker results,** which is why Bing stays.
+
+## Update, 2026-11-07: news
+
+A real meeting's "technology news" searches came back mostly off-topic. The benchmark hadn't caught that, because it only checks that a
+result mentions the topic. Reading SearXNG's code showed why: given a time range, it skips every engine with no time-range support. So
+DuckDuckGo News never ran on those searches, and Bing News served them alone.
+
+A new test, [`news.mjs`](../../dev/benchmark/news.mjs), has a judge model read the results of 12 searches:
+
+| Setup, through mcpgw | Good results | English | Chinese |
+|---|---|---|---|
+| Before: Bing News with the time range | 67% | 26 of 40 | 14 of 20 |
+| **Bing News and Brave News, no time range sent: chosen** | **80%** | **30 of 40** | **18 of 20** |
+
+- **DuckDuckGo News goes,** rather than coming back into play now that no range is sent, because it would add traffic to an engine already
+  answering CAPTCHAs. It couldn't be scored, since DuckDuckGo was answering CAPTCHAs throughout.
+- **Rejected:** Yahoo News at 30% and Qwant News at 40% scored lower alone, and neither improved the mix. Google News, Startpage News and
+  Wikinews returned nothing. ChinaSo and Sina scored 7% and 17% (`results/news-engines`, `news-engines-filter`, `news-mixes`).
+- **The cost:** Bing News and Brave News give no dates, so a `day` search can't be held to one day. Brave also refused once after dozens of
+  test searches. When it does, Bing News carries on.
+- **It's a small test,** with one judge on 12 searches, so read this as a real gain but not an exact one.

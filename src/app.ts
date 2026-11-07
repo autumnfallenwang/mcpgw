@@ -7,6 +7,7 @@ import {
   FETCH_CACHE_TTL_S,
   FETCH_MAX_URL_CHARS,
   SEARCH_CACHE_TTL_S,
+  SEARCH_MIN_GAP_MS,
 } from "./config.js";
 import { renderDocsPage } from "./docs-page.js";
 import { requestLog } from "./lib/request-log.js";
@@ -93,7 +94,7 @@ export function createApp(deps: AppDeps) {
             name: "web_search",
             ...TOOLS.web_search,
             readOnly: TOOLS.web_search.annotations.readOnlyHint,
-            note: `Results are cached for ${minutes(SEARCH_CACHE_TTL_S)}.`,
+            note: `Results are cached for ${minutes(SEARCH_CACHE_TTL_S)}. Searches run at least ${SEARCH_MIN_GAP_MS / 1000} seconds apart across all callers, so a burst waits its turn.`,
           },
           {
             name: "web_fetch",

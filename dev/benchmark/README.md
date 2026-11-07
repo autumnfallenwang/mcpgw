@@ -21,6 +21,11 @@ wrong -50, so a confident wrong answer costs more than "I couldn't confirm".
 **`retrieval.mjs`: the tools alone, with no model and no allowance spent.** Are search results on the topic, and does a page give
 usable text? 31 searches and 36 pages.
 
+**`news.mjs`: is news search any good?** A judge model reads the results of 12 news searches, in English and Chinese, seeing only the query
+and today's date. `retrieval.mjs` only checks that a result mentions the topic, which missed that a real meeting's "technology news" came
+back mostly off-topic. It can also score SearXNG engines directly, with `--searxng` and `--engines`. SearXNG quietly uses its usual engines
+if it doesn't know a name, so the script fails on results from any other engine.
+
 **Questions** (`questions.mjs`): version numbers with answers pulled live from each project's own data, dated facts checked by hand
 against outside sources, docs, PDFs, Chinese, a blocked site and everyday questions. `--set hard` adds questions that are too recent
 for any model to know, with answers from primary sources such as the ECB, the USGS and ESPN.
@@ -30,6 +35,7 @@ for any model to know, with answers from primary sources such as the ECB, the US
 ```sh
 cd dev/benchmark
 node retrieval.mjs --label mylabel
+node news.mjs --label mylabel
 node answers.mjs --arm claude-mcpgw --label mylabel --run 1
 node answers.mjs --arm claude-builtin --label mylabel --run 1
 node answers.mjs --arm gpt-mcpgw --label mylabel --run 1

@@ -3,7 +3,7 @@
 What the first workable version of mcpgw includes, the milestones to get there, and the decisions still open.
 Progress against this plan is logged in [progress.md](progress.md). The design is in [design.md](design.md).
 
-**Updated:** 2026-11-06
+**Updated:** 2026-11-07
 
 ---
 
@@ -20,8 +20,8 @@ Progress against this plan is logged in [progress.md](progress.md). The design i
 
 ### Out (later)
 
-`code_run`, `docs_search`, read-only home data, bearer tokens, a REST mirror, federating other MCP servers, PDF if
-it isn't trivial, rendering JavaScript pages, public exposure.
+`code_run`, `docs_search`, read-only home data, bearer tokens, a REST mirror and federating other MCP servers. Rendering
+JavaScript pages and public exposure aren't planned at all ([design §2](design.md)).
 
 ---
 

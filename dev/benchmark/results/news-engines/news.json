@@ -1,0 +1,1965 @@
+{
+ "label": "news-engines",
+ "date": "2026-11-07",
+ "judge": "gpt-5.6-terra",
+ "runs": [
+  {
+   "summary": {
+    "name": "yahoo news",
+    "good_of_5_each": "0/60",
+    "pct": 0,
+    "en": "0/40",
+    "zh": "0/20",
+    "empty": 12,
+    "errors": 0
+   },
+   "rows": [
+    {
+     "lang": "en",
+     "query": "important technology news November 7 2026 today",
+     "range": "day",
+     "results": [],
+     "good": 0,
+     "error": null
+    },
+    {
+     "lang": "en",
+     "query": "technology news November 7 2026 AI cybersecurity semiconductor",
+     "range": "day",
+     "results": [],
+     "good": 0,
+     "error": null
+    },
+    {
+     "lang": "en",
+     "query": "AI news this week",
+     "range": "week",
+     "results": [],
+     "good": 0,
+     "error": null
+    },
+    {
+     "lang": "en",
+     "query": "federal reserve interest rate decision",
+     "range": "month",
+     "results": [],
+     "good": 0,
+     "error": null
+    },
+    {
+     "lang": "en",
+     "query": "nba news today",
+     "range": "day",
+     "results": [],
+     "good": 0,
+     "error": null
+    },
+    {
+     "lang": "en",
+     "query": "US midterm election results",
+     "range": "week",
+     "results": [],
+     "good": 0,
+     "error": null
+    },
+    {
+     "lang": "en",
+     "query": "stock market news today",
+     "range": "day",
+     "results": [],
+     "good": 0,
+     "error": null
+    },
+    {
+     "lang": "en",
+     "query": "boston local news",
+     "range": "week",
+     "results": [],
+     "good": 0,
+     "error": null
+    },
+    {
+     "lang": "zh",
+     "query": "科技新闻 2026年11月7日",
+     "range": "day",
+     "results": [],
+     "good": 0,
+     "error": null
+    },
+    {
+     "lang": "zh",
+     "query": "今日 科技新闻 2026年11月7日",
+     "range": "day",
+     "results": [],
+     "good": 0,
+     "error": null
+    },
+    {
+     "lang": "zh",
+     "query": "人工智能 最新消息",
+     "range": "week",
+     "results": [],
+     "good": 0,
+     "error": null
+    },
+    {
+     "lang": "zh",
+     "query": "美国 中期选举 结果",
+     "range": "week",
+     "results": [],
+     "good": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "summary": {
+    "name": "bing news",
+    "good_of_5_each": "33/60",
+    "pct": 55,
+    "en": "29/40",
+    "zh": "4/20",
+    "empty": 2,
+    "errors": 0
+   },
+   "rows": [
+    {
+     "lang": "en",
+     "query": "important technology news November 7 2026 today",
+     "range": "day",
+     "results": [
+      {
+       "title": "[Breaking News] Nagoya Institute of Technology: Analysis and Outlook of Application Status for the 2027 School Recommendation Selection (Recommendation I)",
+       "url": "https://note.com/pond_math/n/n763fc52b81cd?hl=en",
+       "published": null,
+       "engines": [
+        "bing news"
+       ],
+       "good": false
+      },
+      {
+       "title": "Sony Q2 2026: AI memory shortage stalls rivals' cameras while boosting Sony's margins",
+       "url": "https://www.msn.com/en-us/technology/tech-companies/sony-q2-2026-ai-memory-shortage-stalls-rivals-cameras-while-boosting-sony-s-margins/ar-AA2gVBrt",
+       "published": null,
+       "engines": [
+        "bing news"
+       ],
+       "good": true
+      },
+      {
+       "title": "Electronics Components Manufacturing Scheme: 12 New Projects Approved Across 7 States",
+       "url": "https://indianmasterminds.com/news/government/ecms-approves-12-electronics-projects-248980/",
+       "published": null,
+       "engines": [
+        "bing news"
+       ],
+       "good": true
+      },
+      {
+       "title": "Crypto Market Weakens, This is the Prediction of Bitcoin Price in November 2026",
+       "url": "https://voi.id/en/technology/601545",
+       "published": null,
+       "engines": [
+        "bing news"
+       ],
+       "good": true
+      },
+      {
+       "title": "Sanjay Seth to grace closing ceremony of 4th All India Sainik Schools National Games 2026 in Karnataka",
+       "url": "https://www.defencewatch.in/ministry-of-defence/sanjay-seth-to-grace-closing-ceremony-of-4th-all-india-sainik-schools-national-games-2026-in-karnataka",
+       "published": null,
+       "engines": [
+        "bing news"
+       ],
+       "good": false
+      }
+     ],
+     "good": 3,
+     "error": null
+    },
+    {
+     "lang": "en",
+     "query": "technology news November 7 2026 AI cybersecurity semiconductor",
+     "range": "day",
+     "results": [
+      {
+       "title": "The Impact of US Midterm Elections 2026 on India and Global Policies",
+       "url": "https://smestreet.in/global/the-impact-of-us-midterm-elections-2026-on-india-and-global-policies-12791474",
+       "published": null,
+       "engines": [
+        "bing news"
+       ],
+       "good": false
+      },
+      {
+       "title": "IBM (NYSE: IBM) Shares Fall Below Their Long-Term Trend Line",
+       "url": "https://www.rswebsols.com/news/ibm-nyse-ibm-shares-fall-below-their-long-term-trend-line/",
+       "published": null,
+       "engines": [
+        "bing news"
+       ],
+       "good": false
+      },
+      {
+       "title": "2026 Senate Election Results",
+       "url": "https://www.foxnews.com/elections/2026/midterm-results/senate",
+       "published": null,
+       "engines": [
+        "bing news"
+       ],
+       "good": false
+      },
+      {
+       "title": "2026 Governor Election Results by State",
+       "url": "https://www.foxnews.com/elections/2026/midterm-results/governor",
+       "published": null,
+       "engines": [
+        "bing news"
+       ],
+       "good": false
+      }
+     ],
+     "good": 0,
+     "error": null
+    },
+    {
+     "lang": "en",
+     "query": "AI news this week",
+     "range": "week",
+     "results": [
+      {
+       "title": "AI in property listings is false advertising, house-hunters say",
+       "url": "https://www.msn.com/en-us/money/real-estate/ai-in-property-listings-is-false-advertising-house-hunters-say/ar-AA2gVMEa",
+       "published": null,
+       "engines": [
+        "bing news"
+       ],
+       "good": true
+      },
+      {
+       "title": "Democrats planning flood of AI bills when they take control of Congress",
+       "url": "https://www.msn.com/en-us/news/other/democrats-planning-flood-of-ai-bills-when-they-take-control-of-congress/ar-AA2gUjiG",
+       "published": null,
+       "engines": [
+        "bing news"
+       ],
+       "good": true
+      },
+      {
+       "title": "OpenAI, Arm and Qualcomm executives react to post-midterm AI sell-off",
+       "url": "https://www.cnbc.com/2026/11/06/tech-executives-ai-data-center-selloff-midterms.html",
+       "published": null,
+       "engines": [
+        "bing news"
+       ],
+       "good": true
+      },
+      {
+       "title": "Not Nvidia. Not Palantir. The Midterms Just Made This Magnificent Artificial Intelligence (AI) Stock the Safer Bet.",
+       "url": "https://www.msn.com/en-us/news/other/not-nvidia-not-palantir-the-midterms-just-made-this-magnificent-artificial-intelligence-ai-stock-the-safer-bet/ar-AA2gTazi",
+       "published": null,
+       "engines": [
+        "bing news"
+       ],
+       "good": false
+      },
+      {
+       "title": "Bill Gates believes a billionaire’s tax is the only option in the age of AI and whatever’s left over can be used as a philanthropic safety net",
+       "url": "https://www.msn.com/en-us/news/other/bill-gates-believes-a-billionaire-s-tax-is-the-only-option-in-the-age-of-ai-and-whatever-s-left-over-can-be-used-as-a-philanthropic-safety-net/ar-AA2gTVSC",
+       "published": null,
+       "engines": [
+        "bing news"
+       ],
+       "good": false
+      }
+     ],
+     "good": 3,
+     "error": null
+    },
+    {
+     "lang": "en",
+     "query": "federal reserve interest rate decision",
+     "range": "month",
+     "results": [
+      {
+       "title": "Federal Reserve makes interest rate decision ahead of midterms",
+       "url": "https://www.foxbusiness.com/economy/federal-reserve-interest-rate-decision-october-28-2026",
+       "published": null,
+       "engines": [
+        "bing news"
+       ],
+       "good": true
+      },
+      {
+       "title": "Federal Reserve holds interest rates steady despite inflation concerns",
+       "url": "https://www.usatoday.com/story/money/economy/2026/10/28/federal-reserve-october-interest-rate-decision--live/92441632007/",
+       "published": null,
+       "engines": [
+        "bing news"
+       ],
+       "good": true
+      },
+      {
+       "title": "Federal Reserve expected to hold interest rates steady in last decision before midterm elections",
+       "url": "https://www.foxbusiness.com/economy/federal-reserve-expected-hold-interest-rates-steady-midterm-elections-week-away",
+       "published": null,
+       "engines": [
+        "bing news"
+       ],
+       "good": true
+      },
+      {
+       "title": "Fed keeps interest rates unchanged, but two officials dissented in favor of a rate hike",
+       "url": "https://www.cnn.com/2026/10/28/business/live-news/federal-reserve-interest-rate-october",
+       "published": null,
+       "engines": [
+        "bing news"
+       ],
+       "good": true
+      },
+      {
+       "title": "US Federal Reserve leaves interest rates unchanged",
+       "url": "https://finance.yahoo.com/economy/policy/articles/us-federal-leaves-interest-rates-183335430.html",
+       "published": null,
+       "engines": [
+        "bing news"
+       ],
+       "good": true
+      }
+     ],
+     "good": 5,
+     "error": null
+    },
+    {
+     "lang": "en",
+     "query": "nba news today",
+     "range": "day",
+     "results": [
+      {
+       "title": "Luka Doncic's 53-point explosion pushes scoring average past 40 as Lakers roll",
+       "url": "https://www.espn.com/nba/story/_/id/50406079/luka-doncic-stays-hot-scores-53-lead-lakers-blazers",
+       "published": null,
+       "engines": [
+        "bing news"
+       ],
+       "good": true
+      },
+      {
+       "title": "NBA roundup: Luka Doncic stays hot with 53 points in Lakers' win",
+       "url": "https://www.yardbarker.com/nba/articles/nba_roundup_luka_doncic_stays_hot_with_53_points_in_lakers_win/s1_17045_44527371",
+       "published": null,
+       "engines": [
+        "bing news"
+       ],
+       "good": true
+      },
+      {
+       "title": "Lakers’ Ziaire Williams confuses Luka Doncic with Austin Reaves: ‘wrong white person’",
+       "url": "https://nypost.com/2026/11/07/sports/lakers-ziaire-williams-confuses-luka-doncic-with-austin-reaves/",
+       "published": null,
+       "engines": [
+        "bing news"
+       ],
+       "good": true
+      },
+      {
+       "title": "NBA : Wemby enchaîne avec les Spurs, les Sixers tombent",
+       "url": "https://www.msn.com/fr-fr/actualite/other/nba-wemby-encha%C3%AEne-avec-les-spurs-les-sixers-tombent/ar-AA2gVMuZ",
+       "published": null,
+       "engines": [
+        "bing news"
+       ],
+       "good": true
+      },
+      {
+       "title": "Hezonja slavi veliku pobjedu nad LeBronom i Philom! Matković zablistao, nova ‘nemoguća‘ večer Dončića",
+       "url": "https://www.jutarnji.hr/sportske/kosarka/nba/hezonja-slavi-veliku-pobjedu-nad-lebronom-i-philom-matkovic-zablistao-nova-nemoguca-vecer-doncica-15763246",
+       "published": null,
+       "engines": [
+        "bing news"
+       ],
+       "good": true
+      }
+     ],
+     "good": 5,
+     "error": null
+    },
+    {
+     "lang": "en",
+     "query": "US midterm election results",
+     "range": "week",
+     "results": [
+      {
+       "title": "Florida Democrats ‘fired up to deliver’ after GOP gerrymander fails",
+       "url": "https://www.ms.now/11th-hour/watch/florida-democrats-fired-up-to-deliver-after-gop-gerrymander-fails-2519973443631",
+       "published": null,
+       "engines": [
+        "bing news"
+       ],
+       "good": true
+      },
+      {
+       "title": "CA-4 race remains close between Eric Jones, Mike Thompson",
+       "url": "https://www.msn.com/en-us/news/other/ca-4-race-remains-close-between-eric-jones-mike-thompson/vi-AA2gVENA",
+       "published": null,
+       "engines": [
+        "bing news"
+       ],
+       "good": false
+      },
+      {
+       "title": "A snapshot look at Tuesday's election",
+       "url": "https://bismarcktribune.com/news/community/mandannews/article_31daee03-080f-4102-99c4-d9d0635efb1d.html",
+       "published": null,
+       "engines": [
+        "bing news"
+       ],
+       "good": true
+      },
+      {
+       "title": "Colom confident as Mississippi appears poised to ‘pick another senator’",
+       "url": "https://www.ms.now/the-briefing-with-jen-psaki/watch/colom-confident-as-mississippi-appears-poised-to-pick-another-senator-2519967811537",
+       "published": null,
+       "engines": [
+        "bing news"
+       ],
+       "good": true
+      },
+      {
+       "title": "The Blue Wave Undertow Continues: Live Updates",
+       "url": "https://www.msn.com/en-us/news/other/the-blue-wave-undertow-continues-live-updates/ar-AA2gJLHr",
+       "published": null,
+       "engines": [
+        "bing news"
+       ],
+       "good": true
+      }
+     ],
+     "good": 4,
+     "error": null
+    },
+    {
+     "lang": "en",
+     "query": "stock market news today",
+     "range": "day",
+     "results": [
+      {
+       "title": "Stock market muhurat trading date and time 2026 on Diwali day 8 Nov: MCX, Sensex, Nifty - What investors should know",
+       "url": "https://www.livemint.com/market/stock-market-news/stock-market-muhurat-trading-date-and-time-2026-on-diwali-day-8-nov-mcx-sensex-nifty-what-investors-should-know-11794036310637.html",
+       "published": null,
+       "engines": [
+        "bing news"
+       ],
+       "good": true
+      },
+      {
+       "title": "Muhurat trading 2026: How to trade during the special session tomorrow to welcome Samvat 2083?",
+       "url": "https://www.msn.com/en-in/news/other/muhurat-trading-2026-how-to-trade-during-the-special-session-tomorrow-to-welcome-samvat-2083/ar-AA2gWy8Z",
+       "published": null,
+       "engines": [
+        "bing news"
+       ],
+       "good": true
+      },
+      {
+       "title": "The Democrat's blue tsunami turned stock markets red across the world",
+       "url": "https://www.msn.com/en-in/news/other/the-democrats-blue-tsunami-turned-stock-markets-red-across-the-world/ar-AA2gWvyu",
+       "published": null,
+       "engines": [
+        "bing news"
+       ],
+       "good": true
+      },
+      {
+       "title": "AI Stocks Have Taken A Beating, But Gene Munster Says The Biggest AI Boom Is Still Ahead",
+       "url": "https://stocktwits.com/news-articles/markets/equity/ai-stocks-taken-beating-gene-munster-biggest-boom-still-ahead/cNGV8quR9Ij",
+       "published": null,
+       "engines": [
+        "bing news"
+       ],
+       "good": true
+      },
+      {
+       "title": "NSE's Electronic Gold Receipts record over ₹23 crore turnover on debut: How investors can buy",
+       "url": "https://www.cnbctv18.com/market/nse-electronic-gold-receipts-over-rs-23-crore-turnover-on-debut-how-investors-can-buy-20029464.htm",
+       "published": null,
+       "engines": [
+        "bing news"
+       ],
+       "good": true
+      }
+     ],
+     "good": 5,
+     "error": null
+    },
+    {
+     "lang": "en",
+     "query": "boston local news",
+     "range": "week",
+     "results": [
+      {
+       "title": "Boston Mayor Wu not deterred by criticism, lightning threat to mark $325M White Stadium milestone",
+       "url": "https://www.msn.com/en-us/news/other/boston-mayor-wu-not-deterred-by-criticism-lightning-threat-to-mark-325m-white-stadium-milestone/ar-AA2gUZiB",
+       "published": null,
+       "engines": [
+        "bing news"
+       ],
+       "good": true
+      },
+      {
+       "title": "Boston mom says son with Type 1 diabetes may lose place at Catholic school amid nursing shortage",
+       "url": "https://www.msn.com/en-us/news/other/boston-mom-says-son-with-type-1-diabetes-may-lose-place-at-catholic-school-amid-nursing-shortage/ar-AA2gVDwH",
+       "published": null,
+       "engines": [
+        "bing news"
+       ],
+       "good": true
+      },
+      {
+       "title": "Telangana student Sreeja Reddy goes missing in Boston",
+       "url": "https://www.msn.com/en-in/news/other/telangana-student-sreeja-reddy-goes-missing-in-boston/ar-AA2gWmkQ",
+       "published": null,
+       "engines": [
+        "bing news"
+       ],
+       "good": true
+      },
+      {
+       "title": "The final day of voting begins in New Zealand’s election as an unusual law bans any talk of politics",
+       "url": "https://www.bostonherald.com/2026/11/06/new-zealand-election/",
+       "published": null,
+       "engines": [
+        "bing news"
+       ],
+       "good": false
+      },
+      {
+       "title": "CASINO TEAMSTERS WIN STRIKE AT ENCORE BOSTON HARBOR",
+       "url": "https://www.prnewswire.com/news-releases/casino-teamsters-win-strike-at-encore-boston-harbor-302932291.html",
+       "published": null,
+       "engines": [
+        "bing news"
+       ],
+       "good": true
+      }
+     ],
+     "good": 4,
+     "error": null
+    },
+    {
+     "lang": "zh",
+     "query": "科技新闻 2026年11月7日",
+     "range": "day",
+     "results": [],
+     "good": 0,
+     "error": null
+    },
+    {
+     "lang": "zh",
+     "query": "今日 科技新闻 2026年11月7日",
+     "range": "day",
+     "results": [],
+     "good": 0,
+     "error": null
+    },
+    {
+     "lang": "zh",
+     "query": "人工智能 最新消息",
+     "range": "week",
+     "results": [
+      {
+       "title": "Anthropic的IPO定价可能下调至1万亿美元",
+       "url": "https://eu.36kr.com/zh/p/4057942380451458",
+       "published": null,
+       "engines": [
+        "bing news"
+       ],
+       "good": true
+      }
+     ],
+     "good": 1,
+     "error": null
+    },
+    {
+     "lang": "zh",
+     "query": "美国 中期选举 结果",
+     "range": "week",
+     "results": [
+      {
+       "title": "美中期选举：密西西比州还未有明确结果",
+       "url": "https://www.rfi.fr/cn/%E7%BE%8E%E6%B4%B2/20261106-%E7%BE%8E%E4%B8%AD%E6%9C%9F%E9%80%89%E4%B8%BE-%E5%AF%86%E8%A5%BF%E8%A5%BF%E6%AF%94%E5%B7%9E%E8%BF%98%E6%9C%AA%E6%9C%89%E6%98%8E%E7%A1%AE%E7%BB%93%E6%9E%9C",
+       "published": null,
+       "engines": [
+        "bing news"
+       ],
+       "good": true
+      },
+      {
+       "title": "中期选举正式落幕，民主党攻破40年得州阵地，马斯克面临全面清算",
+       "url": "https://www.sohu.com/a/1098393305_122656896",
+       "published": null,
+       "engines": [
+        "bing news"
+       ],
+       "good": false
+      },
+      {
+       "title": "美国中期选举结果出炉后欧洲盟友神经紧绷，中选刚结束，泽连斯基 ...",
+       "url": "https://www.sohu.com/a/1098244350_122734274",
+       "published": null,
+       "engines": [
+        "bing news"
+       ],
+       "good": false
+      },
+      {
+       "title": "中期选举结果对美国人的钱包意味着什么",
+       "url": "https://www.aboluowang.com/2026/1106/2454426.html",
+       "published": null,
+       "engines": [
+        "bing news"
+       ],
+       "good": true
+      },
+      {
+       "title": "中期选举结果引发对人工智能监管焦虑，美股暴跌",
+       "url": "https://cn.nytimes.com/business/20261106/stocks-midterms-artificial-intelligence/",
+       "published": null,
+       "engines": [
+        "bing news"
+       ],
+       "good": true
+      }
+     ],
+     "good": 3,
+     "error": null
+    }
+   ]
+  },
+  {
+   "summary": {
+    "name": "google news",
+    "good_of_5_each": "0/60",
+    "pct": 0,
+    "en": "0/40",
+    "zh": "0/20",
+    "empty": 12,
+    "errors": 0
+   },
+   "rows": [
+    {
+     "lang": "en",
+     "query": "important technology news November 7 2026 today",
+     "range": "day",
+     "results": [],
+     "good": 0,
+     "error": null
+    },
+    {
+     "lang": "en",
+     "query": "technology news November 7 2026 AI cybersecurity semiconductor",
+     "range": "day",
+     "results": [],
+     "good": 0,
+     "error": null
+    },
+    {
+     "lang": "en",
+     "query": "AI news this week",
+     "range": "week",
+     "results": [],
+     "good": 0,
+     "error": null
+    },
+    {
+     "lang": "en",
+     "query": "federal reserve interest rate decision",
+     "range": "month",
+     "results": [],
+     "good": 0,
+     "error": null
+    },
+    {
+     "lang": "en",
+     "query": "nba news today",
+     "range": "day",
+     "results": [],
+     "good": 0,
+     "error": null
+    },
+    {
+     "lang": "en",
+     "query": "US midterm election results",
+     "range": "week",
+     "results": [],
+     "good": 0,
+     "error": null
+    },
+    {
+     "lang": "en",
+     "query": "stock market news today",
+     "range": "day",
+     "results": [],
+     "good": 0,
+     "error": null
+    },
+    {
+     "lang": "en",
+     "query": "boston local news",
+     "range": "week",
+     "results": [],
+     "good": 0,
+     "error": null
+    },
+    {
+     "lang": "zh",
+     "query": "科技新闻 2026年11月7日",
+     "range": "day",
+     "results": [],
+     "good": 0,
+     "error": null
+    },
+    {
+     "lang": "zh",
+     "query": "今日 科技新闻 2026年11月7日",
+     "range": "day",
+     "results": [],
+     "good": 0,
+     "error": null
+    },
+    {
+     "lang": "zh",
+     "query": "人工智能 最新消息",
+     "range": "week",
+     "results": [],
+     "good": 0,
+     "error": null
+    },
+    {
+     "lang": "zh",
+     "query": "美国 中期选举 结果",
+     "range": "week",
+     "results": [],
+     "good": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "summary": {
+    "name": "qwant news",
+    "good_of_5_each": "0/60",
+    "pct": 0,
+    "en": "0/40",
+    "zh": "0/20",
+    "empty": 12,
+    "errors": 0
+   },
+   "rows": [
+    {
+     "lang": "en",
+     "query": "important technology news November 7 2026 today",
+     "range": "day",
+     "results": [],
+     "good": 0,
+     "error": null
+    },
+    {
+     "lang": "en",
+     "query": "technology news November 7 2026 AI cybersecurity semiconductor",
+     "range": "day",
+     "results": [],
+     "good": 0,
+     "error": null
+    },
+    {
+     "lang": "en",
+     "query": "AI news this week",
+     "range": "week",
+     "results": [],
+     "good": 0,
+     "error": null
+    },
+    {
+     "lang": "en",
+     "query": "federal reserve interest rate decision",
+     "range": "month",
+     "results": [],
+     "good": 0,
+     "error": null
+    },
+    {
+     "lang": "en",
+     "query": "nba news today",
+     "range": "day",
+     "results": [],
+     "good": 0,
+     "error": null
+    },
+    {
+     "lang": "en",
+     "query": "US midterm election results",
+     "range": "week",
+     "results": [],
+     "good": 0,
+     "error": null
+    },
+    {
+     "lang": "en",
+     "query": "stock market news today",
+     "range": "day",
+     "results": [],
+     "good": 0,
+     "error": null
+    },
+    {
+     "lang": "en",
+     "query": "boston local news",
+     "range": "week",
+     "results": [],
+     "good": 0,
+     "error": null
+    },
+    {
+     "lang": "zh",
+     "query": "科技新闻 2026年11月7日",
+     "range": "day",
+     "results": [],
+     "good": 0,
+     "error": null
+    },
+    {
+     "lang": "zh",
+     "query": "今日 科技新闻 2026年11月7日",
+     "range": "day",
+     "results": [],
+     "good": 0,
+     "error": null
+    },
+    {
+     "lang": "zh",
+     "query": "人工智能 最新消息",
+     "range": "week",
+     "results": [],
+     "good": 0,
+     "error": null
+    },
+    {
+     "lang": "zh",
+     "query": "美国 中期选举 结果",
+     "range": "week",
+     "results": [],
+     "good": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "summary": {
+    "name": "brave.news",
+    "good_of_5_each": "0/60",
+    "pct": 0,
+    "en": "0/40",
+    "zh": "0/20",
+    "empty": 12,
+    "errors": 0
+   },
+   "rows": [
+    {
+     "lang": "en",
+     "query": "important technology news November 7 2026 today",
+     "range": "day",
+     "results": [],
+     "good": 0,
+     "error": null
+    },
+    {
+     "lang": "en",
+     "query": "technology news November 7 2026 AI cybersecurity semiconductor",
+     "range": "day",
+     "results": [],
+     "good": 0,
+     "error": null
+    },
+    {
+     "lang": "en",
+     "query": "AI news this week",
+     "range": "week",
+     "results": [],
+     "good": 0,
+     "error": null
+    },
+    {
+     "lang": "en",
+     "query": "federal reserve interest rate decision",
+     "range": "month",
+     "results": [],
+     "good": 0,
+     "error": null
+    },
+    {
+     "lang": "en",
+     "query": "nba news today",
+     "range": "day",
+     "results": [],
+     "good": 0,
+     "error": null
+    },
+    {
+     "lang": "en",
+     "query": "US midterm election results",
+     "range": "week",
+     "results": [],
+     "good": 0,
+     "error": null
+    },
+    {
+     "lang": "en",
+     "query": "stock market news today",
+     "range": "day",
+     "results": [],
+     "good": 0,
+     "error": null
+    },
+    {
+     "lang": "en",
+     "query": "boston local news",
+     "range": "week",
+     "results": [],
+     "good": 0,
+     "error": null
+    },
+    {
+     "lang": "zh",
+     "query": "科技新闻 2026年11月7日",
+     "range": "day",
+     "results": [],
+     "good": 0,
+     "error": null
+    },
+    {
+     "lang": "zh",
+     "query": "今日 科技新闻 2026年11月7日",
+     "range": "day",
+     "results": [],
+     "good": 0,
+     "error": null
+    },
+    {
+     "lang": "zh",
+     "query": "人工智能 最新消息",
+     "range": "week",
+     "results": [],
+     "good": 0,
+     "error": null
+    },
+    {
+     "lang": "zh",
+     "query": "美国 中期选举 结果",
+     "range": "week",
+     "results": [],
+     "good": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "summary": {
+    "name": "startpage news",
+    "good_of_5_each": "0/60",
+    "pct": 0,
+    "en": "0/40",
+    "zh": "0/20",
+    "empty": 12,
+    "errors": 0
+   },
+   "rows": [
+    {
+     "lang": "en",
+     "query": "important technology news November 7 2026 today",
+     "range": "day",
+     "results": [],
+     "good": 0,
+     "error": null
+    },
+    {
+     "lang": "en",
+     "query": "technology news November 7 2026 AI cybersecurity semiconductor",
+     "range": "day",
+     "results": [],
+     "good": 0,
+     "error": null
+    },
+    {
+     "lang": "en",
+     "query": "AI news this week",
+     "range": "week",
+     "results": [],
+     "good": 0,
+     "error": null
+    },
+    {
+     "lang": "en",
+     "query": "federal reserve interest rate decision",
+     "range": "month",
+     "results": [],
+     "good": 0,
+     "error": null
+    },
+    {
+     "lang": "en",
+     "query": "nba news today",
+     "range": "day",
+     "results": [],
+     "good": 0,
+     "error": null
+    },
+    {
+     "lang": "en",
+     "query": "US midterm election results",
+     "range": "week",
+     "results": [],
+     "good": 0,
+     "error": null
+    },
+    {
+     "lang": "en",
+     "query": "stock market news today",
+     "range": "day",
+     "results": [],
+     "good": 0,
+     "error": null
+    },
+    {
+     "lang": "en",
+     "query": "boston local news",
+     "range": "week",
+     "results": [],
+     "good": 0,
+     "error": null
+    },
+    {
+     "lang": "zh",
+     "query": "科技新闻 2026年11月7日",
+     "range": "day",
+     "results": [],
+     "good": 0,
+     "error": null
+    },
+    {
+     "lang": "zh",
+     "query": "今日 科技新闻 2026年11月7日",
+     "range": "day",
+     "results": [],
+     "good": 0,
+     "error": null
+    },
+    {
+     "lang": "zh",
+     "query": "人工智能 最新消息",
+     "range": "week",
+     "results": [],
+     "good": 0,
+     "error": null
+    },
+    {
+     "lang": "zh",
+     "query": "美国 中期选举 结果",
+     "range": "week",
+     "results": [],
+     "good": 0,
+     "error": null
+    }
+   ]
+  },
+  {
+   "summary": {
+    "name": "chinaso news",
+    "good_of_5_each": "4/60",
+    "pct": 7,
+    "en": "0/40",
+    "zh": "4/20",
+    "empty": 9,
+    "errors": 0
+   },
+   "rows": [
+    {
+     "lang": "en",
+     "query": "important technology news November 7 2026 today",
+     "range": "day",
+     "results": [],
+     "good": 0,
+     "error": null
+    },
+    {
+     "lang": "en",
+     "query": "technology news November 7 2026 AI cybersecurity semiconductor",
+     "range": "day",
+     "results": [],
+     "good": 0,
+     "error": null
+    },
+    {
+     "lang": "en",
+     "query": "AI news this week",
+     "range": "week",
+     "results": [],
+     "good": 0,
+     "error": null
+    },
+    {
+     "lang": "en",
+     "query": "federal reserve interest rate decision",
+     "range": "month",
+     "results": [],
+     "good": 0,
+     "error": null
+    },
+    {
+     "lang": "en",
+     "query": "nba news today",
+     "range": "day",
+     "results": [],
+     "good": 0,
+     "error": null
+    },
+    {
+     "lang": "en",
+     "query": "US midterm election results",
+     "range": "week",
+     "results": [],
+     "good": 0,
+     "error": null
+    },
+    {
+     "lang": "en",
+     "query": "stock market news today",
+     "range": "day",
+     "results": [],
+     "good": 0,
+     "error": null
+    },
+    {
+     "lang": "en",
+     "query": "boston local news",
+     "range": "week",
+     "results": [],
+     "good": 0,
+     "error": null
+    },
+    {
+     "lang": "zh",
+     "query": "科技新闻 2026年11月7日",
+     "range": "day",
+     "results": [
+      {
+       "title": "还有哪些值得关注的科技新闻，一起看看吧~",
+       "url": "https://www.chinaso.com/link?url=EFa8HsFmEYV1YBZv6dhfYHyGBilleDq%2BdqmUp3SqSZpAsSXFxb4%2FQOSEeFbsQVam&pos=0&wd=%E7%A7%91%E6%8A%80%E6%96%B0%E9%97%BB+2026%E5%B9%B411%E6%9C%887%E6%97%A5",
+       "published": "2026-11-06T23:00:00",
+       "engines": [
+        "chinaso news"
+       ],
+       "good": true
+      }
+     ],
+     "good": 1,
+     "error": null
+    },
+    {
+     "lang": "zh",
+     "query": "今日 科技新闻 2026年11月7日",
+     "range": "day",
+     "results": [],
+     "good": 0,
+     "error": null
+    },
+    {
+     "lang": "zh",
+     "query": "人工智能 最新消息",
+     "range": "week",
+     "results": [
+      {
+       "title": "美国中期选举最新消息引爆AI算力主线，创业板人工智能ETF标的指数陡然拉升7%，强势爆发",
+       "url": "https://www.chinaso.com/link?url=RVQJnCWogMX1bP%2FnXr3DXHTvpM%2FC%2FW2PJCcY78Eo1QWRaOItcRALLavOkcfGs5zEoFIHgOp8HN2aB7k4N4qhTA%3D%3D&pos=0&wd=%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD+%E6%9C%80%E6%96%B0%E6%B6%88%E6%81%AF",
+       "published": "2026-11-04T06:42:27",
+       "engines": [
+        "chinaso news"
+       ],
+       "good": false
+      },
+      {
+       "title": "美国中期选举最新消息！AI算力主线强势爆发，创业板人工智能ETF（159363）标的指数陡然拉升7%",
+       "url": "https://www.chinaso.com/link?url=9vjClrSnK%2BMWXMJUsQL0A%2BjDAcNbIqGREO%2BkJMDmjp3%2FiGW%2Bx%2FxaHeuTDlK%2FoJGd6tKVThsjivjp%2FlRb2Wrf%2FvWn4b4eU%2FT30nsq5hRT8Z4%3D&pos=1&wd=%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD+%E6%9C%80%E6%96%B0%E6%B6%88%E6%81%AF",
+       "published": "2026-11-04T06:33:51",
+       "engines": [
+        "chinaso news"
+       ],
+       "good": false
+      },
+      {
+       "title": "美国中期选举最新消息引爆AI算力主线！创业板人工智能ETF（159363）标的指数陡然拉升7%，强势爆发引市场关注",
+       "url": "https://www.chinaso.com/link?url=RVQJnCWogMX1bP%2FnXr3DXHTvpM%2FC%2FW2PJCcY78Eo1QXdn9FoXxxkFWAI0KF7he3ioFIHgOp8HN2aB7k4N4qhTA%3D%3D&pos=2&wd=%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD+%E6%9C%80%E6%96%B0%E6%B6%88%E6%81%AF",
+       "published": "2026-11-04T06:47:01",
+       "engines": [
+        "chinaso news"
+       ],
+       "good": false
+      },
+      {
+       "title": "ETF盘中资讯 美国中期选举最新消息！AI算力主线强势爆发，创业板人工智能ETF（159363）标的指数陡然拉升7%",
+       "url": "https://www.chinaso.com/link?url=RVQJnCWogMX1bP%2FnXr3DXHTvpM%2FC%2FW2PJCcY78Eo1QWr4cFwewTX23%2FB38Cqt4WCoFIHgOp8HN2aB7k4N4qhTA%3D%3D&pos=3&wd=%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD+%E6%9C%80%E6%96%B0%E6%B6%88%E6%81%AF",
+       "published": "2026-11-04T06:34:12",
+       "engines": [
+        "chinaso news"
+       ],
+       "good": false
+      },
+      {
+       "title": "最新消息：海博思创：人工智能驱动的运维平台",
+       "url": "https://www.chinaso.com/link?url=wV9VZSglFrL0iCz9kI03QGn0g1bS5S8zcwpeCaO3LUVenj78eYQ%2FDENWuExA5cOWh6Sohb6I6cCrJXCsecoqWQ%3D%3D&pos=4&wd=%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD+%E6%9C%80%E6%96%B0%E6%B6%88%E6%81%AF",
+       "published": "2026-11-06T09:03:21",
+       "engines": [
+        "chinaso news"
+       ],
+       "good": false
+      }
+     ],
+     "good": 0,
+     "error": null
+    },
+    {
+     "lang": "zh",
+     "query": "美国 中期选举 结果",
+     "range": "week",
+     "results": [
+      {
+       "title": "美国中期选举结果何时出炉？一篇文章，让您看透美国中期选举",
+       "url": "https://www.chinaso.com/link?url=RVQJnCWogMX1bP%2FnXr3DXFtzRQpfgCNI40TPS4BqygHQ%2BM8G9sGE6x%2F4WcCMo4C3&pos=0&wd=%E7%BE%8E%E5%9B%BD+%E4%B8%AD%E6%9C%9F%E9%80%89%E4%B8%BE+%E7%BB%93%E6%9E%9C",
+       "published": "2026-11-06T19:44:35",
+       "engines": [
+        "chinaso news"
+       ],
+       "good": true
+      },
+      {
+       "title": "美国中期选举的结果陆续开票。",
+       "url": "https://www.chinaso.com/link?url=RVQJnCWogMX1bP%2FnXr3DXGgAK19VrbaR3h1jmPLEKOeyalKPMyHthHqOcQV24vxQ&pos=1&wd=%E7%BE%8E%E5%9B%BD+%E4%B8%AD%E6%9C%9F%E9%80%89%E4%B8%BE+%E7%BB%93%E6%9E%9C",
+       "published": "2026-11-06T19:06:57",
+       "engines": [
+        "chinaso news"
+       ],
+       "good": true
+      },
+      {
+       "title": "美国中期选举结果对纯碱期货影响",
+       "url": "https://www.chinaso.com/link?url=koWOJ%2Bfw4SmjW47R9tQkLM6WqnHIO3a3TAnC8yfqz74zTwDbmjYYiKduZEEPqpV5S1vkbZ7oBUYp7%2FEnAxBswcwt2logIt4dZPjuK%2FAGAJfJ71plZprejHArYnnAlp0I&pos=2&wd=%E7%BE%8E%E5%9B%BD+%E4%B8%AD%E6%9C%9F%E9%80%89%E4%B8%BE+%E7%BB%93%E6%9E%9C",
+       "published": "2026-11-06T00:45:00",
+       "engines": [
+        "chinaso news"
+       ],
+       "good": false
+      },
+      {
+       "title": "美国中期选举结果出炉，多国相继作出表态",
+       "url": "https://www.chinaso.com/link?url=RVQJnCWogMX1bP%2FnXr3DXE3sb1E8QQGhEuEx7MZFnIQvEMEaiqZPngLAGgC638z7&pos=3&wd=%E7%BE%8E%E5%9B%BD+%E4%B8%AD%E6%9C%9F%E9%80%89%E4%B8%BE+%E7%BB%93%E6%9E%9C",
+       "published": "2026-11-07T02:10:26",
+       "engines": [
+        "chinaso news"
+       ],
+       "good": true
+      },
+      {
+       "title": "美国中期选举结果引发AI监管担忧 �...",
+       "url": "https://www.chinaso.com/link?url=RVQJnCWogMX1bP%2FnXr3DXHTvpM%2FC%2FW2PJCcY78Eo1QW%2B%2FkmDa9g6yDguYwzuAp2WoFIHgOp8HN2aB7k4N4qhTA%3D%3D&pos=4&wd=%E7%BE%8E%E5%9B%BD+%E4%B8%AD%E6%9C%9F%E9%80%89%E4%B8%BE+%E7%BB%93%E6%9E%9C",
+       "published": "2026-11-06T12:32:59",
+       "engines": [
+        "chinaso news"
+       ],
+       "good": false
+      }
+     ],
+     "good": 3,
+     "error": null
+    }
+   ]
+  },
+  {
+   "summary": {
+    "name": "sina",
+    "good_of_5_each": "10/60",
+    "pct": 17,
+    "en": "3/40",
+    "zh": "7/20",
+    "empty": 2,
+    "errors": 0
+   },
+   "rows": [
+    {
+     "lang": "en",
+     "query": "important technology news November 7 2026 today",
+     "range": "day",
+     "results": [],
+     "good": 0,
+     "error": null
+    },
+    {
+     "lang": "en",
+     "query": "technology news November 7 2026 AI cybersecurity semiconductor",
+     "range": "day",
+     "results": [],
+     "good": 0,
+     "error": null
+    },
+    {
+     "lang": "en",
+     "query": "AI news this week",
+     "range": "week",
+     "results": [
+      {
+       "title": "Susan教英语启蒙week3 窝窝2y1m绘本讨论与日常口语",
+       "url": "https://k.sina.com.cn/article_7811157920_m1d194cfa003301dar6.html?from=pcsearch",
+       "published": null,
+       "engines": [
+        "sina"
+       ],
+       "good": false
+      },
+      {
+       "title": "Pooh Kritin亮相ELLE Fashion Week 2026",
+       "url": "https://k.sina.com.cn/article_7811157903_m1d194cf8f03301td3e.html?from=pcsearch",
+       "published": null,
+       "engines": [
+        "sina"
+       ],
+       "good": false
+      },
+      {
+       "title": "井桁弘惠出演ロッテKARADA WEEK联名广告",
+       "url": "https://k.sina.com.cn/article_2265198580_m87042ff403303mfds.html?from=pcsearch",
+       "published": null,
+       "engines": [
+        "sina"
+       ],
+       "good": false
+      },
+      {
+       "title": "RAYE 更新 IG “CANT HANDLE THIS BIRTHDAY WEEK ”",
+       "url": "https://k.sina.com.cn/article_7811247772_m1d1962e9c03301wvbo.html?from=pcsearch",
+       "published": null,
+       "engines": [
+        "sina"
+       ],
+       "good": false
+      },
+      {
+       "title": "李瑞官推更新 IVE's WEEK DAY 5 公开个人IG账号",
+       "url": "https://k.sina.com.cn/article_7469398565_m1bd35fa2503301gioa.html?from=pcsearch",
+       "published": null,
+       "engines": [
+        "sina"
+       ],
+       "good": false
+      }
+     ],
+     "good": 0,
+     "error": null
+    },
+    {
+     "lang": "en",
+     "query": "federal reserve interest rate decision",
+     "range": "month",
+     "results": [
+      {
+       "title": "Arrow Reserve Capital Management ETF收跌0.03%，成交额5.35万美元",
+       "url": "https://finance.sina.com.cn/stock/usstock/notice/2026-11-07/doc-inixwhsk8417569.shtml?from=pcsearch",
+       "published": null,
+       "engines": [
+        "sina"
+       ],
+       "good": false
+      },
+      {
+       "title": "Crown Reserve Acquisition收涨0.1%，成交额6337美元",
+       "url": "https://finance.sina.com.cn/stock/usstock/notice/2026-11-05/doc-inixrunh9574625.shtml?from=pcsearch",
+       "published": null,
+       "engines": [
+        "sina"
+       ],
+       "good": false
+      },
+      {
+       "title": "Arrow Reserve Capital Management ETF收涨0.02%，成交额2.17万美元",
+       "url": "https://finance.sina.com.cn/stock/usstock/notice/2026-11-03/doc-inixmhhh2357457.shtml?from=pcsearch",
+       "published": null,
+       "engines": [
+        "sina"
+       ],
+       "good": false
+      },
+      {
+       "title": "Arrow Reserve Capital Management ETF收涨0.01%，成交额1.59万美元",
+       "url": "https://finance.sina.com.cn/stock/usstock/notice/2026-10-30/doc-iniwxzqf8402164.shtml?from=pcsearch",
+       "published": null,
+       "engines": [
+        "sina"
+       ],
+       "good": false
+      },
+      {
+       "title": "Arrow Reserve Capital Management ETF收平，成交额1.08万美元",
+       "url": "https://finance.sina.com.cn/stock/usstock/notice/2026-10-22/doc-inivzytw7999582.shtml?from=pcsearch",
+       "published": null,
+       "engines": [
+        "sina"
+       ],
+       "good": false
+      }
+     ],
+     "good": 0,
+     "error": null
+    },
+    {
+     "lang": "en",
+     "query": "nba news today",
+     "range": "day",
+     "results": [
+      {
+       "title": "马斯克删除Vote red today帖文 德州翻蓝后",
+       "url": "https://k.sina.com.cn/article_1788911247_m6aa09e8f03301mzyy.html?from=pcsearch",
+       "published": null,
+       "engines": [
+        "sina"
+       ],
+       "good": false
+      },
+      {
+       "title": "马斯克删掉高喊Vote red today帖子",
+       "url": "https://t.cj.sina.com.cn/articles/view/1788911247/m6aa09e8f05301n08w?from=pcsearch",
+       "published": null,
+       "engines": [
+        "sina"
+       ],
+       "good": false
+      },
+      {
+       "title": "德州翻蓝后马斯克删除Vote red today帖子",
+       "url": "https://k.sina.com.cn/article_7879924057_m1d5ae195903301s0c2.html?from=pcsearch",
+       "published": null,
+       "engines": [
+        "sina"
+       ],
+       "good": false
+      },
+      {
+       "title": "Marcelo Garcia and Thalison training today in our Comp Class.",
+       "url": "https://video.sina.com.cn/p/finance/2026-11-05/detail-inixruna5714203.d.html?from=pcsearch",
+       "published": null,
+       "engines": [
+        "sina"
+       ],
+       "good": false
+      },
+      {
+       "title": "not today 261031 BTS世巡 巴西圣保罗演唱会DAY3 ‪",
+       "url": "https://k.sina.com.cn/article_3894844112_me8269ad003301gg76.html?from=pcsearch",
+       "published": null,
+       "engines": [
+        "sina"
+       ],
+       "good": false
+      }
+     ],
+     "good": 0,
+     "error": null
+    },
+    {
+     "lang": "en",
+     "query": "US midterm election results",
+     "range": "week",
+     "results": [
+      {
+       "title": "BBC US Midterm Elections 2026|20261104",
+       "url": "https://video.sina.com.cn/p/finance/2026-11-04/detail-inixqnsv8016188.d.html?from=pcsearch",
+       "published": null,
+       "engines": [
+        "sina"
+       ],
+       "good": true
+      },
+      {
+       "title": "Fox News 2026 Midterm Elections|20261105",
+       "url": "https://video.sina.com.cn/p/finance/2026-11-07/detail-inixvruu5455089.d.html?from=pcsearch",
+       "published": null,
+       "engines": [
+        "sina"
+       ],
+       "good": true
+      },
+      {
+       "title": "星条红与皇室蓝借midterm热度发幕后视频，网友吐槽应直接给续集定档，今年播不了要明年初",
+       "url": "https://k.sina.com.cn/article_7879923747_m1d5ae182303301f3va.html?from=pcsearch",
+       "published": null,
+       "engines": [
+        "sina"
+       ],
+       "good": false
+      },
+      {
+       "title": "特朗普的中期后伊朗计划是失败者第14集 Trump’s Post-Midterm Iran Plan Is a Lose",
+       "url": "https://video.sina.com.cn/p/finance/2026-11-04/detail-inixprpe1767699.d.html?from=pcsearch",
+       "published": null,
+       "engines": [
+        "sina"
+       ],
+       "good": false
+      },
+      {
+       "title": "week6幸福+准备开始midterm啦啦啦啦",
+       "url": "https://k.sina.com.cn/article_7879923681_m1d5ae17e1033050gcc.html?from=pcsearch",
+       "published": null,
+       "engines": [
+        "sina"
+       ],
+       "good": false
+      }
+     ],
+     "good": 2,
+     "error": null
+    },
+    {
+     "lang": "en",
+     "query": "stock market news today",
+     "range": "day",
+     "results": [
+      {
+       "title": "马斯克删除Vote red today帖文 德州翻蓝后",
+       "url": "https://k.sina.com.cn/article_1788911247_m6aa09e8f03301mzyy.html?from=pcsearch",
+       "published": null,
+       "engines": [
+        "sina"
+       ],
+       "good": false
+      },
+      {
+       "title": "马斯克删掉高喊Vote red today帖子",
+       "url": "https://t.cj.sina.com.cn/articles/view/1788911247/m6aa09e8f05301n08w?from=pcsearch",
+       "published": null,
+       "engines": [
+        "sina"
+       ],
+       "good": false
+      },
+      {
+       "title": "德州翻蓝后马斯克删除Vote red today帖子",
+       "url": "https://k.sina.com.cn/article_7879924057_m1d5ae195903301s0c2.html?from=pcsearch",
+       "published": null,
+       "engines": [
+        "sina"
+       ],
+       "good": false
+      },
+      {
+       "title": "Marcelo Garcia and Thalison training today in our Comp Class.",
+       "url": "https://video.sina.com.cn/p/finance/2026-11-05/detail-inixruna5714203.d.html?from=pcsearch",
+       "published": null,
+       "engines": [
+        "sina"
+       ],
+       "good": false
+      },
+      {
+       "title": "not today 261031 BTS世巡 巴西圣保罗演唱会DAY3 ‪",
+       "url": "https://k.sina.com.cn/article_3894844112_me8269ad003301gg76.html?from=pcsearch",
+       "published": null,
+       "engines": [
+        "sina"
+       ],
+       "good": false
+      }
+     ],
+     "good": 0,
+     "error": null
+    },
+    {
+     "lang": "en",
+     "query": "boston local news",
+     "range": "week",
+     "results": [
+      {
+       "title": "王俊杰首发27分钟得7分6篮板2助攻，Umass 55比71不敌Boston College",
+       "url": "https://k.sina.com.cn/article_7879923906_m1d5ae18c203301me1i.html?from=pcsearch",
+       "published": null,
+       "engines": [
+        "sina"
+       ],
+       "good": true
+      },
+      {
+       "title": "Boston Whaler 170 Montauk 二手出售 25万英镑",
+       "url": "https://video.sina.com.cn/p/finance/2026-10-10/detail-iniushry0893142.d.html?from=pcsearch",
+       "published": null,
+       "engines": [
+        "sina"
+       ],
+       "good": false
+      },
+      {
+       "title": "纽约球迷赛后高喊We want Boston",
+       "url": "https://k.sina.com.cn/article_2804690524_ma72c2e5c053014h8y.html?from=pcsearch",
+       "published": null,
+       "engines": [
+        "sina"
+       ],
+       "good": false
+      },
+      {
+       "title": "凯尔特人主场大比分领先，球迷高呼We want Boston回应费城",
+       "url": "https://k.sina.com.cn/article_2804690524_ma72c2e5c053014gym.html?from=pcsearch",
+       "published": null,
+       "engines": [
+        "sina"
+       ],
+       "good": false
+      },
+      {
+       "title": "轩竹生物-B早盘涨超11% 与Boston Oncology就轩悦宁、轩菲宁订立许可及供货协议",
+       "url": "https://finance.sina.com.cn/stock/hkstock/marketalerts/2026-04-10/doc-inhtymqk0394752.shtml?from=pcsearch",
+       "published": null,
+       "engines": [
+        "sina"
+       ],
+       "good": false
+      }
+     ],
+     "good": 1,
+     "error": null
+    },
+    {
+     "lang": "zh",
+     "query": "科技新闻 2026年11月7日",
+     "range": "day",
+     "results": [
+      {
+       "title": "视频丨机器人志愿者+AI工作站 进博会新闻中心科技感十足",
+       "url": "https://finance.sina.com.cn/jjxw/2026-11-03/doc-inixmswa2304946.shtml?from=pcsearch",
+       "published": null,
+       "engines": [
+        "sina"
+       ],
+       "good": false
+      },
+      {
+       "title": "11月5日雄安新闻第三届京津冀老字号博览会与青少年科技创新大赛成功举办",
+       "url": "https://t.cj.sina.com.cn/articles/view/7879924060/m1d5ae195c03302dgs4?from=pcsearch",
+       "published": null,
+       "engines": [
+        "sina"
+       ],
+       "good": false
+      },
+      {
+       "title": "11月1日科技新闻：苹果AI进中国、Meta人形机器人、微软250亿美元债",
+       "url": "https://video.sina.com.cn/p/finance/2026-11-02/detail-inixhhcs3337421.d.html?from=pcsearch",
+       "published": null,
+       "engines": [
+        "sina"
+       ],
+       "good": false
+      },
+      {
+       "title": "11月2日A股早新闻：外围科技暴跌+PMI破线，三部门盘前护盘能托住吗？",
+       "url": "https://video.sina.com.cn/p/finance/2026-11-02/detail-inixhwzh7299863.d.html?from=pcsearch",
+       "published": null,
+       "engines": [
+        "sina"
+       ],
+       "good": false
+      },
+      {
+       "title": "【直播预告】10月9日10时，山西将举行“开局起步‘十五五’”系列主题第十八场新闻发布会（省科技厅专场）",
+       "url": "https://finance.sina.com.cn/jjxw/2026-10-08/doc-iniupafi7735305.shtml?from=pcsearch",
+       "published": null,
+       "engines": [
+        "sina"
+       ],
+       "good": false
+      }
+     ],
+     "good": 0,
+     "error": null
+    },
+    {
+     "lang": "zh",
+     "query": "今日 科技新闻 2026年11月7日",
+     "range": "day",
+     "results": [
+      {
+       "title": "视频丨机器人志愿者+AI工作站 进博会新闻中心科技感十足",
+       "url": "https://finance.sina.com.cn/jjxw/2026-11-03/doc-inixmswa2304946.shtml?from=pcsearch",
+       "published": null,
+       "engines": [
+        "sina"
+       ],
+       "good": false
+      },
+      {
+       "title": "11月5日雄安新闻第三届京津冀老字号博览会与青少年科技创新大赛成功举办",
+       "url": "https://t.cj.sina.com.cn/articles/view/7879924060/m1d5ae195c03302dgs4?from=pcsearch",
+       "published": null,
+       "engines": [
+        "sina"
+       ],
+       "good": false
+      },
+      {
+       "title": "11月1日科技新闻：苹果AI进中国、Meta人形机器人、微软250亿美元债",
+       "url": "https://video.sina.com.cn/p/finance/2026-11-02/detail-inixhhcs3337421.d.html?from=pcsearch",
+       "published": null,
+       "engines": [
+        "sina"
+       ],
+       "good": false
+      },
+      {
+       "title": "11月2日A股早新闻：外围科技暴跌+PMI破线，三部门盘前护盘能托住吗？",
+       "url": "https://video.sina.com.cn/p/finance/2026-11-02/detail-inixhwzh7299863.d.html?from=pcsearch",
+       "published": null,
+       "engines": [
+        "sina"
+       ],
+       "good": false
+      },
+      {
+       "title": "【直播预告】10月9日10时，山西将举行“开局起步‘十五五’”系列主题第十八场新闻发布会（省科技厅专场）",
+       "url": "https://finance.sina.com.cn/jjxw/2026-10-08/doc-iniupafi7735305.shtml?from=pcsearch",
+       "published": null,
+       "engines": [
+        "sina"
+       ],
+       "good": false
+      }
+     ],
+     "good": 0,
+     "error": null
+    },
+    {
+     "lang": "zh",
+     "query": "人工智能 最新消息",
+     "range": "week",
+     "results": [
+      {
+       "title": "美国中期选举最新消息！AI算力主线强势爆发，创业板人工智能ETF（159363）标的指数陡然拉升7%",
+       "url": "https://finance.sina.com.cn/money/fund/etf/2026-11-04/doc-inixqaaz8088217.shtml?from=pcsearch",
+       "published": null,
+       "engines": [
+        "sina"
+       ],
+       "good": true
+      },
+      {
+       "title": "我国人工智能模型最新消息",
+       "url": "https://finance.sina.com.cn/wm/2026-07-17/doc-iniicuss4073164.shtml?from=pcsearch",
+       "published": null,
+       "engines": [
+        "sina"
+       ],
+       "good": false
+      },
+      {
+       "title": "国家发改委最新消息！事关宏观政策、人工智能→",
+       "url": "https://finance.sina.com.cn/wm/2025-09-29/doc-infseqei1577923.shtml?from=pcsearch",
+       "published": null,
+       "engines": [
+        "sina"
+       ],
+       "good": false
+      },
+      {
+       "title": "创业板人工智能ETF华宝（159363）放量飙涨超3%！最新消息：Blackwell已全面投入生产",
+       "url": "https://finance.sina.com.cn/money/fund/etf/2025-01-07/doc-ineecrwv2112438.shtml?from=pcsearch",
+       "published": null,
+       "engines": [
+        "sina"
+       ],
+       "good": false
+      },
+      {
+       "title": "最新消息： 财政部长贝森特表示，美国即将成为人工智能超级大国",
+       "url": "https://k.sina.com.cn/article_7295052889_1b2d1ac59040016fn4.html?from=pcsearch",
+       "published": null,
+       "engines": [
+        "sina"
+       ],
+       "good": true
+      }
+     ],
+     "good": 2,
+     "error": null
+    },
+    {
+     "lang": "zh",
+     "query": "美国 中期选举 结果",
+     "range": "week",
+     "results": [
+      {
+       "title": "美国：中期选举结果引发AI监管担忧 纽约股市暴跌",
+       "url": "https://cj.sina.com.cn/articles/view/6145283913/m16e49974902002i4ee?from=pcsearch",
+       "published": null,
+       "engines": [
+        "sina"
+       ],
+       "good": true
+      },
+      {
+       "title": "中期选举结果将加剧美国党争极化",
+       "url": "https://k.sina.com.cn/article_3266943013_mc2b9982503301rtp4.html?from=pcsearch",
+       "published": null,
+       "engines": [
+        "sina"
+       ],
+       "good": true
+      },
+      {
+       "title": "美国中期选举结果出炉，特朗普：祝贺民主党人， 特朗普",
+       "url": "https://k.sina.com.cn/article_7295052901_m1b2d1ac6503302xcv4.html?from=pcsearch",
+       "published": null,
+       "engines": [
+        "sina"
+       ],
+       "good": true
+      },
+      {
+       "title": "美国中期选举结果及其影响会如何",
+       "url": "https://k.sina.com.cn/article_7879923852_m1d5ae188c03301p2x4.html?from=pcsearch",
+       "published": null,
+       "engines": [
+        "sina"
+       ],
+       "good": true
+      },
+      {
+       "title": "特朗普美国中期选举特赦",
+       "url": "https://k.sina.com.cn/article_7879923852_m1d5ae188c03301p6a0.html?from=pcsearch",
+       "published": null,
+       "engines": [
+        "sina"
+       ],
+       "good": true
+      }
+     ],
+     "good": 5,
+     "error": null
+    }
+   ]
+  },
+  {
+   "summary": {
+    "name": "wikinews",
+    "good_of_5_each": "0/60",
+    "pct": 0,
+    "en": "0/40",
+    "zh": "0/20",
+    "empty": 12,
+    "errors": 0
+   },
+   "rows": [
+    {
+     "lang": "en",
+     "query": "important technology news November 7 2026 today",
+     "range": "day",
+     "results": [],
+     "good": 0,
+     "error": null
+    },
+    {
+     "lang": "en",
+     "query": "technology news November 7 2026 AI cybersecurity semiconductor",
+     "range": "day",
+     "results": [],
+     "good": 0,
+     "error": null
+    },
+    {
+     "lang": "en",
+     "query": "AI news this week",
+     "range": "week",
+     "results": [],
+     "good": 0,
+     "error": null
+    },
+    {
+     "lang": "en",
+     "query": "federal reserve interest rate decision",
+     "range": "month",
+     "results": [],
+     "good": 0,
+     "error": null
+    },
+    {
+     "lang": "en",
+     "query": "nba news today",
+     "range": "day",
+     "results": [],
+     "good": 0,
+     "error": null
+    },
+    {
+     "lang": "en",
+     "query": "US midterm election results",
+     "range": "week",
+     "results": [],
+     "good": 0,
+     "error": null
+    },
+    {
+     "lang": "en",
+     "query": "stock market news today",
+     "range": "day",
+     "results": [],
+     "good": 0,
+     "error": null
+    },
+    {
+     "lang": "en",
+     "query": "boston local news",
+     "range": "week",
+     "results": [],
+     "good": 0,
+     "error": null
+    },
+    {
+     "lang": "zh",
+     "query": "科技新闻 2026年11月7日",
+     "range": "day",
+     "results": [],
+     "good": 0,
+     "error": null
+    },
+    {
+     "lang": "zh",
+     "query": "今日 科技新闻 2026年11月7日",
+     "range": "day",
+     "results": [],
+     "good": 0,
+     "error": null
+    },
+    {
+     "lang": "zh",
+     "query": "人工智能 最新消息",
+     "range": "week",
+     "results": [],
+     "good": 0,
+     "error": null
+    },
+    {
+     "lang": "zh",
+     "query": "美国 中期选举 结果",
+     "range": "week",
+     "results": [],
+     "good": 0,
+     "error": null
+    }
+   ]
+  }
+ ]
+}

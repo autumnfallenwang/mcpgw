@@ -25,9 +25,12 @@ export const SEARCH_PROVIDER = env.SEARCH_PROVIDER ?? "searxng";
 export const SEARXNG_URL = env.SEARXNG_URL ?? "http://searxng.mcpgw.svc.cluster.local:8080";
 export const SEARCH_CACHE_TTL_S = Number(env.SEARCH_CACHE_TTL_S ?? 600);
 export const SEARCH_CONCURRENCY = Number(env.SEARCH_CONCURRENCY ?? 4);
+/** The least time between searches, across all callers. Waiting calls queue. */
+export const SEARCH_MIN_GAP_MS = Number(env.SEARCH_MIN_GAP_MS ?? 2_000);
 
 export const FETCH_CACHE_TTL_S = Number(env.FETCH_CACHE_TTL_S ?? 600);
 export const FETCH_CONCURRENCY = Number(env.FETCH_CONCURRENCY ?? 8);
+export const FETCH_MIN_GAP_MS = Number(env.FETCH_MIN_GAP_MS ?? 200);
 export const FETCH_TIMEOUT_MS = Number(env.FETCH_TIMEOUT_MS ?? 15_000);
 export const FETCH_MAX_BYTES = Number(env.FETCH_MAX_BYTES ?? 5 * 1024 * 1024);
 export const FETCH_MAX_URL_CHARS = Number(env.FETCH_MAX_URL_CHARS ?? 250);

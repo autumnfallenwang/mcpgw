@@ -166,8 +166,12 @@ describe("the 2026-07-28 protocol, as Claude Code speaks it", () => {
       headersFor("tools/list"),
       rpc("tools/list", { _meta: meta }, 2),
     );
-    const tools = rpcBody(String(list.headers["content-type"]), list.body).result.tools;
+    const listed = rpcBody(String(list.headers["content-type"]), list.body).result;
+    const tools = listed.tools;
     expect(tools.map((t: { name: string }) => t.name)).toContain("web_search");
+    // The SDK's default of 0 tells every client to fetch the same two tools again each time.
+    expect(listed.ttlMs).toBe(300_000);
+    expect(listed.cacheScope).toBe("public");
 
     const call = await send(
       "POST",
