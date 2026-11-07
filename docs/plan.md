@@ -122,7 +122,7 @@ couldn't cover: Traefik, the real hostname, and a second device.
   families searched, read pages and cited them; a `web_fetch` of a URL from no allowed source was refused before reaching
   mcpgw
 - [x] On the cluster: deployed, migrated with the data intact, and homestorm's real client reaches mcpgw from its pod
-- [ ] **By the user:** a real meeting on the cluster, which needs the admin login
+- [x] **A real meeting on the cluster,** with the user signed in: run on 2026-11-07, and again after the fixes in M10
 
 ### M6: Harnesses use it ↩️
 
@@ -215,6 +215,25 @@ DuckDuckGo drew 3 CAPTCHAs during it, and the score held. The answer scores abov
 - **JavaScript rendering:** it means running a heavy browser for a few pages, and Anthropic's own fetch tool doesn't do it.
 - **Disguising fetches as a browser:** sites that refuse mcpgw stay refused. Where one offers an official API, such as the npm
   registry, a model can use that instead.
+
+### M10: First real use 🔄
+
+The first real meeting on the cluster, 3 seats on all three model families over 2 rounds, worked end to end, including a PDF, a
+site that refuses mcpgw and a refused cluster address. It also showed what the tests hadn't:
+
+- [x] **Bursts:** one round sent 6 searches in 3 s, and DuckDuckGo answered with CAPTCHAs. Searches now run 2 s apart across all
+  callers, and a burst waits rather than failing (design §5.1)
+- [x] **News:** mostly off-topic, because a time range made SearXNG skip every news engine but Bing News. News sends no range now,
+  and Brave News replaced DuckDuckGo News: 67% to 80% good results on a new judge-scored test
+  ([ADR 0012](adr/0012-search-engine-mix.md))
+- [x] **`tools/list`** says it may be kept for 5 minutes, rather than the SDK's 0
+- [x] **In homestorm, on the user's request:** 6 web calls per turn instead of 4, since every answer used all 4, and links that stop
+  at Chinese punctuation
+- [x] **Deployed and retested:** the same meeting again, in which all three seats found real tech news and two read an article
+- [ ] **Alert when engines fail,** which needs a change in arch-infra
+- [ ] **Measure again once DuckDuckGo and Brave recover:** the 2 s gap was a judgment call, because DuckDuckGo answered CAPTCHA
+  throughout, even at one search a minute
+- [ ] **Tune from the logs** of more real meetings
 
 ## Future work
 

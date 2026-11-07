@@ -4,6 +4,30 @@ A dated log of what was done and decided, newest first. The plan and milestone s
 
 ---
 
+## 2026-11-07
+
+- **The first real meeting on the cluster** worked end to end: 3 seats, one from each model family, over 2 rounds, with a search, a PDF, a site that refuses
+  mcpgw, and a cluster address refused. It also found three problems:
+  - **One round sends a burst:** 6 searches in 3 s, and DuckDuckGo answered with CAPTCHAs. Searches are now spaced 2 s apart.
+  - **News came back mostly off-topic.** Given a time range, SearXNG skips every engine without time-range support, which left Bing
+    News alone. News now sends no range, with Brave News instead of DuckDuckGo News: 67% to 80% on the new `news.mjs`.
+  - **Every answer used all 4 web calls.** homestorm now allows 6, and its links stop at Chinese punctuation.
+- **Deployed and retested** (mcpgw `6a0e823`, homestorm `d9b9072`):
+  - **News:** all three seats gave real tech news, and two read an article, where before they gave headlines that were barely tech.
+  - **Links:** a link written next to Chinese punctuation now stops where it should.
+  - **Slower:** searches waited up to 11 s for their turn, and answers took 24 to 43 s instead of 10 to 18.
+- **Still not right:**
+  - **DuckDuckGo:** it has answered CAPTCHA on nearly every search since the first meeting, even at one search a minute. Yahoo and
+    Bing carry general search.
+  - **Brave News:** it refused with "too many requests" after the day's testing.
+  - **Bing News:** it sometimes fails to parse.
+  - **GPT-5.6 Luna:** it read PostgreSQL's draft 19.0 release notes as a release, both times. The page is the project's own.
+- **Corrections:**
+  - **DuckDuckGo suspension:** a CAPTCHA doesn't suspend it. SearXNG asks again on every search.
+  - **The cause of weak news:** DuckDuckGo News never ran on searches with a time range.
+- **A cleanup mistake:** a `pkill -f` pattern meant for a local dev server also matched seven production APIs, because k3s
+  containers run as the same user on arch. They were stopped twice, about 12 s each time, and Kubernetes restarted them all.
+
 ## 2026-11-06
 
 - **M9 deployed on the user's OK,** as image `f6e747a`. From homestorm's pod, a search, a PDF and a normal page worked, and a private
