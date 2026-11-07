@@ -251,10 +251,12 @@ describe("SearXNG provider, against a fake SearXNG", () => {
   let base: string;
   let reply: { status: number; body: unknown; delayMs?: number };
   let lastUrl: URL;
+  let lastCookie: string | undefined;
 
   beforeAll(async () => {
     server = createServer((req, res) => {
       lastUrl = new URL(req.url ?? "/", "http://x");
+      lastCookie = req.headers.cookie;
       if (lastUrl.pathname === "/healthz") {
         res.writeHead(reply.status).end("OK");
         return;
@@ -273,6 +275,104 @@ describe("SearXNG provider, against a fake SearXNG", () => {
   });
 
   const signal = () => AbortSignal.timeout(1000);
+
+  it("leaves out an engine that refused, until it returns results again", async () => {
+    const provider = createSearxngProvider(base);
+    const hit = (engine: string) => ({
+      title: "A",
+      url: `https://${engine}.example/`,
+      engines: [engine],
+    });
+    reply = {
+      status: 200,
+      body: {
+        results: [hit("yahoo")],
+        unresponsive_engines: [
+          ["duckduckgo", "CAPTCHA"],
+          ["bing news", "too many requests"],
+          ["wikipedia", "timeout"],
+        ],
+      },
+    };
+    await provider.search(QUERY, signal());
+    expect(lastCookie).toBeUndefined();
+    reply = { status: 200, body: { results: [hit("yahoo")], unresponsive_engines: [] } };
+    await provider.search(QUERY, signal());
+    // A timeout isn't a refusal, so wikipedia is still asked.
+    expect(lastCookie).toContain("duckduckgo__general");
+    expect(lastCookie).toContain("bing news__news");
+    expect(lastCookie).not.toContain("wikipedia");
+    expect(lastCookie).toMatch(/^disabled_engines="[^"]+"$/);
+    const issues = provider.engineIssues?.() ?? [];
+    expect(issues.find((i) => i.engine === "duckduckgo")?.pausedUntil).toBeDefined();
+    expect(issues.find((i) => i.engine === "wikipedia")?.pausedUntil).toBeUndefined();
+
+    reply = { status: 200, body: { results: [hit("duckduckgo")], unresponsive_engines: [] } };
+    await provider.search(QUERY, signal());
+    await provider.search(QUERY, signal());
+    expect(lastCookie).not.toContain("duckduckgo");
+    expect(lastCookie).toContain("bing news__news");
+  });
+
+  it("leaves out an engine that failed 3 times in a row, but not one that failed once", async () => {
+    const provider = createSearxngProvider(base);
+    const answer = (results: string[], failing: [string, string][]) => ({
+      status: 200,
+      body: {
+        results: results.map((e) => ({ title: "A", url: `https://${e}.example/`, engines: [e] })),
+        unresponsive_engines: failing,
+      },
+    });
+    reply = answer(
+      ["yahoo"],
+      [
+        ["bing", "timeout"],
+        ["duckduckgo", "timeout"],
+      ],
+    );
+    await provider.search(QUERY, signal());
+    reply = answer(["bing"], [["duckduckgo", "Suspended: timeout"]]);
+    await provider.search(QUERY, signal());
+    reply = answer(
+      ["yahoo"],
+      [
+        ["bing", "timeout"],
+        ["duckduckgo", "timeout"],
+      ],
+    );
+    await provider.search(QUERY, signal());
+    reply = answer(["yahoo"], []);
+    await provider.search(QUERY, signal());
+    expect(lastCookie).toContain("duckduckgo__general");
+    // Bing answered in between, so its two timeouts weren't in a row.
+    expect(lastCookie).not.toContain("bing__");
+  });
+
+  it("doubles the pause each time an engine refuses again, up to an hour", async () => {
+    vi.useFakeTimers({ toFake: ["Date"] });
+    try {
+      const provider = createSearxngProvider(base);
+      const refuse = {
+        status: 200,
+        body: {
+          results: [{ title: "A", url: "https://a.example/", engines: ["yahoo"] }],
+          unresponsive_engines: [["duckduckgo", "CAPTCHA"]],
+        },
+      };
+      const paused = () =>
+        (Date.parse(provider.engineIssues?.()[0]?.pausedUntil ?? "") - Date.now()) / 60_000;
+      const minutes: number[] = [];
+      for (let n = 0; n < 6; n++) {
+        reply = refuse;
+        await provider.search(QUERY, signal());
+        minutes.push(Math.round(paused()));
+        vi.setSystemTime(Date.now() + 61 * 60_000);
+      }
+      expect(minutes).toEqual([5, 10, 20, 40, 60, 60]);
+    } finally {
+      vi.useRealTimers();
+    }
+  });
 
   it("checks news dates itself, since a time range would make SearXNG skip most news engines", async () => {
     const daysAgo = (days: number) => new Date(Date.now() - days * 86_400_000).toISOString();

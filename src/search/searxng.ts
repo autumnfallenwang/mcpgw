@@ -1,12 +1,13 @@
 import { z } from "zod";
 import { log } from "../lib/logger.js";
 import { ToolFailure } from "../tools/result.js";
-import type {
-  EngineIssue,
-  SearchHit,
-  SearchOutcome,
-  SearchProvider,
-  SearchQuery,
+import {
+  CATEGORIES,
+  type EngineIssue,
+  type SearchHit,
+  type SearchOutcome,
+  type SearchProvider,
+  type SearchQuery,
 } from "./types.js";
 
 const responseSchema = z.object({
@@ -35,6 +36,31 @@ function publishedDay(value: string | null | undefined): string | undefined {
   return day && /^\d{4}-\d{2}-\d{2}$/.test(day) ? day : undefined;
 }
 
+/**
+ * Refusals, as SearXNG reports them. An engine that refuses goes on refusing for a while: DuckDuckGo answered CAPTCHA
+ * on every search for over half an hour, even at one search a minute, and SearXNG asks it again each time, since it
+ * raises the CAPTCHA with no suspension. So mcpgw leaves a refusing engine out, and asking less may help it recover.
+ */
+const REFUSAL = /captcha|too many requests|access denied/i;
+/**
+ * Failures in a row that also count as refusing. Blocked, DuckDuckGo stopped answering CAPTCHA and timed out instead,
+ * adding 5 s to every other search. Three in a row leaves out an engine that has stopped working, but not one that
+ * timed out once.
+ */
+const FAILURES_IN_A_ROW = 3;
+/** How long an engine that refuses is left out. Doubled each time it refuses again, until it next returns results. */
+const PAUSE_FIRST_MS = 5 * 60_000;
+const PAUSE_MAX_MS = 60 * 60_000;
+
+/**
+ * SearXNG's own preference cookie, which names engines to leave out, per category. Quoted, because engine names such
+ * as "bing news" have spaces, and SearXNG read the unquoted form as if nothing were left out.
+ */
+export function disabledEnginesCookie(engines: string[]): string {
+  const pairs = engines.flatMap((e) => CATEGORIES.map((c) => `${e}__${c}`));
+  return `disabled_engines="${pairs.join(",")}"`;
+}
+
 /** A day's slack, since engines date stories in other time zones and a story from last night is still today's news. */
 const RANGE_DAYS = { day: 2, week: 8, month: 32, year: 367 };
 
@@ -45,6 +71,8 @@ function cutoffFor(range: SearchQuery["timeRange"]): number | null {
 export function createSearxngProvider(baseUrl: string): SearchProvider {
   // Only for the status page, so memory is enough: Loki has the history as searxng.error.
   const issues = new Map<string, { reason: string; lastAt: number; count: number }>();
+  const paused = new Map<string, { until: number; ms: number }>();
+  const failuresInARow = new Map<string, number>();
 
   return {
     name: "searxng",
@@ -54,7 +82,15 @@ export function createSearxngProvider(baseUrl: string): SearchProvider {
       const recent: EngineIssue[] = [];
       for (const [engine, issue] of issues) {
         if (issue.lastAt < cutoff) issues.delete(engine);
-        else recent.push({ engine, ...issue, lastAt: new Date(issue.lastAt).toISOString() });
+        else {
+          const until = paused.get(engine)?.until ?? 0;
+          recent.push({
+            engine,
+            ...issue,
+            lastAt: new Date(issue.lastAt).toISOString(),
+            ...(until > Date.now() ? { pausedUntil: new Date(until).toISOString() } : {}),
+          });
+        }
       }
       return recent.sort((a, b) => b.lastAt.localeCompare(a.lastAt));
     },
@@ -74,7 +110,11 @@ export function createSearxngProvider(baseUrl: string): SearchProvider {
 
       let body: z.infer<typeof responseSchema>;
       try {
-        const res = await fetch(url, { signal, headers: { accept: "application/json" } });
+        const now = Date.now();
+        const off = [...paused].filter(([, p]) => p.until > now).map(([engine]) => engine);
+        const headers: Record<string, string> = { accept: "application/json" };
+        if (off.length > 0) headers.cookie = disabledEnginesCookie(off);
+        const res = await fetch(url, { signal, headers });
         if (!res.ok) {
           log.error({ event: "searxng.error", status: res.status }, "search backend error");
           throw new ToolFailure(DOWN_MESSAGE, "error");
@@ -98,6 +138,18 @@ export function createSearxngProvider(baseUrl: string): SearchProvider {
         const seen = issues.get(engine);
         const count = seen && now - seen.lastAt < ISSUE_WINDOW_MS ? seen.count + 1 : 1;
         issues.set(engine, { reason, lastAt: now, count });
+        const failures = (failuresInARow.get(engine) ?? 0) + 1;
+        failuresInARow.set(engine, failures);
+        if (REFUSAL.test(reason) || failures >= FAILURES_IN_A_ROW) {
+          failuresInARow.delete(engine);
+          const before = paused.get(engine);
+          const ms = before ? Math.min(before.ms * 2, PAUSE_MAX_MS) : PAUSE_FIRST_MS;
+          paused.set(engine, { until: now + ms, ms });
+          log.warn(
+            { event: "searxng.engine_paused", engine, reason, minutes: ms / 60_000 },
+            "engine refused, so it's left out for a while",
+          );
+        }
       }
       if (body.unresponsive_engines.length > 0) {
         log.warn(
@@ -108,6 +160,10 @@ export function createSearxngProvider(baseUrl: string): SearchProvider {
 
       const results: SearchHit[] = [];
       for (const r of body.results) {
+        for (const engine of r.engines ?? []) {
+          paused.delete(engine);
+          failuresInARow.delete(engine);
+        }
         if (!r.url || !/^https?:\/\//.test(r.url)) continue;
         const published = publishedDay(r.publishedDate);
         if (newsCutoff && published && Date.parse(published) < newsCutoff) continue;

@@ -219,6 +219,11 @@ Use web_fetch to read a page.
 - **Spacing:** searches run at least 2 s apart across all callers, in the order they arrive, and a burst waits rather than failing. A
   round of a real meeting sent 6 searches in 3 s, and DuckDuckGo answered with CAPTCHAs. A search that would wait over 30 s fails, so
   a runaway caller can't build an endless queue. Answers from the cache don't wait. Fetches run at least 0.2 s apart.
+- **Engines that refuse:** one that answers with a CAPTCHA, "too many requests" or "access denied", or fails 3 searches in a row,
+  is left out for 5 minutes,
+  through SearXNG's own preference cookie, doubling each time it refuses again up to an hour, until it next returns results.
+  DuckDuckGo answered CAPTCHA on every search for over half an hour, even at one search a minute, and SearXNG asks it again each
+  time. Then it timed out instead, adding 5 s to every other search.
 - **Time ranges on news:** SearXNG skips any engine with no time-range support when given a range, and that's nearly every news engine.
   So news searches send no range, and mcpgw drops results dated too long ago. Bing News and Brave News give no dates, so `time_range`
   can't be enforced on their results.
@@ -383,9 +388,12 @@ One JSON object per line, the same shape as llmgw and homestorm (`level`, `time`
 | `tool.call` | `tool`, `client`, `request_id`, `status` (`ok` / `error` / `blocked` / `timeout`), `duration_ms`, `cached`, and `results` (search) or `bytes` and `final_host` (fetch) |
 | `fetch.blocked` | `reason`, `host` |
 | `searxng.error` | `status`, `engine_errors` |
+| `searxng.engine_paused` | `engine`, `reason`, `minutes`: an engine that refused is left out for this long |
 
 - Search queries are logged at `info` (household-internal and useful for debugging). Fetched page text is never
   logged, and neither are full fetch URLs, since a query string can carry private data.
+- **Alerts:** two Grafana rules in [deploy/observability/alerting-rules.yaml](../deploy/observability/alerting-rules.yaml): web search
+  failing, and an engine that keeps refusing. They need pasting into arch-infra, and nothing receives them yet.
 - Query in Loki: `{namespace="mcpgw"} | json | event="tool.call"`. As with llmgw, `req_id` is a JSON field, not a
   Loki label.
 

@@ -28,6 +28,8 @@ export interface EngineIssue {
   reason: string;
   lastAt: string;
   count: number;
+  /** Until when mcpgw leaves it out, if it refused mcpgw rather than just failing. */
+  pausedUntil?: string;
 }
 
 /**

@@ -230,7 +230,8 @@ site that refuses mcpgw and a refused cluster address. It also showed what the t
 - [x] **In homestorm, on the user's request:** 6 web calls per turn instead of 4, since every answer used all 4, and links that stop
   at Chinese punctuation
 - [x] **Deployed and retested:** the same meeting again, in which all three seats found real tech news and two read an article
-- [ ] **Alert when engines fail,** which needs a change in arch-infra
+- [x] **Engines that refuse are left out** for a while, doubling up to an hour, rather than asked on every search
+- [ ] **Alert when engines fail:** the rules are written in `deploy/observability/`, and need pasting into arch-infra
 - [ ] **Measure again once DuckDuckGo and Brave recover:** the 2 s gap was a judgment call, because DuckDuckGo answered CAPTCHA
   throughout, even at one search a minute
 - [ ] **Tune from the logs** of more real meetings

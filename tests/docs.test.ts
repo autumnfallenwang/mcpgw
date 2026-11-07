@@ -122,6 +122,7 @@ describe("/docs with a backend in trouble", () => {
             reason: "<script>alert(1)</script>",
             lastAt: "2026-11-06T04:49:00.000Z",
             count: 3,
+            pausedUntil: "2026-11-06T05:19:00.000Z",
           },
         ],
       }),
@@ -131,6 +132,7 @@ describe("/docs with a backend in trouble", () => {
       expect(res.body).toContain("&lt;script&gt;alert(1)&lt;/script&gt;");
       expect(res.body).toContain("&lt;b&gt;brave&lt;/b&gt;");
       expect(res.body).toContain("2026-11-06 04:49 UTC");
+      expect(res.body).toContain("2026-11-06 05:19 UTC");
       expect(res.body).not.toMatch(/<script/i);
     } finally {
       await app.close();

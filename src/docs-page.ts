@@ -90,6 +90,7 @@ function engineSection(issues: EngineIssue[] | null) {
                   <th>Reason</th>
                   <th>Last failed</th>
                   <th>Times</th>
+                  <th>Left out until</th>
                 </tr>
               </thead>
               <tbody>
@@ -100,6 +101,7 @@ function engineSection(issues: EngineIssue[] | null) {
                       <td>${i.reason}</td>
                       <td>${humanTime(i.lastAt)}</td>
                       <td>${i.count}</td>
+                      <td>${i.pausedUntil ? humanTime(i.pausedUntil) : "Not left out"}</td>
                     </tr>`,
                 )}
               </tbody>
@@ -107,7 +109,9 @@ function engineSection(issues: EngineIssue[] | null) {
           </div>
           <p class="note">
             SearXNG carries on with the other engines, so this doesn't mean search is down. A search
-            only fails when every engine does.
+            only fails when every engine does. An engine that refused mcpgw, with a CAPTCHA or "too many
+            requests", or failed 3 searches in a row, is left out for 5 minutes, doubling each time it
+            refuses again, up to an hour.
           </p>`
     }
     <p class="note">This list resets when mcpgw restarts. Loki keeps the history.</p>`;
@@ -304,6 +308,10 @@ const result = await client.callTool({ name: "web_search", arguments: { query: "
                 <tr>
                   <td>Search engine failures</td>
                   <td><code>{namespace="mcpgw"} | json | event="searxng.error"</code></td>
+                </tr>
+                <tr>
+                  <td>Engines left out after refusing</td>
+                  <td><code>{namespace="mcpgw"} | json | event="searxng.engine_paused"</code></td>
                 </tr>
                 <tr>
                   <td>Refused URLs</td>
