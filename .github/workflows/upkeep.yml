@@ -29,7 +29,7 @@ jobs:
       - name: Write the report
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: node dev/upkeep/report.mjs > report.md
+        run: node dev/upkeep/report.mjs | tee report.md
 
       - name: Open the issue
         if: github.event_name == 'schedule' || inputs.open_issue

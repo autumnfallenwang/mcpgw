@@ -56,11 +56,11 @@ jobs:
               | yq '.spec.source.helm.parameters[] | select(.name == "image.tag") | .value') || DEPLOYED=""
           fi
           echo "Deployed: ${DEPLOYED:-unknown}"
-          # The files deploy/Dockerfile copies, and this workflow. Not knowing what's deployed counts as a change.
+          # The files deploy/Dockerfile copies, and this workflow, which builds them. Not knowing what's deployed counts as a change.
           if [ "$EVENT" != "push" ] || [ -z "$DEPLOYED" ] || ! git cat-file -e "${DEPLOYED}^{commit}" 2>/dev/null; then
             echo "image=true" >> "$GITHUB_OUTPUT"
           elif git diff --name-only "$DEPLOYED" "$GITHUB_SHA" \
-            | grep -qE '^(src/|package\.json$|pnpm-lock\.yaml$|tsconfig\.json$|deploy/Dockerfile$|\.github/workflows/)'; then
+            | grep -qE '^(src/|package\.json$|pnpm-lock\.yaml$|tsconfig\.json$|deploy/Dockerfile$|\.github/workflows/build\.yml$)'; then
             echo "image=true" >> "$GITHUB_OUTPUT"
           else
             echo "image=false" >> "$GITHUB_OUTPUT"
