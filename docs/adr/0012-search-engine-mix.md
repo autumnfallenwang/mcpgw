@@ -93,7 +93,10 @@ results API instead.
 
 - **The scores don't separate the mixes:** Yahoo and Bing alone did as well that day, though they scored 90% on 2026-11-07. What
   differs is which engines keep answering, and a third one that does is what this ADR keeps Bing for.
-- **The cost:** `duckduckgo web` makes two requests a search, so it's 0.2 s slower at the median (0.7 s against 0.5 s).
+- **The cost:** `duckduckgo web` makes two requests a search, so it's 0.2 s slower at the median (0.7 s against 0.5 s). Its parsing
+  errors, 2 a run, were on `site:` searches, which Yahoo answered.
+- **On the cluster,** after the deploy (`results/m11-deployed`): 97% on the topic, 30 of 31 first results, 15 of 15 `site:`, no
+  empty or failed searches and a median of 0.6 s, with `duckduckgo web` in 113 of the results.
 - **GMX goes,** and Brave's general search stays off, because Brave News needs Brave's tolerance more.
 
 **The gap between searches went from 2 s to 1 s** in the same pass. Three bursts of 6 searches at once, the size of a meeting round,

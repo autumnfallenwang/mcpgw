@@ -25,7 +25,15 @@ A dated log of what was done and decided, newest first. The plan and milestone s
 - **5. Alerts reach someone:** not done. There's no channel to send them to, and email was left out by the user's earlier
   decision in arch-infra, so the user picks ntfy, Discord or email.
 - **6. Upkeep comes as an issue** on the 7th of each month, from `dev/upkeep/report.mjs`. Its first run found Biome 2.6.6, now
-  taken, and nothing in SearXNG's 9 newer commits that touches an engine mcpgw uses.
+  taken, and nothing in SearXNG's 9 newer commits that touches an engine mcpgw uses. A run by hand on GitHub wrote the report
+  and skipped the issue, as it should.
+- **Deployed by pushing,** as `14964f7`: CI read the deployed commit from arch-infra, built the image, and GitHub Actions bumped
+  the tag (arch-infra `408fc44`). On the cluster:
+  - **Search:** 97% on the topic, 30 of 31 first results, 15 of 15 `site:`, no empty or failed searches, and a median of 0.6 s.
+    The only engine errors were 2 DuckDuckGo parsing errors on `site:` searches, which Yahoo answered, and one from Wikipedia.
+  - **Pages:** 28 of 36 usable.
+  - **Node.js's download page** reads "Get Node.js® v26.13.0 LTS", and its log line has `thin: true`.
+  - **The status page** says searches run at least 1 second apart.
 
 ## 2026-11-08
 

@@ -247,7 +247,8 @@ The user chose the next steps on 2026-11-07: ship, official APIs, tune from real
   queries had it left out in a meeting. Deployed as `4d0c581` on the user's go
 - [x] **DuckDuckGo through duckduckgo.com,** on the user's go on 2026-11-09: SearXNG's `duckduckgo web` engine in place of
   `duckduckgo`, whose html.duckduckgo.com still answered CAPTCHA. Every mix tried scored 97%, and this one was the only one with no
-  engine refusing ([ADR 0012](adr/0012-search-engine-mix.md))
+  engine refusing ([ADR 0012](adr/0012-search-engine-mix.md)). On the cluster: 97% on the topic, up from 90% on 2026-11-07,
+  and 28 of 36 pages
 - [x] **Searches 1 s apart,** not 2: meeting-sized bursts at 1 s drew no refusals, and a round of 6 searches takes about 6 s
   instead of 11
 - [x] **Dropdowns keep what they show:** Node.js's download page lost its version, the answer to a real question, because
