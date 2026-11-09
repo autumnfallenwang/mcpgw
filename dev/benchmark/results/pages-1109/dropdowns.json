@@ -1,0 +1,727 @@
+{
+ "summary": {
+  "label": "pages-1109",
+  "date": "2026-11-09T06:03:05.058Z",
+  "searches": 31,
+  "on_topic_pct": 0,
+  "on_topic": "0/0",
+  "first_ok": "0/31",
+  "empty": 0,
+  "failed": 31,
+  "median_search_secs": 0,
+  "by_kind": {
+   "docs": "0/0",
+   "debug": "0/0",
+   "fresh": "0/0",
+   "news": "0/0",
+   "everyday": "0/0",
+   "facts": "0/0",
+   "chinese": "0/0",
+   "science": "0/0",
+   "it": "0/0",
+   "operators": "0/0",
+   "longkw": "0/0"
+  },
+  "engines": {},
+  "pages": 36,
+  "usable_pages": 27,
+  "median_fetch_secs": 0.3,
+  "median_link_share_pct": 0,
+  "not_usable": [
+   "github.com/mozilla/readability: The site returned an error (HTTP 504). Try a",
+   "reddit.com/r/selfhosted/: 101 chars",
+   "x.com/AnthropicAI: 241 chars",
+   "youtube.com/watch?v=dQw4w9WgXcQ: 101 chars",
+   "medium.com/@karpathy/software-2-0-: This site refused the request (HTTP 403). Do",
+   "apnews.com/: This site refused the request (HTTP 403). Do",
+   "allrecipes.com/recipe/10813/best-c: This site refused the request (HTTP 403). Do",
+   "google.com/maps: 101 chars",
+   "zhihu.com/question/19550256: This site refused the request (HTTP 403). Do"
+  ]
+ },
+ "searches": [
+  {
+   "kind": "docs",
+   "query": "kubernetes networkpolicy documentation",
+   "args": {},
+   "results": [],
+   "onTopic": 0,
+   "firstOk": false,
+   "error": "The search backend isn't answering right now. Try again shortly, or answer without searching and say so.",
+   "cached": null,
+   "secs": 0.1
+  },
+  {
+   "kind": "docs",
+   "query": "hono web framework documentation",
+   "args": {},
+   "results": [],
+   "onTopic": 0,
+   "firstOk": false,
+   "error": "The search backend isn't answering right now. Try again shortly, or answer without searching and say so.",
+   "cached": null,
+   "secs": 0
+  },
+  {
+   "kind": "docs",
+   "query": "python asyncio taskgroup docs",
+   "args": {},
+   "results": [],
+   "onTopic": 0,
+   "firstOk": false,
+   "error": "The search backend isn't answering right now. Try again shortly, or answer without searching and say so.",
+   "cached": null,
+   "secs": 0
+  },
+  {
+   "kind": "docs",
+   "query": "drizzle orm migrations guide",
+   "args": {},
+   "results": [],
+   "onTopic": 0,
+   "firstOk": false,
+   "error": "The search backend isn't answering right now. Try again shortly, or answer without searching and say so.",
+   "cached": null,
+   "secs": 0
+  },
+  {
+   "kind": "docs",
+   "query": "better-auth cookie prefix option",
+   "args": {},
+   "results": [],
+   "onTopic": 0,
+   "firstOk": false,
+   "error": "The search backend isn't answering right now. Try again shortly, or answer without searching and say so.",
+   "cached": null,
+   "secs": 0
+  },
+  {
+   "kind": "docs",
+   "query": "nftables prerouting raw priority",
+   "args": {},
+   "results": [],
+   "onTopic": 0,
+   "firstOk": false,
+   "error": "The search backend isn't answering right now. Try again shortly, or answer without searching and say so.",
+   "cached": null,
+   "secs": 0
+  },
+  {
+   "kind": "debug",
+   "query": "kubernetes pod CrashLoopBackOff how to debug",
+   "args": {},
+   "results": [],
+   "onTopic": 0,
+   "firstOk": false,
+   "error": "The search backend isn't answering right now. Try again shortly, or answer without searching and say so.",
+   "cached": null,
+   "secs": 0
+  },
+  {
+   "kind": "debug",
+   "query": "TypeError cannot read properties of undefined reading map react",
+   "args": {},
+   "results": [],
+   "onTopic": 0,
+   "firstOk": false,
+   "error": "The search backend isn't answering right now. Try again shortly, or answer without searching and say so.",
+   "cached": null,
+   "secs": 0
+  },
+  {
+   "kind": "fresh",
+   "query": "latest stable postgresql version",
+   "args": {},
+   "results": [],
+   "onTopic": 0,
+   "firstOk": false,
+   "error": "The search backend isn't answering right now. Try again shortly, or answer without searching and say so.",
+   "cached": null,
+   "secs": 0
+  },
+  {
+   "kind": "fresh",
+   "query": "latest node.js LTS version",
+   "args": {},
+   "results": [],
+   "onTopic": 0,
+   "firstOk": false,
+   "error": "The search backend isn't answering right now. Try again shortly, or answer without searching and say so.",
+   "cached": null,
+   "secs": 0
+  },
+  {
+   "kind": "fresh",
+   "query": "current linux kernel stable version",
+   "args": {},
+   "results": [],
+   "onTopic": 0,
+   "firstOk": false,
+   "error": "The search backend isn't answering right now. Try again shortly, or answer without searching and say so.",
+   "cached": null,
+   "secs": 0
+  },
+  {
+   "kind": "fresh",
+   "query": "latest python release",
+   "args": {},
+   "results": [],
+   "onTopic": 0,
+   "firstOk": false,
+   "error": "The search backend isn't answering right now. Try again shortly, or answer without searching and say so.",
+   "cached": null,
+   "secs": 0
+  },
+  {
+   "kind": "news",
+   "query": "AI news this week",
+   "args": {
+    "category": "news",
+    "time_range": "week"
+   },
+   "results": [],
+   "onTopic": 0,
+   "firstOk": false,
+   "error": "The search backend isn't answering right now. Try again shortly, or answer without searching and say so.",
+   "cached": null,
+   "secs": 0
+  },
+  {
+   "kind": "news",
+   "query": "federal reserve interest rate decision",
+   "args": {
+    "category": "news"
+   },
+   "results": [],
+   "onTopic": 0,
+   "firstOk": false,
+   "error": "The search backend isn't answering right now. Try again shortly, or answer without searching and say so.",
+   "cached": null,
+   "secs": 0
+  },
+  {
+   "kind": "news",
+   "query": "nba news today",
+   "args": {
+    "category": "news",
+    "time_range": "day"
+   },
+   "results": [],
+   "onTopic": 0,
+   "firstOk": false,
+   "error": "The search backend isn't answering right now. Try again shortly, or answer without searching and say so.",
+   "cached": null,
+   "secs": 0
+  },
+  {
+   "kind": "everyday",
+   "query": "weather boston today",
+   "args": {},
+   "results": [],
+   "onTopic": 0,
+   "firstOk": false,
+   "error": "The search backend isn't answering right now. Try again shortly, or answer without searching and say so.",
+   "cached": null,
+   "secs": 0
+  },
+  {
+   "kind": "everyday",
+   "query": "best time to visit japan",
+   "args": {},
+   "results": [],
+   "onTopic": 0,
+   "firstOk": false,
+   "error": "The search backend isn't answering right now. Try again shortly, or answer without searching and say so.",
+   "cached": null,
+   "secs": 0
+  },
+  {
+   "kind": "everyday",
+   "query": "why does my sourdough bread come out dense and how do i fix it",
+   "args": {},
+   "results": [],
+   "onTopic": 0,
+   "firstOk": false,
+   "error": "The search backend isn't answering right now. Try again shortly, or answer without searching and say so.",
+   "cached": null,
+   "secs": 0
+  },
+  {
+   "kind": "everyday",
+   "query": "iphone 17 pro price",
+   "args": {},
+   "results": [],
+   "onTopic": 0,
+   "firstOk": false,
+   "error": "The search backend isn't answering right now. Try again shortly, or answer without searching and say so.",
+   "cached": null,
+   "secs": 0
+  },
+  {
+   "kind": "facts",
+   "query": "who is the CEO of anthropic",
+   "args": {},
+   "results": [],
+   "onTopic": 0,
+   "firstOk": false,
+   "error": "The search backend isn't answering right now. Try again shortly, or answer without searching and say so.",
+   "cached": null,
+   "secs": 0
+  },
+  {
+   "kind": "facts",
+   "query": "boston residential tax exemption deadline",
+   "args": {},
+   "results": [],
+   "onTopic": 0,
+   "firstOk": false,
+   "error": "The search backend isn't answering right now. Try again shortly, or answer without searching and say so.",
+   "cached": null,
+   "secs": 0
+  },
+  {
+   "kind": "facts",
+   "query": "uscis eb2 niw premium processing fee",
+   "args": {},
+   "results": [],
+   "onTopic": 0,
+   "firstOk": false,
+   "error": "The search backend isn't answering right now. Try again shortly, or answer without searching and say so.",
+   "cached": null,
+   "secs": 0
+  },
+  {
+   "kind": "chinese",
+   "query": "如何申请美国 NIW 移民",
+   "args": {
+    "language": "zh"
+   },
+   "results": [],
+   "onTopic": 0,
+   "firstOk": false,
+   "error": "The search backend isn't answering right now. Try again shortly, or answer without searching and say so.",
+   "cached": null,
+   "secs": 0
+  },
+  {
+   "kind": "chinese",
+   "query": "如何申请美国 NIW 移民",
+   "args": {},
+   "results": [],
+   "onTopic": 0,
+   "firstOk": false,
+   "error": "The search backend isn't answering right now. Try again shortly, or answer without searching and say so.",
+   "cached": null,
+   "secs": 0
+  },
+  {
+   "kind": "chinese",
+   "query": "今天 科技 新闻",
+   "args": {
+    "language": "zh"
+   },
+   "results": [],
+   "onTopic": 0,
+   "firstOk": false,
+   "error": "The search backend isn't answering right now. Try again shortly, or answer without searching and say so.",
+   "cached": null,
+   "secs": 0
+  },
+  {
+   "kind": "science",
+   "query": "attention is all you need paper",
+   "args": {
+    "category": "science"
+   },
+   "results": [],
+   "onTopic": 0,
+   "firstOk": false,
+   "error": "The search backend isn't answering right now. Try again shortly, or answer without searching and say so.",
+   "cached": null,
+   "secs": 0
+  },
+  {
+   "kind": "it",
+   "query": "hono middleware example",
+   "args": {
+    "category": "it"
+   },
+   "results": [],
+   "onTopic": 0,
+   "firstOk": false,
+   "error": "The search backend isn't answering right now. Try again shortly, or answer without searching and say so.",
+   "cached": null,
+   "secs": 0
+  },
+  {
+   "kind": "operators",
+   "query": "site:postgresql.org release notes",
+   "args": {},
+   "results": [],
+   "onTopic": 0,
+   "firstOk": false,
+   "error": "The search backend isn't answering right now. Try again shortly, or answer without searching and say so.",
+   "cached": null,
+   "secs": 0
+  },
+  {
+   "kind": "operators",
+   "query": "site:postgresql.org/about/news release",
+   "args": {},
+   "results": [],
+   "onTopic": 0,
+   "firstOk": false,
+   "error": "The search backend isn't answering right now. Try again shortly, or answer without searching and say so.",
+   "cached": null,
+   "secs": 0
+  },
+  {
+   "kind": "operators",
+   "query": "site:kubernetes.io network policy",
+   "args": {},
+   "results": [],
+   "onTopic": 0,
+   "firstOk": false,
+   "error": "The search backend isn't answering right now. Try again shortly, or answer without searching and say so.",
+   "cached": null,
+   "secs": 0
+  },
+  {
+   "kind": "longkw",
+   "query": "PostgreSQL 18 minor release notes August 2026",
+   "args": {},
+   "results": [],
+   "onTopic": 0,
+   "firstOk": false,
+   "error": "The search backend isn't answering right now. Try again shortly, or answer without searching and say so.",
+   "cached": null,
+   "secs": 0
+  }
+ ],
+ "pages": [
+  {
+   "kind": "wiki",
+   "url": "https://en.wikipedia.org/wiki/Web_scraping",
+   "usable": true,
+   "chars": 12052,
+   "linkShare": 0,
+   "error": null,
+   "secs": 0.4
+  },
+  {
+   "kind": "docs",
+   "url": "https://kubernetes.io/docs/concepts/services-networking/network-policies/",
+   "usable": true,
+   "chars": 12052,
+   "linkShare": 0,
+   "error": null,
+   "secs": 0.4
+  },
+  {
+   "kind": "docs",
+   "url": "https://docs.python.org/3/library/asyncio-task.html",
+   "usable": true,
+   "chars": 12052,
+   "linkShare": 0,
+   "error": null,
+   "secs": 0.3
+  },
+  {
+   "kind": "docs",
+   "url": "https://react.dev/learn",
+   "usable": true,
+   "chars": 12052,
+   "linkShare": 8,
+   "error": null,
+   "secs": 0.3
+  },
+  {
+   "kind": "docs",
+   "url": "https://learn.microsoft.com/en-us/dotnet/csharp/tour-of-csharp/overview",
+   "usable": true,
+   "chars": 12052,
+   "linkShare": 0,
+   "error": null,
+   "secs": 0.4
+  },
+  {
+   "kind": "code",
+   "url": "https://github.com/mozilla/readability",
+   "usable": false,
+   "chars": 0,
+   "linkShare": 0,
+   "error": "The site returned an error (HTTP 504). Try another source.",
+   "secs": 11.2
+  },
+  {
+   "kind": "code",
+   "url": "https://github.com/searxng/searxng/issues/1",
+   "usable": true,
+   "chars": 1859,
+   "linkShare": 0,
+   "error": null,
+   "secs": 1.6
+  },
+  {
+   "kind": "code",
+   "url": "https://www.npmjs.com/package/hono",
+   "usable": true,
+   "chars": 2244,
+   "linkShare": 0,
+   "error": null,
+   "secs": 0.4
+  },
+  {
+   "kind": "qa",
+   "url": "https://stackoverflow.com/questions/11227809/why-is-processing-a-sorted-array-faster-than-processing-an-unsorted-array",
+   "usable": true,
+   "chars": 12052,
+   "linkShare": 0,
+   "error": null,
+   "secs": 0.2
+  },
+  {
+   "kind": "social",
+   "url": "https://www.reddit.com/r/selfhosted/",
+   "usable": false,
+   "chars": 101,
+   "linkShare": 0,
+   "error": null,
+   "secs": 0.1
+  },
+  {
+   "kind": "social",
+   "url": "https://x.com/AnthropicAI",
+   "usable": false,
+   "chars": 241,
+   "linkShare": 0,
+   "error": null,
+   "secs": 0.5
+  },
+  {
+   "kind": "social",
+   "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+   "usable": false,
+   "chars": 101,
+   "linkShare": 0,
+   "error": null,
+   "secs": 0.9
+  },
+  {
+   "kind": "blog",
+   "url": "https://simonwillison.net/",
+   "usable": true,
+   "chars": 12052,
+   "linkShare": 0,
+   "error": null,
+   "secs": 0.1
+  },
+  {
+   "kind": "blog",
+   "url": "https://medium.com/@karpathy/software-2-0-a64152b37c35",
+   "usable": false,
+   "chars": 0,
+   "linkShare": 0,
+   "error": "This site refused the request (HTTP 403). Don't retry it: use another source.",
+   "secs": 0.1
+  },
+  {
+   "kind": "paper",
+   "url": "https://arxiv.org/abs/1706.03762",
+   "usable": true,
+   "chars": 1870,
+   "linkShare": 0,
+   "error": null,
+   "secs": 0.1
+  },
+  {
+   "kind": "pdf",
+   "url": "https://arxiv.org/pdf/1706.03762",
+   "usable": true,
+   "chars": 12052,
+   "linkShare": 0,
+   "error": null,
+   "secs": 0.5
+  },
+  {
+   "kind": "pdf",
+   "url": "https://www.uscis.gov/sites/default/files/document/forms/i-140instr.pdf",
+   "usable": true,
+   "chars": 12052,
+   "linkShare": 0,
+   "error": null,
+   "secs": 0.3
+  },
+  {
+   "kind": "pdf",
+   "url": "https://www.irs.gov/pub/irs-pdf/fw9.pdf",
+   "usable": true,
+   "chars": 12052,
+   "linkShare": 0,
+   "error": null,
+   "secs": 0.2
+  },
+  {
+   "kind": "gov",
+   "url": "https://www.uscis.gov/working-in-the-united-states/permanent-workers/employment-based-immigration-second-preference-eb-2",
+   "usable": true,
+   "chars": 12052,
+   "linkShare": 0,
+   "error": null,
+   "secs": 0.1
+  },
+  {
+   "kind": "gov",
+   "url": "https://www.weather.gov/box/",
+   "usable": true,
+   "chars": 4785,
+   "linkShare": 0,
+   "error": null,
+   "secs": 0.1
+  },
+  {
+   "kind": "gov",
+   "url": "https://www.boston.gov/departments/assessing",
+   "usable": true,
+   "chars": 4100,
+   "linkShare": 0,
+   "error": null,
+   "secs": 1.1
+  },
+  {
+   "kind": "news",
+   "url": "https://www.bbc.com/news",
+   "usable": true,
+   "chars": 6975,
+   "linkShare": 0,
+   "error": null,
+   "secs": 0.2
+  },
+  {
+   "kind": "news",
+   "url": "https://apnews.com/",
+   "usable": false,
+   "chars": 0,
+   "linkShare": 0,
+   "error": "This site refused the request (HTTP 403). Don't retry it: use another source.",
+   "secs": 0.1
+  },
+  {
+   "kind": "news",
+   "url": "https://www.reuters.com/",
+   "usable": true,
+   "chars": 4096,
+   "linkShare": 0,
+   "error": null,
+   "secs": 0.2
+  },
+  {
+   "kind": "news",
+   "url": "https://www.nytimes.com/",
+   "usable": true,
+   "chars": 4408,
+   "linkShare": 0,
+   "error": null,
+   "secs": 0.4
+  },
+  {
+   "kind": "shop",
+   "url": "https://www.apple.com/iphone/",
+   "usable": true,
+   "chars": 1063,
+   "linkShare": 0,
+   "error": null,
+   "secs": 0.1
+  },
+  {
+   "kind": "shop",
+   "url": "https://www.amazon.com/dp/B0CHWRXH8B",
+   "usable": true,
+   "chars": 3768,
+   "linkShare": 0,
+   "error": null,
+   "secs": 1.6
+  },
+  {
+   "kind": "recipe",
+   "url": "https://www.allrecipes.com/recipe/10813/best-chocolate-chip-cookies/",
+   "usable": false,
+   "chars": 0,
+   "linkShare": 0,
+   "error": "This site refused the request (HTTP 403). Don't retry it: use another source.",
+   "secs": 0.1
+  },
+  {
+   "kind": "spa",
+   "url": "https://www.google.com/maps",
+   "usable": false,
+   "chars": 101,
+   "linkShare": 0,
+   "error": null,
+   "secs": 0.3
+  },
+  {
+   "kind": "chinese",
+   "url": "https://zh.wikipedia.org/wiki/%E7%B6%B2%E9%A0%81%E6%8A%93%E5%8F%96",
+   "usable": true,
+   "chars": 1155,
+   "linkShare": 0,
+   "error": null,
+   "secs": 0.3
+  },
+  {
+   "kind": "chinese",
+   "url": "https://www.163.com/",
+   "usable": true,
+   "chars": 11826,
+   "linkShare": 0,
+   "error": null,
+   "secs": 1.7
+  },
+  {
+   "kind": "chinese",
+   "url": "https://www.zhihu.com/question/19550256",
+   "usable": false,
+   "chars": 0,
+   "linkShare": 0,
+   "error": "This site refused the request (HTTP 403). Don't retry it: use another source.",
+   "secs": 0.5
+  },
+  {
+   "kind": "data",
+   "url": "https://api.github.com/repos/searxng/searxng",
+   "usable": true,
+   "chars": 6409,
+   "linkShare": 0,
+   "error": null,
+   "secs": 0.2
+  },
+  {
+   "kind": "data",
+   "url": "https://hnrss.org/frontpage",
+   "usable": true,
+   "chars": 12052,
+   "linkShare": 0,
+   "error": null,
+   "secs": 0.1
+  },
+  {
+   "kind": "long",
+   "url": "https://www.rfc-editor.org/rfc/rfc9110.html",
+   "usable": true,
+   "chars": 12052,
+   "linkShare": 0,
+   "error": null,
+   "secs": 0.8
+  },
+  {
+   "kind": "text",
+   "url": "https://www.rfc-editor.org/rfc/rfc2616.txt",
+   "usable": true,
+   "chars": 12052,
+   "linkShare": 0,
+   "error": null,
+   "secs": 0.1
+  }
+ ]
+}

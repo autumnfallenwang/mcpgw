@@ -314,6 +314,10 @@ const result = await client.callTool({ name: "web_search", arguments: { query: "
                   <td><code>{namespace="mcpgw"} | json | event="searxng.engine_paused"</code></td>
                 </tr>
                 <tr>
+                  <td>Pages with little text</td>
+                  <td><code>{namespace="mcpgw"} | json | event="tool.call" | thin="true"</code></td>
+                </tr>
+                <tr>
                   <td>Refused URLs</td>
                   <td><code>{namespace="mcpgw"} | json | event="fetch.blocked"</code></td>
                 </tr>

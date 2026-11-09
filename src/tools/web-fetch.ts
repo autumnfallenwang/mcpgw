@@ -33,6 +33,11 @@ export type WebFetchArgs = z.infer<typeof webFetchInput>;
 const DEFAULT_MAX_CHARS = 12_000;
 /** Below this, the page probably had nothing to read without running its JavaScript. */
 const NEARLY_EMPTY_CHARS = 100;
+/**
+ * A web page with less text than this is logged as thin, for upkeep to look at: it may need JavaScript, or extraction may have
+ * dropped what it shows, as it did the version on Node.js's download page.
+ */
+const THIN_CHARS = 1000;
 
 /** Stops short of a cut through a surrogate pair, which would leave a broken character. */
 function slicePage(text: string, start: number, maxChars: number): string {
@@ -94,6 +99,7 @@ export async function webFetch(args: WebFetchArgs, service: FetchService): Promi
       bytes: page.bytes,
       final_host: new URL(page.finalUrl).hostname,
       total_chars: page.text.length,
+      ...(page.contentType === "text/html" && page.text.length < THIN_CHARS ? { thin: true } : {}),
       cached: page.cached,
     },
   };

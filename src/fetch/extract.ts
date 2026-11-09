@@ -98,6 +98,35 @@ const PAGE_FURNITURE =
 const SHORT_ARTICLE_CHARS = 1000;
 const SCRAP_RATIO = 3;
 
+/**
+ * A dropdown shows its current choice, which can be the fact a page is about: the Node.js download page's "Get Node.js v26.13.0
+ * LTS" is one. Readability removes buttons and selects as page furniture, so each becomes the plain text it shows. A select shows
+ * its chosen option, not the rest of the list.
+ */
+function keepWhatDropdownsShow(document: Document): void {
+  for (const el of document.querySelectorAll("[role='combobox'],select")) {
+    const shown =
+      el.tagName === "SELECT"
+        ? [(el.querySelector("option[selected]") ?? el.querySelector("option"))?.textContent ?? ""]
+        : textPieces(el);
+    const span = document.createElement("span");
+    span.textContent = ` ${shown.join(" ").replace(/\s+/g, " ").trim()} `;
+    el.replaceWith(span);
+  }
+}
+
+/** Each text node's text, so "<span>v26.13.0</span><span>LTS</span>" reads as two words. Without recursion, for deep markup. */
+function textPieces(root: Node): string[] {
+  const pieces: string[] = [];
+  const stack: Node[] = [root];
+  while (stack.length > 0) {
+    const node = stack.pop()!;
+    if (node.nodeType === 3) pieces.push(node.textContent ?? "");
+    else for (let i = node.childNodes.length - 1; i >= 0; i--) stack.push(node.childNodes[i]!);
+  }
+  return pieces;
+}
+
 /** The title of a Markdown document: its front matter's, or else its first top-level heading. */
 export function markdownTitle(text: string): string | undefined {
   // Only the top of the document: the title is there, and these patterns needn't see a hostile rest.
@@ -131,6 +160,7 @@ export function extractHtml(
   for (const el of document.querySelectorAll("[style]")) {
     if (HIDDEN_STYLE.test(el.getAttribute("style") ?? "")) el.remove();
   }
+  keepWhatDropdownsShow(document as unknown as Document);
 
   // Readability expects an article. On a home page or a list of links it keeps a scrap, so compare
   // against the page's own text below, without the parts no page is really about.

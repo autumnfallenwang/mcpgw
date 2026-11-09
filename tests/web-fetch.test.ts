@@ -76,6 +76,12 @@ beforeAll(async () => {
         '<html><body><article><h1>Linked</h1><p>A paragraph long enough to count as an article, and it has <a href="/next">a link in it</a> that a reader may or may not want to follow later on.</p></article></body></html>',
       );
     }
+    if (path === "/full") {
+      res.writeHead(200, html);
+      return void res.end(
+        `<html><head><title>Full</title></head><body><article><h1>Full</h1><p>${"A sentence with real content in it. ".repeat(60)}</p></article></body></html>`,
+      );
+    }
     if (path === "/js-only") {
       res.writeHead(200, html);
       return void res.end(
@@ -136,6 +142,15 @@ describe("what the model reads", () => {
   it("says when a page needs JavaScript, without calling it an error", async () => {
     const { text } = await webFetch({ url: `${base}/js-only` }, service());
     expect(text).toContain("may need JavaScript");
+  });
+
+  it("logs a web page with little text as thin, and a full one not", async () => {
+    const thin = await webFetch({ url: `${base}/js-only` }, service());
+    expect(thin.logFields?.thin).toBe(true);
+    const full = await webFetch({ url: `${base}/full` }, service());
+    expect(full.logFields?.thin).toBeUndefined();
+    const md = await webFetch({ url: `${base}/doc.md` }, service());
+    expect(md.logFields?.thin).toBeUndefined();
   });
 });
 
