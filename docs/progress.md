@@ -34,6 +34,9 @@ A dated log of what was done and decided, newest first. The plan and milestone s
   - **Pages:** 28 of 36 usable.
   - **Node.js's download page** reads "Get Node.js® v26.13.0 LTS", and its log line has `thin: true`.
   - **The status page** says searches run at least 1 second apart.
+- **The docs-only push that recorded this** ran the checks and skipped the build: no bump, and the pod kept running. Then
+  `12bfcbb` made only `build.yml` count among the workflows, so it deployed once more, and the upkeep report now shows in its
+  run's log too.
 
 ## 2026-11-08
 
