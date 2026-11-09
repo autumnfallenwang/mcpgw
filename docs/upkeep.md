@@ -3,6 +3,10 @@
 About once a month, or when search seems worse. mcpgw depends on things that change without telling it: search engines that start
 or stop refusing the home IP, the MCP spec and SDK, and SearXNG's engine code. Log each pass in [progress.md](progress.md).
 
+**A reminder comes by itself.** On the 7th of each month, the [upkeep workflow](../.github/workflows/upkeep.yml) opens an issue
+with sections 1 and 2 already checked, from [dev/upkeep/report.mjs](../dev/upkeep/report.mjs), and a checklist for the steps that
+need arch. Run the script yourself for the same report at any time.
+
 ## 1. Versions
 
 ```sh
@@ -53,4 +57,6 @@ changed.
 ## 5. Real use
 
 Read the last month's tool calls in Grafana, by client: which fail, which refuse, how long searches wait for their turn
-(`duration_ms` on `web_search`), and which sites `web_fetch` can't read.
+(`duration_ms` on `web_search`), and which sites `web_fetch` can't read. Pages that came back with little text are
+`{namespace="mcpgw"} | json | event="tool.call" | thin="true"`: only the host is logged, so try that site's pages to see
+whether extraction dropped something, as it once dropped the version from Node.js's download page.

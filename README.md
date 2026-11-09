@@ -44,7 +44,11 @@ GHCR image, the Helm chart in `deploy/chart`, and an Argo CD Application in `arc
 
 - **CI** (`.github/workflows/build.yml`): lint, types and tests, then the image tagged with the commit SHA, then the tag
   bumped in arch-infra with the `ARCH_INFRA_TOKEN` repo secret (set since 2026-11-08, the token the other home apps use).
-  Without it the job skips with a warning and the tag is bumped by hand.
+  Without it the job skips with a warning and the tag is bumped by hand. So a push to main is a deploy, but only when something
+  the image holds changed (`src/`, the package files, the Dockerfile or the workflow): docs and benchmark commits run the checks
+  and stop there. The chart, `settings.yml` included, goes live through Argo CD on any push.
+- **Upkeep** (`.github/workflows/upkeep.yml`): an issue on the 7th of each month, with what changed upstream and the checklist in
+  [docs/upkeep.md](docs/upkeep.md).
 - **Logs:** `{namespace="mcpgw"} | json | event="tool.call"`. One request: `| json | req_id="<id>"`.
 - **Status page, in a browser on arch:** http://mcpgw.mcpgw.svc.cluster.local/docs shows the version, search health, failing
   engines, the tools and how to connect. `/health` and `/` return the basics as JSON.

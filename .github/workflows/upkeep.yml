@@ -1,0 +1,41 @@
+name: upkeep
+
+# The monthly upkeep pass (docs/upkeep.md) as an issue: what changed upstream, from dev/upkeep/report.mjs, and a checklist for
+# what needs arch. Run by hand, it only writes the report to the run's summary, unless asked to open the issue.
+on:
+  schedule:
+    - cron: "0 14 7 * *"
+  workflow_dispatch:
+    inputs:
+      open_issue:
+        description: Open the issue, as the monthly run does
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  report:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 26
+
+      - name: Write the report
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: node dev/upkeep/report.mjs > report.md
+
+      - name: Open the issue
+        if: github.event_name == 'schedule' || inputs.open_issue
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: gh issue create --title "Upkeep $(date -u +%Y-%m)" --body-file report.md
+
+      - name: Show the report
+        run: cat report.md >> "$GITHUB_STEP_SUMMARY"

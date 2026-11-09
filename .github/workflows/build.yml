@@ -31,9 +31,45 @@ jobs:
       - run: pnpm typecheck
       - run: pnpm test
 
+  # A push is a deploy, since the job below bumps arch-infra. Only what goes into the image needs one: a docs or benchmark commit
+  # would otherwise restart the pod, which forgets which search engines are left out and asks them again.
+  changes:
+    runs-on: ubuntu-latest
+    outputs:
+      image: ${{ steps.diff.outputs.image }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - id: diff
+        env:
+          GH_TOKEN: ${{ secrets.ARCH_INFRA_TOKEN }}
+          EVENT: ${{ github.event_name }}
+        run: |
+          set -euo pipefail
+          # Compared with the commit arch-infra deploys, not with the previous push: on 2026-11-07 a code commit's CI failed and
+          # the next commit only fixed a YAML file, so a diff against the previous push would never have built that code.
+          DEPLOYED=""
+          if [ -n "${GH_TOKEN:-}" ]; then
+            DEPLOYED=$(gh api repos/autumnfallenwang/arch-infra/contents/apps/mcpgw.yaml --jq .content | base64 -d \
+              | yq '.spec.source.helm.parameters[] | select(.name == "image.tag") | .value') || DEPLOYED=""
+          fi
+          echo "Deployed: ${DEPLOYED:-unknown}"
+          # The files deploy/Dockerfile copies, and this workflow. Not knowing what's deployed counts as a change.
+          if [ "$EVENT" != "push" ] || [ -z "$DEPLOYED" ] || ! git cat-file -e "${DEPLOYED}^{commit}" 2>/dev/null; then
+            echo "image=true" >> "$GITHUB_OUTPUT"
+          elif git diff --name-only "$DEPLOYED" "$GITHUB_SHA" \
+            | grep -qE '^(src/|package\.json$|pnpm-lock\.yaml$|tsconfig\.json$|deploy/Dockerfile$|\.github/workflows/)'; then
+            echo "image=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "image=false" >> "$GITHUB_OUTPUT"
+            echo "::notice::Nothing in the image changed, so no build and no deploy."
+          fi
+
   build-and-deploy:
-    needs: test
-    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    needs: [test, changes]
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push' && needs.changes.outputs.image == 'true'
     runs-on: ubuntu-latest
     permissions:
       contents: read
