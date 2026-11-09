@@ -64,7 +64,9 @@ for before, `after` and `after-hard` for after, `step1` for the engine mix on th
 ran the new image in local containers. `retrieval.json` under `after` says 25 of 36 pages, but the Transformer PDF was readable and only
 its check was too narrow, so it's 26. That check is corrected now. `deployed` is `retrieval.mjs` alone against production, after the
 deploy: 98% on the topic and 26 of 36 pages. `m10-local` is the official-API readers on 2026-11-07, locally: 28 of 36 pages, and
-90% on the topic with DuckDuckGo out throughout. `m10-deployed` is the same on the cluster after the deploy, with `news.mjs` at 85%.
+90% on the topic with DuckDuckGo out throughout. `m10-deployed` is the same on the cluster after the deploy, with `news.mjs` at 85%. `engines-1109` is four general-search mixes on
+2026-11-09, searches only, all at 97%: see ADR 0012's update. `pages-1109` is the pages alone after dropdowns started keeping
+what they show: 27 of 36, the one change from 28 a GitHub page that answered HTTP 504.
 
 ## Limits
 

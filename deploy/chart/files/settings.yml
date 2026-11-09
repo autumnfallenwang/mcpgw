@@ -6,7 +6,9 @@ use_default_settings:
     # Brave's general search isn't either: it was nearly always rate-limited. See dev/benchmark/ before changing this.
     keep_only:
       - yahoo
-      - duckduckgo
+      # DuckDuckGo through duckduckgo.com. The html.duckduckgo.com engine, "duckduckgo", answered CAPTCHA from 2026-11-07 on, and
+      # this one kept answering in the same runs (ADR 0012).
+      - duckduckgo web
       - bing
       - wikipedia
       - github
@@ -38,6 +40,8 @@ server:
 # keep_only leaves each engine's default on/off state, and Bing is off by default.
 engines:
   - name: yahoo
+    disabled: false
+  - name: duckduckgo web
     disabled: false
   # A backup. It returns the most off-topic results and ignores site:, so at this weight it fills in
   # when the others have too little, rather than leading.

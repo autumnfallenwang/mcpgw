@@ -68,3 +68,33 @@ A new test, [`news.mjs`](../../dev/benchmark/news.mjs), has a judge model read t
 - **The cost:** Bing News and Brave News give no dates, so a `day` search can't be held to one day. Brave also refused once after dozens of
   test searches. When it does, Bing News carries on.
 - **It's a small test,** with one judge on 12 searches, so read this as a real gain but not an exact one.
+
+## Update, 2026-11-09: DuckDuckGo through duckduckgo.com
+
+SearXNG's `duckduckgo` engine reads html.duckduckgo.com, which answered CAPTCHA on most searches from 2026-11-07 on, so DuckDuckGo
+was left out and Yahoo and Bing carried general search. SearXNG also has `duckduckgo web`, which reads duckduckgo.com and its
+results API instead.
+
+**Every keyless engine in the pinned image,** probed with one search each, 8 s apart:
+
+- **Answered, on the topic:** duckduckgo web, Brave, GMX, PrivacyWall, Yandex, Swisscows, Keenable, NeoSearch and iseek.
+- **CAPTCHA:** duckduckgo, Startpage and Qwant.
+- **Refused or failed:** Google, Mojeek, Dogpile, Fireball, Yep and a dozen smaller ones.
+
+**The best of them in place of `duckduckgo`,** 31 searches through mcpgw each, paced as usual, in local containers
+(`results/engines-1109`):
+
+| Mix | On the topic | First result | `site:` | Engine refusals in the run |
+|---|---|---|---|---|
+| Today's: Yahoo, duckduckgo, Bing at 0.2 | 97% | 30 of 31 | 15 of 15 | duckduckgo's CAPTCHA after 19 searches, so it was left out |
+| **Yahoo, duckduckgo web, Bing at 0.2: chosen** | **97%** | **30 of 31** | **15 of 15** | **none**, and 2 parsing errors |
+| Yahoo, GMX, Bing at 0.2 | 97% | 30 of 31 | 15 of 15 | GMX's CAPTCHA after 2 searches |
+| Yahoo, duckduckgo web, GMX, Bing at 0.2 | 97% | 30 of 31 | 15 of 15 | GMX's CAPTCHA |
+
+- **The scores don't separate the mixes:** Yahoo and Bing alone did as well that day, though they scored 90% on 2026-11-07. What
+  differs is which engines keep answering, and a third one that does is what this ADR keeps Bing for.
+- **The cost:** `duckduckgo web` makes two requests a search, so it's 0.2 s slower at the median (0.7 s against 0.5 s).
+- **GMX goes,** and Brave's general search stays off, because Brave News needs Brave's tolerance more.
+
+**The gap between searches went from 2 s to 1 s** in the same pass. Three bursts of 6 searches at once, the size of a meeting round,
+90 s apart, drew no refusals, and a round finished in about 6 s instead of 11.

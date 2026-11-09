@@ -25,8 +25,11 @@ export const SEARCH_PROVIDER = env.SEARCH_PROVIDER ?? "searxng";
 export const SEARXNG_URL = env.SEARXNG_URL ?? "http://searxng.mcpgw.svc.cluster.local:8080";
 export const SEARCH_CACHE_TTL_S = Number(env.SEARCH_CACHE_TTL_S ?? 600);
 export const SEARCH_CONCURRENCY = Number(env.SEARCH_CONCURRENCY ?? 4);
-/** The least time between searches, across all callers. Waiting calls queue. */
-export const SEARCH_MIN_GAP_MS = Number(env.SEARCH_MIN_GAP_MS ?? 2_000);
+/**
+ * The least time between searches, across all callers. Waiting calls queue. 2 s at first, after a burst drew CAPTCHAs; 1 s since
+ * meeting-sized bursts at 1 s drew no refusals (ADR 0012, 2026-11-09).
+ */
+export const SEARCH_MIN_GAP_MS = Number(env.SEARCH_MIN_GAP_MS ?? 1_000);
 
 export const FETCH_CACHE_TTL_S = Number(env.FETCH_CACHE_TTL_S ?? 600);
 export const FETCH_CONCURRENCY = Number(env.FETCH_CONCURRENCY ?? 8);

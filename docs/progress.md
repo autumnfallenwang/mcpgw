@@ -4,6 +4,29 @@ A dated log of what was done and decided, newest first. The plan and milestone s
 
 ---
 
+## 2026-11-09
+
+- **Plan, on the user's "go all 1-6 e2e and push":** six items, from the user's own meetings on 2026-11-08 and 09 (Node.js
+  releases, weather, NAS drive prices, Backblaze). All 31 of their searches worked, in 0.6 to 4.3 s. 13 of 17 fetches read. The
+  other 4 were sites refusing mcpgw: Newegg 3 times and raidsize.com once.
+- **1. DuckDuckGo through duckduckgo.com.** html.duckduckgo.com still answered CAPTCHA. A probe of every keyless engine in the
+  pinned SearXNG image found nine that answered, among them `duckduckgo web`, which reads duckduckgo.com instead. Four mixes,
+  scored with `retrieval.mjs`, all reached 97% on the topic. The chosen one was the only one in which no engine refused: the old
+  DuckDuckGo engine answered CAPTCHA after 19 searches, and GMX after 2 ([ADR 0012](adr/0012-search-engine-mix.md)).
+- **2. A push deploys only when the image changes.** CI still lints and tests every push. It compares with the commit
+  arch-infra deploys, not with the previous push: on 2026-11-07, comparing with the previous push would have left a code commit
+  whose CI failed unbuilt, since the next commit only fixed a YAML file.
+- **3. Dropdowns keep what they show.** A real question about Node.js read the download page, and got "Get Node.js® for using
+  with": the version was in a `<button role="combobox">`, which Readability removes. Each dropdown now becomes the text it
+  shows. Pages under 1,000 characters are logged as `thin`. The 36 benchmark pages are otherwise unchanged: 27 of 36 usable,
+  the one change from 28 a GitHub page that answered HTTP 504.
+- **4. Searches 1 s apart.** Three bursts of 6 searches at once at 1 s, the size of a meeting round, drew no refusals. A round
+  takes about 6 s instead of 11.
+- **5. Alerts reach someone:** not done. There's no channel to send them to, and email was left out by the user's earlier
+  decision in arch-infra, so the user picks ntfy, Discord or email.
+- **6. Upkeep comes as an issue** on the 7th of each month, from `dev/upkeep/report.mjs`. Its first run found Biome 2.6.6, now
+  taken, and nothing in SearXNG's 9 newer commits that touches an engine mcpgw uses.
+
 ## 2026-11-08
 
 - **CI bumps arch-infra itself now.** `ARCH_INFRA_TOKEN` is set on this repo, the same fine-grained token homecal,

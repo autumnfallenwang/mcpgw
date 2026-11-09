@@ -216,8 +216,9 @@ Use web_fetch to read a page.
 - **Cache:** identical arguments return the cached result for 10 minutes (in memory, an LRU of 500 entries).
 - **Concurrency:** at most 4 SearXNG requests at once across all callers, so upstream engines don't start refusing
   the home IP. A queue wait of over 10 s fails the call with a timeout.
-- **Spacing:** searches run at least 2 s apart across all callers, in the order they arrive, and a burst waits rather than failing. A
-  round of a real meeting sent 6 searches in 3 s, and DuckDuckGo answered with CAPTCHAs. A search that would wait over 30 s fails, so
+- **Spacing:** searches run at least 1 s apart across all callers, in the order they arrive, and a burst waits rather than failing. A
+  round of a real meeting sent 6 searches in 3 s, and DuckDuckGo answered with CAPTCHAs, so the gap was 2 s at first. Three
+  meeting-sized bursts at 1 s drew no refusals, and a round of 6 searches takes about 6 s instead of 11. A search that would wait over 30 s fails, so
   a runaway caller can't build an endless queue. Answers from the cache don't wait. Fetches run at least 0.2 s apart.
 - **Engines that refuse:** one that answers with a CAPTCHA, "too many requests" or "access denied", or times out on 3 searches in a row,
   is left out for 5 minutes,
@@ -261,6 +262,8 @@ into Markdown for Agents answer with Markdown, which skips extraction.
   navigation and ads dropped. Link addresses are dropped too unless `include_links` is set, because they took a median 20% of
   the text, up to 78% on Chinese pages, and homestorm refuses to follow them anyway. Mozilla Readability on linkedom to start, behind one `extract()`
   function. Compared with Defuddle on real pages: Defuddle was 3–5× slower and not clearly better.
+- **Dropdowns keep what they show.** Readability removes buttons and selects, and the version on Node.js's download page is in
+  one, so each `[role=combobox]` becomes the text it shows, and each `<select>` its chosen option.
 - **Output is cleaned** (the spec requires it): hidden elements, HTML comments and invisible Unicode go, because
   they're where instructions to a model get hidden. This reduces the risk; it doesn't remove it (§6.3).
 - `text/plain`, `text/markdown`, `application/json`: returned as is, after the same Unicode cleaning.
@@ -342,7 +345,7 @@ can't tell where a URL came from, so the rule has to live with whoever holds the
 | `SEARXNG_URL` | `http://searxng.mcpgw.svc.cluster.local:8080` | SearXNG base URL (dev: `http://127.0.0.1:8180`) |
 | `SEARCH_CACHE_TTL_S` | `600` | |
 | `SEARCH_CONCURRENCY` | `4` | |
-| `SEARCH_MIN_GAP_MS` | `2000` | The least time between searches, across all callers |
+| `SEARCH_MIN_GAP_MS` | `1000` | The least time between searches, across all callers |
 | `FETCH_CONCURRENCY` | `8` | |
 | `FETCH_MIN_GAP_MS` | `200` | The least time between fetches, across all callers |
 | `FETCH_TIMEOUT_MS` | `15000` | |
@@ -357,8 +360,9 @@ can't tell where a URL came from, so the rule has to live with whoever holds the
 - `server.limiter: false`: only mcpgw calls it, from inside the cluster.
 - `server.secret_key` from the env var `SEARXNG_SECRET`, a random value the pod generates at boot. Nothing signed with
   it outlives the pod, since the limiter and image proxy are off, so there's no Kubernetes Secret.
-- Engines: yahoo, duckduckgo, bing, wikipedia, github, stackoverflow, arxiv, bing news, brave.news ([ADR 0012](adr/0012-search-engine-mix.md)). The rest stay
-  off to keep upstream traffic low. Google is off because it refused every query from this IP.
+- Engines: yahoo, duckduckgo web, bing, wikipedia, github, stackoverflow, arxiv, bing news, brave.news ([ADR 0012](adr/0012-search-engine-mix.md)). The rest stay
+  off to keep upstream traffic low. Google is off because it refused every query from this IP. `duckduckgo web` reads
+  duckduckgo.com, where `duckduckgo` reads html.duckduckgo.com, which answered CAPTCHA from 2026-11-07 on.
 - Image: `searxng/searxng`, pinned to a dated tag such as `2026.11.5-3e95f6cd2`, never `latest`.
 
 ## 8. Deployment
@@ -391,7 +395,7 @@ One JSON object per line, the same shape as llmgw and homestorm (`level`, `time`
 |---|---|
 | `server.start` | `port`, `searxng_url` |
 | `http.request` | `method`, `path`, `status`, `latency_ms`, `client`, `request_id` |
-| `tool.call` | `tool`, `client`, `request_id`, `status` (`ok` / `error` / `blocked` / `timeout`), `duration_ms`, `cached`, and `results` (search) or `bytes` and `final_host` (fetch) |
+| `tool.call` | `tool`, `client`, `request_id`, `status` (`ok` / `error` / `blocked` / `timeout`), `duration_ms`, `cached`, and `results` (search) or `bytes`, `final_host`, `total_chars` and `via` (fetch), plus `thin` for a web page with under 1,000 characters of text |
 | `fetch.blocked` | `reason`, `host` |
 | `searxng.error` | `status`, `engine_errors` |
 | `searxng.engine_paused` | `engine`, `reason`, `minutes`: an engine that refused is left out for this long |
@@ -399,7 +403,9 @@ One JSON object per line, the same shape as llmgw and homestorm (`level`, `time`
 - Search queries are logged at `info` (household-internal and useful for debugging). Fetched page text is never
   logged, and neither are full fetch URLs, since a query string can carry private data.
 - **Alerts:** two Grafana rules in [deploy/observability/alerting-rules.yaml](../deploy/observability/alerting-rules.yaml): web search
-  failing, and an engine that keeps refusing. They need pasting into arch-infra, and nothing receives them yet.
+  failing, and an engine that keeps refusing. A copy is in arch-infra's Grafana values, and nothing receives them yet.
+- **`thin`** marks pages for upkeep to look at: they may need JavaScript, or extraction may have dropped what they show. Only the
+  host is logged, so look at that site's pages to find which.
 - Query in Loki: `{namespace="mcpgw"} | json | event="tool.call"`. As with llmgw, `req_id` is a JSON field, not a
   Loki label.
 

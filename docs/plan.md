@@ -3,7 +3,7 @@
 What the first workable version of mcpgw includes, the milestones to get there, and the decisions still open.
 Progress against this plan is logged in [progress.md](progress.md). The design is in [design.md](design.md).
 
-**Updated:** 2026-11-07
+**Updated:** 2026-11-09
 
 ---
 
@@ -245,10 +245,20 @@ The user chose the next steps on 2026-11-07: ship, official APIs, tune from real
   DuckDuckGo out; median search 0.5 s
 - [x] **First tuning from real use:** only timeouts now count toward leaving an engine out, since Wikipedia's HTTP 400s on odd
   queries had it left out in a meeting. Deployed as `4d0c581` on the user's go
-- [ ] **Measure again once DuckDuckGo and Brave recover:** the 2 s gap was a judgment call, because DuckDuckGo answered CAPTCHA
-  throughout, even at one search a minute
-- [ ] **Keep tuning from real meetings.** Open: searches wait up to about 10 s for their turn, and answers take 23 to 38 s. The 2 s
-  gap stays until DuckDuckGo recovers and can be measured
+- [x] **DuckDuckGo through duckduckgo.com,** on the user's go on 2026-11-09: SearXNG's `duckduckgo web` engine in place of
+  `duckduckgo`, whose html.duckduckgo.com still answered CAPTCHA. Every mix tried scored 97%, and this one was the only one with no
+  engine refusing ([ADR 0012](adr/0012-search-engine-mix.md))
+- [x] **Searches 1 s apart,** not 2: meeting-sized bursts at 1 s drew no refusals, and a round of 6 searches takes about 6 s
+  instead of 11
+- [x] **Dropdowns keep what they show:** Node.js's download page lost its version, the answer to a real question, because
+  Readability removes buttons. Pages under 1,000 characters are logged as `thin` for upkeep to look at
+- [x] **A push deploys only when the image changes:** docs and benchmark commits run the checks and stop, so they no longer
+  restart the pod and forget which engines are left out
+- [x] **Upkeep comes as an issue** on the 7th of each month, with what changed upstream already checked
+  ([upkeep.md](upkeep.md))
+- [ ] **Alerts reach someone:** waiting for the user to pick ntfy, Discord or email. It's a change in arch-infra
+- [ ] **Keep tuning from real meetings.** Newegg refused 3 of the 4 failed fetches in the user's meetings on 2026-11-08 and 09, and
+  has no public API, so it stays refused
 
 ## Future work
 

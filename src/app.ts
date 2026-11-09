@@ -20,6 +20,11 @@ function minutes(seconds: number): string {
   return count === 1 ? "1 minute" : `${count} minutes`;
 }
 
+function seconds(ms: number): string {
+  const count = ms / 1000;
+  return count === 1 ? "1 second" : `${count} seconds`;
+}
+
 const MAX_BODY_BYTES = 1024 * 1024;
 const HEALTH_REFRESH_MS = 15_000;
 const DESCRIPTION = "Home cluster tool gateway. Models live in llmgw, tools live here.";
@@ -94,7 +99,7 @@ export function createApp(deps: AppDeps) {
             name: "web_search",
             ...TOOLS.web_search,
             readOnly: TOOLS.web_search.annotations.readOnlyHint,
-            note: `Results are cached for ${minutes(SEARCH_CACHE_TTL_S)}. Searches run at least ${SEARCH_MIN_GAP_MS / 1000} seconds apart across all callers, so a burst waits its turn.`,
+            note: `Results are cached for ${minutes(SEARCH_CACHE_TTL_S)}. Searches run at least ${seconds(SEARCH_MIN_GAP_MS)} apart across all callers, so a burst waits its turn.`,
           },
           {
             name: "web_fetch",
