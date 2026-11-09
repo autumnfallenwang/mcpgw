@@ -4,6 +4,13 @@ A dated log of what was done and decided, newest first. The plan and milestone s
 
 ---
 
+## 2026-11-08
+
+- **CI bumps arch-infra itself now.** `ARCH_INFRA_TOKEN` is set on this repo, the same fine-grained token homecal,
+  homenews, homeparentcontrol, homework, llm-gateway and homestorm use. Until now the job skipped with a warning and
+  tags were bumped by hand. This commit is the check: it rebuilds the same code, and the bump should come from GitHub
+  Actions.
+
 ## 2026-11-07
 
 - **Next steps chosen by the user:** ship what's ready, official APIs for sites that refuse mcpgw, tune from real use, and monthly
@@ -169,7 +176,7 @@ A dated log of what was done and decided, newest first. The plan and milestone s
     ended it. The SDK sends a keepalive every 15 s.
   - **Not tested:** a second device. That's the user's to try: `curl http://mcpgw.arch.internal/health`.
   - **Open:** `ARCH_INFRA_TOKEN` isn't set on this repo, so CI skips the arch-infra tag bump, and tags are bumped by hand
-    as on homestorm.
+    as on homestorm. *Set on 2026-11-08.*
 - **DNS:** `mcpgw.arch.internal` added by the user, and answered by the router.
 - **M1 done: the repo is public.** The user made it public, since auto mode refuses to. Checked with no credentials:
   the repo page and the raw README both load. Next is M2.
