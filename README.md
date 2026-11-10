@@ -6,8 +6,8 @@ here, loops live in apps.**
 Models only know what was in their training data. mcpgw gives home apps such as
 [homestorm](https://github.com/autumnfallenwang/homestorm) one place to reach tools: `web_search`, `web_fetch` and `code_run`.
 
-**Status:** live on the home k3s cluster at http://mcpgw.mcpgw.svc.cluster.local, with `web_search` and `web_fetch`.
-`code_run` is built and on its way (M11). Only home apps call it. See [the plan](docs/plan.md).
+**Status:** live on the home k3s cluster at http://mcpgw.mcpgw.svc.cluster.local, with `web_search`, `web_fetch` and, since
+2026-11-10, `code_run`. Only home apps call it, and homestorm doesn't offer `code_run` to seats yet. See [the plan](docs/plan.md).
 
 ## How it works, in short
 

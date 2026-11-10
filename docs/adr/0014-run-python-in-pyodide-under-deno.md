@@ -59,6 +59,9 @@ How others do it, from research on 2026-11-10:
     kernel at the pod's limit while the server and the next run carry on.
   - **The control proved the cases work:** with no permissions set, the same code reached everything, and `os.system("id")` ran on
     arch.
+- **On the cluster, 2026-11-10:** from inside the pod, Deno with every permission reached nothing, so the NetworkPolicy holds
+  on its own too. A throwaway pod reached mcpgw but not the runner. arch itself does reach the runner, since k3s lets the
+  node's own traffic through, as it does for SearXNG.
 - **Pyodide alone is no sandbox.** Deno's permissions are what hold, so a change to the runner's flags is a security change.
 - **What can't run:** anything Pyodide doesn't ship (PyTorch, for one), `pip install`, and anything that needs the network. numpy is
   slow for big work: a 1000×1000 matrix multiply takes 3 s.

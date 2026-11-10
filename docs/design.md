@@ -310,7 +310,8 @@ Python 3.14 in Pyodide, for arithmetic, tables and statistics that models get wr
   env, programs or FFI. `--no-remote` matters, since plain Deno lets `import()` load code from esm.sh and jsdelivr, and the
   URL can carry data out. Its WebAssembly memory is capped at 1 GiB and its JavaScript heap at 512 MB, and it starts with an
   empty environment.
-- **The pod is the second layer:** its NetworkPolicy allows no egress at all and ingress only from mcpgw. It runs as uid
+- **The pod is the second layer:** its NetworkPolicy allows no egress at all and ingress only from mcpgw. arch itself still
+  reaches it, since k3s lets the node's own traffic through, as with SearXNG; arch is trusted anyway (ADR 0008). It runs as uid
   1000 with a read-only root, no capabilities, `RuntimeDefault` seccomp and no service-account token. Each run is marked first
   for the kernel's out-of-memory killer, so a runaway run dies rather than the server, and a started-ahead runner that dies
   with it is replaced.

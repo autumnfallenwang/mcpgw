@@ -276,7 +276,10 @@ On the user's go on 2026-11-10 ([ADR 0014](adr/0014-run-python-in-pyodide-under-
   tests in CI
 - [x] **Tool:** `code_run` in mcpgw, offered only when the runner is configured, logging sizes and the outcome only
 - [x] **Chart and CI:** the runner's image beside mcpgw's, its NetworkPolicy, and mcpgw allowed to reach it
-- [ ] **Deployed and checked on the cluster:** the runner can reach nothing, and `code_run` answers through mcpgw
+- [x] **Deployed and checked on the cluster** as `40d2666`, then `83ca8f8` turned the runner on: from inside its pod, Deno
+  with every permission reached nothing (internet, mcpgw, Loki, the Kubernetes API, the home LAN, DNS); a throwaway pod
+  reached mcpgw but not the runner; and 10 cases through mcpgw behaved, from price per TB in 56 ms to an endless loop stopped
+  at 20 s
 - [ ] **homestorm offers it to seats:** homestorm's own work, in its own session
 
 ## Future work

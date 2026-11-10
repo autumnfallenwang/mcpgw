@@ -25,6 +25,15 @@ A dated log of what was done and decided, newest first. The plan and milestone s
     and Deno's "run again with --allow-net" were reaching the model; both are cleaned.
   - **Checked locally:** in a container shaped like the pod (read-only root, uid 1000, no capabilities, 3.5 GiB), and through
     mcpgw over MCP: price per TB, a pandas sum, a Python error, a refused fetch of mcpgw's own address, and `os.system`.
+  - **Deployed** in two pushes, since Argo syncs the chart before CI builds the image: `40d2666` built both images with the
+    runner off (CI's 14 sandbox tests passed on GitHub, which has a network), then `83ca8f8` turned it on. On the cluster:
+    - **The pod's own layer:** Deno run in the pod with every permission reached nothing: the internet by name and by IP,
+      mcpgw, Loki, the Kubernetes API, the home LAN and DNS. A throwaway pod reached mcpgw but not the runner. arch itself
+      does reach the runner, as with SearXNG, since k3s lets the node's own traffic through.
+    - **Through mcpgw, as homestorm will call it:** price per TB in 56 ms, pandas in 41 ms, sympy, scipy, a short traceback,
+      a refused fetch of homestorm's API, `os.system` refused, a MemoryError at 900 MB, a flood cut off, and an endless loop
+      stopped at 20 s. Three at once: 165 ms, 306 ms and 8 s, the last waiting for a runner to start, since two are kept
+      ready. The status page shows the runner, and Loki has 13 `code_run` lines with sizes and outcomes and none of the code.
 
 - **On the user's "go all e2e for them for me":** one real 8-seat homestorm meeting, and the alerts.
 - **The meeting:** 8 seats (Claude Haiku 5.5, Sonnet 5.5 and Sonnet 5, GPT-5.6 Luna and Terra, GPT-6 Luna, DeepSeek Flash and
