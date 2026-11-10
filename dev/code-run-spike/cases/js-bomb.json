@@ -1,0 +1,1 @@
+{"code":"import js\njs.eval(\"globalThis.keep = []; for (let i = 0; i < 100000; i++) { const b = new Uint8Array(64 * 1024 * 1024); b.fill(1); globalThis.keep.push(b); }\")\nprint(\"survived\")"}

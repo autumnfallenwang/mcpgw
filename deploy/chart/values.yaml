@@ -95,3 +95,23 @@ networkPolicy:
     - 192.168.0.0/16
   fetchPorts: [80, 443, 8080, 8443]
   searchPorts: [80, 443]
+
+# code_run's runner (ADR 0014). Its image is mcpgw's tag plus "-code-runner", built by the same CI run. Its NetworkPolicy
+# lets it reach nothing, and only mcpgw reach it; that policy doesn't depend on networkPolicy.enabled above.
+codeRunner:
+  enabled: false
+  port: 8080
+  # Runners started ahead, each with numpy and pandas loaded (about 430 MB each), so a run doesn't wait 5 s for one.
+  pool: 2
+  # Runs at once; the rest wait their turn, up to queueTimeoutMs, then get "busy".
+  maxRunning: 2
+  timeoutMs: 20000
+  queueTimeoutMs: 20000
+  # Two runs at their 1 GB cap plus two started ahead, with room to spare. Idle it's about 0.7 GB.
+  resources:
+    requests:
+      cpu: 100m
+      memory: 1Gi
+    limits:
+      cpu: "2"
+      memory: 3584Mi

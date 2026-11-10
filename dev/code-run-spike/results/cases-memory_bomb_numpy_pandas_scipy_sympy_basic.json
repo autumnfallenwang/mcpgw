@@ -1,0 +1,126 @@
+{
+  "date": "2026-11-10T05:46:16.386Z",
+  "node": "v26.13.0",
+  "results": {
+    "basic": {
+      "deno-no-remote-1GiB": {
+        "wall_ms": 1782,
+        "peak_rss_mb": 218,
+        "ok": true,
+        "value": null,
+        "output": "332833500 3.14.2\n",
+        "truncated": false,
+        "timings": {
+          "load_ms": 1718,
+          "packages_ms": 1,
+          "run_ms": 4
+        },
+        "rss_mb": 188
+      },
+      "node-1GiB": {
+        "wall_ms": 1514,
+        "peak_rss_mb": 223,
+        "ok": true,
+        "value": null,
+        "output": "332833500 3.14.2\n",
+        "truncated": false,
+        "timings": {
+          "load_ms": 1473,
+          "packages_ms": 1,
+          "run_ms": 5
+        },
+        "rss_mb": 221
+      }
+    },
+    "numpy pandas": {
+      "deno-no-remote-1GiB": {
+        "wall_ms": 4733,
+        "peak_rss_mb": 421,
+        "ok": true,
+        "value": null,
+        "output": "drive  price  tb  per_tb\n    c  449.0  20   22.45\n    b  289.0  12   24.08\n    a  199.0   8   24.88\n[[0.6, -0.2], [-0.2, 0.4]]\n",
+        "truncated": false,
+        "timings": {
+          "load_ms": 1612,
+          "packages_ms": 582,
+          "run_ms": 2494
+        },
+        "rss_mb": 421
+      },
+      "node-1GiB": {
+        "wall_ms": 4142,
+        "peak_rss_mb": 438,
+        "ok": true,
+        "value": null,
+        "output": "drive  price  tb  per_tb\n    c  449.0  20   22.45\n    b  289.0  12   24.08\n    a  199.0   8   24.88\n[[0.6, -0.2], [-0.2, 0.4]]\n",
+        "truncated": false,
+        "timings": {
+          "load_ms": 1382,
+          "packages_ms": 623,
+          "run_ms": 2080
+        },
+        "rss_mb": 409
+      }
+    },
+    "scipy sympy": {
+      "deno-no-remote-1GiB": {
+        "wall_ms": 9679,
+        "peak_rss_mb": 536,
+        "ok": true,
+        "value": null,
+        "output": "0.975 [-sqrt(2), sqrt(2)]\n",
+        "truncated": false,
+        "timings": {
+          "load_ms": 1608,
+          "packages_ms": 1429,
+          "run_ms": 6586
+        },
+        "rss_mb": 522
+      },
+      "node-1GiB": {
+        "wall_ms": 8447,
+        "peak_rss_mb": 566,
+        "ok": true,
+        "value": null,
+        "output": "0.975 [-sqrt(2), sqrt(2)]\n",
+        "truncated": false,
+        "timings": {
+          "load_ms": 1391,
+          "packages_ms": 1553,
+          "run_ms": 5373
+        },
+        "rss_mb": 565
+      }
+    },
+    "memory bomb": {
+      "deno-no-remote-1GiB": {
+        "wall_ms": 1816,
+        "peak_rss_mb": 1130,
+        "ok": true,
+        "value": null,
+        "output": "MemoryError after 950 MB\n",
+        "truncated": false,
+        "timings": {
+          "load_ms": 1644,
+          "packages_ms": 1,
+          "run_ms": 120
+        },
+        "rss_mb": 1130
+      },
+      "node-1GiB": {
+        "wall_ms": 1547,
+        "peak_rss_mb": 1025,
+        "ok": true,
+        "value": null,
+        "output": "MemoryError after 950 MB\n",
+        "truncated": false,
+        "timings": {
+          "load_ms": 1396,
+          "packages_ms": 2,
+          "run_ms": 106
+        },
+        "rss_mb": 1184
+      }
+    }
+  }
+}

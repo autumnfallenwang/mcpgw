@@ -31,6 +31,18 @@ jobs:
       - run: pnpm typecheck
       - run: pnpm test
 
+      # code_run's sandbox, against real Deno and Pyodide. The runner has a network here, so these show Deno's permissions
+      # hold on their own; in the cluster its NetworkPolicy is a second layer.
+      - uses: denoland/setup-deno@v2
+        with:
+          deno-version: v2.9.8
+      - uses: actions/cache@v4
+        with:
+          path: code-runner/pyodide
+          key: pyodide-${{ hashFiles('code-runner/fetch-pyodide.mjs') }}
+      - run: node code-runner/fetch-pyodide.mjs code-runner/pyodide
+      - run: deno test --allow-run --allow-read --allow-write=/proc --allow-env code-runner/
+
   # A push is a deploy, since the job below bumps arch-infra. Only what goes into the image needs one: a docs or benchmark commit
   # would otherwise restart the pod, which forgets which search engines are left out and asks them again.
   changes:
@@ -56,11 +68,11 @@ jobs:
               | yq '.spec.source.helm.parameters[] | select(.name == "image.tag") | .value') || DEPLOYED=""
           fi
           echo "Deployed: ${DEPLOYED:-unknown}"
-          # The files deploy/Dockerfile copies, and this workflow, which builds them. Not knowing what's deployed counts as a change.
+          # The files the two Dockerfiles copy, and this workflow, which builds them. Not knowing what's deployed counts as a change.
           if [ "$EVENT" != "push" ] || [ -z "$DEPLOYED" ] || ! git cat-file -e "${DEPLOYED}^{commit}" 2>/dev/null; then
             echo "image=true" >> "$GITHUB_OUTPUT"
           elif git diff --name-only "$DEPLOYED" "$GITHUB_SHA" \
-            | grep -qE '^(src/|package\.json$|pnpm-lock\.yaml$|tsconfig\.json$|deploy/Dockerfile$|\.github/workflows/build\.yml$)'; then
+            | grep -qE '^(src/|code-runner/|package\.json$|pnpm-lock\.yaml$|tsconfig\.json$|deploy/Dockerfile$|deploy/code-runner/|\.github/workflows/build\.yml$)'; then
             echo "image=true" >> "$GITHUB_OUTPUT"
           else
             echo "image=false" >> "$GITHUB_OUTPUT"
@@ -97,6 +109,17 @@ jobs:
             ghcr.io/autumnfallenwang/mcpgw:${{ github.sha }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
+
+      # code_run's runner, in the same package with a suffix, so the one tag in arch-infra moves both (ADR 0014).
+      - name: Build and push the code runner's image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: deploy/code-runner/Dockerfile
+          push: true
+          tags: ghcr.io/autumnfallenwang/mcpgw:${{ github.sha }}-code-runner
+          cache-from: type=gha,scope=code-runner
+          cache-to: type=gha,scope=code-runner,mode=max
 
       - name: Bump image tag in arch-infra
         env:

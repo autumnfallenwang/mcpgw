@@ -33,6 +33,12 @@ spec:
             - name: {{ $key }}
               value: {{ $value | quote }}
             {{- end }}
+            {{- if .Values.codeRunner.enabled }}
+            - name: CODE_RUNNER_URL
+              value: "http://code-runner.{{ .Release.Namespace }}.svc.cluster.local:{{ .Values.codeRunner.port }}"
+            - name: CODE_RUN_TIMEOUT_MS
+              value: {{ .Values.codeRunner.timeoutMs | quote }}
+            {{- end }}
           livenessProbe:
             {{- toYaml .Values.probes.liveness | nindent 12 }}
           readinessProbe:

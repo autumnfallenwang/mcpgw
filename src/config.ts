@@ -37,3 +37,10 @@ export const FETCH_MIN_GAP_MS = Number(env.FETCH_MIN_GAP_MS ?? 200);
 export const FETCH_TIMEOUT_MS = Number(env.FETCH_TIMEOUT_MS ?? 15_000);
 export const FETCH_MAX_BYTES = Number(env.FETCH_MAX_BYTES ?? 5 * 1024 * 1024);
 export const FETCH_MAX_URL_CHARS = Number(env.FETCH_MAX_URL_CHARS ?? 250);
+
+/** The code runner's pod (ADR 0014). Unset, code_run isn't offered at all. */
+export const CODE_RUNNER_URL = env.CODE_RUNNER_URL || null;
+/** A run is killed after this. The chart gives the runner the same value. */
+export const CODE_RUN_TIMEOUT_MS = Number(env.CODE_RUN_TIMEOUT_MS ?? 20_000);
+/** How long mcpgw waits for the runner: a turn in its queue, a runner starting, then the run. Under the 60 s an MCP client waits. */
+export const CODE_RUNNER_WAIT_MS = Number(env.CODE_RUNNER_WAIT_MS ?? 58_000);

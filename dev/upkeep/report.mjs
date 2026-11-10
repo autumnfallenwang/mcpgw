@@ -39,6 +39,26 @@ for (const [name, spec] of Object.entries(deps)) {
     problems.push(`npm ${name}: ${err.message}`);
   }
 }
+// code_run's sandbox, pinned outside package.json. A new Pyodide means new hashes, and either one is a security change: run
+// code-runner's sandbox tests (ADR 0014).
+const pyodide = /PYODIDE_VERSION = "([^"]+)"/.exec(read("code-runner/fetch-pyodide.mjs"))?.[1];
+const deno = /denoland\/deno:distroless-(\S+)/.exec(read("deploy/code-runner/Dockerfile"))?.[1];
+try {
+  const latest = (await get("https://registry.npmjs.org/-/package/pyodide/dist-tags")).latest;
+  if (latest && latest !== pyodide) {
+    rows.push(`| pyodide | ${pyodide} (code-runner/fetch-pyodide.mjs) | ${latest} | new hashes; run the sandbox tests |`);
+  }
+} catch (err) {
+  problems.push(`npm pyodide: ${err.message}`);
+}
+try {
+  const latest = (await get("https://api.github.com/repos/denoland/deno/releases/latest")).tag_name?.replace(/^v/, "");
+  if (latest && latest !== deno) {
+    rows.push(`| deno | ${deno} (Dockerfile and build.yml) | ${latest} | run the sandbox tests |`);
+  }
+} catch (err) {
+  problems.push(`deno: ${err.message}`);
+}
 out.push("## 1. Versions", "");
 if (rows.length === 0) out.push("Everything is on its latest version.");
 else out.push("| Package | package.json | Latest | |", "|---|---|---|---|", ...rows);

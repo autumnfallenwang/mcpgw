@@ -17,3 +17,6 @@ dev/*/package-lock.json
 
 # Account-specific notes (plans, balances, private links): never commit
 private/
+
+# Pyodide and its packages, fetched by code-runner/fetch-pyodide.mjs
+code-runner/pyodide/

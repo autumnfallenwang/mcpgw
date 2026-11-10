@@ -1,9 +1,11 @@
 import { createMcpHonoApp } from "@modelcontextprotocol/hono";
 import { createMcpHandler, McpServer } from "@modelcontextprotocol/server";
 import type { Context } from "hono";
+import type { CodeRunner } from "./code/runner.js";
 import { APP_NAME, APP_VERSION } from "./config.js";
 import type { FetchService } from "./fetch/service.js";
 import type { SearchService } from "./search/service.js";
+import { CODE_RUN_DESCRIPTION, codeRun, codeRunInput } from "./tools/code-run.js";
 import { runTool } from "./tools/result.js";
 import { WEB_FETCH_DESCRIPTION, webFetch, webFetchInput } from "./tools/web-fetch.js";
 import { WEB_SEARCH_DESCRIPTION, webSearch, webSearchInput } from "./tools/web-search.js";
@@ -12,6 +14,8 @@ export interface McpDeps {
   allowedHosts: string[];
   search: SearchService;
   fetch: FetchService;
+  /** Absent, code_run isn't offered. */
+  code?: { runner: CodeRunner; timeoutMs: number };
 }
 
 /**
@@ -40,9 +44,21 @@ export const TOOLS = {
     inputSchema: webFetchInput,
     annotations: ANNOTATIONS,
   },
+  // Changes nothing and reaches nothing outside its sandbox. Not idempotent: code can use random numbers or the time.
+  code_run: {
+    title: "Run Python",
+    description: CODE_RUN_DESCRIPTION,
+    inputSchema: codeRunInput,
+    annotations: {
+      readOnlyHint: true,
+      destructiveHint: false,
+      idempotentHint: false,
+      openWorldHint: false,
+    },
+  },
 };
 
-/** The tools only change with a new image and are the same for everyone, so anyone may keep them for a while. */
+/** The tools only change with a new image or chart, and are the same for everyone, so anyone may keep them for a while. */
 const TOOL_LIST_CACHE = { ttlMs: 5 * 60_000, cacheScope: "public" } as const;
 
 export function createMcpApp(deps: McpDeps) {
@@ -59,6 +75,12 @@ export function createMcpApp(deps: McpDeps) {
     server.registerTool("web_fetch", TOOLS.web_fetch, (args) =>
       runTool("web_fetch", () => webFetch(args, deps.fetch)),
     );
+    const code = deps.code;
+    if (code) {
+      server.registerTool("code_run", TOOLS.code_run, (args) =>
+        runTool("code_run", () => codeRun(args, code.runner, code.timeoutMs)),
+      );
+    }
     return server;
   });
 

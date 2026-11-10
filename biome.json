@@ -14,6 +14,7 @@
       "!**/coverage",
       "!**/*.md",
       "!**/private",
+      "!**/code-runner/pyodide",
       "!**/dev",
       "!**/deploy/chart/templates"
     ]

@@ -20,6 +20,10 @@ gh api repos/modelcontextprotocol/modelcontextprotocol/releases --jq '.[0:2][] |
 - **A new spec revision** means checking what a tools-only server must do, as for `2026-07-28`: `server/discover`, `resultType`,
   and the cache fields on `tools/list`.
 - **Others:** take patch and minor updates, then run `pnpm lint && pnpm typecheck && pnpm test`.
+- **code_run's sandbox** is pinned outside `package.json`: Pyodide in `code-runner/fetch-pyodide.mjs` (with its tarball's
+  sha512) and Deno in `deploy/code-runner/Dockerfile` and `build.yml`. The report lists newer ones. Either is a security
+  change ([ADR 0014](adr/0014-run-python-in-pyodide-under-deno.md)): run
+  `deno test --allow-run --allow-read --allow-write=/proc --allow-env code-runner/` before taking it, and keep `--no-remote`.
 
 ## 2. SearXNG
 

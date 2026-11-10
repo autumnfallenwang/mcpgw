@@ -4,10 +4,10 @@ The home cluster's tool gateway. **Models live in [llmgw](https://github.com/aut
 here, loops live in apps.**
 
 Models only know what was in their training data. mcpgw gives home apps such as
-[homestorm](https://github.com/autumnfallenwang/homestorm) one place to reach tools: `web_search` and `web_fetch` first, more later.
+[homestorm](https://github.com/autumnfallenwang/homestorm) one place to reach tools: `web_search`, `web_fetch` and `code_run`.
 
-**Status:** live on the home k3s cluster at http://mcpgw.mcpgw.svc.cluster.local, with `web_search` and `web_fetch`. Only
-home apps call it. See [the plan](docs/plan.md).
+**Status:** live on the home k3s cluster at http://mcpgw.mcpgw.svc.cluster.local, with `web_search` and `web_fetch`.
+`code_run` is built and on its way (M11). Only home apps call it. See [the plan](docs/plan.md).
 
 ## How it works, in short
 
@@ -16,6 +16,8 @@ home apps call it. See [the plan](docs/plan.md).
 - **It runs tools and nothing else:** mcpgw never calls an LLM and never runs an agent loop. Each app decides when a
   model may use a tool and who sees the results.
 - **Search:** a self-hosted SearXNG that only mcpgw talks to, behind a provider layer that a hosted API could replace.
+- **Code:** `code_run` runs Python (Pyodide) in its own pod, each run a fresh Deno process allowed only to read Pyodide, and
+  the pod can reach nothing ([ADR 0014](docs/adr/0014-run-python-in-pyodide-under-deno.md)).
 - **Fetch:** `web_fetch` can't reach the home network. The app checks every address at connect time, and a
   NetworkPolicy blocks private addresses as a second layer.
 - **Leaks:** a page can tell a model to send private data to an address it controls, and mcpgw can't tell where a URL
@@ -37,16 +39,26 @@ ALLOWED_HOSTS=127.0.0.1 SEARXNG_URL=http://127.0.0.1:8180 pnpm dev   # on :3002
 - `pnpm test`: all tests, including hostile pages against the workers (about 10 s). No network or SearXNG needed.
 - `pnpm lint`, `pnpm typecheck`.
 
+**code_run's runner** needs Deno 2.9:
+
+```sh
+node code-runner/fetch-pyodide.mjs code-runner/pyodide      # Pyodide and its packages, each checked (39 MB)
+deno test --allow-run --allow-read --allow-write=/proc --allow-env code-runner/   # the sandbox, about 45 s
+deno run --allow-net=0.0.0.0:8080 --allow-run --allow-read --allow-write=/proc --allow-env code-runner/server.mjs
+CODE_RUNNER_URL=http://127.0.0.1:8080 ALLOWED_HOSTS=127.0.0.1 SEARXNG_URL=http://127.0.0.1:8180 pnpm dev
+```
+
 ## Deploy
 
 GHCR image, the Helm chart in `deploy/chart`, and an Argo CD Application in `arch-infra` (`apps/mcpgw.yaml`; review copy in
 `deploy/arch-infra/`), like the sibling apps.
 
-- **CI** (`.github/workflows/build.yml`): lint, types and tests, then the image tagged with the commit SHA, then the tag
+- **CI** (`.github/workflows/build.yml`): lint, types, tests and the sandbox tests, then the images tagged with the commit SHA
+  (the code runner's as `<sha>-code-runner`), then the tag
   bumped in arch-infra with the `ARCH_INFRA_TOKEN` repo secret (set since 2026-11-08, the token the other home apps use).
   Without it the job skips with a warning and the tag is bumped by hand. So a push to main is a deploy, but only when something
-  the image holds changed (`src/`, the package files, the Dockerfile or `build.yml`): docs and benchmark commits run the checks
-  and stop there. The chart, `settings.yml` included, goes live through Argo CD on any push.
+  an image holds changed (`src/`, `code-runner/`, the package files, the Dockerfiles or `build.yml`): docs and benchmark commits
+  run the checks and stop there. The chart, `settings.yml` included, goes live through Argo CD on any push.
 - **Upkeep** (`.github/workflows/upkeep.yml`): an issue on the 7th of each month, with what changed upstream and the checklist in
   [docs/upkeep.md](docs/upkeep.md).
 - **Logs:** `{namespace="mcpgw"} | json | event="tool.call"`. One request: `| json | req_id="<id>"`.
@@ -91,3 +103,4 @@ Account-specific details stay in a local, gitignored `private/` folder.
 | [0011](docs/adr/0011-read-pdfs-in-capped-workers.md) | Read PDFs in capped workers, with a limit on the whole process |
 | [0012](docs/adr/0012-search-engine-mix.md) | Yahoo and DuckDuckGo lead the search, with Bing as a backup |
 | [0013](docs/adr/0013-read-refusing-sites-through-official-apis.md) | Read Stack Overflow and npm through their official APIs |
+| [0014](docs/adr/0014-run-python-in-pyodide-under-deno.md) | Run model-written Python in Pyodide under Deno, in its own pod |

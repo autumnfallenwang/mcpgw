@@ -4,6 +4,7 @@ import {
   APP_COMMIT,
   APP_NAME,
   APP_VERSION,
+  CODE_RUN_TIMEOUT_MS,
   FETCH_CACHE_TTL_S,
   FETCH_MAX_URL_CHARS,
   SEARCH_CACHE_TTL_S,
@@ -12,6 +13,7 @@ import {
 import { renderDocsPage } from "./docs-page.js";
 import { requestLog } from "./lib/request-log.js";
 import { createMcpApp, type McpDeps, TOOLS } from "./mcp.js";
+import { CODE_RUN_MAX_CHARS } from "./tools/code-run.js";
 
 export type AppDeps = McpDeps;
 
@@ -51,6 +53,20 @@ export function createApp(deps: AppDeps) {
     }
     return checking;
   };
+  // The code runner, the same way. Absent when code_run isn't offered.
+  const code = deps.code;
+  let runner: "ok" | "down" | "unknown" = "unknown";
+  let runnerCheckedAt = 0;
+  let runnerChecking: Promise<void> = Promise.resolve();
+  const refreshRunner = () => {
+    if (code && Date.now() - runnerCheckedAt >= HEALTH_REFRESH_MS) {
+      runnerCheckedAt = Date.now();
+      runnerChecking = code.runner.health().then((state) => {
+        runner = state;
+      });
+    }
+    return runnerChecking;
+  };
   const startedAt = new Date().toISOString();
 
   // These come before the MCP app, whose Host check would refuse a Kubernetes probe's pod-IP Host.
@@ -66,7 +82,12 @@ export function createApp(deps: AppDeps) {
   );
   app.get("/health", (c) => {
     void refreshBackend();
-    return c.json({ status: "ok", [provider.name]: backend });
+    void refreshRunner();
+    return c.json({
+      status: "ok",
+      [provider.name]: backend,
+      ...(code ? { code_runner: runner } : {}),
+    });
   });
 
   // For a person in a browser. Unlike a probe it can wait for a fresh health check, and it has the
@@ -76,7 +97,7 @@ export function createApp(deps: AppDeps) {
     if (!deps.allowedHosts.includes(host.replace(/:\d+$/, ""))) {
       return c.text("This Host isn't served here.", 403);
     }
-    await refreshBackend();
+    await Promise.all([refreshBackend(), refreshRunner()]);
     c.header(
       "Content-Security-Policy",
       "default-src 'none'; style-src 'unsafe-inline'; img-src data:; base-uri 'none'; form-action 'none'; frame-ancestors 'none'",
@@ -94,6 +115,7 @@ export function createApp(deps: AppDeps) {
         backendName: provider.name,
         backend,
         engineIssues: provider.engineIssues?.() ?? null,
+        codeRunner: code ? runner : null,
         tools: [
           {
             name: "web_search",
@@ -108,6 +130,19 @@ export function createApp(deps: AppDeps) {
             note: `Reads web pages, text and PDFs. Only reads public addresses: home network and cluster addresses are refused. Results are cached for ${minutes(FETCH_CACHE_TTL_S)}.`,
             inputTypes: { url: `string, up to ${FETCH_MAX_URL_CHARS} characters` },
           },
+          ...(code
+            ? [
+                {
+                  name: "code_run",
+                  ...TOOLS.code_run,
+                  readOnly: TOOLS.code_run.annotations.readOnlyHint,
+                  note: `Python 3.14 in Pyodide, in its own pod that can reach nothing (ADR 0014). Each run is a fresh process, stopped after ${seconds(CODE_RUN_TIMEOUT_MS)}; two run at once and the rest wait. Logs keep sizes and the outcome, never the code or its output.`,
+                  inputTypes: {
+                    code: `string, up to ${CODE_RUN_MAX_CHARS.toLocaleString("en-US")} characters`,
+                  },
+                },
+              ]
+            : []),
         ],
       }),
     );

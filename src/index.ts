@@ -1,7 +1,11 @@
 import { serve } from "@hono/node-server";
 import { createApp } from "./app.js";
+import { createCodeRunner } from "./code/runner.js";
 import {
   ALLOWED_HOSTS,
+  CODE_RUN_TIMEOUT_MS,
+  CODE_RUNNER_URL,
+  CODE_RUNNER_WAIT_MS,
   FETCH_CACHE_TTL_S,
   FETCH_CONCURRENCY,
   FETCH_MAX_BYTES,
@@ -51,7 +55,19 @@ const fetchService = new FetchService(
   },
 );
 
-const app = createApp({ allowedHosts: ALLOWED_HOSTS, search, fetch: fetchService });
+const app = createApp({
+  allowedHosts: ALLOWED_HOSTS,
+  search,
+  fetch: fetchService,
+  ...(CODE_RUNNER_URL
+    ? {
+        code: {
+          runner: createCodeRunner(CODE_RUNNER_URL, CODE_RUNNER_WAIT_MS),
+          timeoutMs: CODE_RUN_TIMEOUT_MS,
+        },
+      }
+    : {}),
+});
 
 const server = serve({ fetch: app.fetch, hostname: "0.0.0.0", port: PORT }, () => {
   log.info(
@@ -60,6 +76,7 @@ const server = serve({ fetch: app.fetch, hostname: "0.0.0.0", port: PORT }, () =
       port: PORT,
       search_provider: SEARCH_PROVIDER,
       ...(SEARCH_PROVIDER === "searxng" ? { searxng_url: SEARXNG_URL } : {}),
+      code_runner_url: CODE_RUNNER_URL,
     },
     "mcpgw starting",
   );

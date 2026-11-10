@@ -1,0 +1,297 @@
+{
+  "date": "2026-11-10T05:48:24.270Z",
+  "out": {
+    "deno-no-remote-1GiB | price per TB with pandas | cold": {
+      "median_ms": 4767,
+      "runs": [
+        {
+          "ms": 4767,
+          "ok": true,
+          "timings": {
+            "load_ms": 1639,
+            "packages_ms": 606,
+            "run_ms": 2468
+          },
+          "startup_ms": 0
+        },
+        {
+          "ms": 4730,
+          "ok": true,
+          "timings": {
+            "load_ms": 1579,
+            "packages_ms": 596,
+            "run_ms": 2505
+          },
+          "startup_ms": 0
+        },
+        {
+          "ms": 5010,
+          "ok": true,
+          "timings": {
+            "load_ms": 1642,
+            "packages_ms": 603,
+            "run_ms": 2720
+          },
+          "startup_ms": 0
+        }
+      ]
+    },
+    "deno-no-remote-1GiB | price per TB with pandas | warm": {
+      "median_ms": 48,
+      "runs": [
+        {
+          "ms": 48,
+          "ok": true,
+          "timings": {
+            "warmup_ms": 4669,
+            "load_ms": 0,
+            "packages_ms": 1,
+            "run_ms": 23
+          },
+          "startup_ms": 4689
+        },
+        {
+          "ms": 46,
+          "ok": true,
+          "timings": {
+            "warmup_ms": 4760,
+            "load_ms": 0,
+            "packages_ms": 1,
+            "run_ms": 21
+          },
+          "startup_ms": 4780
+        },
+        {
+          "ms": 50,
+          "ok": true,
+          "timings": {
+            "warmup_ms": 4658,
+            "load_ms": 0,
+            "packages_ms": 1,
+            "run_ms": 25
+          },
+          "startup_ms": 4677
+        }
+      ]
+    },
+    "deno-no-remote-1GiB | plain arithmetic | cold": {
+      "median_ms": 1662,
+      "runs": [
+        {
+          "ms": 1662,
+          "ok": true,
+          "timings": {
+            "load_ms": 1621,
+            "packages_ms": 1,
+            "run_ms": 4
+          },
+          "startup_ms": 0
+        },
+        {
+          "ms": 1664,
+          "ok": true,
+          "timings": {
+            "load_ms": 1618,
+            "packages_ms": 1,
+            "run_ms": 7
+          },
+          "startup_ms": 0
+        },
+        {
+          "ms": 1621,
+          "ok": true,
+          "timings": {
+            "load_ms": 1577,
+            "packages_ms": 1,
+            "run_ms": 5
+          },
+          "startup_ms": 0
+        }
+      ]
+    },
+    "deno-no-remote-1GiB | plain arithmetic | warm": {
+      "median_ms": 26,
+      "runs": [
+        {
+          "ms": 25,
+          "ok": true,
+          "timings": {
+            "warmup_ms": 4725,
+            "load_ms": 0,
+            "packages_ms": 1,
+            "run_ms": 2
+          },
+          "startup_ms": 4744
+        },
+        {
+          "ms": 27,
+          "ok": true,
+          "timings": {
+            "warmup_ms": 4859,
+            "load_ms": 0,
+            "packages_ms": 1,
+            "run_ms": 2
+          },
+          "startup_ms": 4880
+        },
+        {
+          "ms": 26,
+          "ok": true,
+          "timings": {
+            "warmup_ms": 4624,
+            "load_ms": 0,
+            "packages_ms": 1,
+            "run_ms": 2
+          },
+          "startup_ms": 4643
+        }
+      ]
+    },
+    "node-1GiB | price per TB with pandas | cold": {
+      "median_ms": 4119,
+      "runs": [
+        {
+          "ms": 4119,
+          "ok": true,
+          "timings": {
+            "load_ms": 1365,
+            "packages_ms": 640,
+            "run_ms": 2050
+          },
+          "startup_ms": 0
+        },
+        {
+          "ms": 4047,
+          "ok": true,
+          "timings": {
+            "load_ms": 1336,
+            "packages_ms": 619,
+            "run_ms": 2030
+          },
+          "startup_ms": 0
+        },
+        {
+          "ms": 4143,
+          "ok": true,
+          "timings": {
+            "load_ms": 1331,
+            "packages_ms": 635,
+            "run_ms": 2115
+          },
+          "startup_ms": 0
+        }
+      ]
+    },
+    "node-1GiB | price per TB with pandas | warm": {
+      "median_ms": 50,
+      "runs": [
+        {
+          "ms": 48,
+          "ok": true,
+          "timings": {
+            "warmup_ms": 4117,
+            "load_ms": 0,
+            "packages_ms": 1,
+            "run_ms": 21
+          },
+          "startup_ms": 4140
+        },
+        {
+          "ms": 51,
+          "ok": true,
+          "timings": {
+            "warmup_ms": 4133,
+            "load_ms": 0,
+            "packages_ms": 1,
+            "run_ms": 24
+          },
+          "startup_ms": 4155
+        },
+        {
+          "ms": 50,
+          "ok": true,
+          "timings": {
+            "warmup_ms": 4029,
+            "load_ms": 0,
+            "packages_ms": 1,
+            "run_ms": 22
+          },
+          "startup_ms": 4055
+        }
+      ]
+    },
+    "node-1GiB | plain arithmetic | cold": {
+      "median_ms": 1400,
+      "runs": [
+        {
+          "ms": 1454,
+          "ok": true,
+          "timings": {
+            "load_ms": 1394,
+            "packages_ms": 1,
+            "run_ms": 11
+          },
+          "startup_ms": 0
+        },
+        {
+          "ms": 1400,
+          "ok": true,
+          "timings": {
+            "load_ms": 1345,
+            "packages_ms": 1,
+            "run_ms": 4
+          },
+          "startup_ms": 0
+        },
+        {
+          "ms": 1386,
+          "ok": true,
+          "timings": {
+            "load_ms": 1329,
+            "packages_ms": 1,
+            "run_ms": 5
+          },
+          "startup_ms": 0
+        }
+      ]
+    },
+    "node-1GiB | plain arithmetic | warm": {
+      "median_ms": 33,
+      "runs": [
+        {
+          "ms": 35,
+          "ok": true,
+          "timings": {
+            "warmup_ms": 4123,
+            "load_ms": 0,
+            "packages_ms": 1,
+            "run_ms": 4
+          },
+          "startup_ms": 4149
+        },
+        {
+          "ms": 33,
+          "ok": true,
+          "timings": {
+            "warmup_ms": 4031,
+            "load_ms": 0,
+            "packages_ms": 1,
+            "run_ms": 3
+          },
+          "startup_ms": 4054
+        },
+        {
+          "ms": 31,
+          "ok": true,
+          "timings": {
+            "warmup_ms": 4002,
+            "load_ms": 0,
+            "packages_ms": 1,
+            "run_ms": 3
+          },
+          "startup_ms": 4026
+        }
+      ]
+    }
+  }
+}

@@ -26,3 +26,8 @@ app.kubernetes.io/instance: {{ .Release.Name }}
 app.kubernetes.io/name: searxng
 app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end -}}
+
+{{- define "mcpgw.codeRunnerSelectorLabels" -}}
+app.kubernetes.io/name: code-runner
+app.kubernetes.io/instance: {{ .Release.Name }}
+{{- end -}}

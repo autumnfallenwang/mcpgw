@@ -43,6 +43,8 @@ mcpgw never calls an LLM itself, and it never runs an agent loop.
 - `web_search`: query the web through a self-hosted **SearXNG**, behind a replaceable provider
   ([ADR 0009](adr/0009-search-behind-a-replaceable-provider.md)).
 - `web_fetch`: read one URL as clean text, with strict safety rules (§6).
+- `code_run`: run Python in a sandbox that can reach nothing, for maths and data checks (§5.3,
+  [ADR 0014](adr/0014-run-python-in-pyodide-under-deno.md)). Added 2026-11-10.
 - MCP over **Streamable HTTP** at `/mcp`, the only tool interface
   ([ADR 0005](adr/0005-mcp-only-no-rest-mirror.md)).
 - Deployed on k3s by Argo CD from arch-infra, like llmgw and homestorm.
@@ -51,7 +53,6 @@ mcpgw never calls an LLM itself, and it never runs an agent loop.
 
 | Item | Notes |
 |---|---|
-| `code_run` | Sandboxed Python for maths and small data checks. Needs real isolation (a k8s Job with no network, gVisor or similar). The riskiest tool; never in the mcpgw process |
 | `docs_search` | Retrieval over the user's own notes and meeting minutes, using llmgw's `/v1/embeddings` |
 | Home data, read-only | homecal events, homenews articles, cluster status from Loki |
 | Per-client bearer tokens | Before any untrusted device or wider exposure ([ADR 0008](adr/0008-only-arch-and-the-cluster-no-auth.md)) |
@@ -68,13 +69,16 @@ JavaScript pages.
   (app)     │                                                            │
             ├─► mcpgw ──► SearXNG ──► Yahoo · DuckDuckGo · Bing · …      │
             │     │                                                      │
-            │     └────► the public web (web_fetch, with the §6 guards)  │
+            │     ├────► the public web (web_fetch, with the §6 guards)  │
+            │     │                                                      │
+            │     └────► code-runner (code_run: reaches nothing)         │
             └────────────────────────────────────────────────────────────┘
 ```
 
 - **mcpgw:** one stateless Node service (no database in v1).
 - **SearXNG:** a second Deployment in the same Argo CD app and namespace. It's an implementation detail: only
   mcpgw talks to it, and apps never see its URL.
+- **code-runner:** a third, for `code_run`. Deno, not Node, and it can reach nothing (§5.3).
 
 **Stack** ([ADR 0001](adr/0001-house-stack.md)): the same as llmgw and homestorm, so one person can keep both in
 their head: TypeScript on Node, Hono, zod 4, pino (the house JSON log shape), Vitest, Biome, pnpm. MCP through the
@@ -282,6 +286,39 @@ into Markdown for Agents answer with Markdown, which skips extraction.
   5 MB page took 9.5 s and 1.3 GB, freezing every caller. Now a page over either limit fails alone, the worker is thrown
   away, and the model is told to try another source. All handling of page content happens there, including decoding.
 
+### 5.3 `code_run`
+
+Python 3.14 in Pyodide, for arithmetic, tables and statistics that models get wrong in their heads
+([ADR 0014](adr/0014-run-python-in-pyodide-under-deno.md)). Offered only when `CODE_RUNNER_URL` is set.
+
+- **Input:** `code`, up to 20,000 characters.
+- **What comes back:** what the code printed, then `Value of the last line: …` when the last line is an expression. A Python
+  error is a normal result, "Python raised an error:" and a traceback of the code's own lines only, so the model can fix it.
+- **Packages:** the standard library plus numpy, pandas, scipy and sympy. Anything else is a `ModuleNotFoundError` that says
+  what is available. Nothing can be installed.
+- **Each call starts fresh:** a new process, never reused, so nothing carries from one call to the next.
+- **Failures, as `isError` with what to do next:** over 20 s (`timeout`); out of memory; the code tried something the sandbox
+  refuses, such as `os.system`, which stops Python itself (`blocked`); too many runs waiting (`busy`); the runner down.
+- **Limits:** output to the model is cut at 16,000 characters (the runner keeps 64 KB). Python's memory stops at about 1 GB
+  with a `MemoryError`. Two runs at once; the rest wait up to 20 s for a turn.
+
+**The runner** (`code-runner/`, a Deno service in its own pod):
+
+- **`server.mjs`** takes `POST /run {code}` from mcpgw. **`pool.mjs`** keeps two runners started ahead, each with numpy and
+  pandas loaded, and hands each run to one, which then exits. A run waits about 50 ms; a cold start is 1.5 to 5 s.
+- **`runner.mjs`** is one run. Deno gives it only `--allow-read` on Pyodide, with `--no-remote --no-npm`: no network, files,
+  env, programs or FFI. `--no-remote` matters, since plain Deno lets `import()` load code from esm.sh and jsdelivr, and the
+  URL can carry data out. Its WebAssembly memory is capped at 1 GiB and its JavaScript heap at 512 MB, and it starts with an
+  empty environment.
+- **The pod is the second layer:** its NetworkPolicy allows no egress at all and ingress only from mcpgw. It runs as uid
+  1000 with a read-only root, no capabilities, `RuntimeDefault` seccomp and no service-account token. Each run is marked first
+  for the kernel's out-of-memory killer, so a runaway run dies rather than the server, and a started-ahead runner that dies
+  with it is replaced.
+- **`fetch-pyodide.mjs`** downloads Pyodide and the packages and checks each file against a pinned hash; the image build,
+  CI and local development all use it.
+- **Pyodide alone is no sandbox:** with no permissions set, the same code reached the network and ran `id` on arch. Deno's
+  flags are what hold, so changing them is a security change, and `sandbox_test.mjs` tests them.
+
 ## 6. Safety rules for `web_fetch`
 
 ### 6.1 The app's own checks
@@ -355,7 +392,13 @@ can't tell where a URL came from, so the rule has to live with whoever holds the
 | `FETCH_MAX_BYTES` | `5242880` | |
 | `FETCH_MAX_URL_CHARS` | `250` | |
 | `FETCH_CACHE_TTL_S` | `600` | |
+| `CODE_RUNNER_URL` | unset | The code runner. Unset, `code_run` isn't offered. The chart sets it when `codeRunner.enabled` |
+| `CODE_RUN_TIMEOUT_MS` | `20000` | What the model is told the limit is. The chart gives the runner the same value |
+| `CODE_RUNNER_WAIT_MS` | `58000` | How long mcpgw waits for the runner: a turn, a runner starting, then the run. Under the 60 s an MCP client waits |
 | `LOG_LEVEL` | `info` | |
+
+**The runner's own** (set by the chart from `codeRunner`): `CODE_RUNNER_PORT` (`8080`), `CODE_RUNNER_POOL` (`2` started
+ahead), `CODE_RUNNER_MAX_RUNNING` (`2`), `CODE_RUN_TIMEOUT_MS` (`20000`) and `CODE_RUN_QUEUE_TIMEOUT_MS` (`20000`).
 
 **SearXNG `settings.yml`** (a ConfigMap):
 
@@ -372,7 +415,8 @@ can't tell where a URL came from, so the rule has to live with whoever holds the
 
 - **Repo:** `autumnfallenwang/mcpgw`, public like the sibling apps (no secrets in it). Local checkout
   `~/agentic/mcpgw`.
-- **Images:** `ghcr.io/autumnfallenwang/mcpgw:<git sha>`, built by GitHub Actions on main. CI runs lint, typecheck
+- **Images:** `ghcr.io/autumnfallenwang/mcpgw:<git sha>`, and the runner's as `<git sha>-code-runner` in the same package, so
+  one tag in arch-infra moves both. Built by GitHub Actions on main. CI runs lint, typecheck
   and tests first, then builds. A bump job updates arch-infra if `ARCH_INFRA_TOKEN` is set; otherwise bump by
   hand (homestorm's current practice).
 - **Kubernetes (namespace `mcpgw`), one Helm chart at `deploy/chart`:**
@@ -380,12 +424,14 @@ can't tell where a URL came from, so the rule has to live with whoever holds the
     on port 80, like llmgw. Probes on `/health`;
   - Deployment `searxng` and Service `searxng:8080`, cluster-internal only;
   - ConfigMap `searxng-settings`, from `deploy/chart/files/settings.yml`;
+  - Deployment and Service `code-runner:8080`, with its own NetworkPolicy, when `codeRunner.enabled` (§5.3);
   - the §6.2 NetworkPolicies;
   - no Ingress, for either Deployment ([ADR 0008](adr/0008-only-arch-and-the-cluster-no-auth.md)), and Service `mcpgw`'s IP is pinned.
 - **Argo CD:** `apps/mcpgw.yaml` in arch-infra (the root app-of-apps), review copy in `deploy/arch-infra/`, tags
   pinned to the image SHA.
 - **Resources:** mcpgw uses about 75 MB and SearXNG about 100 MB. Both request 128 MB. mcpgw's limit is 512 MB, enough for
-  the main thread plus both workers at their caps.
+  the main thread plus both workers at their caps. The code runner uses about 0.7 GB idle, requests 1 GiB and is limited to
+  3.5 GiB and 2 CPUs: two runs at their 1 GB cap plus two started ahead.
 - **Local dev:** `docker run -p 127.0.0.1:8180:8080 -e SEARXNG_SECRET=dev -v ./deploy/chart/files:/etc/searxng:ro
   searxng/searxng:<tag>`, then `ALLOWED_HOSTS=127.0.0.1 SEARXNG_URL=http://127.0.0.1:8180 pnpm dev` on port 3002.
 
@@ -398,13 +444,16 @@ One JSON object per line, the same shape as llmgw and homestorm (`level`, `time`
 |---|---|
 | `server.start` | `port`, `searxng_url` |
 | `http.request` | `method`, `path`, `status`, `latency_ms`, `client`, `request_id` |
-| `tool.call` | `tool`, `client`, `request_id`, `status` (`ok` / `error` / `blocked` / `timeout`), `duration_ms`, `cached`, and `results` (search) or `bytes`, `final_host`, `total_chars` and `via` (fetch), plus `thin` for a web page with under 1,000 characters of text |
+| `tool.call` | `tool`, `client`, `request_id`, `status` (`ok` / `error` / `blocked` / `timeout`), `duration_ms`, `cached`, and `results` (search) or `bytes`, `final_host`, `total_chars` and `via` (fetch), plus `thin` for a web page with under 1,000 characters of text. For `code_run`: `outcome` (`ok`, `python_error`, `timeout`, `out_of_memory`, `refused`, `busy`, `crashed`, `unavailable`), `code_chars`, `output_chars`, `truncated`, `run_ms`, `waited_ms` |
+| `code.run` | From the runner (`service: "code-runner"`): `status`, `code_chars`, `output_chars`, `run_ms`, `waited_ms`, `duration_ms` |
+| `code_runner.crashed` | `exit`, `refused`, and the end of the runner's stderr |
 | `fetch.blocked` | `reason`, `host` |
 | `searxng.error` | `status`, `engine_errors` |
 | `searxng.engine_paused` | `engine`, `reason`, `minutes`: an engine that refused is left out for this long |
 
 - Search queries are logged at `info` (household-internal and useful for debugging). Fetched page text is never
-  logged, and neither are full fetch URLs, since a query string can carry private data.
+  logged, and neither are full fetch URLs, since a query string can carry private data. Nor is code or what it printed:
+  either may hold meeting content.
 - **Alerts:** two Grafana rules in [deploy/observability/alerting-rules.yaml](../deploy/observability/alerting-rules.yaml): web search
   failing, and an engine that keeps refusing. A copy is in arch-infra's Grafana values. They show
   only in Grafana: nothing sends them anywhere, by the user's decision on 2026-11-10.
@@ -452,6 +501,9 @@ tools at all, since `tool_choice: "none"` made DeepSeek write raw tool markup in
   - the guards: wrong `Host` 403, any `Origin` 403, `GET` and `DELETE` 405, and `/health` 200 with a pod-IP `Host`.
 - **Live, opt-in** (`pnpm test:live`): real SearXNG and one real page fetch, plus one llmgw round trip per family
   (Claude, GPT, DeepSeek) where the model calls `web_search` and answers from its result.
+- **The sandbox** (`deno test` on `code-runner/`, in CI too): every way out the spike found, network, files, env, programs,
+  FFI, the real disk, and `import()` from code hosts, must stay blocked; plus the limits, nothing carrying over between runs,
+  and a started-ahead run answering in under a second. CI has a network, so it shows Deno's flags hold on their own.
 - **Harness check:** the record of testing real Claude Code and Codex is in [dev/harness-check/](../dev/harness-check/). Re-run it
   if a harness is ever reconnected, because which block a harness shows its model isn't set by the spec.
 

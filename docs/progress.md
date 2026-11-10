@@ -6,6 +6,26 @@ A dated log of what was done and decided, newest first. The plan and milestone s
 
 ## 2026-11-10
 
+- **code_run, on the user's go** ("this is needed", then "go dev e2e for that"), after a research round and a spike
+  ([ADR 0014](adr/0014-run-python-in-pyodide-under-deno.md)).
+  - **Research:** vendor sandboxes have no network and belong to one vendor; harness sandboxes protect a laptop; sandbox
+    platforms use Firecracker or gVisor; Kubernetes' Agent Sandbox reached v1.0 and takes gVisor or Kata. arch has KVM but no
+    gVisor, k3s v1.35.4 with containerd 2.2, 16 cores and 62 GB, of which the cluster's pods used 0.18 cores and 3.1 GiB.
+  - **Spike** ([dev/code-run-spike](../dev/code-run-spike/README.md)): Pyodide 314.0.7 under Deno 2.9.8 and Node 26, beside a
+    control with no restrictions. Nothing got out of either locked host, to the internet, cluster services or the home LAN, and
+    no real files, env, programs or disk mounts. Plain Deno let `import()` load code from esm.sh and jsdelivr, which
+    `--no-remote` closes. In the control, `os.system("id")` ran on arch: Pyodide alone is no sandbox. Deno was chosen over Node:
+    Node's permission model isn't meant to stop malicious code, leaves env readable, and needs a workaround to start Pyodide.
+  - **Built:** `code-runner/`, a Deno service in its own pod, a fresh process per run with only `--allow-read` on Pyodide, two
+    started ahead (about 50 ms a run instead of 1.5 to 5 s), two at once, 20 s per run, 1 GiB of Python memory. Its
+    NetworkPolicy allows no egress at all. `code_run` in mcpgw, offered only when the runner is configured, logs sizes and the
+    outcome only. 14 sandbox tests run in CI with `deno test`, and 17 more in vitest.
+  - **Found while building:** the kernel's out-of-memory killer took an idle started-ahead runner along with a JavaScript memory
+    bomb, and the next run was handed the dead one. The pool now replaces a runner that dies while it waits. Python's crash dump
+    and Deno's "run again with --allow-net" were reaching the model; both are cleaned.
+  - **Checked locally:** in a container shaped like the pod (read-only root, uid 1000, no capabilities, 3.5 GiB), and through
+    mcpgw over MCP: price per TB, a pandas sum, a Python error, a refused fetch of mcpgw's own address, and `os.system`.
+
 - **On the user's "go all e2e for them for me":** one real 8-seat homestorm meeting, and the alerts.
 - **The meeting:** 8 seats (Claude Haiku 5.5, Sonnet 5.5 and Sonnet 5, GPT-5.6 Luna and Terra, GPT-6 Luna, DeepSeek Flash and
   V4 Pro), all with web tools. 2 rounds, each sent to everyone at once: the current k3s release, then the latest MCP spec and

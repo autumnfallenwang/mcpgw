@@ -1,0 +1,217 @@
+{
+  "date": "2026-11-10T05:44:06.322Z",
+  "node": "v26.13.0",
+  "results": {
+    "Python: mount the host disk": {
+      "deno": {
+        "wall_ms": 1702,
+        "peak_rss_mb": 233,
+        "ok": true,
+        "value": null,
+        "output": "BLOCKED mount the host disk (NODEFS) and read /etc/passwd -> JsException NotCapable: Requires read access to \"/\", run again with the --allow-read flag\n",
+        "truncated": false,
+        "timings": {
+          "load_ms": 1653,
+          "packages_ms": 2,
+          "run_ms": 13
+        },
+        "rss_mb": 203
+      },
+      "deno-no-remote": {
+        "wall_ms": 1682,
+        "peak_rss_mb": 219,
+        "ok": true,
+        "value": null,
+        "output": "BLOCKED mount the host disk (NODEFS) and read /etc/passwd -> JsException NotCapable: Requires read access to \"/\", run again with the --allow-read flag\n",
+        "truncated": false,
+        "timings": {
+          "load_ms": 1637,
+          "packages_ms": 1,
+          "run_ms": 10
+        },
+        "rss_mb": 189
+      },
+      "node": {
+        "wall_ms": 1392,
+        "peak_rss_mb": 213,
+        "ok": true,
+        "value": null,
+        "output": "BLOCKED mount the host disk (NODEFS) and read /etc/passwd -> JsException Error: A value of type object with tag [object Object] was thrown as an error! String interpolation of the thrown value gives \"\"\"[object Obj\n",
+        "truncated": false,
+        "timings": {
+          "load_ms": 1343,
+          "packages_ms": 1,
+          "run_ms": 12
+        },
+        "rss_mb": 213
+      },
+      "node-open (control)": {
+        "wall_ms": 1445,
+        "peak_rss_mb": 233,
+        "ok": true,
+        "value": null,
+        "output": "ESCAPED mount the host disk (NODEFS) and read /etc/passwd -> [the start of /etc/passwd, redacted]\n",
+        "truncated": false,
+        "timings": {
+          "load_ms": 1402,
+          "packages_ms": 1,
+          "run_ms": 7
+        },
+        "rss_mb": 214
+      }
+    },
+    "Python: its own files": {
+      "deno": {
+        "wall_ms": 1655,
+        "peak_rss_mb": 216,
+        "ok": true,
+        "value": null,
+        "output": "BLOCKED open /etc/passwd -> FileNotFoundError [Errno 44] No such file or directory: '/etc/passwd'\nESCAPED listdir / -> ['tmp', 'home', 'dev', 'proc', 'lib']\nESCAPED listdir /home -> ['web_user', 'pyodide']\n",
+        "truncated": false,
+        "timings": {
+          "load_ms": 1615,
+          "packages_ms": 2,
+          "run_ms": 8
+        },
+        "rss_mb": 182
+      },
+      "deno-no-remote": {
+        "wall_ms": 1641,
+        "peak_rss_mb": 235,
+        "ok": true,
+        "value": null,
+        "output": "BLOCKED open /etc/passwd -> FileNotFoundError [Errno 44] No such file or directory: '/etc/passwd'\nESCAPED listdir / -> ['tmp', 'home', 'dev', 'proc', 'lib']\nESCAPED listdir /home -> ['web_user', 'pyodide']\n",
+        "truncated": false,
+        "timings": {
+          "load_ms": 1599,
+          "packages_ms": 1,
+          "run_ms": 8
+        },
+        "rss_mb": 200
+      },
+      "node": {
+        "wall_ms": 1446,
+        "peak_rss_mb": 228,
+        "ok": true,
+        "value": null,
+        "output": "BLOCKED open /etc/passwd -> FileNotFoundError [Errno 44] No such file or directory: '/etc/passwd'\nESCAPED listdir / -> ['tmp', 'home', 'dev', 'proc', 'lib']\nESCAPED listdir /home -> ['web_user', 'pyodide']\n",
+        "truncated": false,
+        "timings": {
+          "load_ms": 1392,
+          "packages_ms": 1,
+          "run_ms": 14
+        },
+        "rss_mb": 223
+      },
+      "node-open (control)": {
+        "wall_ms": 1427,
+        "peak_rss_mb": 198,
+        "ok": true,
+        "value": null,
+        "output": "BLOCKED open /etc/passwd -> FileNotFoundError [Errno 44] No such file or directory: '/etc/passwd'\nESCAPED listdir / -> ['tmp', 'home', 'dev', 'proc', 'lib']\nESCAPED listdir /home -> ['web_user', 'pyodide']\n",
+        "truncated": false,
+        "timings": {
+          "load_ms": 1385,
+          "packages_ms": 1,
+          "run_ms": 6
+        },
+        "rss_mb": 198
+      }
+    },
+    "Python: os.system": {
+      "deno": {
+        "wall_ms": 1632,
+        "peak_rss_mb": 234,
+        "exit": 1,
+        "raw": "",
+        "stderr": "> (wasm://wasm/0249d42a:wasm-function[0]:0xd7671) {\n  pyodide_fatal_error: true\n}\n\u001b[0m\u001b[1m\u001b[31merror\u001b[0m: Top-level await promise never resolved\n  const value = await pyodide.runPythonAsync(code);\n\u001b[0m\u001b[31m                ^\u001b[0m\n    at \u001b[0m\u001b[1m\u001b[3m<anonymous>\u001b[0m (\u001b[0m\u001b[2m\u001b[38;5;245mfile:///home/aaronwang/agentic/mcpgw/dev/code-run-spike/\u001b[0m\u001b[0m\u001b[36mrunner.mjs\u001b[0m:\u001b[0m\u001b[33m48\u001b[0m:\u001b[0m\u001b[33m17\u001b[0m)\n"
+      },
+      "deno-no-remote": {
+        "wall_ms": 1679,
+        "peak_rss_mb": 220,
+        "exit": 1,
+        "raw": "",
+        "stderr": "> (wasm://wasm/0249d42a:wasm-function[0]:0xd7671) {\n  pyodide_fatal_error: true\n}\n\u001b[0m\u001b[1m\u001b[31merror\u001b[0m: Top-level await promise never resolved\n  const value = await pyodide.runPythonAsync(code);\n\u001b[0m\u001b[31m                ^\u001b[0m\n    at \u001b[0m\u001b[1m\u001b[3m<anonymous>\u001b[0m (\u001b[0m\u001b[2m\u001b[38;5;245mfile:///home/aaronwang/agentic/mcpgw/dev/code-run-spike/\u001b[0m\u001b[0m\u001b[36mrunner.mjs\u001b[0m:\u001b[0m\u001b[33m48\u001b[0m:\u001b[0m\u001b[33m17\u001b[0m)\n"
+      },
+      "node": {
+        "wall_ms": 1450,
+        "peak_rss_mb": 230,
+        "exit": 1,
+        "raw": "",
+        "stderr": "wasm/0249d42a:wasm-function[2350]:0x10d1e9\n    at wasm://wasm/0249d42a:wasm-function[1213]:0xbe919\n    at wasm://wasm/0249d42a:wasm-function[3792]:0x1c537a\n    at wasm://wasm/0249d42a:wasm-function[1623]:0xd7671\n    at wasm://wasm/0249d42a:wasm-function[1648]:0xd8a2d {\n  code: 'ERR_ACCESS_DENIED',\n  permission: 'ChildProcess',\n  resource: '/bin/sh',\n  pyodide_fatal_error: true\n}\n\nNode.js v26.13.0\n"
+      },
+      "node-open (control)": {
+        "wall_ms": 1386,
+        "peak_rss_mb": 207,
+        "ok": true,
+        "value": null,
+        "output": "ESCAPED os.system -> 0\n",
+        "truncated": false,
+        "timings": {
+          "load_ms": 1338,
+          "packages_ms": 1,
+          "run_ms": 11
+        },
+        "rss_mb": 209
+      }
+    },
+    "Python: subprocess": {
+      "deno": {
+        "wall_ms": 1621,
+        "peak_rss_mb": 217,
+        "ok": true,
+        "value": null,
+        "output": "BLOCKED subprocess -> OSError [Errno 138] emscripten does not support processes.\n",
+        "truncated": false,
+        "timings": {
+          "load_ms": 1580,
+          "packages_ms": 1,
+          "run_ms": 9
+        },
+        "rss_mb": 179
+      },
+      "deno-no-remote": {
+        "wall_ms": 1635,
+        "peak_rss_mb": 237,
+        "ok": true,
+        "value": null,
+        "output": "BLOCKED subprocess -> OSError [Errno 138] emscripten does not support processes.\n",
+        "truncated": false,
+        "timings": {
+          "load_ms": 1594,
+          "packages_ms": 1,
+          "run_ms": 8
+        },
+        "rss_mb": 217
+      },
+      "node": {
+        "wall_ms": 1486,
+        "peak_rss_mb": 225,
+        "ok": true,
+        "value": null,
+        "output": "BLOCKED subprocess -> OSError [Errno 138] emscripten does not support processes.\n",
+        "truncated": false,
+        "timings": {
+          "load_ms": 1441,
+          "packages_ms": 2,
+          "run_ms": 6
+        },
+        "rss_mb": 225
+      },
+      "node-open (control)": {
+        "wall_ms": 1414,
+        "peak_rss_mb": 223,
+        "ok": true,
+        "value": null,
+        "output": "BLOCKED subprocess -> OSError [Errno 138] emscripten does not support processes.\n",
+        "truncated": false,
+        "timings": {
+          "load_ms": 1371,
+          "packages_ms": 1,
+          "run_ms": 6
+        },
+        "rss_mb": 223
+      }
+    }
+  }
+}

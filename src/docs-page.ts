@@ -27,6 +27,8 @@ export interface DocsPageData {
   backend: "ok" | "down" | "unknown";
   /** Null when the backend doesn't report on its engines. */
   engineIssues: EngineIssue[] | null;
+  /** Null when code_run isn't offered. */
+  codeRunner: "ok" | "down" | "unknown" | null;
   tools: DocsTool[];
 }
 
@@ -268,6 +270,12 @@ export function renderDocsPage(page: DocsPageData) {
               <code>${page.backendName}</code>
               <span class="state-${page.backend}">${STATE_WORDS[page.backend]}</span>
             </dd>
+            ${
+              page.codeRunner
+                ? html`<dt>Code runner</dt>
+                    <dd><span class="state-${page.codeRunner}">${STATE_WORDS[page.codeRunner]}</span></dd>`
+                : ""
+            }
           </dl>
           ${engineSection(page.engineIssues)}
 

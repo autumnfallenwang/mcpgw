@@ -20,8 +20,8 @@ Progress against this plan is logged in [progress.md](progress.md). The design i
 
 ### Out (later)
 
-`code_run`, `docs_search`, read-only home data, bearer tokens, a REST mirror and federating other MCP servers. Rendering
-JavaScript pages and public exposure aren't planned at all ([design §2](design.md)).
+`docs_search`, read-only home data, bearer tokens, a REST mirror and federating other MCP servers. Rendering JavaScript pages
+and public exposure aren't planned at all ([design §2](design.md)). `code_run` came after v1, as M11.
 
 ---
 
@@ -265,11 +265,25 @@ The user chose the next steps on 2026-11-07: ship, official APIs, tune from real
 - [ ] **Keep tuning from real meetings.** Newegg refused 3 of the 4 failed fetches in the user's meetings on 2026-11-08 and 09, and
   has no public API, so it stays refused
 
+### M11: `code_run` 🔄
+
+On the user's go on 2026-11-10 ([ADR 0014](adr/0014-run-python-in-pyodide-under-deno.md), [design §5.3](design.md)).
+
+- [x] **Research:** how vendor sandboxes, harnesses, sandbox platforms and Kubernetes do it, and what arch can run
+- [x] **Spike** ([dev/code-run-spike](../dev/code-run-spike/README.md)): Pyodide under Deno and Node, with a control that has no
+  restrictions. Nothing got out of either locked host; plain Deno's `import()` from esm.sh did, which `--no-remote` closes
+- [x] **Runner** (`code-runner/`): a Deno service in its own pod, a fresh process per run, two started ahead, and 14 sandbox
+  tests in CI
+- [x] **Tool:** `code_run` in mcpgw, offered only when the runner is configured, logging sizes and the outcome only
+- [x] **Chart and CI:** the runner's image beside mcpgw's, its NetworkPolicy, and mcpgw allowed to reach it
+- [ ] **Deployed and checked on the cluster:** the runner can reach nothing, and `code_run` answers through mcpgw
+- [ ] **homestorm offers it to seats:** homestorm's own work, in its own session
+
 ## Future work
 
 Each needs its own design note first ([design §2](design.md)):
 
-- **`code_run`:** its own process and sandbox. That's also when to decide how mcpgw reaches tools running elsewhere:
-  proxy them itself, or put a product such as agentgateway in front.
+- **Tools running elsewhere:** `code_run`'s runner is mcpgw's own. If a tool ever lives outside mcpgw, decide whether mcpgw
+  proxies it or a product such as agentgateway goes in front.
 - **`docs_search`,** then **read-only home data.**
 - **Bearer tokens,** before any untrusted device or wider exposure.

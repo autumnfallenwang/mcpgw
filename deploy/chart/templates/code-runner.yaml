@@ -1,0 +1,113 @@
+{{- if .Values.codeRunner.enabled -}}
+{{- $cr := .Values.codeRunner -}}
+# code_run's runner (ADR 0014): model-written Python, each run in a fresh Deno process allowed only to read Pyodide.
+# This pod is the second layer: it can reach nothing, and only mcpgw can reach it.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: code-runner
+  labels:
+    {{- include "mcpgw.labels" . | nindent 4 }}
+    {{- include "mcpgw.codeRunnerSelectorLabels" . | nindent 4 }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      {{- include "mcpgw.codeRunnerSelectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "mcpgw.codeRunnerSelectorLabels" . | nindent 8 }}
+    spec:
+      automountServiceAccountToken: false
+      enableServiceLinks: false
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 1000
+        seccompProfile:
+          type: RuntimeDefault
+      containers:
+        - name: code-runner
+          # Built with mcpgw's image from the same commit, so one tag in arch-infra moves both.
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}-code-runner"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            capabilities:
+              drop:
+                - ALL
+          env:
+            - { name: CODE_RUNNER_PORT, value: {{ $cr.port | quote }} }
+            - { name: CODE_RUNNER_POOL, value: {{ $cr.pool | quote }} }
+            - { name: CODE_RUNNER_MAX_RUNNING, value: {{ $cr.maxRunning | quote }} }
+            - { name: CODE_RUN_TIMEOUT_MS, value: {{ $cr.timeoutMs | quote }} }
+            - { name: CODE_RUN_QUEUE_TIMEOUT_MS, value: {{ $cr.queueTimeoutMs | quote }} }
+          ports:
+            - name: http
+              containerPort: {{ $cr.port }}
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: http
+            initialDelaySeconds: 10
+            periodSeconds: 30
+          # Ready once a runner has started ahead, about 5 s after the pod starts.
+          readinessProbe:
+            httpGet:
+              path: /ready
+              port: http
+            initialDelaySeconds: 3
+            periodSeconds: 5
+          resources:
+            {{- toYaml $cr.resources | nindent 12 }}
+          volumeMounts:
+            - name: tmp
+              mountPath: /tmp
+      volumes:
+        - name: tmp
+          emptyDir:
+            sizeLimit: 256Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: code-runner
+  labels:
+    {{- include "mcpgw.labels" . | nindent 4 }}
+spec:
+  type: ClusterIP
+  selector:
+    {{- include "mcpgw.codeRunnerSelectorLabels" . | nindent 4 }}
+  ports:
+    - name: http
+      port: {{ $cr.port }}
+      targetPort: http
+      protocol: TCP
+---
+# Nothing out, not even DNS, and only mcpgw in. Each run is also refused the network by Deno itself.
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: code-runner
+  labels:
+    {{- include "mcpgw.labels" . | nindent 4 }}
+spec:
+  podSelector:
+    matchLabels:
+      {{- include "mcpgw.codeRunnerSelectorLabels" . | nindent 6 }}
+  policyTypes:
+    - Ingress
+    - Egress
+  ingress:
+    - from:
+        - podSelector:
+            matchLabels:
+              {{- include "mcpgw.selectorLabels" . | nindent 14 }}
+      ports:
+        - { protocol: TCP, port: {{ $cr.port }} }
+  egress: []
+{{- end }}
