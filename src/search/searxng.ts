@@ -26,6 +26,29 @@ const responseSchema = z.object({
   unresponsive_engines: z.array(z.tuple([z.string(), z.string()])).default([]),
 });
 
+/**
+ * The query as the engines are asked it. They only understand a bare domain after `site:`: in an 8-seat meeting on
+ * 2026-11-10, `site:github.com/k3s-io/k3s/releases …` got nothing from Yahoo, news front pages from Bing and a parsing
+ * error from DuckDuckGo, so 4 of 43 searches came back empty. Asked as `site:github.com k3s-io k3s releases …`, Yahoo
+ * returned those release pages. So the path goes in as plain words, and web_search's site filter still holds the
+ * results to it. The cache key keeps the model's own query, since that filter is what decides the results.
+ */
+export function engineQuery(query: string): string {
+  return query.replace(/(^|\s)site:(\S+)/gi, (whole, lead: string, term: string) => {
+    const bare = term.replace(/^https?:\/\//i, "");
+    const slash = bare.indexOf("/");
+    if (slash <= 0) return whole;
+    let path = bare.slice(slash + 1);
+    try {
+      path = decodeURIComponent(path);
+    } catch {
+      // Not valid percent-encoding: the words go in as written.
+    }
+    const words = path.split(/[/?#&=]+/).filter(Boolean);
+    return `${lead}site:${bare.slice(0, slash)}${words.length ? ` ${words.join(" ")}` : ""}`;
+  });
+}
+
 const DOWN_MESSAGE =
   "The search backend isn't answering right now. Try again shortly, or answer without searching and say so.";
 
@@ -99,7 +122,7 @@ export function createSearxngProvider(baseUrl: string): SearchProvider {
 
     async search(query: SearchQuery, signal: AbortSignal): Promise<SearchOutcome> {
       const url = new URL("/search", baseUrl);
-      url.searchParams.set("q", query.query);
+      url.searchParams.set("q", engineQuery(query.query));
       url.searchParams.set("format", "json");
       url.searchParams.set("language", query.language);
       url.searchParams.set("categories", query.category);

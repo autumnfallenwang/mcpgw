@@ -4,6 +4,31 @@ A dated log of what was done and decided, newest first. The plan and milestone s
 
 ---
 
+## 2026-11-10
+
+- **On the user's "go all e2e for them for me":** the alerts, and one real 8-seat homestorm meeting.
+- **The meeting:** 8 seats (Claude Haiku 5.5, Sonnet 5.5 and Sonnet 5, GPT-5.6 Luna and Terra, GPT-6 Luna, DeepSeek Flash and
+  V4 Pro), all with web tools. 2 rounds, each sent to everyone at once: the current k3s release, then the latest MCP spec and
+  recent news. Titled "mcpgw test: 8 seats, 2 rounds (safe to delete)".
+  - **Calls:** 43 searches and 27 fetches, none failed. 12 fetches came from the cache, and none were `thin`.
+  - **Answers:** 7 of 8 seats named k3s v1.37.2+k3s1, which is the stable channel. GPT-6 Luna named v1.34.13+k3s1, an older
+    line released the same day. All 8 named MCP spec 2026-07-28.
+  - **Waits:** 22 searches in 27 s in round 1. With searches 1 s apart, the median search took 4.6 s and the longest 13 s, nearly
+    all of it waiting for a turn. There were no CAPTCHAs and no refusals, so the gap stays at 1 s.
+  - **Engine errors:** DuckDuckGo's parsing error on `site:` searches 12 times, as before. Wikipedia answered HTTP errors and
+    was left out for a while (9 times); it adds little to these searches.
+  - **Empty:** 4 searches, all with a path after `site:` (`site:github.com/k3s-io/k3s/releases …`). Run again on a local SearXNG,
+    Yahoo found nothing for the path form and Bing returned news front pages. Asked `site:github.com k3s-io k3s releases …`,
+    Yahoo returned the releases pages.
+- **Fix:** the SearXNG provider now sends a bare domain after `site:`, with the path as words. web_search's filter still holds
+  results to the path, and the cache key keeps the model's own query. The query that was empty now returns the k3s releases
+  pages.
+- **Alerts, ntfy.sh:** chosen on the same go, since it needs nothing from the user but the app. arch-infra is a public repo and an
+  ntfy topic works as its password, so the topic is random and goes in a Secret, `observability/grafana-ntfy`, never in git.
+  Auto mode doesn't allow Secret writes, so the user creates it. A message posted to the topic with ntfy's `grafana` template
+  arrived as a title and a message. The arch-infra change routes only `app=mcpgw` alerts to it. It waits for the Secret,
+  since Grafana's new pod can't start without it.
+
 ## 2026-11-09
 
 - **Plan, on the user's "go all 1-6 e2e and push":** six items, from the user's own meetings on 2026-11-08 and 09 (Node.js

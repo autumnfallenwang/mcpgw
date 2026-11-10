@@ -207,6 +207,9 @@ Use web_fetch to read a page.
 - Results with the same URL are merged (SearXNG mostly does this).
 - `site:` terms in a query are applied here as well, because not every engine honours them and models use them in about half
   their searches.
+- Engines only understand a bare domain after `site:`, so the SearXNG provider sends `site:github.com/k3s-io/k3s/releases` as
+  `site:github.com k3s-io k3s releases`, and the filter above still holds results to the path. The cache key keeps the model's
+  own query. With the path left in, Yahoo found nothing and Bing returned news front pages.
 - A narrow category that finds fewer than 3 results is filled in from a general search. `it` is only GitHub and Stack Overflow, and
   GPT-5.6 Luna often picked it for ordinary technical questions and got one stray result, or none.
 - An empty result gets one more try after 1.5 s and is never cached. The message says an empty result doesn't prove nothing

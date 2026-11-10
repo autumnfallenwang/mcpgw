@@ -4,7 +4,7 @@ import { afterAll, afterEach, beforeAll, describe, expect, it, vi } from "vitest
 import { TtlCache } from "../src/lib/cache.js";
 import { Limiter, QueueTimeout } from "../src/lib/limiter.js";
 import { Pacer } from "../src/lib/pacer.js";
-import { createSearxngProvider } from "../src/search/searxng.js";
+import { createSearxngProvider, engineQuery } from "../src/search/searxng.js";
 import { SearchService } from "../src/search/service.js";
 import type { SearchOutcome, SearchProvider, SearchQuery } from "../src/search/types.js";
 import { ToolFailure } from "../src/tools/result.js";
@@ -246,6 +246,31 @@ describe("SearchService", () => {
   });
 });
 
+describe("engineQuery", () => {
+  it.each([
+    // From the 2026-11-10 meeting.
+    [
+      "site:kubernetes.io/blog Kubernetes v1.37.2 OR site:github.com/kubernetes/kubernetes/releases/tag/v1.37.2",
+      "site:kubernetes.io blog Kubernetes v1.37.2 OR site:github.com kubernetes kubernetes releases tag v1.37.2",
+    ],
+    ["latest site:https://docs.k3s.io/release-notes/", "latest site:docs.k3s.io release-notes"],
+    [
+      "site:github.com/k3s-io/k3s/releases?q=v1.37%2Bk3s1",
+      "site:github.com k3s-io k3s releases q v1.37+k3s1",
+    ],
+    // Left alone: a bare domain, an excluded site, a quoted URL, and broken percent-encoding.
+    ["site:docs.k3s.io release notes", "site:docs.k3s.io release notes"],
+    ["k3s -site:reddit.com/r/kubernetes", "k3s -site:reddit.com/r/kubernetes"],
+    [
+      '"modelcontextprotocol.io/specification" latest',
+      '"modelcontextprotocol.io/specification" latest',
+    ],
+    ["site:a.example/100%", "site:a.example 100%"],
+  ])("%s", (query, expected) => {
+    expect(engineQuery(query)).toBe(expected);
+  });
+});
+
 describe("SearXNG provider, against a fake SearXNG", () => {
   let server: Server;
   let base: string;
@@ -457,6 +482,18 @@ describe("SearXNG provider, against a fake SearXNG", () => {
       { title: "No date", url: "https://b.example/", snippet: "", engines: [] },
     ]);
     expect(out.suggestions).toEqual(["more gold"]);
+  });
+
+  it("asks the engines for a bare domain after site:, with the path as words", async () => {
+    reply = { status: 200, body: { results: [] } };
+    const provider = createSearxngProvider(base);
+    await provider.search(
+      { ...QUERY, query: "site:github.com/k3s-io/k3s/releases latest release" },
+      signal(),
+    );
+    expect(lastUrl.searchParams.get("q")).toBe(
+      "site:github.com k3s-io k3s releases latest release",
+    );
   });
 
   it("keeps results when only some engines failed", async () => {

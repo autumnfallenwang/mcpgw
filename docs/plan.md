@@ -3,7 +3,7 @@
 What the first workable version of mcpgw includes, the milestones to get there, and the decisions still open.
 Progress against this plan is logged in [progress.md](progress.md). The design is in [design.md](design.md).
 
-**Updated:** 2026-11-09
+**Updated:** 2026-11-10
 
 ---
 
@@ -257,7 +257,12 @@ The user chose the next steps on 2026-11-07: ship, official APIs, tune from real
   restart the pod and forget which engines are left out
 - [x] **Upkeep comes as an issue** on the 7th of each month, with what changed upstream already checked
   ([upkeep.md](upkeep.md))
-- [ ] **Alerts reach someone:** waiting for the user to pick ntfy, Discord or email. It's a change in arch-infra
+- [x] **An 8-seat meeting** on 2026-11-10, 2 rounds sent to every seat at once: 43 searches and 27 fetches, none failed; 7 of 8
+  seats named the right k3s release and 8 of 8 the right MCP spec. Waits for a turn reached 13 s, and 1 s apart drew no refusals
+- [x] **`site:` with a path** goes to the engines as a bare domain plus the path as words. In that meeting it was 4 of the 43
+  searches, and all came back empty
+- [ ] **Alerts reach someone:** the user's go for ntfy.sh on 2026-11-10. The arch-infra change waits for its Secret, which only
+  the user can create
 - [ ] **Keep tuning from real meetings.** Newegg refused 3 of the 4 failed fetches in the user's meetings on 2026-11-08 and 09, and
   has no public API, so it stays refused
 
