@@ -6,7 +6,7 @@ A dated log of what was done and decided, newest first. The plan and milestone s
 
 ## 2026-11-10
 
-- **On the user's "go all e2e for them for me":** the alerts, and one real 8-seat homestorm meeting.
+- **On the user's "go all e2e for them for me":** one real 8-seat homestorm meeting, and the alerts.
 - **The meeting:** 8 seats (Claude Haiku 5.5, Sonnet 5.5 and Sonnet 5, GPT-5.6 Luna and Terra, GPT-6 Luna, DeepSeek Flash and
   V4 Pro), all with web tools. 2 rounds, each sent to everyone at once: the current k3s release, then the latest MCP spec and
   recent news. Titled "mcpgw test: 8 seats, 2 rounds (safe to delete)".
@@ -23,11 +23,11 @@ A dated log of what was done and decided, newest first. The plan and milestone s
 - **Fix:** the SearXNG provider now sends a bare domain after `site:`, with the path as words. web_search's filter still holds
   results to the path, and the cache key keeps the model's own query. The query that was empty now returns the k3s releases
   pages.
-- **Alerts, ntfy.sh:** chosen on the same go, since it needs nothing from the user but the app. arch-infra is a public repo and an
-  ntfy topic works as its password, so the topic is random and goes in a Secret, `observability/grafana-ntfy`, never in git.
-  Auto mode doesn't allow Secret writes, so the user creates it. A message posted to the topic with ntfy's `grafana` template
-  arrived as a title and a message. The arch-infra change routes only `app=mcpgw` alerts to it. It waits for the Secret,
-  since Grafana's new pod can't start without it.
+- **Alerts stay in Grafana.** An ntfy.sh setup was prepared (a random topic in a Secret, since arch-infra is public), then
+  dropped before anything was pushed: the user doesn't want alerts on the phone or anywhere else, as it was never on the list.
+  The local arch-infra change was reverted.
+- **Deployed by pushing** as `6838c84` (CI's own bump). On the cluster, one of the meeting's empty `site:` searches now returns
+  the k3s releases pages.
 
 ## 2026-11-09
 

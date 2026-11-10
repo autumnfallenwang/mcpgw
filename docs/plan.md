@@ -261,8 +261,7 @@ The user chose the next steps on 2026-11-07: ship, official APIs, tune from real
   seats named the right k3s release and 8 of 8 the right MCP spec. Waits for a turn reached 13 s, and 1 s apart drew no refusals
 - [x] **`site:` with a path** goes to the engines as a bare domain plus the path as words. In that meeting it was 4 of the 43
   searches, and all came back empty
-- [ ] **Alerts reach someone:** the user's go for ntfy.sh on 2026-11-10. The arch-infra change waits for its Secret, which only
-  the user can create
+- [x] **Alerts stay in Grafana,** the user's decision on 2026-11-10: nothing sends them anywhere, phone included
 - [ ] **Keep tuning from real meetings.** Newegg refused 3 of the 4 failed fetches in the user's meetings on 2026-11-08 and 09, and
   has no public API, so it stays refused
 

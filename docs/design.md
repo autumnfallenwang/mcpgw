@@ -406,7 +406,8 @@ One JSON object per line, the same shape as llmgw and homestorm (`level`, `time`
 - Search queries are logged at `info` (household-internal and useful for debugging). Fetched page text is never
   logged, and neither are full fetch URLs, since a query string can carry private data.
 - **Alerts:** two Grafana rules in [deploy/observability/alerting-rules.yaml](../deploy/observability/alerting-rules.yaml): web search
-  failing, and an engine that keeps refusing. A copy is in arch-infra's Grafana values, and nothing receives them yet.
+  failing, and an engine that keeps refusing. A copy is in arch-infra's Grafana values. They show
+  only in Grafana: nothing sends them anywhere, by the user's decision on 2026-11-10.
 - **`thin`** marks pages for upkeep to look at: they may need JavaScript, or extraction may have dropped what they show. Only the
   host is logged, so look at that site's pages to find which.
 - Query in Loki: `{namespace="mcpgw"} | json | event="tool.call"`. As with llmgw, `req_id` is a JSON field, not a

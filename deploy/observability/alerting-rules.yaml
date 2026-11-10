@@ -3,8 +3,8 @@
 # `rules.yaml` → `groups`, after the homeparentcontrol group and indented to match: that file is what Argo CD deploys.
 # Edit here first, then copy there. Both queries were run against live Loki on 2026-11-07.
 #
-# ⚠️ Nothing receives these yet: Grafana has no contact point beyond its default email receiver, and there's no SMTP.
-# They show under Alerting in Grafana. ⚠️ No Go-template braces anywhere: the chart passes this through Helm's `tpl`.
+# Nothing receives these, by the user's decision on 2026-11-10: they show under Alerting in Grafana, and Grafana has no
+# contact point beyond its default email receiver, with no SMTP. ⚠️ No Go-template braces anywhere: the chart passes this through Helm's `tpl`.
 # Both rules treat No Data as OK, because the absence of failures is good news.
 apiVersion: 1
 groups:
