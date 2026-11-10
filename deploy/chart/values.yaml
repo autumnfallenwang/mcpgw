@@ -99,7 +99,8 @@ networkPolicy:
 # code_run's runner (ADR 0014). Its image is mcpgw's tag plus "-code-runner", built by the same CI run. Its NetworkPolicy
 # lets it reach nothing, and only mcpgw reach it; that policy doesn't depend on networkPolicy.enabled above.
 codeRunner:
-  enabled: false
+  # Turned on once the first <sha>-code-runner image existed (40d2666): Argo syncs the chart before CI builds the image.
+  enabled: true
   port: 8080
   # Runners started ahead, each with numpy and pandas loaded (about 430 MB each), so a run doesn't wait 5 s for one.
   pool: 2
